@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Lero/.gradle/caches/transforms-3/1512b9c7cea3218e717cf0a221514deb/transformed/material-1.6.1/res/layout/design_bottom_navigation_item.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_baseline_explore_24.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_collect.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.10277777777777777" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.1945288753799392" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_home_article_layout.xml" value="0.21693840579710144" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.10277777777777777" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
