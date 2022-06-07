@@ -11,9 +11,11 @@
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_web_layout.xml" value="0.33645833333333336" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.10277777777777777" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_child_project.xml" value="0.19021739130434784" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.1945288753799392" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_project.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_home_article_layout.xml" value="0.5" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.10277777777777777" />
       </map>

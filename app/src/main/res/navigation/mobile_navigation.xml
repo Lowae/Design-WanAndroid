@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.lowe.wanandroid.ui.dashboard.DashboardFragment"
+        android:name="com.lowe.wanandroid.ui.dashboard.ProjectFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_project" />
 
     <fragment
         android:id="@+id/navigation_notifications"

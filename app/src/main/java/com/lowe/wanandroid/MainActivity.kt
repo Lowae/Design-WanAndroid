@@ -5,7 +5,7 @@ import android.view.MenuItem
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.dashboard.DashboardFragment
+import com.lowe.wanandroid.ui.dashboard.ProjectFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.notifications.NotificationsFragment
 
@@ -17,7 +17,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     private lateinit var binding: ActivityMainBinding
 
-    private var fragmentList = listOf(HomeFragment(), DashboardFragment(), NotificationsFragment())
+    private var fragmentList = listOf(HomeFragment(), ProjectFragment(), NotificationsFragment())
     private var activeFragmentIndex = -1
 
     override fun createViewModel() = MainViewModel()
