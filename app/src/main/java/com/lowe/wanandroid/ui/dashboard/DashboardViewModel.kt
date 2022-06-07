@@ -1,13 +1,10 @@
 package com.lowe.wanandroid.ui.dashboard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.lowe.wanandroid.ui.BaseViewModel
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    override fun start() {
+
     }
-    val text: LiveData<String> = _text
 }

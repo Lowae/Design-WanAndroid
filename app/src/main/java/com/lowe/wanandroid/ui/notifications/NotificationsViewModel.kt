@@ -1,13 +1,10 @@
 package com.lowe.wanandroid.ui.notifications
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.lowe.wanandroid.ui.BaseViewModel
 
-class NotificationsViewModel : ViewModel() {
+class NotificationsViewModel : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    override fun start() {
+
     }
-    val text: LiveData<String> = _text
 }

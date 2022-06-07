@@ -2,13 +2,14 @@ package com.lowe.wanandroid
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.FragmentActivity
 import com.lowe.wanandroid.databinding.ActivityMainBinding
+import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.dashboard.DashboardFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.notifications.NotificationsFragment
 
-class MainActivity : FragmentActivity() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
 
     companion object {
         private const val KEY_CURRENT_FRAGMENT_INDEX = "key_current_fragment_index"
@@ -19,11 +20,17 @@ class MainActivity : FragmentActivity() {
     private var fragmentList = listOf(HomeFragment(), DashboardFragment(), NotificationsFragment())
     private var activeFragmentIndex = -1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun createViewModel() = MainViewModel()
+
+    override fun init(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.navView.setOnItemSelectedListener(NavBottomViewDoubleClickListener(this::onBottomItemSelect, this::onBottomDoubleClick))
+        binding.navView.setOnItemSelectedListener(
+            NavBottomViewDoubleClickListener(
+                this::onBottomItemSelect,
+                this::onBottomDoubleClick
+            )
+        )
         if (savedInstanceState == null) {
             switchFragment(0)
         }
@@ -37,7 +44,8 @@ class MainActivity : FragmentActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         fragmentList = fragmentList.map {
-            supportFragmentManager.findFragmentByTag(it.javaClass.simpleName) ?: it
+            supportFragmentManager.findFragmentByTag(it.javaClass.simpleName) as? BaseFragment<*, *>
+                ?: it
         }
         switchFragment(savedInstanceState.getInt(KEY_CURRENT_FRAGMENT_INDEX, 0))
     }

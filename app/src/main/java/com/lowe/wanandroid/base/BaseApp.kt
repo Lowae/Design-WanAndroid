@@ -10,7 +10,6 @@ import kotlin.properties.Delegates
 /**
  * Application基类
  *
- * @author LTP  2022/3/21
  */
 open class BaseApp : Application(), ViewModelStoreOwner {
 
