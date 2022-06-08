@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.utils.ToastUtil
+import com.lowe.wanandroid.utils.ToastEx.showLongToast
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -40,22 +41,14 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
             requestException.observe(viewLifecycleOwner) {
                 AppLog.e(msg = "网络请求错误：${it.message}")
                 when (it) {
-                    is SocketTimeoutException -> ToastUtil.showShort(
-                        requireContext(),
-                        "网络请求超时"
-                    )
-                    is ConnectException, is UnknownHostException -> ToastUtil.showShort(
-                        requireContext(),
-                        "网络连接失败"
-                    )
-                    else -> ToastUtil.showShort(
-                        requireContext(), it.message ?: "网络请求失败"
-                    )
+                    is SocketTimeoutException -> "网络请求超时".showShortToast()
+                    is ConnectException, is UnknownHostException -> "网络连接失败".showShortToast()
+                    else -> "网络请求失败".showShortToast()
                 }
             }
 
             responseException.observe(viewLifecycleOwner) {
-                ToastUtil.showLong(requireContext(), it.errorMsg)
+                it.errorMsg.showLongToast()
             }
         }
     }

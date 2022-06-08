@@ -58,6 +58,9 @@ dependencies {
     implementation(Deps.retrofit)
     implementation(Deps.retrofitGsonConverter)
     implementation(Deps.gson)
+    implementation(Deps.fresco)
+
+    implementation(Deps.banner)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

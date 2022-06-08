@@ -10,7 +10,7 @@
             type="com.lowe.wanandroid.ui.BaseViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout
         android:id="@+id/projectSwipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,5 +37,5 @@
 
 
         </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout>
 </layout>

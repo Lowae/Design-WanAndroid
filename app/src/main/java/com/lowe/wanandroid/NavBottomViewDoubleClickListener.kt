@@ -19,6 +19,7 @@ class NavBottomViewDoubleClickListener(
         if (SystemClock.elapsedRealtime() - timestampLastClick < DEFAULT_QUICK_CLICK_DURATION) {
             onItemDoubleClick(item)
         }
+        timestampLastClick = SystemClock.elapsedRealtime()
         return onItemSelected(item)
     }
 }

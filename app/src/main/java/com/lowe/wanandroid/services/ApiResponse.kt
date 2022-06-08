@@ -1,7 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.base.BaseApp
-import com.lowe.wanandroid.utils.ToastUtil
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
 
 /**
  * 接口返回外层封装实体
@@ -27,7 +26,7 @@ fun <T> ApiResponse<T>.success(): ApiResponse<T>? {
     return if (errorCode == 0) {
         return this
     } else {
-        ToastUtil.showShort(BaseApp.appContext, errorMsg)
+        errorMsg.showShortToast()
         null
     }
 }

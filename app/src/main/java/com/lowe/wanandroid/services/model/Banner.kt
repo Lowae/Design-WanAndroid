@@ -13,3 +13,26 @@ data class Banner(
     var type: Int = 0,
     var url: String = ""
 )
+
+data class Banners(
+    val banners: List<Banner>
+) {
+    override fun equals(other: Any?): Boolean {
+        if (other is Banners) {
+            if (this.banners.size == other.banners.size) {
+                this.banners.forEachIndexed { index, banner ->
+                    if (banner != other.banners[index]) {
+                        return false
+                    }
+                }
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return super.equals(other)
+        }
+    }
+
+    override fun hashCode() = banners.hashCode()
+}

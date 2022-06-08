@@ -23,10 +23,14 @@ object Version {
     const val retrofitVersion = "2.9.0"
     const val okHttp3Version = "4.9.3"
     const val gsonVersion = "2.9.0"
+    const val frescoVersion = "2.6.0"
 
     const val testJunitVersion = "4.13.2"
     const val androidTestJunitAndroidExt = "1.1.3"
     const val androidTestEspressoCore = "3.4.0"
+
+    // ui
+    const val bannerVersion = "2.2.2"
 }
 
 object Deps {
@@ -59,4 +63,6 @@ object Deps {
     const val retrofitGsonConverter =
         "com.squareup.retrofit2:converter-gson:${Version.retrofitVersion}"
     const val gson = "com.google.code.gson:gson:${Version.gsonVersion}"
+    const val fresco = "com.facebook.fresco:fresco:${Version.frescoVersion}"
+    const val banner = "io.github.youth5201314:banner:${Version.bannerVersion}"
 }

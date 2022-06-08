@@ -67,13 +67,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             else -> false
         }
 
-    private fun onBottomDoubleClick(item: MenuItem) =
-        when (item.itemId) {
-            R.id.navigation_home -> {
-
-            }
-            else -> Unit
-        }
+    private fun onBottomDoubleClick(item: MenuItem) {
+        viewModel.mainTabDoubleClickLiveData.value = getTagFromItemId(item.itemId)
+    }
 
     private fun switchFragment(fragmentIndex: Int) {
         if (fragmentIndex != activeFragmentIndex) {
@@ -93,6 +89,17 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
             }
             fragmentTransaction.commitAllowingStateLoss()
             activeFragmentIndex = fragmentIndex
+        }
+    }
+
+    private fun getTagFromItemId(itemId: Int) = fragmentList[getFragmentIndexFromItemId(itemId)].tag ?: HomeFragment::class.java.simpleName
+
+    private fun getFragmentIndexFromItemId(itemId: Int): Int {
+        return when (itemId) {
+            R.id.navigation_home -> 0
+            R.id.navigation_dashboard -> 1
+            R.id.navigation_notifications -> 2
+            else -> 0
         }
     }
 }

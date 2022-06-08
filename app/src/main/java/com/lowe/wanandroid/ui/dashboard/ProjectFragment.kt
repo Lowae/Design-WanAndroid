@@ -17,7 +17,7 @@ class ProjectFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         childAdapter =
-            ProjectChildFragmentAdapter(emptyList(), this.parentFragmentManager, lifecycle)
+            ProjectChildFragmentAdapter(emptyList(), this.childFragmentManager, lifecycle)
         initView()
         initObserve()
     }
@@ -33,6 +33,13 @@ class ProjectFragment :
         viewBinding.apply {
             with(projectViewPager2) {
                 adapter = childAdapter
+            }
+            with(projectSwipeRefresh) {
+                setOnRefreshListener {
+                    this@ProjectFragment.viewModel.parentRefreshLiveData.value =
+                        childAdapter.items[projectViewPager2.currentItem].id
+                    this.isRefreshing = false
+                }
             }
             tabLayoutMediator = TabLayoutMediator(
                 viewBinding.projectTabLayout,

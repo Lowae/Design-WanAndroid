@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import com.facebook.drawee.backends.pipeline.Fresco
 import kotlin.properties.Delegates
 
 /**
@@ -13,7 +14,7 @@ import kotlin.properties.Delegates
  */
 open class BaseApp : Application(), ViewModelStoreOwner {
 
-    private lateinit var mAppViewModelStore: ViewModelStore
+    private lateinit var _appViewModelStore: ViewModelStore
     private var mFactory: ViewModelProvider.Factory? = null
 
     companion object {
@@ -23,7 +24,8 @@ open class BaseApp : Application(), ViewModelStoreOwner {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        mAppViewModelStore = ViewModelStore()
+        _appViewModelStore = ViewModelStore()
+        Fresco.initialize(this)
     }
 
     /** 获取一个全局的ViewModel */
@@ -36,5 +38,5 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         return mFactory as ViewModelProvider.Factory
     }
 
-    override fun getViewModelStore() = mAppViewModelStore
+    override fun getViewModelStore() = _appViewModelStore
 }

@@ -2,7 +2,12 @@ package com.lowe.wanandroid.base
 
 import androidx.recyclerview.widget.DiffUtil
 
-abstract class SimpleDiffCalculator(private val oldList: List<Any>, private val newList: List<Any>) :
+class SimpleDiffCalculator(
+    private val oldList: List<Any>,
+    private val newList: List<Any>,
+    val areItemSame: (Any, Any) -> Boolean,
+    val areContentSame: (Any, Any) -> Boolean
+) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
@@ -11,16 +16,12 @@ abstract class SimpleDiffCalculator(private val oldList: List<Any>, private val 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldItem = oldList[oldItemPosition]
         val newItem = newList[newItemPosition]
-        return areItemsSame(oldItem, newItem)
+        return areItemSame(oldItem, newItem)
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldItem = oldList[oldItemPosition]
         val newItem = newList[newItemPosition]
-        return atrContentsSame(oldItem, newItem)
+        return areContentSame(oldItem, newItem)
     }
-
-    abstract fun areItemsSame(oldItem: Any, newItem: Any): Boolean
-
-    abstract fun atrContentsSame(oldItem: Any, newItem: Any): Boolean
 }

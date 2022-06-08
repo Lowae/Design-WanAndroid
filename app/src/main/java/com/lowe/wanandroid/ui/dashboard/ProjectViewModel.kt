@@ -10,6 +10,7 @@ import com.lowe.wanandroid.ui.launch
 class ProjectViewModel : BaseViewModel() {
 
     val projectTitleListLiveData = MutableLiveData<List<ProjectTitle>>()
+    val parentRefreshLiveData = MutableLiveData<Int>()
 
     override fun start() {
         fetchProjectList()
