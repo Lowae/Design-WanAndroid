@@ -1,11 +1,8 @@
 package com.lowe.wanandroid.ui.dashboard.repository
 
 import com.lowe.wanandroid.base.http.RetrofitManager
-import com.lowe.wanandroid.services.ApiResponse
-import com.lowe.wanandroid.services.PageResponse
 import com.lowe.wanandroid.services.ProjectService
 import com.lowe.wanandroid.services.apiCall
-import com.lowe.wanandroid.services.model.Article
 
 object ProjectRepository : ProjectService {
 
@@ -17,5 +14,10 @@ object ProjectRepository : ProjectService {
         pageNo: Int,
         pageSize: Int,
         categoryId: Int
-    ): ApiResponse<PageResponse<Article>> = apiCall { service.getProjectPageList(pageNo, pageSize, categoryId) }
+    ) = apiCall { service.getProjectPageList(pageNo, pageSize, categoryId) }
+
+    override suspend fun getNewProjectPageList(
+        pageNo: Int,
+        pageSize: Int
+    ) = apiCall { service.getNewProjectPageList(pageNo, pageSize) }
 }

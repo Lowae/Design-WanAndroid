@@ -21,4 +21,11 @@ interface ProjectService : BaseService {
         @Query("page_size") pageSize: Int,
         @Query("cid") categoryId: Int
     ): ApiResponse<PageResponse<Article>>
+
+    /** 获取最新项目列表分页数据 */
+    @GET("article/listproject/{pageNo}/json")
+    suspend fun getNewProjectPageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
 }

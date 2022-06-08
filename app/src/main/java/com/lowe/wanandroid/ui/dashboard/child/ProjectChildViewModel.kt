@@ -28,11 +28,13 @@ class ProjectChildViewModel : BaseViewModel() {
         pageNo = if (isRefresh) 0 else pageNo
         launch({
             val projects =
-                ProjectRepository.getProjectPageList(pageNo, DEFAULT_PAGE_SIZE, categoryId)
-            projectListLiveData.value = getDiffResultPair(
-                projectListLiveData.value?.first ?: emptyList(),
-                projects.success()?.data?.datas ?: emptyList()
-            )
+                if (categoryId == ProjectChildFragment.CATEGORY_ID_NEWEST_PROJECT)
+                    ProjectRepository.getNewProjectPageList(pageNo, DEFAULT_PAGE_SIZE)
+                else ProjectRepository.getProjectPageList(pageNo, DEFAULT_PAGE_SIZE, categoryId)
+
+            val oldList = projectListLiveData.value?.first ?: emptyList()
+            val newList = oldList + (projects.success()?.data?.datas ?: emptyList())
+            projectListLiveData.value = getDiffResultPair(oldList, newList)
             pageNo++
             isLoading = false
         })

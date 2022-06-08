@@ -1,8 +1,10 @@
 package com.lowe.wanandroid.ui.dashboard
 
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProjectBinding
 import com.lowe.wanandroid.ui.BaseFragment
@@ -12,6 +14,7 @@ class ProjectFragment :
 
     private lateinit var childAdapter: ProjectChildFragmentAdapter
     private lateinit var tabLayoutMediator: TabLayoutMediator
+    private val mainViewModel by activityViewModels<MainViewModel>()
 
     override fun createViewModel() = ProjectViewModel()
 
@@ -26,6 +29,10 @@ class ProjectFragment :
         viewModel.projectTitleListLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
             childAdapter.notifyDataSetChanged()
+        }
+        mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
+            viewModel.scrollToTopLiveData.value =
+                childAdapter.items[viewBinding.projectViewPager2.currentItem].id
         }
     }
 

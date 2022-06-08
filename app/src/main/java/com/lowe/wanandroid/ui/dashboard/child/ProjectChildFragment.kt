@@ -14,8 +14,9 @@ import com.lowe.wanandroid.utils.loadMore
 
 class ProjectChildFragment :
     BaseFragment<ProjectChildViewModel, FragmentChildProjectBinding>(R.layout.fragment_child_project) {
-    companion object {
 
+    companion object {
+        const val CATEGORY_ID_NEWEST_PROJECT = 0
         const val KEY_PROJECT_CHILD_CATEGORY_ID = "key_project_child_category_id"
 
         fun newInstance(categoryId: Int) = ProjectChildFragment().apply {
@@ -55,6 +56,7 @@ class ProjectChildFragment :
     private fun initObserve() {
         viewModel.projectListLiveData.observe(viewLifecycleOwner, this::dispatchToAdapter)
         projectViewModel.parentRefreshLiveData.observe(viewLifecycleOwner, this::onParentRefresh)
+        projectViewModel.scrollToTopLiveData.observe(viewLifecycleOwner, this::scrollToTop)
     }
 
     private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
@@ -65,6 +67,11 @@ class ProjectChildFragment :
     private fun onParentRefresh(categoryId: Int) {
         if (categoryId != this.categoryId) return
         onRefresh()
+    }
+
+    private fun scrollToTop(categoryId: Int) {
+        if (categoryId != this.categoryId) return
+        viewBinding.childList.scrollToPosition(0)
     }
 
     private fun onRefresh() {
