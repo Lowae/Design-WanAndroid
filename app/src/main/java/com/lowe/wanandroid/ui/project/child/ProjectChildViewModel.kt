@@ -1,11 +1,11 @@
-package com.lowe.wanandroid.ui.dashboard.child
+package com.lowe.wanandroid.ui.project.child
 
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.dashboard.repository.ProjectRepository
+import com.lowe.wanandroid.ui.project.repository.ProjectRepository
 import com.lowe.wanandroid.ui.launch
 
 class ProjectChildViewModel : BaseViewModel() {

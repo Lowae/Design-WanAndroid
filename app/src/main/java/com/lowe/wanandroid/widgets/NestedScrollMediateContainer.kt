@@ -4,13 +4,19 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
+import androidx.core.view.children
+import kotlin.math.abs
 
-class NestedScrollMediateContainer(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
+class NestedScrollMediateContainer @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
     FrameLayout(context, attrs, defStyleAttr) {
-
 
     private var eventX = 0f
     private var eventY = 0f
+    private val childView by lazy(LazyThreadSafetyMode.NONE) { children.first() }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         ev ?: return super.onInterceptTouchEvent(ev)
@@ -22,13 +28,14 @@ class NestedScrollMediateContainer(context: Context, attrs: AttributeSet?, defSt
             MotionEvent.ACTION_MOVE -> {
                 val dx = ev.x - eventX
                 val dy = ev.y - eventY
-                computeVerticalScrollOffset()
-                if (!canScrollVertically(1) || !canScrollVertically(-1))
+                if (!childView.canScrollVertically(1) || !childView.canScrollVertically(-1)) {
+                    if (abs(dx) < abs(dy)){
+                        requestDisallowInterceptTouchEvent(true)
+                    }
+                }
             }
         }
-
         return super.onInterceptTouchEvent(ev)
-
     }
 
 }

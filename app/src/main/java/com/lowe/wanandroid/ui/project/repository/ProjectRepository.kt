@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.dashboard.repository
+package com.lowe.wanandroid.ui.project.repository
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.ProjectService

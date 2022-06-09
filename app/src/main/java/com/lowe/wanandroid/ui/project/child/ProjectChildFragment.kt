@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.dashboard.child
+package com.lowe.wanandroid.ui.project.child
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -8,8 +8,8 @@ import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentChildProjectBinding
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.dashboard.ProjectViewModel
-import com.lowe.wanandroid.ui.dashboard.child.item.ProjectChildItemBinder
+import com.lowe.wanandroid.ui.project.ProjectViewModel
+import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
 import com.lowe.wanandroid.utils.loadMore
 
 class ProjectChildFragment :

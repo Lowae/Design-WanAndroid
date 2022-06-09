@@ -5,10 +5,10 @@ import android.view.MenuItem
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.dashboard.ProjectFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
-import com.lowe.wanandroid.ui.notifications.NotificationsFragment
+import com.lowe.wanandroid.ui.navigator.NavigatorFragment
+import com.lowe.wanandroid.ui.project.ProjectFragment
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
 
@@ -18,7 +18,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     private lateinit var binding: ActivityMainBinding
 
-    private var fragmentList = listOf(HomeFragment(), ProjectFragment(), NotificationsFragment())
+    private var fragmentList = listOf(HomeFragment(), ProjectFragment(), NavigatorFragment())
     private var activeFragmentIndex = -1
 
     override fun createViewModel() = MainViewModel()
@@ -57,11 +57,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
                 switchFragment(0)
                 true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_project -> {
                 switchFragment(1)
                 true
             }
-            R.id.navigation_notifications -> {
+            R.id.navigation_navigator -> {
                 switchFragment(2)
                 true
             }
@@ -98,8 +98,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
     private fun getFragmentIndexFromItemId(itemId: Int): Int {
         return when (itemId) {
             R.id.navigation_home -> 0
-            R.id.navigation_dashboard -> 1
-            R.id.navigation_notifications -> 2
+            R.id.navigation_project -> 1
+            R.id.navigation_navigator -> 2
             else -> 0
         }
     }

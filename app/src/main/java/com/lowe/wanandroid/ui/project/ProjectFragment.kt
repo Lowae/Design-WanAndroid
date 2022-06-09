@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.dashboard
+package com.lowe.wanandroid.ui.project
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels

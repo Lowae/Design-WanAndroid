@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.dashboard.child.item
+package com.lowe.wanandroid.ui.project.child.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

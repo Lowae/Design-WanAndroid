@@ -1,11 +1,11 @@
-package com.lowe.wanandroid.ui.dashboard
+package com.lowe.wanandroid.ui.project
 
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.ProjectTitle
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.dashboard.child.ProjectChildFragment
-import com.lowe.wanandroid.ui.dashboard.repository.ProjectRepository
+import com.lowe.wanandroid.ui.project.child.ProjectChildFragment
+import com.lowe.wanandroid.ui.project.repository.ProjectRepository
 import com.lowe.wanandroid.ui.launch
 
 class ProjectViewModel : BaseViewModel() {

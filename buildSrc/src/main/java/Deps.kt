@@ -31,6 +31,7 @@ object Version {
 
     // ui
     const val bannerVersion = "2.2.2"
+    const val flexboxVersion = "3.0.0"
 }
 
 object Deps {
@@ -65,4 +66,5 @@ object Deps {
     const val gson = "com.google.code.gson:gson:${Version.gsonVersion}"
     const val fresco = "com.facebook.fresco:fresco:${Version.frescoVersion}"
     const val banner = "io.github.youth5201314:banner:${Version.bannerVersion}"
+    const val flexbox = "com.google.android.flexbox:flexbox:${Version.flexboxVersion}"
 }

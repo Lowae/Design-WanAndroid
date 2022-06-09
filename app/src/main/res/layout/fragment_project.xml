@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".ui.dashboard.ProjectFragment">
+            tools:context=".ui.project.ProjectFragment">
 
 
             <com.google.android.material.tabs.TabLayout

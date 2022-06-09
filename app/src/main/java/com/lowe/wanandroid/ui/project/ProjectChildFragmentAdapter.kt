@@ -1,11 +1,11 @@
-package com.lowe.wanandroid.ui.dashboard
+package com.lowe.wanandroid.ui.project
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lowe.wanandroid.services.model.ProjectTitle
-import com.lowe.wanandroid.ui.dashboard.child.ProjectChildFragment
+import com.lowe.wanandroid.ui.project.child.ProjectChildFragment
 
 class ProjectChildFragmentAdapter(
     var items: List<ProjectTitle>,

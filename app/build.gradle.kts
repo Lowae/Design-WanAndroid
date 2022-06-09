@@ -61,6 +61,7 @@ dependencies {
     implementation(Deps.fresco)
 
     implementation(Deps.banner)
+    implementation(Deps.flexbox)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

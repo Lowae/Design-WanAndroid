@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.lowe.wanandroid.ui.dashboard.ProjectFragment"
+        android:id="@+id/navigation_project"
+        android:name="com.lowe.wanandroid.ui.project.ProjectFragment"
         android:label="@string/title_project"
         tools:layout="@layout/fragment_project" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.lowe.wanandroid.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_navigator"
+        android:name="com.lowe.wanandroid.ui.navigator.NavigatorFragment"
+        android:label="@string/title_navigator"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

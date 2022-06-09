@@ -10,24 +10,33 @@
             type="com.lowe.wanandroid.ui.BaseViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.notifications.NotificationsFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_notifications"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.project.ProjectFragment">
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/navigatorTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="center"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/design_default_color_primary" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/navigatorPager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+    </com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout>
 
 </layout>
