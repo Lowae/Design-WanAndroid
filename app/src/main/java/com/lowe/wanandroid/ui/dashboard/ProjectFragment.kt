@@ -31,6 +31,7 @@ class ProjectFragment :
             childAdapter.notifyDataSetChanged()
         }
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
+            if (childAdapter.items.isEmpty()) return@observe
             viewModel.scrollToTopLiveData.value =
                 childAdapter.items[viewBinding.projectViewPager2.currentItem].id
         }

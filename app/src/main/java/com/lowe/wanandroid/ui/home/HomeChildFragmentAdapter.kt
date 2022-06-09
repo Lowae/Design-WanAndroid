@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.home
 
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -7,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lowe.wanandroid.ui.home.child.answer.AnswerFragment
 import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.home.child.square.SquareFragment
+import kotlinx.parcelize.Parcelize
 
 class HomeChildFragmentAdapter(
     var items: List<HomeTabBean>,
@@ -24,14 +26,15 @@ class HomeChildFragmentAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (items[position].title) {
-            HOME_TAB_EXPLORE -> ExploreFragment.newInstance()
-            HOME_TAB_SQUARE -> SquareFragment.newInstance()
-            HOME_TAB_ANSWER -> AnswerFragment.newInstance()
-            else -> ExploreFragment.newInstance()
+            HOME_TAB_EXPLORE -> ExploreFragment.newInstance(items[position])
+            HOME_TAB_SQUARE -> SquareFragment.newInstance(items[position])
+            HOME_TAB_ANSWER -> AnswerFragment.newInstance(items[position])
+            else -> ExploreFragment.newInstance(items[position])
         }
     }
 }
 
+@Parcelize
 data class HomeTabBean(
     val title: String
-)
+) : Parcelable

@@ -1,10 +1,10 @@
-package com.lowe.wanandroid.ui.home.child.explore.repository
+package com.lowe.wanandroid.ui.home
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.HomeService
 import com.lowe.wanandroid.services.apiCall
 
-object ExploreRepository : HomeService {
+object HomeRepository : HomeService {
 
     private val service by lazy { RetrofitManager.getService(HomeService::class.java) }
 
@@ -17,5 +17,12 @@ object ExploreRepository : HomeService {
         pageSize: Int
     ) = apiCall { service.getArticlePageList(pageNo, pageSize) }
 
+    override suspend fun getSquarePageList(pageNo: Int, pageSize: Int) =
+        apiCall { service.getSquarePageList(pageNo, pageSize) }
+
+    override suspend fun getAnswerPageList(
+        pageNo: Int,
+        pageSize: Int
+    ) = apiCall { service.getAnswerPageList(pageNo, pageSize) }
 
 }

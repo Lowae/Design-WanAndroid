@@ -12,7 +12,10 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
-    companion object{
+    companion object {
+
+        const val DEFAULT_PAGE_SIZE = 20
+
         val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             AppLog.e(msg = throwable.message.toString())
         }

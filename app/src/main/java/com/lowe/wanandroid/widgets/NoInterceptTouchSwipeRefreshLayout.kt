@@ -11,8 +11,6 @@ class NoInterceptTouchSwipeRefreshLayout(context: Context, attrs: AttributeSet?)
     /**
      * 不应该拦截任何子View事件
      */
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        return false
-    }
+    override fun onInterceptTouchEvent(ev: MotionEvent) = false
 
 }

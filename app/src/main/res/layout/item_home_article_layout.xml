@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
             <TextView
-                android:id="@+id/tv_type1"
+                android:id="@+id/tv_tag1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -86,6 +86,22 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_new"
                 app:layout_constraintTop_toTopOf="@+id/tv_author"
                 tools:text="本站发布" />
+
+            <TextView
+                android:id="@+id/tv_tag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@{article.tags[1].name}"
+                android:textColor="@color/_669900"
+                android:textSize="11sp"
+                android:visibility="@{article.tags.size()==2?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_tag1"
+                app:layout_constraintTop_toTopOf="@+id/tv_author"
+                tools:text="问答" />
 
             <TextView
                 android:id="@+id/tv_date"

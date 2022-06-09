@@ -1,32 +1,46 @@
 package com.lowe.wanandroid.ui.home.child.explore
 
 import android.os.Bundle
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
-import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildExploreBinding
 import com.lowe.wanandroid.services.model.Banner
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
+import com.lowe.wanandroid.ui.home.HomeFragment
+import com.lowe.wanandroid.ui.home.HomeTabBean
+import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.child.explore.repository.ExploreViewModel
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
-class ExploreFragment : BaseFragment<ExploreViewModel, FragmentHomeChildExploreBinding>(R.layout.fragment_home_child_explore) {
+class ExploreFragment :
+    BaseFragment<ExploreViewModel, FragmentHomeChildExploreBinding>(R.layout.fragment_home_child_explore) {
 
     companion object {
         private const val KEY_HOME_FRAGMENT_LIST_SAVE_STATE = "key_home_fragment_list_save_state"
 
-        fun newInstance() = ExploreFragment()
+        fun newInstance(homeTabBean: HomeTabBean): ExploreFragment = with(ExploreFragment()) {
+            arguments?.apply {
+                putParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE, homeTabBean)
+            }
+            this
+        }
 
     }
 
     private val homeAdapter = MultiTypeAdapter()
-    private val mainViewModel by activityViewModels<MainViewModel>()
+    private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
+    private val exploreTabBean by lazy(LazyThreadSafetyMode.NONE) {
+        arguments?.getParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE) ?: HomeTabBean(
+            HomeChildFragmentAdapter.HOME_TAB_EXPLORE
+        )
+    }
 
     override fun createViewModel() = ExploreViewModel()
 
@@ -60,9 +74,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentHomeChildExploreB
                 viewModel.fetchArticleList()
             }
         }
-        viewBinding.swipeRefreshLayout.setOnRefreshListener {
-            onRefresh()
-        }
     }
 
     private fun initObserve() {
@@ -71,11 +82,12 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentHomeChildExploreB
                 it?.let(this@ExploreFragment::afterLoadArticle)
             }
         }
-        mainViewModel.apply {
-            mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-                if (it == this@ExploreFragment.tag) {
-                    scrollToTop()
-                }
+        homeViewModel.apply {
+            scrollToTopLiveData.observe(viewLifecycleOwner) {
+                if (it.title == exploreTabBean.title) scrollToTop()
+            }
+            refreshLiveData.observe(viewLifecycleOwner) {
+                if (it.title == exploreTabBean.title) onRefresh()
             }
         }
     }
@@ -90,9 +102,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentHomeChildExploreB
     }
 
     private fun onRefresh() {
-        viewBinding.swipeRefreshLayout.isRefreshing = true
         viewModel.refreshArticleList()
-        viewBinding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun onBannerItemClick(data: Banner, position: Int) {

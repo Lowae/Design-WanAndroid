@@ -22,4 +22,16 @@ interface HomeService : BaseService {
     /** 获取置顶文章集合数据 */
     @GET("article/top/json")
     suspend fun getArticleTopList(): ApiResponse<List<Article>>
+
+    @GET("user_article/list/{pageNo}/json")
+    suspend fun getSquarePageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
+
+    @GET("wenda/list/{pageNo}/json")
+    suspend fun getAnswerPageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PageResponse<Article>>
 }

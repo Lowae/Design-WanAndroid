@@ -10,10 +10,6 @@ import com.lowe.wanandroid.ui.launch
 
 class ProjectChildViewModel : BaseViewModel() {
 
-    companion object {
-        private const val DEFAULT_PAGE_SIZE = 20
-    }
-
     private var pageNo = 0
 
     var isLoading = false
