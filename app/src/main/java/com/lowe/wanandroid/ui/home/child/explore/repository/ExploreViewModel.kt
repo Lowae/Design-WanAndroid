@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.home.repository
+package com.lowe.wanandroid.ui.home.child.explore.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +9,7 @@ import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import kotlinx.coroutines.async
 
-class HomeViewModel : BaseViewModel() {
+class ExploreViewModel : BaseViewModel() {
 
     companion object {
         private const val DEFAULT_PAGE_SIZE = 10
@@ -34,12 +34,12 @@ class HomeViewModel : BaseViewModel() {
         launch({
             currentList = if (page == 0) {
                 // Banner
-                val banners = async { HomeRepository.getBanner() }
+                val banners = async { ExploreRepository.getBanner() }
                 // 置顶文字
                 val pageListDeferred =
-                    async { HomeRepository.getArticlePageList(page, DEFAULT_PAGE_SIZE) }
+                    async { ExploreRepository.getArticlePageList(page, DEFAULT_PAGE_SIZE) }
                 // 文章列表
-                val topListDeferred = async { HomeRepository.getArticleTopList() }
+                val topListDeferred = async { ExploreRepository.getArticleTopList() }
                 with(mutableListOf<Any>()) {
                     add(Banners(banners.await().success()?.data ?: emptyList()))
                     addAll((topListDeferred.await().success()?.data ?: emptyList()))
@@ -49,7 +49,7 @@ class HomeViewModel : BaseViewModel() {
                     this
                 }
             } else {
-                HomeRepository.getArticlePageList(page, DEFAULT_PAGE_SIZE).run {
+                ExploreRepository.getArticlePageList(page, DEFAULT_PAGE_SIZE).run {
                     val newList = currentList + data.datas
                     articleListLiveData.value = getDiffResultPair(currentList, newList)
                     newList

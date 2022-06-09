@@ -10,36 +10,32 @@
             type="com.lowe.wanandroid.ui.BaseViewModel" />
     </data>
 
-    <LinearLayout
+    <com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.home.child.explore.ExploreFragment">
 
-        <androidx.appcompat.widget.Toolbar
+        <LinearLayout
             android:layout_width="match_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/homeTabLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Home"
-                android:textSize="16sp" />
+                app:tabGravity="center"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/design_default_color_primary" />
 
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeList"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/homeViewPager2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+        </LinearLayout>
+
+    </com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout>
+
 </layout>

@@ -7,6 +7,7 @@ import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.dashboard.ProjectFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
+import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.notifications.NotificationsFragment
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
@@ -92,7 +93,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         }
     }
 
-    private fun getTagFromItemId(itemId: Int) = fragmentList[getFragmentIndexFromItemId(itemId)].tag ?: HomeFragment::class.java.simpleName
+    private fun getTagFromItemId(itemId: Int) = fragmentList[getFragmentIndexFromItemId(itemId)].tag ?: ExploreFragment::class.java.simpleName
 
     private fun getFragmentIndexFromItemId(itemId: Int): Int {
         return when (itemId) {
