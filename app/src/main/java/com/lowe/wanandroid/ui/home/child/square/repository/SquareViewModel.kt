@@ -24,7 +24,7 @@ class SquareViewModel : BaseViewModel() {
         launch({
             val squarePageResponse = HomeRepository.getSquarePageList(page, DEFAULT_PAGE_SIZE)
             val oldList = squareListLiveData.value?.first ?: emptyList()
-            val newList = oldList + (squarePageResponse.success()?.data?.datas ?: emptyList())
+            val newList = (if (isRefresh) emptyList() else oldList) + (squarePageResponse.success()?.data?.datas ?: emptyList())
             squareListLiveData.value = getDiffResultPair(oldList, newList)
             page++
             isLoading = false

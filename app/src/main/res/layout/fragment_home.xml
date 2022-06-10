@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="center"
                 app:tabMode="scrollable"
-                app:tabTextColor="@color/design_default_color_primary" />
+                app:tabTextColor="@color/md_theme_light_primary" />
 
             <ImageView
                 android:layout_width="wrap_content"

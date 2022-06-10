@@ -30,8 +30,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         tabLayoutMediator.detach()
+        super.onDestroy()
     }
 
     private fun initView() {

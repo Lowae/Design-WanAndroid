@@ -20,9 +20,7 @@ object HomeRepository : HomeService {
     override suspend fun getSquarePageList(pageNo: Int, pageSize: Int) =
         apiCall { service.getSquarePageList(pageNo, pageSize) }
 
-    override suspend fun getAnswerPageList(
-        pageNo: Int,
-        pageSize: Int
-    ) = apiCall { service.getAnswerPageList(pageNo, pageSize) }
+    override suspend fun getAnswerPageList(pageNo: Int) =
+        apiCall { service.getAnswerPageList(pageNo) }
 
 }

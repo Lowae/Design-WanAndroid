@@ -30,8 +30,5 @@ interface HomeService : BaseService {
     ): ApiResponse<PageResponse<Article>>
 
     @GET("wenda/list/{pageNo}/json")
-    suspend fun getAnswerPageList(
-        @Path("pageNo") pageNo: Int,
-        @Query("page_size") pageSize: Int
-    ): ApiResponse<PageResponse<Article>>
+    suspend fun getAnswerPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Article>>
 }

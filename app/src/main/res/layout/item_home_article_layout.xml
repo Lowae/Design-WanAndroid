@@ -17,15 +17,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        app:cardCornerRadius="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground">
+            android:background="@color/md_theme_light_secondaryContainer"
+            android:foreground="?android:attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/tv_author"
@@ -35,7 +39,7 @@
                 android:layout_marginTop="10dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@{article.articleAuthor}"
-                android:textColor="@color/_666666"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -109,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:text="@{article.niceDate}"
-                android:textColor="@color/_666666"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_author"
                 app:layout_constraintRight_toRightOf="parent"
@@ -141,8 +145,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:text="@{Html.fromHtml(article.superChapterName+'·'+article.chapterName)}"
-                android:textColor="@color/_666666"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_author"
                 app:layout_constraintTop_toBottomOf="@+id/tv_content"
                 tools:text="分类·项目" />

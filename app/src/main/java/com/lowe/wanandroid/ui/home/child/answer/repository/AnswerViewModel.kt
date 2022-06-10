@@ -8,7 +8,7 @@ import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.home.HomeRepository
 import com.lowe.wanandroid.ui.launch
 
-class AnswerViewModel: BaseViewModel() {
+class AnswerViewModel : BaseViewModel() {
 
     var isLoading = false
     val answerListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
@@ -22,9 +22,9 @@ class AnswerViewModel: BaseViewModel() {
         page = if (isRefresh) 0 else page
         isLoading = true
         launch({
-            val answerPageResponse = HomeRepository.getAnswerPageList(page, DEFAULT_PAGE_SIZE)
+            val answerPageResponse = HomeRepository.getAnswerPageList(page)
             val oldList = answerListLiveData.value?.first ?: emptyList()
-            val newList = oldList + (answerPageResponse.success()?.data?.datas ?: emptyList())
+            val newList = (if (isRefresh) emptyList() else oldList) + (answerPageResponse.success()?.data?.datas ?: emptyList())
             answerListLiveData.value = getDiffResultPair(oldList, newList)
             page++
             isLoading = false

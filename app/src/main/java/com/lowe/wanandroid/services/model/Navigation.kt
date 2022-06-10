@@ -7,4 +7,6 @@ data class Navigation(
     var articles: List<Article>,
     var cid: Int,
     var name: String
-)
+) {
+    var isSelected = false
+}

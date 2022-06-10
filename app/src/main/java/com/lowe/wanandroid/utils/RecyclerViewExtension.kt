@@ -3,6 +3,7 @@ package com.lowe.wanandroid.utils
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
@@ -162,3 +163,15 @@ fun RecyclerView.paging(
 //            }
 //        }
 //}
+
+fun RecyclerView.smoothSnapToPosition(
+    position: Int,
+    snapMode: Int = LinearSmoothScroller.SNAP_TO_START
+) {
+    val smoothScroller = object : LinearSmoothScroller(this.context) {
+        override fun getVerticalSnapPreference(): Int = snapMode
+        override fun getHorizontalSnapPreference() = snapMode
+    }
+    smoothScroller.targetPosition = position
+    this.layoutManager?.startSmoothScroll(smoothScroller)
+}
