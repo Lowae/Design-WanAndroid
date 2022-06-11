@@ -19,8 +19,8 @@ class TutorialChildViewModel : BaseViewModel() {
     fun fetchTutorialList() {
         launch({
             val tutorials = NavigatorRepository.getTutorialList().success()?.data ?: emptyList()
-            val oldList = tutorialListLiveData.value?.first ?: emptyList()
-            tutorialListLiveData.value = getDiffResultPair(oldList, oldList + tutorials)
+            tutorialListLiveData.value =
+                getDiffResultPair(tutorialListLiveData.value?.first ?: emptyList(), tutorials)
         })
     }
 

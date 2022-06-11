@@ -1,6 +1,8 @@
 package com.lowe.wanandroid.ui.navigator.child.series
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -12,10 +14,10 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.navigator.TagSelectedChange
+import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListActivity
 import com.lowe.wanandroid.ui.navigator.child.series.item.SeriesChildTagChildrenItemBinder
 import com.lowe.wanandroid.ui.navigator.child.series.item.SeriesChildTagItemBinder
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.smoothSnapToPosition
 
 class SeriesChildFragment :
@@ -95,7 +97,14 @@ class SeriesChildFragment :
     }
 
     private fun onTagChildrenItemClick(classify: Classify) {
-        classify.name.showShortToast()
+        val series = viewModel.getCurrentList()
+            .find { it is Series && it.id == classify.parentChapterId } as? Series ?: return
+        startActivity(Intent(this.context, SeriesDetailListActivity::class.java).apply {
+            putParcelableArrayListExtra(
+                SeriesDetailListActivity.KEY_BUNDLE_CLASSIFY_LIST_TAB,
+                series.children as ArrayList<out Parcelable>
+            )
+        })
     }
 
     private fun tagSelectedChange(pos: Int) {

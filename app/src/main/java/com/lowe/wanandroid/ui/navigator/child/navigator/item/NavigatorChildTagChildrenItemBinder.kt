@@ -10,7 +10,6 @@ import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import com.drakeet.multitype.ItemViewBinder
-import com.google.android.flexbox.FlexboxLayout
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTagChildrenLayoutBinding
@@ -43,25 +42,25 @@ class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Artic
         holder.binding.apply {
             name = item.name
             executePendingBindings()
-            flexboxLayout.removeAllViews()
+            tagChildrenLayout.removeAllViews()
             item.articles.forEach { article ->
                 val tv = generateTagChildrenTextView(
                     this.root.context,
-                    FlexboxLayout.LayoutParams(
-                        FlexboxLayout.LayoutParams.WRAP_CONTENT,
-                        FlexboxLayout.LayoutParams.WRAP_CONTENT
+                    ViewGroup.MarginLayoutParams(
+                        ViewGroup.MarginLayoutParams.WRAP_CONTENT,
+                        ViewGroup.MarginLayoutParams.WRAP_CONTENT
                     )
                 )
                 tv.text = article.title
                 tv.setOnClickListener { onTagChildrenClick(article) }
-                flexboxLayout.addView(tv)
+                tagChildrenLayout.addView(tv)
             }
         }
     }
 
     private fun generateTagChildrenTextView(
         context: Context,
-        layoutParams: FlexboxLayout.LayoutParams
+        layoutParams: ViewGroup.MarginLayoutParams
     ) = with(TextView(context)) {
         layoutParams.setMargins(6.dp)
         this.layoutParams = layoutParams

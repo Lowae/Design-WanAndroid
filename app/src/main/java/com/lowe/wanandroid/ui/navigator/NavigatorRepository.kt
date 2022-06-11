@@ -16,4 +16,7 @@ object NavigatorRepository : NavigatorService {
 
     override suspend fun getTutorialChapterList(id: Int, orderType: Int) =
         apiCall { service.getTutorialChapterList(id, orderType) }
+
+    override suspend fun getSeriesDetailList(page: Int, id: Int, size: Int) =
+        apiCall { service.getSeriesDetailList(page, id, size) }
 }

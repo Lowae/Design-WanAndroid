@@ -28,7 +28,7 @@ class ProjectFragment :
     private fun initObserve() {
         viewModel.projectTitleListLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
-            childAdapter.notifyDataSetChanged()
+            childAdapter.notifyItemRangeInserted(0, childAdapter.itemCount)
         }
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
             if (childAdapter.items.isEmpty()) return@observe

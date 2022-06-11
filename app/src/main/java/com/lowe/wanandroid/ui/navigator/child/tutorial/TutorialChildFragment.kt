@@ -2,6 +2,8 @@ package com.lowe.wanandroid.ui.navigator.child.tutorial
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -9,8 +11,10 @@ import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildTutorialBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.navigator.NavigatorChildFragmentAdapter
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
+import com.lowe.wanandroid.ui.navigator.NavigatorViewModel
 import com.lowe.wanandroid.ui.navigator.child.tutorial.item.TutorialChildItemBinder
 import com.lowe.wanandroid.ui.navigator.child.tutorial.list.TutorialChapterListActivity
 
@@ -21,17 +25,18 @@ class TutorialChildFragment :
         fun newInstance(navigatorTabBean: NavigatorTabBean): TutorialChildFragment = with(
             TutorialChildFragment()
         ) {
-            arguments?.apply {
-                putParcelable(
-                    NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE,
-                    navigatorTabBean
-                )
-            }
+            arguments =
+                bundleOf(NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE to navigatorTabBean)
             this
         }
     }
 
+    private val navigatorTabBean by lazy(LazyThreadSafetyMode.NONE) {
+        arguments?.getParcelable(NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE)
+            ?: NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
+    }
     private val tutorialAdapter = MultiTypeAdapter()
+    private val parentFragmentViewModel by viewModels<NavigatorViewModel>(this::requireParentFragment)
 
     override fun createViewModel() = TutorialChildViewModel()
 
@@ -56,6 +61,12 @@ class TutorialChildFragment :
                 viewLifecycleOwner,
                 this@TutorialChildFragment::dispatchToAdapter
             )
+        }
+        parentFragmentViewModel.apply {
+            refreshLiveData.observe(viewLifecycleOwner) {
+                if (it.title == navigatorTabBean.title)
+                    viewModel.fetchTutorialList()
+            }
         }
     }
 

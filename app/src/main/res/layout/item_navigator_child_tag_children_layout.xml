@@ -24,7 +24,7 @@
             tools:text="常用网站" />
 
         <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flexboxLayout"
+            android:id="@+id/tagChildrenLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:alignContent="flex_start"

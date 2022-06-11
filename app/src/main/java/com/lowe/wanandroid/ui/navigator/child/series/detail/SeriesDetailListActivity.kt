@@ -1,16 +1,65 @@
 package com.lowe.wanandroid.ui.navigator.child.series.detail
 
 import android.os.Bundle
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
+import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.BaseActivity
 
-class SeriesDetailListActivity : BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>(R.layout.activity_series_detail_list_layout) {
+class SeriesDetailListActivity :
+    BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>(R.layout.activity_series_detail_list_layout) {
+
+    companion object {
+
+        const val KEY_BUNDLE_CLASSIFY_LIST_TAB = "key_bundle_classify_list_Tab"
+
+    }
+
+    private lateinit var detailFragmentAdapter: SeriesDetailFragmentStateAdapter
+    private lateinit var tabLayoutMediator: TabLayoutMediator
+
+    private val classifyList: List<Classify> by lazy(LazyThreadSafetyMode.NONE) {
+        intent.getParcelableArrayListExtra(
+            KEY_BUNDLE_CLASSIFY_LIST_TAB
+        ) ?: emptyList()
+    }
 
     override fun createViewModel() = SeriesDetailListViewModel()
 
     override fun init(savedInstanceState: Bundle?) {
+        detailFragmentAdapter =
+            SeriesDetailFragmentStateAdapter(classifyList, supportFragmentManager, lifecycle)
+        initView()
+        initObserve()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        tabLayoutMediator.detach()
+    }
+
+    private fun initView() {
+        viewDataBinding.apply {
+            with(seriesDetailPager2) {
+                adapter = detailFragmentAdapter
+            }
+            tabLayoutMediator = TabLayoutMediator(
+                seriesDetailTabLayout,
+                seriesDetailPager2
+            ) { tab: TabLayout.Tab, position: Int ->
+                tab.text = detailFragmentAdapter.items[position].name
+            }.apply(TabLayoutMediator::attach)
+        }
+    }
+
+    private fun initObserve() {
+        viewDataBinding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onRefreshLiveData.value =
+                detailFragmentAdapter.items[viewDataBinding.seriesDetailPager2.currentItem]
+            viewDataBinding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,11 +41,10 @@ class TutorialChapterListActivity :
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initObserve() {
         viewModel.chaptersLiveData.observe(this) {
             chapterAdapter.items = it
-            chapterAdapter.notifyDataSetChanged()
+            chapterAdapter.notifyItemRangeInserted(0, chapterAdapter.itemCount)
         }
     }
 

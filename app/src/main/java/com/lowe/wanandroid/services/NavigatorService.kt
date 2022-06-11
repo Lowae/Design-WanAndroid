@@ -5,6 +5,7 @@ import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.Navigation
 import com.lowe.wanandroid.services.model.Series
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NavigatorService : BaseService {
@@ -25,5 +26,12 @@ interface NavigatorService : BaseService {
     suspend fun getTutorialChapterList(
         @Query("cid") id: Int,
         @Query("order_type") orderType: Int = 1
+    ): ApiResponse<PageResponse<Article>>
+
+    @GET("article/list/{page}/json")
+    suspend fun getSeriesDetailList(
+        @Path("page") page: Int,
+        @Query("cid") id: Int,
+        @Query("page_size") size: Int
     ): ApiResponse<PageResponse<Article>>
 }

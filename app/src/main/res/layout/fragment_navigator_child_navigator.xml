@@ -15,6 +15,11 @@
             android:layout_width="100dp"
             android:layout_height="match_parent" />
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tagChipList"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tagChildrenList"
             android:layout_width="match_parent"
