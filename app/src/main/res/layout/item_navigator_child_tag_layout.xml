@@ -6,39 +6,39 @@
 
         <variable
             name="binder"
-            type="com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagItemBinder" />
+            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
 
         <variable
-            name="navigation"
-            type="com.lowe.wanandroid.services.model.Navigation" />
+            name="name"
+            type="String" />
 
         <variable
             name="position"
             type="int" />
-
-        <import type="android.view.View" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
         android:background="@drawable/selected_tag_corner"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp">
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
         <TextView
+            android:id="@+id/tagTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:onClick="@{() -> binder.onItemClick(position)}"
-            android:text="@{navigation.name}"
-            android:textColor="@color/md_theme_dark_surfaceVariant"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            android:text="@{name}"
+            android:textColor="@color/md_theme_light_outline"
             tools:text="常用网站" />
 
     </FrameLayout>

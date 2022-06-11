@@ -5,9 +5,27 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.lowe.wanandroid.widgets.NestedScrollMediateContainer
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesTagList"
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/seriesTagChildrenList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </com.lowe.wanandroid.widgets.NestedScrollMediateContainer>
+
 </layout>

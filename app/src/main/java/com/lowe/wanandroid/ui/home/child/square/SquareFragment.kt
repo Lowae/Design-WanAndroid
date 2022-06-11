@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.home.child.square
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildSquareBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
@@ -14,6 +16,8 @@ import com.lowe.wanandroid.ui.home.HomeTabBean
 import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.child.square.repository.SquareViewModel
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
 class SquareFragment :
@@ -44,7 +48,7 @@ class SquareFragment :
     }
 
     private fun initView() {
-        squareAdapter.register(HomeArticleItemBinder())
+        squareAdapter.register(HomeArticleItemBinder(this::onItemClick))
         viewBinding.apply {
             with(squareList) {
                 layoutManager = LinearLayoutManager(context)
@@ -86,4 +90,14 @@ class SquareFragment :
         result.second.dispatchUpdatesTo(squareAdapter)
     }
 
+    private fun onItemClick(action: Pair<Int, Article>) {
+        val (position, article) = action
+        startActivity(
+            Intent(
+                this.context,
+                WebActivity::class.java
+            )
+        )
+        "pos: $position - name: ${article.title}".showShortToast()
+    }
 }

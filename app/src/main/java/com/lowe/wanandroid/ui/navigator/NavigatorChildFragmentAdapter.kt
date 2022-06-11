@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lowe.wanandroid.ui.navigator.child.navigator.NavigatorChildFragment
 import com.lowe.wanandroid.ui.navigator.child.series.SeriesChildFragment
+import com.lowe.wanandroid.ui.navigator.child.tutorial.TutorialChildFragment
 import kotlinx.parcelize.Parcelize
 
 class NavigatorChildFragmentAdapter(
@@ -18,6 +19,7 @@ class NavigatorChildFragmentAdapter(
     companion object {
         const val NAVIGATOR_TAB_NAVIGATOR = "导航"
         const val NAVIGATOR_TAB_SERIES = "体系"
+        const val NAVIGATOR_TAB_TUTORIAL = "教程"
     }
 
     override fun getItemCount() = items.size
@@ -26,6 +28,7 @@ class NavigatorChildFragmentAdapter(
         return when (items[position].title) {
             NAVIGATOR_TAB_NAVIGATOR -> NavigatorChildFragment.newInstance(items[position])
             NAVIGATOR_TAB_SERIES -> SeriesChildFragment.newInstance(items[position])
+            NAVIGATOR_TAB_TUTORIAL -> TutorialChildFragment.newInstance(items[position])
             else -> NavigatorChildFragment.newInstance(items[position])
         }
     }

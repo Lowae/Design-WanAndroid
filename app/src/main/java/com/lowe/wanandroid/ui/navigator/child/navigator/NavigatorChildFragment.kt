@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildNavigatorBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Navigation
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagChildrenItemBinder
 import com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagItemBinder
+import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.smoothSnapToPosition
 
 class NavigatorChildFragment :
@@ -32,6 +35,7 @@ class NavigatorChildFragment :
 
     private val tagAdapter = MultiTypeAdapter()
     private val tagChildrenAdapter = MultiTypeAdapter()
+    private val tagOnScrollListener = NavigatorTagOnScrollListener()
 
     override fun createViewModel() = NavigatorChildViewModel()
 
@@ -48,9 +52,10 @@ class NavigatorChildFragment :
                 layoutManager = LinearLayoutManager(context)
             }
             with(tagChildrenList) {
-                tagChildrenAdapter.register(NavigatorChildTagChildrenItemBinder())
+                tagChildrenAdapter.register(NavigatorChildTagChildrenItemBinder(this@NavigatorChildFragment::onTagChildrenItemClick))
                 adapter = tagChildrenAdapter
                 layoutManager = LinearLayoutManager(context)
+                addOnScrollListener(tagOnScrollListener)
             }
         }
     }
@@ -61,6 +66,10 @@ class NavigatorChildFragment :
                 dispatchToAdapter(it, tagAdapter)
                 dispatchToAdapter(it, tagChildrenAdapter)
             }
+        }
+        tagOnScrollListener.firstCompletelyVisiblePosChange.observe(viewLifecycleOwner) { pos ->
+            val item = tagChildrenAdapter.items[pos] as? Navigation ?: return@observe
+            if (item.isSelected.not()) tagSelectedChange(pos)
         }
     }
 
@@ -73,12 +82,12 @@ class NavigatorChildFragment :
     }
 
     private fun onTagClick(action: Pair<Int, Navigation>) {
-        val index = viewModel.navigationTagListLiveData.value?.first?.indexOfFirst {
-            it is Navigation && it.name == action.second.name
-        } ?: return
-        viewBinding.tagChildrenList.smoothSnapToPosition(index)
-        viewModel.onTagSelectedChange(index)
+        val (pos, _) = action
+        viewBinding.tagChildrenList.smoothSnapToPosition(pos)
+        tagSelectedChange(pos)
+    }
 
+    private fun tagSelectedChange(pos: Int) {
         //TODO ugly code
         viewModel.getCurrentList().forEachIndexed { index, any ->
             if (any is Navigation && any.isSelected) {
@@ -86,7 +95,14 @@ class NavigatorChildFragment :
                 tagAdapter.notifyItemChanged(index, TagSelectedChange)
             }
         }
-        (viewModel.getCurrentList().get(index) as Navigation).isSelected = true
-        tagAdapter.notifyItemChanged(index, TagSelectedChange)
+        (viewModel.getCurrentList()[pos] as Navigation).isSelected = true
+        tagAdapter.notifyItemChanged(pos, TagSelectedChange)
+        viewBinding.tagList.post {
+            viewBinding.tagList.scrollToPosition(pos)
+        }
+    }
+
+    private fun onTagChildrenItemClick(article: Article) {
+        article.title.showShortToast()
     }
 }

@@ -6,6 +6,14 @@
     <data>
 
         <variable
+            name="binder"
+            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
             name="article"
             type="com.lowe.wanandroid.services.model.Article" />
 
@@ -29,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/md_theme_light_secondaryContainer"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{()->binder.onItemClick(position)}">
 
             <TextView
                 android:id="@+id/tv_author"

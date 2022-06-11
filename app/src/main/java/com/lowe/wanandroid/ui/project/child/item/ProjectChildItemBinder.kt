@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.drakeet.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.ViewBindingHolder
+import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemProjectArticleLayoutBinding
 import com.lowe.wanandroid.services.model.Article
 

@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.home.child.explore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildExploreBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Banner
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
@@ -16,6 +18,7 @@ import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.child.explore.repository.ExploreViewModel
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
+import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
@@ -65,7 +68,7 @@ class ExploreFragment :
     }
 
     private fun initView() {
-        homeAdapter.register(HomeArticleItemBinder())
+        homeAdapter.register(HomeArticleItemBinder(this::onItemClick))
         homeAdapter.register(HomeBannerItemBinder(this::onBannerItemClick))
         viewBinding.homeList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -109,4 +112,14 @@ class ExploreFragment :
         position.toString().showShortToast()
     }
 
+    private fun onItemClick(action: Pair<Int, Article>) {
+        val (position, article) = action
+        startActivity(
+            Intent(
+                this.context,
+                WebActivity::class.java
+            )
+        )
+        "pos: $position - name: ${article.title}".showShortToast()
+    }
 }

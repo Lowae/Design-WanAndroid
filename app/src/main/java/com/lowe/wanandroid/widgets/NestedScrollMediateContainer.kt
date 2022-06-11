@@ -7,6 +7,9 @@ import android.widget.FrameLayout
 import androidx.core.view.children
 import kotlin.math.abs
 
+/**
+ * 避免ViewPager2内部RecyclerView滑到底后事件被ViewPager2拦截1
+ */
 class NestedScrollMediateContainer @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

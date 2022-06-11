@@ -66,6 +66,7 @@ class NavigatorFragment :
     private fun generateNavigatorTabs() = listOf(
         NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_NAVIGATOR),
         NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_SERIES),
+        NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
     )
 
     override fun onDestroy() {

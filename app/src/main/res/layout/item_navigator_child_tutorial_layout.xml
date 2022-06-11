@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="binder"
+            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+
+        <variable
+            name="classify"
+            type="com.lowe.wanandroid.services.model.Classify" />
+
+        <variable
+            name="position"
+            type="int" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="12dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_light_secondaryContainer"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{()->binder.onItemClick(position)}"
+            android:padding="10dp">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_project"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{classify.cover}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/iv_project"
+                app:layout_constraintTop_toTopOf="parent"
+                app:roundedCornerRadius="8dp"
+                app:viewAspectRatio="0.72" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{classify.name}"
+                android:textColor="@color/_333333"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/iv_project"
+                app:layout_constraintTop_toTopOf="@+id/iv_project"
+                tools:text="C 语言入门教程_阮一峰" />
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:text='@{classify.author}'
+                android:textColor="@color/md_theme_dark_surfaceVariant"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="张鸿洋" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.4"
+                android:maxLines="3"
+                android:text="@{classify.desc}"
+                android:textColor="@color/_333333"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_author"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="也可以用作参考手册查阅语法。\n\n" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

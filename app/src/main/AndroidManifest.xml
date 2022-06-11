@@ -4,7 +4,8 @@
     package="com.lowe.wanandroid">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".base.BaseApp"
         android:allowBackup="true"
@@ -17,6 +18,9 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".SeriesDetailListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -26,6 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.web.WebActivity" />
+        <activity
+            android:name=".ui.navigator.child.tutorial.list.TutorialChapterListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -3,15 +3,15 @@ package com.lowe.wanandroid.ui.navigator.child.navigator.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.drakeet.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.ViewBindingHolder
+import com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder
+import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTagLayoutBinding
 import com.lowe.wanandroid.services.model.Navigation
 import com.lowe.wanandroid.ui.navigator.child.navigator.TagSelectedChange
 
 class NavigatorChildTagItemBinder(private val onClick: (Pair<Int, Navigation>) -> Unit) :
-    ItemViewBinder<Navigation, ViewBindingHolder<ItemNavigatorChildTagLayoutBinding>>() {
+    ItemViewDataBindingBinder<Navigation, ViewBindingHolder<ItemNavigatorChildTagLayoutBinding>>() {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -47,17 +47,16 @@ class NavigatorChildTagItemBinder(private val onClick: (Pair<Int, Navigation>) -
         holder: ViewBindingHolder<ItemNavigatorChildTagLayoutBinding>,
         item: Navigation
     ) {
+        super.onBindViewHolder(holder, item)
         holder.binding.apply {
-            navigation = item
-            binder = this@NavigatorChildTagItemBinder
-            position = holder.bindingAdapterPosition
+            name = item.name
             onTagSelectedChange(holder, item)
             executePendingBindings()
         }
     }
 
-    fun onItemClick(position: Int) {
-        onClick(position to adapterItems[position] as Navigation)
+    override fun onItemClick(position: Int) {
+        position.takeIf { it >= 0 }?.also { onClick(it to adapterItems[it] as Navigation) }
     }
 
     private fun onTagSelectedChange(
@@ -65,5 +64,6 @@ class NavigatorChildTagItemBinder(private val onClick: (Pair<Int, Navigation>) -
         item: Navigation
     ) {
         holder.itemView.isSelected = item.isSelected
+        holder.binding.tagTv.setTextColor(holder.itemView.context.getColor(if (item.isSelected) R.color.md_theme_dark_onPrimary else R.color.md_theme_light_outline))
     }
 }

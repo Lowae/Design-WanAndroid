@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="navigation"
-            type="com.lowe.wanandroid.services.model.Navigation" />
+            name="name"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:id="@+id/tagTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{navigation.name}"
+            android:text="@{name}"
             android:textColor="@color/md_theme_dark_surfaceVariant"
             tools:text="常用网站" />
 

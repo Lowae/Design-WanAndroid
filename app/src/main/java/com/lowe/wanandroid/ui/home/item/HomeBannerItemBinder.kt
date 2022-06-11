@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.drakeet.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.ViewBindingHolder
+import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeBannerLayoutBinding
 import com.lowe.wanandroid.services.model.Banner
 import com.lowe.wanandroid.services.model.Banners

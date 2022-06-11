@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.home.child.answer
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildAnswerBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
@@ -14,6 +16,8 @@ import com.lowe.wanandroid.ui.home.HomeTabBean
 import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.child.answer.repository.AnswerViewModel
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
 class AnswerFragment :
@@ -44,7 +48,7 @@ class AnswerFragment :
     }
 
     private fun initView() {
-        squareAdapter.register(HomeArticleItemBinder())
+        squareAdapter.register(HomeArticleItemBinder(this::onItemClick))
         viewBinding.apply {
             with(answerList) {
                 layoutManager = LinearLayoutManager(context)
@@ -84,6 +88,17 @@ class AnswerFragment :
     private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
         squareAdapter.items = result.first
         result.second.dispatchUpdatesTo(squareAdapter)
+    }
+
+    private fun onItemClick(action: Pair<Int, Article>) {
+        val (position, article) = action
+        startActivity(
+            Intent(
+                this.context,
+                WebActivity::class.java
+            )
+        )
+        "pos: $position - name: ${article.title}".showShortToast()
     }
 
 }
