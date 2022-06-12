@@ -5,9 +5,11 @@ import android.view.MenuItem
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.group.GroupFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
+import com.lowe.wanandroid.ui.profile.ProfileFragment
 import com.lowe.wanandroid.ui.project.ProjectFragment
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
@@ -18,7 +20,14 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     private lateinit var binding: ActivityMainBinding
 
-    private var fragmentList = listOf(HomeFragment(), ProjectFragment(), NavigatorFragment())
+    private var fragmentList =
+        listOf(
+            HomeFragment(),
+            ProjectFragment(),
+            NavigatorFragment(),
+            GroupFragment(),
+            ProfileFragment()
+        )
     private var activeFragmentIndex = -1
 
     override fun createViewModel() = MainViewModel()
@@ -51,22 +60,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         switchFragment(savedInstanceState.getInt(KEY_CURRENT_FRAGMENT_INDEX, 0))
     }
 
-    private fun onBottomItemSelect(item: MenuItem) =
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                switchFragment(0)
-                true
-            }
-            R.id.navigation_project -> {
-                switchFragment(1)
-                true
-            }
-            R.id.navigation_navigator -> {
-                switchFragment(2)
-                true
-            }
-            else -> false
-        }
+    private fun onBottomItemSelect(item: MenuItem): Boolean {
+        switchFragment(getFragmentIndexFromItemId(item.itemId))
+        return true
+    }
 
     private fun onBottomDoubleClick(item: MenuItem) {
         viewModel.mainTabDoubleClickLiveData.value = getTagFromItemId(item.itemId)
@@ -93,13 +90,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         }
     }
 
-    private fun getTagFromItemId(itemId: Int) = fragmentList[getFragmentIndexFromItemId(itemId)].tag ?: ExploreFragment::class.java.simpleName
+    private fun getTagFromItemId(itemId: Int) = fragmentList[getFragmentIndexFromItemId(itemId)].tag
+        ?: ExploreFragment::class.java.simpleName
 
     private fun getFragmentIndexFromItemId(itemId: Int): Int {
         return when (itemId) {
             R.id.navigation_home -> 0
             R.id.navigation_project -> 1
             R.id.navigation_navigator -> 2
+            R.id.navigation_we_chat_group -> 3
+            R.id.navigation_profile -> 4
             else -> 0
         }
     }

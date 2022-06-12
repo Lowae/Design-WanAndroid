@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentChildProjectBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.project.ProjectViewModel
 import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
+import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.loadMore
 
 class ProjectChildFragment :
@@ -41,7 +43,7 @@ class ProjectChildFragment :
     }
 
     private fun initView() {
-        projectAdapter.register(ProjectChildItemBinder())
+        projectAdapter.register(ProjectChildItemBinder(this::onItemClick))
         viewBinding.apply {
             with(childList) {
                 layoutManager = LinearLayoutManager(context)
@@ -76,5 +78,10 @@ class ProjectChildFragment :
 
     private fun onRefresh() {
         viewModel.fetchProjectList(categoryId, true)
+    }
+
+    private fun onItemClick(action: Pair<Int, Article>) {
+        val (position, article) = action
+        WebActivity.loadUrl(this.requireContext(), article.link)
     }
 }

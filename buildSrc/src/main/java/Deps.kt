@@ -19,6 +19,9 @@ object Version {
     // MultiAdapter
     const val multiTypeVersion = "4.3.0"
 
+    // paging3
+    const val pagingVersion = "3.1.1"
+
     // 网络
     const val retrofitVersion = "2.9.0"
     const val okHttp3Version = "4.9.3"
@@ -32,6 +35,8 @@ object Version {
     // ui
     const val bannerVersion = "2.2.2"
     const val flexboxVersion = "3.0.0"
+
+    const val agentWebVersion = "v4.1.9-androidx"
 }
 
 object Deps {
@@ -67,4 +72,7 @@ object Deps {
     const val fresco = "com.facebook.fresco:fresco:${Version.frescoVersion}"
     const val banner = "io.github.youth5201314:banner:${Version.bannerVersion}"
     const val flexbox = "com.google.android.flexbox:flexbox:${Version.flexboxVersion}"
+    const val paging = "androidx.paging:paging-runtime:${Version.pagingVersion}"
+    const val pagingKtx = "androidx.paging:paging-runtime-ktx:${Version.pagingVersion}"
+    const val agentWeb = "com.github.Justson.AgentWeb:agentweb-core:${Version.agentWebVersion}"
 }

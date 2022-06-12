@@ -52,6 +52,9 @@ dependencies {
     implementation(Deps.recyclerview)
 
     implementation(Deps.multitype)
+    implementation(Deps.paging)
+    implementation(Deps.pagingKtx)
+
 
     implementation(Deps.okhttp)
     implementation(Deps.okhttpLoggingInterceptor)
@@ -62,9 +65,8 @@ dependencies {
 
     implementation(Deps.banner)
     implementation(Deps.flexbox)
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation(Deps.agentWeb)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

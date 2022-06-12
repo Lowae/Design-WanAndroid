@@ -12,14 +12,14 @@ class AnswerViewModel : BaseViewModel() {
 
     var isLoading = false
     val answerListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
-    private var page = 0
+    private var page = 1
 
     override fun start() {
         fetchAnswerList(true)
     }
 
     fun fetchAnswerList(isRefresh: Boolean = false) {
-        page = if (isRefresh) 0 else page
+        page = if (isRefresh) 1 else page
         isLoading = true
         launch({
             val answerPageResponse = HomeRepository.getAnswerPageList(page)

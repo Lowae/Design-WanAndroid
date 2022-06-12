@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.navigator.child.series.detail.child
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -15,7 +14,6 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
 class SeriesDetailChildFragment :
@@ -86,12 +84,6 @@ class SeriesDetailChildFragment :
 
     private fun onItemClick(action: Pair<Int, Article>) {
         val (position, article) = action
-        startActivity(
-            Intent(
-                this.context,
-                WebActivity::class.java
-            )
-        )
-        "pos: $position - name: ${article.title}".showShortToast()
+        WebActivity.loadUrl(this.requireContext(), article.link)
     }
 }

@@ -6,8 +6,16 @@
     <data>
 
         <variable
+            name="binder"
+            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+
+        <variable
             name="article"
             type="com.lowe.wanandroid.services.model.Article" />
+
+        <variable
+            name="position"
+            type="int" />
 
         <import type="android.text.Html" />
     </data>
@@ -27,7 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/md_theme_light_secondaryContainer"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{()->binder.onItemClick(position)}"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/tv_author"
@@ -79,51 +89,54 @@
                 android:textColor="@color/_333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_content"
                 app:layout_constraintEnd_toEndOf="@+id/tv_date"
                 app:layout_constraintStart_toEndOf="@+id/iv_project"
                 app:layout_constraintTop_toTopOf="@+id/iv_project"
-                tools:text="我是标题" />
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="我是标题\n" />
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="1.4"
                 android:maxLines="3"
+                android:minLines="3"
                 android:text="@{Html.fromHtml(article.desc)}"
                 android:textColor="@color/_333333"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/iv_collect"
                 app:layout_constraintEnd_toEndOf="@+id/tv_date"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="一个Jetpack结合MVVM的快速开发框架，基于MVVM模式集成谷歌官方推荐的JetPack组件库：LiveData、ViewModel、Lifecycle组件 使用Kotlin语言，添加大量拓展函数，简化代码 加入Retrofit网络请求,协程，帮你简化各种操作，让你快速开发项目" />
 
             <TextView
                 android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
                 android:text="@{Html.fromHtml(article.superChapterName+'·'+article.chapterName)}"
                 android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_author"
-                app:layout_constraintTop_toBottomOf="@+id/iv_project"
+                app:layout_constraintBottom_toBottomOf="@id/iv_collect"
+                app:layout_constraintStart_toStartOf="@id/tv_author"
+                app:layout_constraintTop_toTopOf="@id/iv_collect"
                 tools:text="分类·项目" />
 
             <ImageView
                 android:id="@+id/iv_collect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="12dp"
                 android:src="@{article.collect?@drawable/ic_collect:@drawable/ic_un_collect}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_type"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_type"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_content"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/ic_un_collect" />
         </androidx.constraintlayout.widget.ConstraintLayout>

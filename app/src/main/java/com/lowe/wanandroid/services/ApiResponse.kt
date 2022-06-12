@@ -22,6 +22,8 @@ data class PageResponse<T>(
     val total: Int
 )
 
+fun <T> ApiResponse<T>.isSuccess() = errorCode == 0 && errorMsg == ""
+
 fun <T> ApiResponse<T>.success(): ApiResponse<T>? {
     return if (errorCode == 0) {
         return this

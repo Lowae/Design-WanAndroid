@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,13 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tagList"
-            android:layout_width="100dp"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/tagChipList"
+        <com.lowe.wanandroid.widgets.VerticalScrollChipGroup
+            android:id="@+id/verticalTagList"
             android:layout_width="100dp"
             android:layout_height="match_parent"/>
 

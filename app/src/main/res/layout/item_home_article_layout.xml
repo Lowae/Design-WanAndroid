@@ -163,9 +163,9 @@
 
             <ImageView
                 android:id="@+id/iv_collect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="10dp"
                 android:src="@{article.collect?@drawable/ic_collect:@drawable/ic_un_collect}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_type2"
                 app:layout_constraintEnd_toEndOf="parent"

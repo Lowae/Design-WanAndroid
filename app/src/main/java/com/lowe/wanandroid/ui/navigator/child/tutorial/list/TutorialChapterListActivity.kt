@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -9,7 +8,6 @@ import com.lowe.wanandroid.databinding.ActivityTutorialChapterListLayoutBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 
 class TutorialChapterListActivity :
     BaseActivity<TutorialChapterListViewModel, ActivityTutorialChapterListLayoutBinding>(R.layout.activity_tutorial_chapter_list_layout) {
@@ -50,12 +48,6 @@ class TutorialChapterListActivity :
 
     private fun onItemClick(action: Pair<Int, Article>) {
         val (position, article) = action
-        startActivity(
-            Intent(
-                this,
-                WebActivity::class.java
-            )
-        )
-        "pos: $position - name: ${article.title}".showShortToast()
+        WebActivity.loadUrl(this, article.link)
     }
 }

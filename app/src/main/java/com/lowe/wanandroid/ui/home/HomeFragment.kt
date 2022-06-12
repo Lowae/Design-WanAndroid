@@ -29,11 +29,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         initObserve()
     }
 
-    override fun onDestroy() {
-        tabLayoutMediator.detach()
-        super.onDestroy()
-    }
-
     private fun initView() {
         childAdapter =
             HomeChildFragmentAdapter(generateHomeTabs(), this.childFragmentManager, lifecycle)

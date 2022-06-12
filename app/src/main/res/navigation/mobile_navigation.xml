@@ -22,4 +22,10 @@
         android:name="com.lowe.wanandroid.ui.navigator.NavigatorFragment"
         android:label="@string/title_navigator"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_we_chat_group"
+        android:name="com.lowe.wanandroid.ui.group.GroupFragment"
+        android:label="@string/title_we_chat_group"
+        tools:layout="@layout/fragment_group" />
 </navigation>

@@ -14,6 +14,7 @@ class SeriesDetailListActivity :
     companion object {
 
         const val KEY_BUNDLE_CLASSIFY_LIST_TAB = "key_bundle_classify_list_Tab"
+        const val KEY_BUNDLE_INIT_TAB_INDEX = "key_bundle_init_tab_index"
 
     }
 
@@ -24,6 +25,10 @@ class SeriesDetailListActivity :
         intent.getParcelableArrayListExtra(
             KEY_BUNDLE_CLASSIFY_LIST_TAB
         ) ?: emptyList()
+    }
+
+    private val initIndex: Int by lazy(LazyThreadSafetyMode.NONE) {
+        intent.getIntExtra(KEY_BUNDLE_INIT_TAB_INDEX, -1)
     }
 
     override fun createViewModel() = SeriesDetailListViewModel()
@@ -44,6 +49,7 @@ class SeriesDetailListActivity :
         viewDataBinding.apply {
             with(seriesDetailPager2) {
                 adapter = detailFragmentAdapter
+                setCurrentItem(initIndex.takeIf { it >= 0 } ?: 0, false)
             }
             tabLayoutMediator = TabLayoutMediator(
                 seriesDetailTabLayout,

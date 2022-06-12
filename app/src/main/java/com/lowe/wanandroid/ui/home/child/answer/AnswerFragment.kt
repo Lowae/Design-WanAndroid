@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.home.child.answer
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +16,6 @@ import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.child.answer.repository.AnswerViewModel
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.loadMore
 
 class AnswerFragment :
@@ -92,13 +90,7 @@ class AnswerFragment :
 
     private fun onItemClick(action: Pair<Int, Article>) {
         val (position, article) = action
-        startActivity(
-            Intent(
-                this.context,
-                WebActivity::class.java
-            )
-        )
-        "pos: $position - name: ${article.title}".showShortToast()
+        WebActivity.loadUrl(this.requireContext(), article.link)
     }
 
 }

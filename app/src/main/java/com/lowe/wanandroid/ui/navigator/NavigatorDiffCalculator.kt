@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.ui.navigator
 
-import com.lowe.wanandroid.base.SimpleDiffCalculator
+import com.lowe.wanandroid.base.SimpleDiffCallback
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.Navigation
@@ -11,7 +11,7 @@ import com.lowe.wanandroid.ui.navigator.child.navigator.TagSelectedChange
 object NavigatorDiffCalculator {
 
     fun getNavigatorDiffCalculator(oldList: List<Any>, newList: List<Any>) =
-        SimpleDiffCalculator(
+        SimpleDiffCallback(
             oldList,
             newList,
             { oldItem: Any, newItem: Any ->
