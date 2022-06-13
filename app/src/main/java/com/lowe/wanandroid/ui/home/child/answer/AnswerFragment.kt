@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.home.child.answer
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,9 +24,9 @@ class AnswerFragment :
 
     companion object {
         fun newInstance(homeTabBean: HomeTabBean) = with(AnswerFragment()) {
-            arguments?.apply {
-                putParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE, homeTabBean)
-            }
+            arguments = bundleOf(
+                HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE to homeTabBean
+            )
             this
         }
     }

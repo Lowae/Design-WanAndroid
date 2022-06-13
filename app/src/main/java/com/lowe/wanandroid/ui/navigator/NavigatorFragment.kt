@@ -68,9 +68,4 @@ class NavigatorFragment :
         NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_SERIES),
         NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
     )
-
-    override fun onDestroy() {
-        super.onDestroy()
-        tabLayoutMediator.detach()
-    }
 }

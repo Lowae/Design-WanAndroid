@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.home.child.explore
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +28,9 @@ class ExploreFragment :
         private const val KEY_HOME_FRAGMENT_LIST_SAVE_STATE = "key_home_fragment_list_save_state"
 
         fun newInstance(homeTabBean: HomeTabBean): ExploreFragment = with(ExploreFragment()) {
-            arguments?.apply {
-                putParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE, homeTabBean)
-            }
+            arguments = bundleOf(
+                HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE to homeTabBean
+            )
             this
         }
 

@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.home.child.square
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,9 +24,9 @@ class SquareFragment :
 
     companion object {
         fun newInstance(homeTabBean: HomeTabBean) = with(SquareFragment()) {
-            arguments?.apply {
-                putParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE, homeTabBean)
-            }
+            arguments = bundleOf(
+                HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE to homeTabBean
+            )
             this
         }
     }

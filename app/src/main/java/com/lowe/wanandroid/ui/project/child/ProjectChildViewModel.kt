@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.DiffUtil
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.project.repository.ProjectRepository
 import com.lowe.wanandroid.ui.launch
+import com.lowe.wanandroid.ui.project.repository.ProjectRepository
 
 class ProjectChildViewModel : BaseViewModel() {
 
@@ -24,12 +24,16 @@ class ProjectChildViewModel : BaseViewModel() {
         pageNo = if (isRefresh) 0 else pageNo
         launch({
             val projects =
-                if (categoryId == ProjectChildFragment.CATEGORY_ID_NEWEST_PROJECT)
+                (if (categoryId == ProjectChildFragment.CATEGORY_ID_NEWEST_PROJECT)
                     ProjectRepository.getNewProjectPageList(pageNo, DEFAULT_PAGE_SIZE)
-                else ProjectRepository.getProjectPageList(pageNo, DEFAULT_PAGE_SIZE, categoryId)
+                else ProjectRepository.getProjectPageList(
+                    pageNo,
+                    DEFAULT_PAGE_SIZE,
+                    categoryId
+                )).success()?.data?.datas ?: emptyList()
 
             val oldList = projectListLiveData.value?.first ?: emptyList()
-            val newList = oldList + (projects.success()?.data?.datas ?: emptyList())
+            val newList = if (isRefresh) projects else oldList + projects
             projectListLiveData.value = getDiffResultPair(oldList, newList)
             pageNo++
             isLoading = false

@@ -6,4 +6,13 @@
     <string name="title_search">搜索</string>
     <string name="title_we_chat_group">公众号</string>
     <string name="title_profile">我</string>
+
+    <!-- 我Tab -->
+    <string name="profile_item_title_message">消息中心</string>
+    <string name="profile_item_title_share">分享文章</string>
+    <string name="profile_item_title_favorite">收藏文章</string>
+
+    <string name="profile_item_title_tools">工具列表</string>
+    <string name="profile_item_title_project_page">项目网址</string>
+
 </resources>

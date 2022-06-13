@@ -57,9 +57,4 @@ class ProjectFragment :
             }.apply(TabLayoutMediator::attach)
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        tabLayoutMediator.detach()
-    }
 }

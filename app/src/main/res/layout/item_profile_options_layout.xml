@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="binder"
+            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="item"
+            type="com.lowe.wanandroid.ui.profile.ProfileItemBean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/md_theme_light_secondaryContainer"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical"
+        android:onClick="@{()->binder.onItemClick(position)}">
+
+        <ImageView
+            android:id="@+id/profileItemIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/profileItemText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@{item.title}"
+            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="@string/profile_item_title_message" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_right_arrow_48dp" />
+
+    </LinearLayout>
+</layout>

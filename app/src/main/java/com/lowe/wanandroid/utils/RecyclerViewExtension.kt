@@ -1,11 +1,27 @@
 package com.lowe.wanandroid.utils
 
+import android.util.Log
 import android.view.View
 import android.view.ViewConfiguration
+import android.widget.EdgeEffect
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+
+/** The magnitude of rotation while the list is scrolled. */
+private const val SCROLL_ROTATION_MAGNITUDE = 0.25f
+
+/** The magnitude of rotation while the list is over-scrolled. */
+private const val OVERSCROLL_ROTATION_MAGNITUDE = -10
+
+/** The magnitude of translation distance while the list is over-scrolled. */
+private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.2f
+
+/** The magnitude of translation distance when the list reaches the edge on fling. */
+private const val FLING_TRANSLATION_MAGNITUDE = 0.5f
 
 /**
  * 分页状态
@@ -76,93 +92,6 @@ fun RecyclerView.paging(
         }
     })
 }
-//
-///**
-// * 视频feed有向上加载更多需要，加入了向上加载更多的回调
-// *
-// * @param loadFinish
-// * @return
-// */
-//fun RecyclerView.pagingWithUp(
-//    remainCount: Int = 6,
-//    loadFinish: () -> Boolean
-//): Observable<PagingState> {
-//    return scrollEvents()
-//        .filter { loadFinish() }
-//        .filter { Math.abs(it.dy) > getTouchSlop() }
-//        .map {
-//            var realRemainCount = 0
-//            var firstPosition = -1
-//            if (layoutManager is StaggeredGridLayoutManager) {
-//                (layoutManager as StaggeredGridLayoutManager).let {
-//                    val last = IntArray(it.spanCount)
-//                    it.findLastVisibleItemPositions(last)
-//                    realRemainCount = it.itemCount - last.last()
-//                    firstPosition = it.findFirstCompletelyVisibleItemPositions(null).min()
-//                        ?: RecyclerView.NO_POSITION
-//                }
-//            }
-//            if (layoutManager is LinearLayoutManager) {
-//                (layoutManager as LinearLayoutManager).let {
-//                    realRemainCount = it.itemCount - it.findLastVisibleItemPosition()
-//                    firstPosition = it.findFirstVisibleItemPosition()
-//                }
-//            }
-//            when {
-//                realRemainCount == 1 -> PagingState.END
-//                realRemainCount <= remainCount -> PagingState.PAGING
-//                firstPosition == 0 -> PagingState.UP
-//                else -> PagingState.OTHERS
-//            }
-//        }
-//}
-//
-///**
-// *  横向加载更多
-// *
-// * @param remainCount 预加载数量
-// * @param loadFinish
-// * @return
-// */
-//fun RecyclerView.pagingHorizontal(
-//    remainCount: Int = 6,
-//    loadFinish: (Boolean) -> Boolean
-//): Observable<PagingState> {
-//    return scrollEvents()
-//        .filter { abs(it.dx) > getTouchSlop() }
-//        .filter { loadFinish(it.dx < 0) }
-//        .map {
-//            var realRemainCount = 0
-//            val isLoadForward = it.dx < 0
-//            if (layoutManager is StaggeredGridLayoutManager) {
-//                (layoutManager as StaggeredGridLayoutManager).let {
-//                    val last = IntArray(it.spanCount)
-//                    if (isLoadForward) {
-//                        it.findFirstVisibleItemPositions(last)
-//                        realRemainCount = last.first()
-//                    } else {
-//                        it.findLastVisibleItemPositions(last)
-//                        realRemainCount = it.itemCount - last.last()
-//                    }
-//                }
-//            }
-//            if (layoutManager is LinearLayoutManager) {
-//                (layoutManager as LinearLayoutManager).let {
-//                    realRemainCount = if (isLoadForward) {
-//                        it.findFirstVisibleItemPosition()
-//                    } else {
-//                        it.itemCount - it.findLastVisibleItemPosition()
-//                    }
-//                }
-//            }
-//
-//            when {
-//                realRemainCount <= remainCount && isLoadForward.not() -> PagingState.PAGING
-//                realRemainCount <= remainCount && isLoadForward -> PagingState.UP
-//                else -> PagingState.OTHERS
-//            }
-//        }
-//}
 
 fun RecyclerView.smoothSnapToPosition(
     position: Int,
@@ -174,4 +103,75 @@ fun RecyclerView.smoothSnapToPosition(
     }
     smoothScroller.targetPosition = position
     this.layoutManager?.startSmoothScroll(smoothScroller)
+}
+
+fun RecyclerView.setDefaultEffectFactory() {
+
+    edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {
+        override fun createEdgeEffect(recyclerView: RecyclerView, direction: Int): EdgeEffect {
+            val edgeEffect = object : EdgeEffect(recyclerView.context) {
+
+                private fun translationY(view: View) =
+                    SpringAnimation(view, SpringAnimation.TRANSLATION_Y)
+                        .setSpring(
+                            SpringForce()
+                                .setFinalPosition(0f)
+                                .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
+                                .setStiffness(SpringForce.STIFFNESS_LOW)
+                        )
+
+                override fun onPull(deltaDistance: Float) {
+                    super.onPull(deltaDistance)
+                    handlePull(deltaDistance)
+                }
+
+                override fun onPull(deltaDistance: Float, displacement: Float) {
+                    super.onPull(deltaDistance, displacement)
+                    handlePull(deltaDistance)
+                }
+
+                private fun handlePull(deltaDistance: Float) {
+                    Log.d("EdgeEffect", "handlePull: $deltaDistance")
+                    // This is called on every touch event while the list is scrolled with a finger.
+                    // We simply update the view properties without animation.
+                    val sign = if (direction == DIRECTION_TOP) 1 else -1
+                    val translationXDelta =
+                        sign * recyclerView.width * deltaDistance * OVERSCROLL_TRANSLATION_MAGNITUDE
+                    recyclerView.forEachVisibleHolder { holder: RecyclerView.ViewHolder ->
+                        holder.itemView.translationY += translationXDelta
+                    }
+                }
+
+                override fun onRelease() {
+                    super.onRelease()
+                    Log.d("EdgeEffect", "onRelease")
+                    // The finger is lifted. This is when we should start the animations to bring
+                    // the view property values back to their resting states.
+                    recyclerView.forEachVisibleHolder { holder: RecyclerView.ViewHolder ->
+                        translationY(holder.itemView).start()
+                    }
+                }
+
+                override fun onAbsorb(velocity: Int) {
+                    super.onAbsorb(velocity)
+                    Log.d("EdgeEffect", "onAbsorb: $velocity")
+                    val sign = if (direction == DIRECTION_TOP) 1 else -1
+                    // The list has reached the edge on fling.
+                    val translationVelocity = sign * velocity * FLING_TRANSLATION_MAGNITUDE
+                    recyclerView.forEachVisibleHolder { holder: RecyclerView.ViewHolder ->
+                        translationY(holder.itemView).setStartVelocity(translationVelocity).start()
+                    }
+                }
+            }
+            return edgeEffect
+        }
+    }
+}
+
+private inline fun <reified T : RecyclerView.ViewHolder> RecyclerView.forEachVisibleHolder(
+    action: (T) -> Unit
+) {
+    for (i in 0 until childCount) {
+        action(getChildViewHolder(getChildAt(i)) as T)
+    }
 }

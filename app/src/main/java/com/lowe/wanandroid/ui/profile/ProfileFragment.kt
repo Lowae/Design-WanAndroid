@@ -1,55 +1,73 @@
 package com.lowe.wanandroid.ui.profile
 
-import android.animation.ObjectAnimator
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.util.Log
-import android.view.animation.LinearInterpolator
-import androidx.core.animation.addListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
 import com.lowe.wanandroid.ui.BaseFragment
-
-val colors = mutableListOf(
-    Color.BLACK, Color.DKGRAY, Color.GRAY, Color.LTGRAY, Color.WHITE,
-    Color.RED,
-    Color.GREEN,
-    Color.BLUE,
-    Color.YELLOW,
-    Color.CYAN,
-    Color.MAGENTA
-).apply {
-    this + this.reverse()
-}.toIntArray()
+import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import okhttp3.internal.immutableListOf
 
 class ProfileFragment :
     BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.layout.fragment_profile) {
 
 
+    private val profileItemAdapter = MultiTypeAdapter()
+
     override fun createViewModel() = ProfileViewModel()
 
     override fun init(savedInstanceState: Bundle?) {
+        initView()
+        initItems()
+    }
 
-        getArgbAnimator {
-            viewBinding.funny.drawable.colorFilter =
-                PorterDuffColorFilter(it, PorterDuff.Mode.SRC_IN)
+    private fun initView() {
+        profileItemAdapter.register(ProfileItemBinder(this::onOptionClick))
+        viewBinding.apply {
+            with(this.itemContainer.profileItemList) {
+                adapter = profileItemAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 
-    fun getArgbAnimator(update: (Int) -> Unit) {
-        ObjectAnimator.ofArgb(*colors).apply {
-            setDuration(3000)
-            addUpdateListener {
-                val color = it.animatedValue as Int
-                Log.d("getArgbAnimator", "$color")
-                update(color)
+
+    private fun initItems() {
+        profileItemAdapter.items = immutableListOf(
+            ProfileItemBean(
+                R.drawable.ic_notification_48dp,
+                getString(R.string.profile_item_title_message)
+            ),
+            ProfileItemBean(R.drawable.ic_share_48dp, getString(R.string.profile_item_title_share)),
+            ProfileItemBean(R.drawable.ic_collect, getString(R.string.profile_item_title_favorite)),
+            ProfileItemBean(R.drawable.ic_tool_48dp, getString(R.string.profile_item_title_tools)),
+            ProfileItemBean(
+                R.drawable.ic_code_48dp,
+                getString(R.string.profile_item_title_project_page)
+            ),
+        )
+        profileItemAdapter.notifyItemRangeChanged(0, profileItemAdapter.itemCount)
+    }
+
+    private fun onOptionClick(position: Int, item: ProfileItemBean) {
+        item.title.showShortToast()
+        when (item.title) {
+            getString(R.string.profile_item_title_message) -> {
             }
-            interpolator = LinearInterpolator()
-            addListener(onEnd = {
-                getArgbAnimator(update)
-            })
-        }.start()
+            getString(R.string.profile_item_title_share) -> {
+
+            }
+            getString(R.string.profile_item_title_favorite) -> {
+
+            }
+            getString(R.string.profile_item_title_tools) -> {
+
+            }
+            getString(R.string.profile_item_title_project_page) -> {
+
+            }
+        }
     }
 }

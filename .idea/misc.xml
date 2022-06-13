@@ -3,53 +3,51 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.43020833333333336" />
         <entry key="..\:/Users/Lero/.gradle/caches/transforms-3/1512b9c7cea3218e717cf0a221514deb/transformed/material-1.6.1/res/layout/design_bottom_navigation_item.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.371" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/bg_tag_corner_16.xml" value="0.287" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/bg_tag_corner_16_selected.xml" value="0.287" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_baseline_explore_24.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_baseline_navigation_24.xml" value="0.1295" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_category_48dp.xml" value="0.3635" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_collect.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_favorite_48dp.xml" value="0.3365" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_groups_48dp.xml" value="0.3365" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_home_48dp.xml" value="0.316" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_un_collect.xml" value="0.3365" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/ic_unfavorite_48dp.xml" value="0.3365" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/drawable/selected_tag_corner.xml" value="0.287" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_series_detail_list_layout.xml" value="0.22937443336355395" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_tutorial_chapter_list_layout.xml" value="0.37708422402736214" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_web_layout.xml" value="0.33645833333333336" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_child_group.xml" value="0.1849143334726285" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_child_project.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_group.xml" value="0.1849143334726285" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.34031637451902524" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home_child_answer.xml" value="0.553125" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home_child_explore.xml" value="0.33695652173913043" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home_child_square.xml" value="0.553125" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home_v2.xml" value="0.33695652173913043" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_navigator_child_navigator.xml" value="0.33" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_navigator_child_series.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_navigator_child_tutorial.xml" value="0.45404018811457886" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.10277777777777777" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.1945288753799392" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.2975630611372381" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_project.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_series_detail_child.xml" value="0.39846088071825564" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_home_article_layout.xml" value="0.5" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_home_banner_layout.xml" value="0.3515625" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_navigator_child_tag_children_layout.xml" value="0.33" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_navigator_child_tag_layout.xml" value="0.27704147071398033" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_navigator_child_tutorial_layout.xml" value="0.33" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/item_project_article_layout.xml" value="0.25" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22" />
-        <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/drawable/list_selector_background.xml" value="0.226" />
-        <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/activity_list_item.xml" value="0.37708422402736214" />
-        <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/shutdown_dialog.xml" value="0.37708422402736214" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.10277777777777777" />
+        <entry key="app/src/main/res/drawable/bg_line_corner.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/bg_tag_corner_16.xml" value="0.2975" />
+        <entry key="app/src/main/res/drawable/bg_tag_corner_16_selected.xml" value="0.2975" />
+        <entry key="app/src/main/res/drawable/bg_tag_corner_8.xml" value="0.1505" />
+        <entry key="app/src/main/res/drawable/bg_tag_selected.xml" value="0.2975" />
+        <entry key="app/src/main/res/drawable/bg_tag_seleted.xml" value="0.2975" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/ic_code_48dp.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/ic_collect.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/ic_notification_48dp.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/ic_right_arrow_48dp.xml" value="0.173" />
+        <entry key="app/src/main/res/drawable/ic_settings_suggest_48dp.xml" value="0.194" />
+        <entry key="app/src/main/res/drawable/selected_tag_corner.xml" value="0.2975" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3491847826086957" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.5427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_child_project.xml" value="0.4239583333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.39809782608695654" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.5573893473368342" />
+        <entry key="app/src/main/res/layout/fragment_home_child_answer.xml" value="0.3390625" />
+        <entry key="app/src/main/res/layout/fragment_home_child_explore.xml" value="0.5881470367591898" />
+        <entry key="app/src/main/res/layout/fragment_navigator_child_navigator.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.6820652173913043" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_profile_item_list.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_project.xml" value="0.4083333333333333" />
+        <entry key="app/src/main/res/layout/item_home_article_layout.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_home_banner_layout.xml" value="0.69375" />
+        <entry key="app/src/main/res/layout/item_navigator_child_tag_children_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_navigator_child_tag_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_profile_options_layout.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_project_article_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

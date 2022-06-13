@@ -40,11 +40,6 @@ class SeriesDetailListActivity :
         initObserve()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        tabLayoutMediator.detach()
-    }
-
     private fun initView() {
         viewDataBinding.apply {
             with(seriesDetailPager2) {
