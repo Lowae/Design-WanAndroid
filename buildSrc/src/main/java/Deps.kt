@@ -37,6 +37,7 @@ object Version {
     const val flexboxVersion = "3.0.0"
 
     const val agentWebVersion = "v4.1.9-androidx"
+    const val dataStoreVersion = "1.0.0"
 }
 
 object Deps {
@@ -75,4 +76,5 @@ object Deps {
     const val paging = "androidx.paging:paging-runtime:${Version.pagingVersion}"
     const val pagingKtx = "androidx.paging:paging-runtime-ktx:${Version.pagingVersion}"
     const val agentWeb = "com.github.Justson.AgentWeb:agentweb-core:${Version.agentWebVersion}"
+    const val dataStore = "androidx.datastore:datastore-preferences:${Version.dataStoreVersion}"
 }

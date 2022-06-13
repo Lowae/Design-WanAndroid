@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.base
+package com.lowe.wanandroid.base.app
 
 import android.app.Application
 import android.content.Context
@@ -15,6 +15,7 @@ import kotlin.properties.Delegates
 open class BaseApp : Application(), ViewModelStoreOwner {
 
     private lateinit var _appViewModelStore: ViewModelStore
+    private lateinit var appViewModel: AppViewModel
     private var mFactory: ViewModelProvider.Factory? = null
 
     companion object {
@@ -28,8 +29,18 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         Fresco.initialize(this)
     }
 
+    override fun onTerminate() {
+        super.onTerminate()
+        mFactory = null
+    }
+
     /** 获取一个全局的ViewModel */
-    fun getAppViewModelProvider() = ViewModelProvider(this, getAppFactory())
+    fun getAppViewModel(): AppViewModel {
+        if (this::appViewModel.isInitialized.not()) {
+            appViewModel = ViewModelProvider(this, getAppFactory())[AppViewModel::class.java]
+        }
+        return appViewModel
+    }
 
     private fun getAppFactory(): ViewModelProvider.Factory {
         if (mFactory == null) {

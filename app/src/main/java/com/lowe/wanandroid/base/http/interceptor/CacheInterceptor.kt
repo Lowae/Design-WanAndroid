@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.base.http.interceptor
 
-import com.lowe.wanandroid.base.BaseApp.Companion.appContext
+import com.lowe.wanandroid.base.app.BaseApp.Companion.appContext
 import com.lowe.wanandroid.utils.NetworkUtil
 import okhttp3.CacheControl
 import okhttp3.Interceptor

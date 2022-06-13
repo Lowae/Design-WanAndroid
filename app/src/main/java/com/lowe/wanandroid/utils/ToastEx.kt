@@ -2,7 +2,7 @@ package com.lowe.wanandroid.utils
 
 import android.view.Gravity
 import android.widget.Toast
-import com.lowe.wanandroid.base.BaseApp
+import com.lowe.wanandroid.base.app.BaseApp
 
 /**
  * Toast封装工具类

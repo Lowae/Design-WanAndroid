@@ -14,10 +14,9 @@ object ColorExtension {
         Random.nextInt(0, 255).toFloat()
     )
 
-
     fun hsvToRgb(hue: Float, saturation: Float, value: Float): Int {
-        val h = (hue / 6).toInt()
-        val f = hue * 6 - h
+        val h = (hue % 6).toInt()
+        val f = hue / 60 - h
         val p = value * (1 - saturation)
         val q = value * (1 - f * saturation)
         val t = value * (1 - (1 - f) * saturation)

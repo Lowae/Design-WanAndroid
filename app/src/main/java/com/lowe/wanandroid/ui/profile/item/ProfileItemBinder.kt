@@ -38,7 +38,7 @@ class ProfileItemBinder(private val onClick: (Int, ProfileItemBean) -> Unit) :
             profileItemIcon.setImageDrawable(
                 AppCompatResources.getDrawable(root.context, item.iconRes)?.apply {
                     colorFilter = PorterDuffColorFilter(
-                        ColorExtension.getRandomColor(),
+                        ColorExtension.getRandomWarmColor(),
                         PorterDuff.Mode.SRC_IN
                     )
                 }

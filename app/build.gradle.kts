@@ -67,6 +67,7 @@ dependencies {
     implementation(Deps.flexbox)
 
     implementation(Deps.agentWeb)
+    implementation(Deps.dataStore)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)
