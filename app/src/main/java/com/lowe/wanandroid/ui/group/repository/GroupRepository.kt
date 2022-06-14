@@ -2,7 +2,6 @@ package com.lowe.wanandroid.ui.group.repository
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.GroupService
-import com.lowe.wanandroid.services.apiCall
 
 object GroupRepository : GroupService {
 

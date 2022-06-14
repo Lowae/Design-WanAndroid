@@ -6,7 +6,6 @@ import com.lowe.wanandroid.base.app.BaseApp
 
 /**
  * Toast封装工具类
- * 注：不知咋回事，设置Toast为静态LeakCanary就报内存泄漏，即使设置成context.applicationContext
  */
 object ToastEx {
 

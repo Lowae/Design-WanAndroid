@@ -1,21 +1,30 @@
 package com.lowe.wanandroid.ui.profile
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
+import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import okhttp3.internal.immutableListOf
 import kotlin.math.abs
 
+@AndroidEntryPoint
 class ProfileFragment :
     BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.layout.fragment_profile) {
 
@@ -24,7 +33,7 @@ class ProfileFragment :
     private var collapsingToolBarStateFlow =
         MutableStateFlow(ProfileCollapsingToolBarState.EXPANDED)
 
-    override fun createViewModel() = ProfileViewModel()
+    override val viewModel: ProfileViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
@@ -50,6 +59,13 @@ class ProfileFragment :
                             ProfileCollapsingToolBarState.INTERMEDIATE
                     }
                 })
+            }
+            userName.setOnClickListener {
+                requireActivity().startActivityFromFragment(
+                    this@ProfileFragment,
+                    Intent(context, LoginActivity::class.java),
+                    LoginActivity.REQUEST_CODE_TO_LOGIN_ACTIVITY
+                )
             }
         }
     }
@@ -80,9 +96,26 @@ class ProfileFragment :
                     old == new
                 }.collectLatest {
                     if (it == ProfileCollapsingToolBarState.COLLAPSED)
-                        viewBinding.collapsingToolbarLayout.title = "Lowae"
+                        viewBinding.collapsingToolbarLayout.title = viewBinding.user?.nickname
                     else viewBinding.collapsingToolbarLayout.title = ""
                 }
+        }
+        lifecycleScope.launchWhenCreated {
+            Log.d("lifecycleScope", "launchWhenCreated")
+            viewModel.userBaseInfoStateFlow().collectLatest {
+                userInfoGot(it)
+            }
+        }
+        lifecycleScope.launchWhenResumed {
+            Log.d("lifecycleScope", "launchWhenResumed")
+        }
+        lifecycleScope.launchWhenStarted {
+            Log.d("lifecycleScope", "launchWhenStarted")
+        }
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                viewModel.fetchUserInfo()
+            }
         }
     }
 
@@ -104,5 +137,10 @@ class ProfileFragment :
 
             }
         }
+    }
+
+    private fun userInfoGot(response: UserBaseInfo) {
+        viewBinding.user = response.user
+        viewBinding.executePendingBindings()
     }
 }

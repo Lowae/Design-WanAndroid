@@ -36,6 +36,8 @@ fun BaseViewModel.launch(
     catchBlock: suspend CoroutineScope.() -> Unit = {},
     finallyBlock: suspend CoroutineScope.() -> Unit = {}
 ) {
+
+
     this.viewModelScope.launch(BaseViewModel.exceptionHandler) {
         try {
             apiCall()

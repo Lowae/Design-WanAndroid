@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -15,6 +16,7 @@ import com.lowe.wanandroid.databinding.FragmentNavigatorChildSeriesBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.Series
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.home.child.explore.repository.ExploreViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListActivity
@@ -42,7 +44,7 @@ class SeriesChildFragment :
     private val tagChildrenAdapter = MultiTypeAdapter()
     private val tagOnScrollListener = NavigatorTagOnScrollListener()
 
-    override fun createViewModel() = SeriesChildViewModel()
+    override val viewModel: SeriesChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

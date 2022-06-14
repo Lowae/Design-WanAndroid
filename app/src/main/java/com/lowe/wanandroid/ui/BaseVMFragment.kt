@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.base.AppLog
 import com.lowe.wanandroid.utils.ToastEx.showLongToast
@@ -20,8 +19,8 @@ import java.net.UnknownHostException
 abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private val layoutResId: Int) :
     Fragment() {
 
-    protected lateinit var viewModel: VM
     protected lateinit var viewBinding: VB
+    protected abstract val viewModel: VM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +38,7 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
         setupDataBinding()
         viewModel.apply {
             requestException.observe(viewLifecycleOwner) {
-                AppLog.e(msg = "网络请求错误：${it.message}")
+                AppLog.e(msg = "错误：${it.message}")
                 when (it) {
                     is SocketTimeoutException -> "网络请求超时".showShortToast()
                     is ConnectException, is UnknownHostException -> "网络连接失败".showShortToast()
@@ -53,15 +52,12 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
         }
     }
 
-    protected abstract fun createViewModel(): VM
-
     /**
      * View初始化
      */
     protected abstract fun init(savedInstanceState: Bundle?)
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this)[createViewModel()::class.java]
         viewModel.start()
     }
 
@@ -76,6 +72,4 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
             setVariable(BR.viewModel, viewModel)
         }
     }
-
-
 }

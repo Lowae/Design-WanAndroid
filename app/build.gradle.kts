@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
-    id("kotlin-parcelize")
     kotlin("android")
+    id("kotlin-parcelize")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -33,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+kapt {
+    correctErrorTypes = true
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -68,6 +72,10 @@ dependencies {
 
     implementation(Deps.agentWeb)
     implementation(Deps.dataStore)
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.kaptHiltAndroidCompiler)
+
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

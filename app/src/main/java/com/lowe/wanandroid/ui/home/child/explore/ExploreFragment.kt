@@ -44,7 +44,7 @@ class ExploreFragment :
         )
     }
 
-    override fun createViewModel() = ExploreViewModel()
+    override val viewModel: ExploreViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

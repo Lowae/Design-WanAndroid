@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.navigator.child.series.detail
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
@@ -31,7 +32,7 @@ class SeriesDetailListActivity :
         intent.getIntExtra(KEY_BUNDLE_INIT_TAB_INDEX, -1)
     }
 
-    override fun createViewModel() = SeriesDetailListViewModel()
+    override val viewModel: SeriesDetailListViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         detailFragmentAdapter =

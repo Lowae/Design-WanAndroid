@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -39,7 +40,7 @@ class NavigatorChildFragment :
     private val tagChildrenAdapter = MultiTypeAdapter()
     private val tagOnScrollListener = NavigatorTagOnScrollListener()
 
-    override fun createViewModel() = NavigatorChildViewModel()
+    override val viewModel: NavigatorChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

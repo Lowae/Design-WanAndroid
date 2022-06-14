@@ -33,6 +33,9 @@
         <activity
             android:name=".ui.navigator.child.series.detail.SeriesDetailListActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

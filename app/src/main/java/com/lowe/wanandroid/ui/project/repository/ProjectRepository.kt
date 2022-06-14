@@ -2,7 +2,6 @@ package com.lowe.wanandroid.ui.project.repository
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.ProjectService
-import com.lowe.wanandroid.services.apiCall
 
 object ProjectRepository : ProjectService {
 

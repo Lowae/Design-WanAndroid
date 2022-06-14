@@ -3,6 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.series.detail.child
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -36,7 +37,7 @@ class SeriesDetailChildFragment :
     private val detailsAdapter = MultiTypeAdapter()
     private val seriesDetailViewModel by activityViewModels<SeriesDetailListViewModel>()
 
-    override fun createViewModel() = SeriesDetailChildViewModel()
+    override val viewModel: SeriesDetailChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

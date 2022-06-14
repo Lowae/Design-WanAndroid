@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseVMActivity<VM : BaseViewModel, VD : ViewDataBinding>(private val layoutResId: Int) :
     AppCompatActivity() {
 
-
-    lateinit var viewModel: VM
     lateinit var viewDataBinding: VD
+    protected abstract val viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +19,6 @@ abstract class BaseVMActivity<VM : BaseViewModel, VD : ViewDataBinding>(private 
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this)[createViewModel()::class.java]
         viewModel.start()
     }
 
@@ -32,6 +29,5 @@ abstract class BaseVMActivity<VM : BaseViewModel, VD : ViewDataBinding>(private 
         }
     }
 
-    abstract fun createViewModel(): VM
     abstract fun init(savedInstanceState: Bundle?)
 }

@@ -38,7 +38,7 @@ class TutorialChildFragment :
     private val tutorialAdapter = MultiTypeAdapter()
     private val parentFragmentViewModel by viewModels<NavigatorViewModel>(this::requireParentFragment)
 
-    override fun createViewModel() = TutorialChildViewModel()
+    override val viewModel: TutorialChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

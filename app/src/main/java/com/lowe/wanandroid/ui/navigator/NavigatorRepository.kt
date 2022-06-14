@@ -2,7 +2,6 @@ package com.lowe.wanandroid.ui.navigator
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.NavigatorService
-import com.lowe.wanandroid.services.apiCall
 
 object NavigatorRepository : NavigatorService {
 

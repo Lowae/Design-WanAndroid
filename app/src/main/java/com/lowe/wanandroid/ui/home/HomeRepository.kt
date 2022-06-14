@@ -2,7 +2,6 @@ package com.lowe.wanandroid.ui.home
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.HomeService
-import com.lowe.wanandroid.services.apiCall
 
 object HomeRepository : HomeService {
 

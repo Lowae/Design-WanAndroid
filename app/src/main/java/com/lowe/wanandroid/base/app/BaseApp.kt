@@ -6,12 +6,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.lowe.wanandroid.base.DataStoreManager
+import dagger.hilt.android.HiltAndroidApp
 import kotlin.properties.Delegates
 
 /**
  * Application基类
  *
  */
+@HiltAndroidApp
 open class BaseApp : Application(), ViewModelStoreOwner {
 
     private lateinit var _appViewModelStore: ViewModelStore
@@ -27,6 +30,7 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         appContext = applicationContext
         _appViewModelStore = ViewModelStore()
         Fresco.initialize(this)
+        DataStoreManager.init(this)
     }
 
     override fun onTerminate() {

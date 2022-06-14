@@ -39,7 +39,7 @@ class SquareFragment :
     }
     private val squareAdapter = MultiTypeAdapter()
 
-    override fun createViewModel() = SquareViewModel()
+    override val viewModel: SquareViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

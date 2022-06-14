@@ -2,6 +2,7 @@ package com.lowe.wanandroid
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
@@ -11,7 +12,9 @@ import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.profile.ProfileFragment
 import com.lowe.wanandroid.ui.project.ProjectFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
 
     companion object {
@@ -30,7 +33,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
         )
     private var activeFragmentIndex = -1
 
-    override fun createViewModel() = MainViewModel()
+    override val viewModel: MainViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)

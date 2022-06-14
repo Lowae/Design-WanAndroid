@@ -1,5 +1,9 @@
 object Version {
 
+    object ClassPathVersion {
+        const val hiltPluginVersion = "2.42"
+    }
+
     const val compileSdk = 32
     const val applicationId = "com.lowe.selfwanandroid"
     const val minSdk = 23
@@ -42,6 +46,12 @@ object Version {
 
 object Deps {
 
+    object ClassPath {
+
+        const val hiltPlugin =
+            "com.google.dagger:hilt-android-gradle-plugin:${Version.ClassPathVersion.hiltPluginVersion}"
+    }
+
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtxVersion}"
     const val appcompat = "androidx.appcompat:appcompat:${Version.appCompatVersion}"
     const val material = "com.google.android.material:material:${Version.materialVersion}"
@@ -77,4 +87,8 @@ object Deps {
     const val pagingKtx = "androidx.paging:paging-runtime-ktx:${Version.pagingVersion}"
     const val agentWeb = "com.github.Justson.AgentWeb:agentweb-core:${Version.agentWebVersion}"
     const val dataStore = "androidx.datastore:datastore-preferences:${Version.dataStoreVersion}"
+    const val hiltAndroid =
+        "com.google.dagger:hilt-android:${Version.ClassPathVersion.hiltPluginVersion}"
+    const val kaptHiltAndroidCompiler =
+        "com.google.dagger:hilt-android-compiler:${Version.ClassPathVersion.hiltPluginVersion}"
 }

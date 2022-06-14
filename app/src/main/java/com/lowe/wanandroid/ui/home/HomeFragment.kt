@@ -2,6 +2,7 @@ package com.lowe.wanandroid.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.MainViewModel
@@ -22,7 +23,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
 
     private val mainViewModel by activityViewModels<MainViewModel>()
 
-    override fun createViewModel() = HomeViewModel()
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

@@ -14,7 +14,6 @@ interface BaseService {
 
     }
 
+    suspend fun <T> BaseService.apiCall(api: suspend () -> ApiResponse<T>) =
+        withContext(Dispatchers.IO) { api() }
 }
-
-suspend inline fun <T> BaseService.apiCall(crossinline api: suspend () -> ApiResponse<T>) =
-    withContext(Dispatchers.IO) { api() }

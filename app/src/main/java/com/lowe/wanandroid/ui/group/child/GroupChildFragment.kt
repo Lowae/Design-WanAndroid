@@ -2,6 +2,7 @@ package com.lowe.wanandroid.ui.group.child
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
@@ -36,7 +37,7 @@ class GroupChildFragment :
 
     private val articlesAdapter = MultiTypeAdapter()
 
-    override fun createViewModel() = GroupChildViewModel()
+    override val viewModel: GroupChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

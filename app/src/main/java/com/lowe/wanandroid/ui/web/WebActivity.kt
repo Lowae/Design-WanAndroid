@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import android.widget.FrameLayout
+import androidx.activity.viewModels
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
 import com.lowe.wanandroid.R
@@ -50,7 +51,7 @@ class WebActivity :
         intent.getStringExtra(KEY_WEB_VIEW_URL) ?: ""
     }
 
-    override fun createViewModel() = WebViewModel()
+    override val viewModel: WebViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         agentWeb.urlLoader.loadUrl(url)

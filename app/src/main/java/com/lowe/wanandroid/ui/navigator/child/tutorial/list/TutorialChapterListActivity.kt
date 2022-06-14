@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
@@ -21,7 +22,7 @@ class TutorialChapterListActivity :
         intent.getIntExtra(KEY_INTENT_TUTORIAL_ID, -1)
     }
 
-    override fun createViewModel() = TutorialChapterListViewModel()
+    override val viewModel: TutorialChapterListViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

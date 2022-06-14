@@ -34,7 +34,7 @@ class ProjectChildFragment :
     private val projectViewModel by viewModels<ProjectViewModel>(this::requireParentFragment)
     private val categoryId by lazy { arguments?.getInt(KEY_PROJECT_CHILD_CATEGORY_ID, -1) ?: -1 }
 
-    override fun createViewModel() = ProjectChildViewModel()
+    override val viewModel: ProjectChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()

@@ -2,6 +2,7 @@ package com.lowe.wanandroid.ui.project
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.MainViewModel
@@ -16,7 +17,7 @@ class ProjectFragment :
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private val mainViewModel by activityViewModels<MainViewModel>()
 
-    override fun createViewModel() = ProjectViewModel()
+    override val viewModel: ProjectViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         childAdapter =
