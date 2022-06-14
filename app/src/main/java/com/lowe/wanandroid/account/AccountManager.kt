@@ -74,7 +74,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
                         null
                     }
                 }.collectLatest { userBaseInfo->
-                    AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO.name}: ${userBaseInfo?.user?.nickname}")
+                    AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO.name}: ${userBaseInfo?.userInfo?.nickname}")
                     userBaseInfo?.apply { _userBaseInfoStateFlow.emit(this) }
                 }
         }

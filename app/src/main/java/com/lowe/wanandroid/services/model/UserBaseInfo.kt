@@ -6,5 +6,5 @@ package com.lowe.wanandroid.services.model
 data class UserBaseInfo(
     val coinInfo: CoinInfo = CoinInfo(),
     val collectArticleInfo: CollectArticleInfo = CollectArticleInfo(),
-    val user: User = User()
+    val userInfo: User = User()
 )

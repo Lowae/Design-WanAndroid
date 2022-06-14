@@ -18,7 +18,6 @@ class NavigatorFragment :
     }
 
     private lateinit var childAdapter: NavigatorChildFragmentAdapter
-    private lateinit var tabLayoutMediator: TabLayoutMediator
     private val mainViewModel by activityViewModels<MainViewModel>()
 
     override val viewModel: NavigatorViewModel by viewModels()

@@ -11,7 +11,7 @@
 
         <variable
             name="user"
-            type="com.lowe.wanandroid.services.model.User" />
+            type="com.lowe.wanandroid.services.model.UserBaseInfo" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="@{user.nickname.empty ? @string/profile_user_name(`-`) : @string/profile_user_name(user.nickname)}"
+                        android:text="@{user.userInfo.nickname.empty ? @string/profile_user_name(`-`) : @string/profile_user_name(user.userInfo.nickname)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@{user.id.empty ? @string/profile_user_id(`-`) : @string/profile_user_id(user.id)}"
+                        android:text="@{user.userInfo.id.empty ? @string/profile_user_id(`-`) : @string/profile_user_id(user.userInfo.id)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@id/userCoinCount"
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="积分：— 排名: -"
+                        android:text="@{@string/profile_user_coin_and_rank(user.coinInfo.coinCount, user.coinInfo.rank)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/userAvatar"

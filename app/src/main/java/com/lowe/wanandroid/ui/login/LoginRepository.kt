@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.login
 
-import android.util.Log
 import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.services.ApiResponse
@@ -24,7 +23,6 @@ class LoginRepository @Inject constructor(
                 accountManager.cacheServeUserInfo(baseUserInfo.data)
             }
         }
-        Log.d("LoginViewModel", "login result: $result")
         return result
     }
 

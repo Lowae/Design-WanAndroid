@@ -3,18 +3,19 @@ package com.lowe.wanandroid.ui.profile
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.appbar.AppBarLayout
+import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.login.LoginActivity
+import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,6 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class ProfileFragment :
     BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.layout.fragment_profile) {
-
 
     private val profileItemAdapter = MultiTypeAdapter()
     private var collapsingToolBarStateFlow =
@@ -96,21 +96,15 @@ class ProfileFragment :
                     old == new
                 }.collectLatest {
                     if (it == ProfileCollapsingToolBarState.COLLAPSED)
-                        viewBinding.collapsingToolbarLayout.title = viewBinding.user?.nickname
+                        viewBinding.collapsingToolbarLayout.title =
+                            viewBinding.user?.userInfo?.nickname
                     else viewBinding.collapsingToolbarLayout.title = ""
                 }
         }
         lifecycleScope.launchWhenCreated {
-            Log.d("lifecycleScope", "launchWhenCreated")
             viewModel.userBaseInfoStateFlow().collectLatest {
                 userInfoGot(it)
             }
-        }
-        lifecycleScope.launchWhenResumed {
-            Log.d("lifecycleScope", "launchWhenResumed")
-        }
-        lifecycleScope.launchWhenStarted {
-            Log.d("lifecycleScope", "launchWhenStarted")
         }
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -123,6 +117,7 @@ class ProfileFragment :
         item.title.showShortToast()
         when (item.title) {
             getString(R.string.profile_item_title_message) -> {
+                startActivity(Intent(requireContext(), MessageActivity::class.java))
             }
             getString(R.string.profile_item_title_share) -> {
 
@@ -140,7 +135,7 @@ class ProfileFragment :
     }
 
     private fun userInfoGot(response: UserBaseInfo) {
-        viewBinding.user = response.user
-        viewBinding.executePendingBindings()
+        viewBinding.user = response
+        viewBinding.notifyPropertyChanged(BR.user)
     }
 }
