@@ -9,7 +9,7 @@ import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutBinding
 import com.lowe.wanandroid.services.model.Article
 
-class HomeArticleItemBinder(private val onClick: (Pair<Int, Article>) -> Unit) :
+class HomeArticleItemBinder(private val onClick: (Int, Article) -> Unit) :
     ItemViewDataBindingBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutBinding>>() {
 
     override fun onCreateViewHolder(
@@ -39,6 +39,6 @@ class HomeArticleItemBinder(private val onClick: (Pair<Int, Article>) -> Unit) :
 
     override fun onItemClick(position: Int) {
         super.onItemClick(position)
-        onClick(position to adapterItems[position] as Article)
+        onClick(position, adapterItems[position] as Article)
     }
 }

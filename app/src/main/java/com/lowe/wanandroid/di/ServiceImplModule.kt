@@ -2,8 +2,10 @@ package com.lowe.wanandroid.di
 
 import com.lowe.wanandroid.services.AccountService
 import com.lowe.wanandroid.services.MessageService
+import com.lowe.wanandroid.services.ProfileService
 import com.lowe.wanandroid.services.impl.AccountServiceImpl
 import com.lowe.wanandroid.services.impl.MessageServiceImpl
+import com.lowe.wanandroid.services.impl.ProfileServiceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,5 +20,8 @@ abstract class ServiceImplModule {
 
     @Binds
     abstract fun getMessageServiceImpl(impl: MessageServiceImpl): MessageService
+
+    @Binds
+    abstract fun getProfileServiceImple(impl: ProfileServiceImpl): ProfileService
 
 }

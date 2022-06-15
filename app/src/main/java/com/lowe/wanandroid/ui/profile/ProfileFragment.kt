@@ -17,6 +17,7 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
+import com.lowe.wanandroid.ui.share.ShareListActivity
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -120,7 +121,7 @@ class ProfileFragment :
                 startActivity(Intent(requireContext(), MessageActivity::class.java))
             }
             getString(R.string.profile_item_title_share) -> {
-
+                startActivity(Intent(requireContext(), ShareListActivity::class.java))
             }
             getString(R.string.profile_item_title_favorite) -> {
 

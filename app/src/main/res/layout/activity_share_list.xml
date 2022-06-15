@@ -6,12 +6,9 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.lowe.wanandroid.ui.BaseViewModel" />
+            name="shareBean"
+            type="com.lowe.wanandroid.services.model.ShareBean" />
 
-        <variable
-            name="user"
-            type="com.lowe.wanandroid.services.model.UserBaseInfo" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -56,11 +53,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="@{@string/profile_user_name(user.userInfo.nickname)}"
+                        android:text="@{@string/profile_user_name(shareBean.coinInfo.nickname)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/userId"
+                        app:layout_constraintBottom_toTopOf="@+id/userShareCount"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/userAvatar"
                         app:layout_constraintTop_toTopOf="@+id/userAvatar"
@@ -68,28 +65,30 @@
                         tools:text="Lowae" />
 
                     <TextView
-                        android:id="@+id/userId"
+                        android:id="@+id/userShareCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@{@string/profile_user_id(user.userInfo.id)}"
+                        android:text="@{@string/share_count_description(shareBean.shareArticles.total)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@id/userCoinCount"
                         app:layout_constraintStart_toStartOf="@+id/userName"
-                        app:layout_constraintTop_toBottomOf="@+id/userName" />
+                        app:layout_constraintTop_toBottomOf="@+id/userName"
+                        tools:text="分享了1986篇文章" />
 
                     <TextView
                         android:id="@+id/userCoinCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@{@string/profile_user_coin_and_rank(user.coinInfo.coinCount,user.coinInfo.level,user.coinInfo.rank)}"
+                        android:text="@{@string/profile_user_coin_and_rank(shareBean.coinInfo.coinCount,shareBean.coinInfo.level,shareBean.coinInfo.rank)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="12sp"
+                        tools:text="积分: 49760 等级: 498 排名: 3"
                         app:layout_constraintBottom_toBottomOf="@+id/userAvatar"
                         app:layout_constraintStart_toStartOf="@+id/userName"
-                        app:layout_constraintTop_toBottomOf="@+id/userId" />
+                        app:layout_constraintTop_toBottomOf="@+id/userShareCount" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,22 +103,15 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            android:id="@+id/itemContainer"
-            layout="@layout/fragment_profile_item_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shareList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_fragment_profile_list_corner"
+            android:overScrollMode="never"
+            android:paddingTop="12dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/settingFabIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="设置"
-            app:layout_anchor="@id/appBarLayout"
-            app:layout_anchorGravity="bottom|end"
-            app:maxImageSize="32dp"
-            app:srcCompat="@drawable/ic_settings_suggest_48dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 </layout>

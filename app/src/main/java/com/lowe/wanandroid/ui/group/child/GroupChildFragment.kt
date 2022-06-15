@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentChildGroupBinding
+import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
@@ -55,10 +56,7 @@ class GroupChildFragment :
     }
 
     private fun initView() {
-        articlesAdapter.register(HomeArticleItemBinder {
-            val (position, article) = it
-            WebActivity.loadUrl(this.requireContext(), article.link)
-        })
+        articlesAdapter.register(HomeArticleItemBinder(this::onArticleClick))
         viewBinding.apply {
             with(childList) {
                 adapter = articlesAdapter
@@ -77,5 +75,9 @@ class GroupChildFragment :
     private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
         articlesAdapter.items = result.first
         result.second.dispatchUpdatesTo(articlesAdapter)
+    }
+
+    private fun onArticleClick(position: Int, article: Article) {
+        WebActivity.loadUrl(requireContext(), article.link)
     }
 }

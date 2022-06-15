@@ -39,6 +39,9 @@
         <activity
             android:name=".ui.message.MessageActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.share.ShareListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

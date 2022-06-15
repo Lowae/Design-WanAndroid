@@ -111,8 +111,7 @@ class ExploreFragment :
         WebActivity.loadUrl(this.requireContext(), data.url)
     }
 
-    private fun onItemClick(action: Pair<Int, Article>) {
-        val (position, article) = action
+    private fun onItemClick(position: Int, article: Article) {
         WebActivity.loadUrl(this.requireContext(), article.link)
     }
 }

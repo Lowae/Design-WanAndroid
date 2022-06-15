@@ -16,6 +16,8 @@
     <string name="profile_item_title_project_page">项目网址</string>
     <string name="profile_user_name">用户名: %s</string>
     <string name="profile_user_id">id: %s</string>
-    <string name="profile_user_coin_and_rank">积分: %s 排名: %s</string>
+    <string name="profile_user_coin_and_rank">积分: %s 等级: %s 排名: %s</string>
+
+    <string name="share_count_description">分享了%s篇文章</string>
 
 </resources>
