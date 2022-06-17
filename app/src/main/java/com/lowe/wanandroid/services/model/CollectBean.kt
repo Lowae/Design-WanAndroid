@@ -4,22 +4,22 @@ package com.lowe.wanandroid.services.model
  * 收藏
  */
 data class CollectBean(
-    val author: String,
-    val chapterId: Int,
-    val chapterName: String,
-    val courseId: Int,
-    val desc: String,
-    val envelopePic: String,
-    val id: Int,
-    val link: String,
-    val niceDate: String,
-    val origin: String,
-    val originId: Int,
-    val publishTime: Long,
-    val title: String,
-    val userId: Int,
-    val visible: Int,
-    val zan: Int
-) {
+    val author: String = "",
+    val chapterId: Int = 0,
+    val chapterName: String = "",
+    val courseId: Int = 0,
+    val desc: String = "",
+    val envelopePic: String = "",
+    val id: Int = 0,
+    val link: String = "",
+    val niceDate: String = "",
+    val origin: String = "",
+    val originId: Int = 0,
+    val publishTime: Long = 0,
+    val title: String = "",
+    val userId: Int = 0,
+    val visible: Int = 0,
+    val zan: Int = 0,
+){
     var collect: Boolean = true
 }

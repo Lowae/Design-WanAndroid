@@ -9,12 +9,15 @@ import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemToolListLayoutBinding
 import com.lowe.wanandroid.services.model.ToolBean
 
-class ToolItemBinder : ItemViewBinder<ToolBean, ViewBindingHolder<ItemToolListLayoutBinding>>() {
+class ToolItemBinder(private val onClick: (Int, ToolBean) -> Unit) :
+    ItemViewBinder<ToolBean, ViewBindingHolder<ItemToolListLayoutBinding>>() {
+
     override fun onBindViewHolder(
         holder: ViewBindingHolder<ItemToolListLayoutBinding>,
         item: ToolBean
     ) {
         holder.binding.apply {
+            onClickFunc = onClick
             toolBean = item
             executePendingBindings()
         }

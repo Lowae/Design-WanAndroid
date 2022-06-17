@@ -6,6 +6,8 @@ import android.view.ViewConfiguration
 import android.widget.EdgeEffect
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
@@ -174,4 +176,11 @@ private inline fun <reified T : RecyclerView.ViewHolder> RecyclerView.forEachVis
     for (i in 0 until childCount) {
         action(getChildViewHolder(getChildAt(i)) as T)
     }
+}
+
+inline fun CombinedLoadStates.whenError(action: (LoadState.Error) -> Unit) {
+    (refresh as? LoadState.Error ?: source.append as? LoadState.Error
+    ?: source.prepend as? LoadState.Error
+    ?: append as? LoadState.Error
+    ?: prepend as? LoadState.Error)?.let(action)
 }

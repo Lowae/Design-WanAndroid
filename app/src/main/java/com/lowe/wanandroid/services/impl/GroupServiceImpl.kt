@@ -1,9 +1,10 @@
-package com.lowe.wanandroid.ui.group.repository
+package com.lowe.wanandroid.services.impl
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.GroupService
+import javax.inject.Inject
 
-object GroupRepository : GroupService {
+class GroupServiceImpl @Inject constructor() : GroupService {
 
     private val service by lazy { RetrofitManager.getService(GroupService::class.java) }
 

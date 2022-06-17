@@ -5,12 +5,12 @@ import androidx.paging.PagingState
 import com.lowe.wanandroid.base.http.ApiException
 import com.lowe.wanandroid.services.ApiResponse
 import com.lowe.wanandroid.services.BaseService
-import com.lowe.wanandroid.services.PageResponse
 import com.lowe.wanandroid.services.isSuccess
 
 class IntKeyPagingSource<S : BaseService, V : Any>(
+    private val pageStart: Int = BaseService.DEFAULT_PAGE_START_NO_1,
     private val service: S,
-    private val load: suspend (S, Int) -> ApiResponse<PageResponse<V>>
+    private val load: suspend (S, Int) -> Pair<ApiResponse<*>, List<V>>
 ) : PagingSource<Int, V>() {
 
     override fun getRefreshKey(state: PagingState<Int, V>): Int? {
@@ -21,17 +21,17 @@ class IntKeyPagingSource<S : BaseService, V : Any>(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, V> {
-        val page = params.key ?: BaseService.DEFAULT_PAGE_START_NO
+        val page = params.key ?: pageStart
         return try {
-            val results = load(service, page)
-            if (results.isSuccess()) {
+            val (response, data) = load(service, page)
+            if (response.isSuccess()) {
                 LoadResult.Page(
-                    data = results.data.datas,
-                    prevKey = if (page == BaseService.DEFAULT_PAGE_START_NO) null else page - 1,
-                    nextKey = if (results.data.datas.isEmpty()) null else page + 1
+                    data = data,
+                    prevKey = if (page == pageStart) null else page - 1,
+                    nextKey = if (data.isEmpty()) null else page + 1
                 )
             } else {
-                LoadResult.Error(ApiException(results.errorCode, results.errorMsg))
+                LoadResult.Error(ApiException(response.errorCode, response.errorMsg))
             }
         } catch (e: Exception) {
             LoadResult.Error(e)

@@ -5,18 +5,21 @@
 
     <data>
 
+        <import type="kotlin.jvm.functions.Function2" />
 
-        <variable
-            name="binder"
-            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+        <import type="com.lowe.wanandroid.services.model.MsgBean" />
 
         <variable
             name="msg"
-            type="com.lowe.wanandroid.services.model.MsgBean" />
+            type="MsgBean" />
 
         <variable
             name="position"
             type="int" />
+
+        <variable
+            name="onClickFunc"
+            type="Function2&lt;Integer, MsgBean, kotlin.Unit&gt;" />
 
     </data>
 
@@ -36,7 +39,7 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_light_secondaryContainer"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{()->binder.onItemClick(position)}"
+            android:onClick="@{()->onClickFunc.invoke(position, msg)}"
             android:padding="12dp">
 
             <TextView

@@ -5,20 +5,33 @@
 
     <data>
 
+        <import type="kotlin.jvm.functions.Function2" />
+
         <variable
             name="toolBean"
             type="com.lowe.wanandroid.services.model.ToolBean" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="onClickFunc"
+            type="Function2&lt;Integer, com.lowe.wanandroid.services.model.ToolBean, kotlin.Unit&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="96dp">
+        android:layout_height="96dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{()->onClickFunc.invoke(position, toolBean)}"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/toolIcon"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_marginStart="12dp"
             app:imageUrl="@{toolBean.iconUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,20 +39,21 @@
 
         <TextView
             android:id="@+id/toolTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="@{toolBean.name}"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/toolDescription"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/toolIcon"
             app:layout_constraintTop_toTopOf="@id/toolIcon"
             tools:text="取色器" />
 
         <TextView
             android:id="@+id/toolDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
@@ -48,6 +62,7 @@
             android:text="@{toolBean.desc}"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/toolIcon"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/toolIcon"
             app:layout_constraintTop_toBottomOf="@id/toolTitle"
             tools:text="支持在线取色，颜色转化" />

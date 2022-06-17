@@ -21,5 +21,9 @@
     <string name="profile_user_coin_and_rank">积分: %s 等级: %s 排名: %s</string>
 
     <string name="share_count_description">分享了%s篇文章</string>
-
+    <string name="classify_chapter_name">分类·%s</string>
+    <string name="author_name">作者·%s</string>
+    <string name="article_tag_new">新</string>
+    <string name="article_tag_top">置顶</string>
+    <string name="empty_data_tips">暂无数据~</string>
 </resources>

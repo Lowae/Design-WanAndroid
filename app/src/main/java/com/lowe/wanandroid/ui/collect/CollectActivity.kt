@@ -3,17 +3,19 @@ package com.lowe.wanandroid.ui.collect
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypeLoadStateAdapter
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.LoadingItemDelegate
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
+import com.lowe.wanandroid.services.model.CollectBean
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
+import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -23,7 +25,7 @@ class CollectActivity :
 
     private val collectPagingAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
-            register(CollectItemBinder())
+            register(CollectItemBinder(this@CollectActivity::onCollectClick))
         }
 
     private val loadingAdapter = MultiTypeLoadStateAdapter().apply {
@@ -54,15 +56,17 @@ class CollectActivity :
 
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
-            collectPagingAdapter.loadStateFlow.collectLatest {
-                if (it.refresh is LoadState.Error) {
-                    (it.refresh as LoadState.Error).error.message?.showShortToast()
-                }
+            collectPagingAdapter.loadStateFlow.collectLatest { loadState ->
+                loadState.whenError { it.error.message?.showShortToast() }
             }
         }
         lifecycleScope.launchWhenCreated {
             viewModel.collectFlow().collectLatest(collectPagingAdapter::submitData)
         }
+    }
+
+    private fun onCollectClick(position: Int, collectBean: CollectBean) {
+        WebActivity.loadUrl(this, collectBean.link)
     }
 
 }

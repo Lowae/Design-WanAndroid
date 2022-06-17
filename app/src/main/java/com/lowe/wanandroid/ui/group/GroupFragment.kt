@@ -9,7 +9,9 @@ import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentGroupBinding
 import com.lowe.wanandroid.ui.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GroupFragment :
     BaseFragment<GroupViewModel, FragmentGroupBinding>(R.layout.fragment_group) {
 
@@ -45,6 +47,8 @@ class GroupFragment :
             }
             with(groupSwipeRefresh) {
                 setOnRefreshListener {
+                    this@GroupFragment.viewModel.parentRefreshLiveData.value =
+                        childAdapter.items[groupViewPager2.currentItem].id
                     this.isRefreshing = false
                 }
             }

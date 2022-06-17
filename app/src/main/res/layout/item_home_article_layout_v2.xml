@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="kotlin.jvm.functions.Function2" />
+
+        <import type="com.lowe.wanandroid.services.model.Article" />
+
+        <variable
+            name="article"
+            type="Article" />
+
+        <variable
+            name="position"
+            type="int" />
+
+        <variable
+            name="onClickFunc"
+            type="Function2&lt;Integer, Article, kotlin.Unit&gt;" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_light_secondaryContainer"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{()->onClickFunc.invoke(position, article)}">
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@{article.articleAuthor}"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="张鸿洋" />
+
+            <TextView
+                android:id="@+id/tv_isTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="@string/article_tag_top"
+                android:textColor="@color/_ff4a57"
+                android:textSize="11sp"
+                android:visibility="@{article.type==1?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_author"
+                app:layout_constraintTop_toTopOf="@+id/tv_author" />
+
+            <TextView
+                android:id="@+id/tv_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/article_tag_new"
+                android:textColor="@color/_ff4a57"
+                android:textSize="11sp"
+                android:visibility="@{article.fresh?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_isTop"
+                app:layout_constraintTop_toTopOf="@+id/tv_author" />
+
+            <TextView
+                android:id="@+id/tv_tag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@{article.tags[0].name}"
+                android:textColor="@color/_669900"
+                android:textSize="11sp"
+                android:visibility="@{article.tags.size()==0?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_new"
+                app:layout_constraintTop_toTopOf="@+id/tv_author"
+                tools:text="本站发布" />
+
+            <TextView
+                android:id="@+id/tv_tag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@{article.tags[1].name}"
+                android:textColor="@color/_669900"
+                android:textSize="11sp"
+                android:visibility="@{article.tags.size()==2?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_tag1"
+                app:layout_constraintTop_toTopOf="@+id/tv_author"
+                tools:text="问答" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@{article.niceDate}"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_author"
+                tools:text="1小时前" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{article.title}"
+                android:textColor="@color/_333333"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tv_date"
+                app:layout_constraintStart_toStartOf="@+id/tv_author"
+                app:layout_constraintTop_toBottomOf="@+id/tv_author"
+                tools:text="这是一个根据JetpackMvvm框架开发玩Android的一个APP" />
+
+            <TextView
+                android:id="@+id/tv_type2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:text="@{article.superChapterName+'·'+article.chapterName}"
+                android:textColor="@color/md_theme_dark_surfaceVariant"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_author"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                tools:text="分类·项目" />
+
+            <ImageView
+                android:id="@+id/iv_collect"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="10dp"
+                android:src="@{article.collect?@drawable/ic_collect:@drawable/ic_un_collect}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_type2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_type2"
+                tools:ignore="ContentDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

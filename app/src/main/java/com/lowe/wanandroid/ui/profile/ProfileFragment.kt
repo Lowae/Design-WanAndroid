@@ -20,6 +20,7 @@ import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.share.ShareListActivity
 import com.lowe.wanandroid.ui.tools.ToolListActivity
+import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -130,7 +131,7 @@ class ProfileFragment :
                 startActivity(Intent(requireContext(), ToolListActivity::class.java))
             }
             getString(R.string.profile_item_title_project_page) -> {
-
+                WebActivity.loadUrl(requireContext(), "https://github.com/Lowae/WanAndroid")
             }
         }
     }

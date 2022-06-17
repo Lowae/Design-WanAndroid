@@ -1,10 +1,8 @@
 package com.lowe.wanandroid.di
 
-import com.lowe.wanandroid.services.AccountService
-import com.lowe.wanandroid.services.MessageService
+import com.lowe.wanandroid.services.GroupService
 import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.services.impl.AccountServiceImpl
-import com.lowe.wanandroid.services.impl.MessageServiceImpl
+import com.lowe.wanandroid.services.impl.GroupServiceImpl
 import com.lowe.wanandroid.services.impl.ProfileServiceImpl
 import dagger.Binds
 import dagger.Module
@@ -16,10 +14,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 abstract class ServiceImplModule {
 
     @Binds
-    abstract fun getAccountServiceImpl(impl: AccountServiceImpl): AccountService
-
-    @Binds
-    abstract fun getMessageServiceImpl(impl: MessageServiceImpl): MessageService
+    abstract fun getGroupServiceImpl(impl: GroupServiceImpl): GroupService
 
     @Binds
     abstract fun getProfileServiceImpl(impl: ProfileServiceImpl): ProfileService

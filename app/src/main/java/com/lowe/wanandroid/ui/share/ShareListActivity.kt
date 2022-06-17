@@ -3,20 +3,21 @@ package com.lowe.wanandroid.ui.share
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
 import com.google.android.material.appbar.AppBarLayout
+import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityShareListBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.ShareBean
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.loadMore
+import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -27,7 +28,11 @@ import kotlin.math.abs
 class ShareListActivity :
     BaseActivity<ShareListViewModel, ActivityShareListBinding>(R.layout.activity_share_list) {
 
-    private val shareAdapter = MultiTypeAdapter()
+    private val shareAdapter =
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+            register(HomeArticleItemBinderV2(this@ShareListActivity::onArticleClick))
+        }
+
     private var collapsingToolBarStateFlow =
         MutableStateFlow(ProfileCollapsingToolBarState.EXPANDED)
 
@@ -39,14 +44,11 @@ class ShareListActivity :
     }
 
     private fun initView() {
-        shareAdapter.register(HomeArticleItemBinder(this::onArticleClick))
         viewDataBinding.apply {
             with(shareList) {
                 adapter = shareAdapter
                 layoutManager = LinearLayoutManager(context)
-                loadMore(loadFinish = { viewModel.isLoading.not() }) {
-                    viewModel.fetchShareList()
-                }
+                setHasFixedSize(true)
             }
             with(appBarLayout) {
                 addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -75,11 +77,16 @@ class ShareListActivity :
                     else viewDataBinding.collapsingToolbarLayout.title = ""
                 }
         }
-        viewModel.apply {
-            shareArticlesLiveData.observe(this@ShareListActivity) {
-                updateShareUserInfo(it.first)
-                dispatchToAdapter(it.first.shareArticles.datas to it.second, shareAdapter)
+        lifecycleScope.launchWhenCreated {
+            shareAdapter.loadStateFlow.collectLatest { loadState ->
+                loadState.whenError { it.error.message?.showShortToast() }
             }
+        }
+        lifecycleScope.launchWhenCreated {
+            viewModel.getShareFlow().collectLatest(shareAdapter::submitData)
+        }
+        lifecycleScope.launchWhenCreated {
+            viewModel.getShareBeanFlow().collectLatest(this@ShareListActivity::updateShareUserInfo)
         }
     }
 
@@ -88,16 +95,7 @@ class ShareListActivity :
         viewDataBinding.notifyPropertyChanged(BR.shareBean)
     }
 
-    private fun dispatchToAdapter(
-        result: Pair<List<Any>, DiffUtil.DiffResult>,
-        adapter: MultiTypeAdapter
-    ) {
-        adapter.items = result.first
-        result.second.dispatchUpdatesTo(adapter)
-    }
-
     private fun onArticleClick(position: Int, article: Article) {
         WebActivity.loadUrl(this, article.link)
     }
-
 }

@@ -4,10 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.group.repository.GroupRepository
 import com.lowe.wanandroid.ui.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GroupViewModel : BaseViewModel() {
+@HiltViewModel
+class GroupViewModel @Inject constructor(private val repository: GroupRepository) :
+    BaseViewModel() {
 
     val authorsNameLiveData = MutableLiveData<List<Classify>>()
     val parentRefreshLiveData = MutableLiveData<Int>()
@@ -20,7 +23,7 @@ class GroupViewModel : BaseViewModel() {
     private fun fetchAuthorsName() {
         launch({
             authorsNameLiveData.value =
-                GroupRepository.getAuthorTitleList().success()?.data ?: emptyList()
+                repository.getAuthorTitleList().success()?.data ?: emptyList()
         })
     }
 

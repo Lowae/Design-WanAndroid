@@ -3,14 +3,14 @@ package com.lowe.wanandroid.ui.message.child
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemMessageChildLayoutBinding
 import com.lowe.wanandroid.services.model.MsgBean
 
 class MessageTabChildItemBinder(private val onClick: (Int, MsgBean) -> Unit) :
-    ItemViewDataBindingBinder<MsgBean, ViewBindingHolder<ItemMessageChildLayoutBinding>>() {
+    PagingItemViewBinder<MsgBean, ViewBindingHolder<ItemMessageChildLayoutBinding>>() {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -28,15 +28,11 @@ class MessageTabChildItemBinder(private val onClick: (Int, MsgBean) -> Unit) :
         holder: ViewBindingHolder<ItemMessageChildLayoutBinding>,
         item: MsgBean
     ) {
-        super.onBindViewHolder(holder, item)
         holder.binding.apply {
+            onClickFunc = onClick
             msg = item
             executePendingBindings()
         }
     }
 
-    override fun onItemClick(position: Int) {
-        super.onItemClick(position)
-        onClick(position, adapterItems[position] as MsgBean)
-    }
 }

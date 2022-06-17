@@ -12,6 +12,7 @@ interface BaseService {
          */
         const val DEFAULT_PAGE_START_NO = 0
 
+        const val DEFAULT_PAGE_START_NO_1 = 1
     }
 
     suspend fun <T> BaseService.apiCall(api: suspend () -> ApiResponse<T>) =
