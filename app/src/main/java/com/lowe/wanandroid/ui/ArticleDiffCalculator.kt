@@ -4,6 +4,7 @@ import com.lowe.wanandroid.base.SimpleDiffCallback
 import com.lowe.wanandroid.base.SimpleDiffItemCallback
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Banners
+import com.lowe.wanandroid.services.model.CollectBean
 
 object ArticleDiffCalculator {
 
@@ -26,19 +27,21 @@ object ArticleDiffCalculator {
                 }
             })
 
-    fun <T : Any> getCommonArticleDiffItemCallback() =
+    fun getCommonArticleDiffItemCallback() =
         SimpleDiffItemCallback(
-            areItemSame = { oldItem: T, newItem: T ->
+            areItemSame = { oldItem: Any, newItem: Any ->
                 when {
                     oldItem is Article && newItem is Article -> oldItem.id == newItem.id
                     oldItem is Banners && newItem is Banners -> true
+                    oldItem is CollectBean && newItem is CollectBean -> oldItem.id == newItem.id
                     else -> oldItem::class.java == newItem::class.java
                 }
             },
-            areContentSame = { oldItem: T, newItem: T ->
+            areContentSame = { oldItem: Any, newItem: Any ->
                 when {
                     oldItem is Article && newItem is Article -> oldItem == newItem
                     oldItem is Banners && newItem is Banners -> oldItem == newItem
+                    oldItem is CollectBean && newItem is CollectBean -> oldItem == newItem && oldItem.collect == newItem.collect
                     else -> oldItem == newItem
                 }
             }

@@ -42,6 +42,12 @@
         <activity
             android:name=".ui.share.ShareListActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.collect.CollectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.tools.ToolListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

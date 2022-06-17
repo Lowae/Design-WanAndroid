@@ -7,6 +7,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.ItemSnapshotList
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.AdapterListUpdateCallback
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.lowe.multitype.MutableTypes
 import com.lowe.multitype.Types
@@ -29,15 +30,19 @@ class MultiTypePagingAdapter(
         workerDispatcher = workerDispatcher
     )
 
-    override fun setHasStableIds(hasStableIds: Boolean) = throw UnsupportedOperationException("Stable ids are unsupported on PagingDataAdapter.")
+    override fun setHasStableIds(hasStableIds: Boolean) =
+        throw UnsupportedOperationException("Stable ids are unsupported on PagingDataAdapter.")
 
     override fun getItem(@IntRange(from = 0) position: Int) = differ.getItem(position) as Any
 
     override fun getItemCount() = differ.itemCount
 
-    suspend fun submitData(pagingData: PagingData<Any>) = differ.submitData(pagingData)
+    @Suppress("UNCHECKED_CAST")
+    suspend fun submitData(pagingData: PagingData<*>) = differ.submitData(pagingData as PagingData<Any>)
 
-    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<Any>) = differ.submitData(lifecycle, pagingData)
+    @Suppress("UNCHECKED_CAST")
+    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<*>) =
+        differ.submitData(lifecycle, pagingData as PagingData<Any>)
 
     fun retry() = differ.retry()
 
@@ -51,11 +56,43 @@ class MultiTypePagingAdapter(
 
     val onPagesUpdatedFlow: Flow<Unit> = differ.onPagesUpdatedFlow
 
-    fun addLoadStateListener(listener: (CombinedLoadStates) -> Unit) = differ.addLoadStateListener(listener)
+    fun addLoadStateListener(listener: (CombinedLoadStates) -> Unit) =
+        differ.addLoadStateListener(listener)
 
-    fun removeLoadStateListener(listener: (CombinedLoadStates) -> Unit) = differ.removeLoadStateListener(listener)
+    fun removeLoadStateListener(listener: (CombinedLoadStates) -> Unit) =
+        differ.removeLoadStateListener(listener)
 
     fun addOnPagesUpdatedListener(listener: () -> Unit) = differ.addOnPagesUpdatedListener(listener)
 
-    fun removeOnPagesUpdatedListener(listener: () -> Unit) = differ.removeOnPagesUpdatedListener(listener)
+    fun removeOnPagesUpdatedListener(listener: () -> Unit) =
+        differ.removeOnPagesUpdatedListener(listener)
+
+    fun withLoadStateHeader(
+        header: MultiTypeLoadStateAdapter
+    ): ConcatAdapter {
+        addLoadStateListener { loadStates ->
+            header.loadState = loadStates.prepend
+        }
+        return ConcatAdapter(header, this)
+    }
+
+    fun withLoadStateFooter(
+        footer: MultiTypeLoadStateAdapter
+    ): ConcatAdapter {
+        addLoadStateListener { loadStates ->
+            footer.loadState = loadStates.append
+        }
+        return ConcatAdapter(this, footer)
+    }
+
+    fun withLoadStateHeaderAndFooter(
+        header: MultiTypeLoadStateAdapter,
+        footer: MultiTypeLoadStateAdapter
+    ): ConcatAdapter {
+        addLoadStateListener { loadStates ->
+            header.loadState = loadStates.prepend
+            footer.loadState = loadStates.append
+        }
+        return ConcatAdapter(header, this, footer)
+    }
 }

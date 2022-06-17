@@ -3,6 +3,7 @@ package com.lowe.multitype.paging
 import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.CheckResult
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lowe.multitype.*
 import kotlin.reflect.KClass
@@ -30,19 +31,19 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      * @param delegate the item view delegate
      * @param T the item data type
      * */
-    fun <T> register(clazz: Class<T>, delegate: ItemViewDelegate<T, *>) {
+    fun <T> register(clazz: Class<T>, delegate: ItemViewBaseDelegate<T, *>) {
         unregisterAllTypesIfNeeded(clazz)
         register(Type(clazz, delegate, DefaultLinker()))
     }
 
-    inline fun <reified T : Any> register(delegate: ItemViewDelegate<T, *>) {
+    inline fun <reified T : Any> register(delegate: ItemViewBaseDelegate<T, *>) {
         register(T::class.java, delegate)
     }
 
     inline fun <reified T : Any> register(
         // Keep this parameter to provide the explicit relationship
         @Suppress("UNUSED_PARAMETER") clazz: KClass<T>,
-        delegate: ItemViewDelegate<T, *>,
+        delegate: ItemViewBaseDelegate<T, *>,
     ) {
         // Always use the reified type to avoid javaPrimitiveType problem
         // See https://github.com/drakeet/MultiType/issues/302
@@ -50,15 +51,27 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
     }
 
     fun <T> register(clazz: Class<T>, binder: ItemViewBinder<T, *>) {
-        register(clazz, binder as ItemViewDelegate<T, *>)
+        register(clazz, binder as ItemViewBaseDelegate<T, *>)
+    }
+
+    fun <T> register(clazz: Class<T>, binder: PagingItemViewBinder<T, *>) {
+        register(clazz, binder as ItemViewBaseDelegate<T, *>)
     }
 
     inline fun <reified T : Any> register(binder: ItemViewBinder<T, *>) {
-        register(binder as ItemViewDelegate<T, *>)
+        register(binder as ItemViewBaseDelegate<T, *>)
+    }
+
+    inline fun <reified T : Any> register(binder: PagingItemViewBinder<T, *>) {
+        register(binder as ItemViewBaseDelegate<T, *>)
     }
 
     inline fun <reified T : Any> register(clazz: KClass<T>, binder: ItemViewBinder<T, *>) {
-        register(clazz, binder as ItemViewDelegate<T, *>)
+        register(clazz, binder as ItemViewBaseDelegate<T, *>)
+    }
+
+    inline fun <reified T : Any> register(clazz: KClass<T>, binder: PagingItemViewBinder<T, *>) {
+        register(clazz, binder as ItemViewBaseDelegate<T, *>)
     }
 
     internal fun <T> register(type: Type<T>) {
@@ -149,7 +162,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      *
      * @param position Adapter position to query
      * @return the stable ID of the item at position
-     * @see ItemViewDelegate.getItemId
+     * @see ItemViewBaseDelegate.getItemId
      * @see RecyclerView.Adapter.setHasStableIds
      * @since v3.2.0
      */
@@ -164,7 +177,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      *
      * @param holder The ViewHolder for the view being recycled
      * @see RecyclerView.Adapter.onViewRecycled
-     * @see ItemViewDelegate.onViewRecycled
+     * @see ItemViewBaseDelegate.onViewRecycled
      */
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         getOutDelegateByViewHolder(holder).onViewRecycled(holder)
@@ -182,7 +195,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      * RecyclerView will check the View's transient state again before giving a final decision.
      * Default implementation returns false.
      * @see RecyclerView.Adapter.onFailedToRecycleView
-     * @see ItemViewDelegate.onFailedToRecycleView
+     * @see ItemViewBaseDelegate.onFailedToRecycleView
      */
     override fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
         return getOutDelegateByViewHolder(holder).onFailedToRecycleView(holder)
@@ -194,7 +207,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      *
      * @param holder Holder of the view being attached
      * @see RecyclerView.Adapter.onViewAttachedToWindow
-     * @see ItemViewDelegate.onViewAttachedToWindow
+     * @see ItemViewBaseDelegate.onViewAttachedToWindow
      */
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         getOutDelegateByViewHolder(holder).onViewAttachedToWindow(holder)
@@ -206,20 +219,20 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      *
      * @param holder Holder of the view being detached
      * @see RecyclerView.Adapter.onViewDetachedFromWindow
-     * @see ItemViewDelegate.onViewDetachedFromWindow
+     * @see ItemViewBaseDelegate.onViewDetachedFromWindow
      */
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         getOutDelegateByViewHolder(holder).onViewDetachedFromWindow(holder)
     }
 
-    private fun getOutDelegateByViewHolder(holder: RecyclerView.ViewHolder): ItemViewDelegate<Any, RecyclerView.ViewHolder> {
+    private fun getOutDelegateByViewHolder(holder: RecyclerView.ViewHolder): ItemViewBaseDelegate<Any, RecyclerView.ViewHolder> {
         @Suppress("UNCHECKED_CAST")
         return getOutDelegateByViewHolder(holder.bindingAdapterPosition)
     }
 
-    private fun getOutDelegateByViewHolder(position: Int): ItemViewDelegate<Any, RecyclerView.ViewHolder> {
+    private fun getOutDelegateByViewHolder(position: Int): ItemViewBaseDelegate<Any, RecyclerView.ViewHolder> {
         @Suppress("UNCHECKED_CAST")
-        return types.getType<Any>(getItemViewType(position)).delegate as ItemViewDelegate<Any, RecyclerView.ViewHolder>
+        return types.getType<Any>(getItemViewType(position)).delegate as ItemViewBaseDelegate<Any, RecyclerView.ViewHolder>
     }
 
     @Throws(DelegateNotFoundException::class)
@@ -241,4 +254,8 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
     companion object {
         private const val TAG = "MultiTypeAdapter"
     }
+}
+
+operator fun MultiTypeBaseAdapter.plus(adapter: MultiTypeBaseAdapter) {
+    ConcatAdapter(ConcatAdapter.Config.DEFAULT, this, adapter)
 }

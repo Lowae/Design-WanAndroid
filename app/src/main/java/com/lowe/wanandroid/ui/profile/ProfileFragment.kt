@@ -7,18 +7,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
 import com.google.android.material.appbar.AppBarLayout
+import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.collect.CollectActivity
 import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.share.ShareListActivity
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.ui.tools.ToolListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -115,7 +116,6 @@ class ProfileFragment :
     }
 
     private fun onOptionClick(position: Int, item: ProfileItemBean) {
-        item.title.showShortToast()
         when (item.title) {
             getString(R.string.profile_item_title_message) -> {
                 startActivity(Intent(requireContext(), MessageActivity::class.java))
@@ -124,10 +124,10 @@ class ProfileFragment :
                 startActivity(Intent(requireContext(), ShareListActivity::class.java))
             }
             getString(R.string.profile_item_title_favorite) -> {
-
+                startActivity(Intent(requireContext(), CollectActivity::class.java))
             }
             getString(R.string.profile_item_title_tools) -> {
-
+                startActivity(Intent(requireContext(), ToolListActivity::class.java))
             }
             getString(R.string.profile_item_title_project_page) -> {
 

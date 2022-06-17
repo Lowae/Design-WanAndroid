@@ -12,4 +12,8 @@ class ProfileServiceImpl @Inject constructor() : ProfileService {
 
     override suspend fun getUserShareList(userId: Int, page: Int) =
         apiCall { service.getUserShareList(userId, page) }
+
+    override suspend fun getCollectList(page: Int) = apiCall { service.getCollectList(page) }
+
+    override suspend fun getToolList() = apiCall { service.getToolList() }
 }
