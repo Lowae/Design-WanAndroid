@@ -9,7 +9,9 @@ import com.lowe.wanandroid.databinding.ActivityTutorialChapterListLayoutBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TutorialChapterListActivity :
     BaseActivity<TutorialChapterListViewModel, ActivityTutorialChapterListLayoutBinding>(R.layout.activity_tutorial_chapter_list_layout) {
 
@@ -47,8 +49,7 @@ class TutorialChapterListActivity :
         }
     }
 
-    private fun onItemClick(action: Pair<Int, Article>) {
-        val (position, article) = action
+    private fun onItemClick(position: Int, article: Article) {
         WebActivity.loadUrl(this, article.link)
     }
 }

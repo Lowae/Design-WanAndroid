@@ -7,8 +7,12 @@ import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.navigator.NavigatorDiffCalculator
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class TutorialChildViewModel : BaseViewModel() {
+@HiltViewModel
+class TutorialChildViewModel @Inject constructor(private val repository: NavigatorRepository) :
+    BaseViewModel() {
 
     val tutorialListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
 
@@ -18,7 +22,7 @@ class TutorialChildViewModel : BaseViewModel() {
 
     fun fetchTutorialList() {
         launch({
-            val tutorials = NavigatorRepository.getTutorialList().success()?.data ?: emptyList()
+            val tutorials = repository.getTutorialList().success()?.data ?: emptyList()
             tutorialListLiveData.value =
                 getDiffResultPair(tutorialListLiveData.value?.first ?: emptyList(), tutorials)
         })

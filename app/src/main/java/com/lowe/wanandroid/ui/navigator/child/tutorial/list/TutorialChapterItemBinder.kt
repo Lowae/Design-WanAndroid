@@ -4,23 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
-import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutBinding
+import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutV2Binding
 import com.lowe.wanandroid.services.model.Article
 
-class TutorialChapterItemBinder(private val onClick: (Pair<Int, Article>) -> Unit) :
-    ItemViewDataBindingBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutBinding>>() {
+class TutorialChapterItemBinder(private val onClick: (Int, Article) -> Unit) :
+    ItemViewBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutV2Binding>>() {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup
-    ): ViewBindingHolder<ItemHomeArticleLayoutBinding> {
+    ): ViewBindingHolder<ItemHomeArticleLayoutV2Binding> {
         return ViewBindingHolder(
             DataBindingUtil.inflate(
                 inflater,
-                R.layout.item_home_article_layout,
+                R.layout.item_home_article_layout_v2,
                 parent,
                 false
             )
@@ -28,19 +28,14 @@ class TutorialChapterItemBinder(private val onClick: (Pair<Int, Article>) -> Uni
     }
 
     override fun onBindViewHolder(
-        holder: ViewBindingHolder<ItemHomeArticleLayoutBinding>,
+        holder: ViewBindingHolder<ItemHomeArticleLayoutV2Binding>,
         item: Article
     ) {
-        super.onBindViewHolder(holder, item)
         holder.binding.apply {
             ivCollect.isVisible = false
+            onClickFunc = onClick
             article = item
             executePendingBindings()
         }
-    }
-
-    override fun onItemClick(position: Int) {
-        super.onItemClick(position)
-        onClick(position to adapterItems[position] as Article)
     }
 }

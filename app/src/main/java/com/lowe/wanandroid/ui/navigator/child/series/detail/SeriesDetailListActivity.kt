@@ -8,7 +8,9 @@ import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SeriesDetailListActivity :
     BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>(R.layout.activity_series_detail_list_layout) {
 

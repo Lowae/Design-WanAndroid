@@ -6,19 +6,19 @@ import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class TutorialChapterListViewModel : BaseViewModel() {
+@HiltViewModel
+class TutorialChapterListViewModel @Inject constructor(private val repository: NavigatorRepository) :
+    BaseViewModel() {
 
     val chaptersLiveData = MutableLiveData<List<Article>>()
-
-    override fun start() {
-
-    }
 
     fun fetchChapterList(tutorialId: Int) {
         launch({
             chaptersLiveData.value =
-                NavigatorRepository.getTutorialChapterList(tutorialId).success()?.data?.datas
+                repository.getTutorialChapterList(tutorialId).success()?.data?.datas
                     ?: emptyList()
         })
 

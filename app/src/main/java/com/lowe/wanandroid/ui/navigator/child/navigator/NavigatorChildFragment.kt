@@ -20,7 +20,9 @@ import com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagCh
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.smoothSnapToPosition
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NavigatorChildFragment :
     BaseFragment<NavigatorChildViewModel, FragmentNavigatorChildNavigatorBinding>(R.layout.fragment_navigator_child_navigator) {
 

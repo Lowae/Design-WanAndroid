@@ -4,19 +4,24 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
+import com.lowe.multitype.paging.MultiTypeLoadStateAdapter
+import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.LoadingItemDelegate
 import com.lowe.wanandroid.databinding.FragmentSeriesDetailChildBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Classify
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.loadMore
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class SeriesDetailChildFragment :
     BaseFragment<SeriesDetailChildViewModel, FragmentSeriesDetailChildBinding>(R.layout.fragment_series_detail_child) {
 
@@ -34,53 +39,41 @@ class SeriesDetailChildFragment :
     private val classify by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getParcelable(KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
     }
-    private val detailsAdapter = MultiTypeAdapter()
+    private val detailsAdapter =
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+            register(HomeArticleItemBinderV2(this@SeriesDetailChildFragment::onItemClick))
+        }
+
+    private val loadingAdapter = MultiTypeLoadStateAdapter().apply {
+        register(LoadingItemDelegate())
+    }
+
     private val seriesDetailViewModel by activityViewModels<SeriesDetailListViewModel>()
 
     override val viewModel: SeriesDetailChildViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
-        onRefresh()
+        initEvents()
     }
 
     private fun initView() {
         viewBinding.apply {
             with(seriesDetailList) {
-                detailsAdapter.register(HomeArticleItemBinder(this@SeriesDetailChildFragment::onItemClick))
                 setHasFixedSize(true)
-                adapter = detailsAdapter
+                adapter = detailsAdapter.withLoadStateFooter(loadingAdapter)
                 layoutManager = LinearLayoutManager(context)
             }
         }
     }
 
-    private fun initObserve() {
-        viewModel.apply {
-            detailListLiveData.observe(
-                viewLifecycleOwner,
-                this@SeriesDetailChildFragment::dispatchToAdapter
-            )
-            viewBinding.seriesDetailList.loadMore(loadFinish = { isLoading.not() && hasMore }) {
-                this.fetchSeriesDetailList(classify.id)
-            }
+    private fun initEvents() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getSeriesDetailListFlow(classify.id).collectLatest(detailsAdapter::submitData)
         }
-        seriesDetailViewModel.apply {
-            onRefreshLiveData.observe(viewLifecycleOwner) {
-                if (it.id == classify.id) viewModel.fetchSeriesDetailList(classify.id, true)
-            }
+        seriesDetailViewModel.onRefreshLiveData.observe(viewLifecycleOwner) {
+            if (it.id == classify.id) detailsAdapter.refresh()
         }
-    }
-
-
-    private fun onRefresh() {
-        viewModel.fetchSeriesDetailList(classify.id)
-    }
-
-    private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
-        detailsAdapter.items = result.first
-        result.second.dispatchUpdatesTo(detailsAdapter)
     }
 
     private fun onItemClick(position: Int, article: Article) {

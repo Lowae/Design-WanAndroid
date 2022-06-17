@@ -22,7 +22,9 @@ import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListActi
 import com.lowe.wanandroid.ui.navigator.child.series.item.SeriesChildTagChildrenItemBinder
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
 import com.lowe.wanandroid.utils.smoothSnapToPosition
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SeriesChildFragment :
     BaseFragment<SeriesChildViewModel, FragmentNavigatorChildSeriesBinding>(R.layout.fragment_navigator_child_series) {
 

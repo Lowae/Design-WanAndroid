@@ -17,7 +17,9 @@ import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.NavigatorViewModel
 import com.lowe.wanandroid.ui.navigator.child.tutorial.item.TutorialChildItemBinder
 import com.lowe.wanandroid.ui.navigator.child.tutorial.list.TutorialChapterListActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TutorialChildFragment :
     BaseFragment<TutorialChildViewModel, FragmentNavigatorChildTutorialBinding>(R.layout.fragment_navigator_child_tutorial) {
 

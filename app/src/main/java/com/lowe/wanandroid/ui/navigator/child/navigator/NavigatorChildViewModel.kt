@@ -7,12 +7,12 @@ import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.navigator.NavigatorDiffCalculator
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class NavigatorChildViewModel : BaseViewModel() {
-
-    companion object {
-        const val PAYLOAD_TAG_SELECTED_CHANGE = "payload_tag_selected_change"
-    }
+@HiltViewModel
+class NavigatorChildViewModel @Inject constructor(private val repository: NavigatorRepository) :
+    BaseViewModel() {
 
     val navigationTagListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
 
@@ -20,18 +20,13 @@ class NavigatorChildViewModel : BaseViewModel() {
         fetchNavigationList()
     }
 
-    fun getCurrentList() = navigationTagListLiveData.value?.first ?: emptyList()
-
     private fun fetchNavigationList() {
         launch({
-            val navigation = NavigatorRepository.getNavigationList().success()?.data ?: emptyList()
+            val navigation = repository.getNavigationList().success()?.data ?: emptyList()
             // 默认第一个选中
-            val newList = navigation.apply {
-                firstOrNull()?.isSelected = true
-            }
             navigationTagListLiveData.value = getDiffResultPair(
                 navigationTagListLiveData.value?.first ?: emptyList(),
-                newList
+                navigation
             )
         })
     }

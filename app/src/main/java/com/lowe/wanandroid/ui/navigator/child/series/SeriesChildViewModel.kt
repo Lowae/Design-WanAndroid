@@ -7,20 +7,20 @@ import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.navigator.NavigatorDiffCalculator
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SeriesChildViewModel : BaseViewModel() {
+@HiltViewModel
+class SeriesChildViewModel @Inject constructor(private val repository: NavigatorRepository) :
+    BaseViewModel() {
 
     val seriesListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
-
-    override fun start() {
-
-    }
 
     fun getCurrentList() = seriesListLiveData.value?.first ?: emptyList()
 
     fun fetchSeriesList() {
         launch({
-            val series = NavigatorRepository.getTreeList().success()?.data ?: emptyList()
+            val series = repository.getTreeList().success()?.data ?: emptyList()
             val oldList = seriesListLiveData.value?.first ?: emptyList()
             seriesListLiveData.value = getDiffResultPair(oldList, oldList + series)
         })
