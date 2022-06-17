@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
-import com.drakeet.multitype.ItemViewBinder
+import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTagChildrenLayoutBinding

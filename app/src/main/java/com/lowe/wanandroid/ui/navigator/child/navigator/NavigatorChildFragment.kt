@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.chip.Chip
+import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildNavigatorBinding
 import com.lowe.wanandroid.services.model.Article

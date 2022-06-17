@@ -5,6 +5,7 @@
       <module name="SelfWanAndroid.buildSrc" target="11" />
       <module name="SelfWanAndroid.buildSrc.main" target="11" />
       <module name="SelfWanAndroid.buildSrc.test" target="11" />
+      <module name="SelfWanAndroid.multityep" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

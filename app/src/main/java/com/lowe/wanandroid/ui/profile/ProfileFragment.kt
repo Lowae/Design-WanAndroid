@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.drakeet.multitype.MultiTypeAdapter
+import com.lowe.multitype.MultiTypeAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R

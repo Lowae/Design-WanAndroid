@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.material.chip.Chip
+import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildSeriesBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.Series
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.home.child.explore.repository.ExploreViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListActivity

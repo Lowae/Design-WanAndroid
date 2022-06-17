@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2016-present. Drakeet Xu
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.lowe.multitype
+
+import androidx.recyclerview.widget.RecyclerView
+import com.lowe.multitype.paging.MultiTypeBaseAdapter
+import java.util.concurrent.CopyOnWriteArrayList
+
+/**
+ * @author Drakeet Xu
+ */
+open class MultiTypeAdapter @JvmOverloads constructor(
+    /**
+     * Sets and updates the items atomically and safely. It is recommended to use this method
+     * to update the items with a new wrapper list or consider using [CopyOnWriteArrayList].
+     *
+     * Note: If you want to refresh the list views after setting items, you should
+     * call [RecyclerView.Adapter.notifyDataSetChanged] by yourself.
+     *
+     * @since v2.4.1
+     */
+    open var items: List<Any> = emptyList(),
+) : MultiTypeBaseAdapter() {
+
+    override fun getItem(position: Int) = items[position]
+
+    override fun getItemCount() = items.size
+}

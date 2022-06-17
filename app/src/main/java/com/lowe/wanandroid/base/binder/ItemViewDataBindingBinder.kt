@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.base.binder
 
 import androidx.annotation.CallSuper
-import com.drakeet.multitype.ItemViewBinder
+import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.BR
 
 abstract class ItemViewDataBindingBinder<T, VH : ViewBindingHolder<*>> :

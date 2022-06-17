@@ -44,6 +44,8 @@ java {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":multityep")))
+
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
     implementation(Deps.material)
@@ -55,7 +57,6 @@ dependencies {
     implementation(Deps.swiperefreshlayout)
     implementation(Deps.recyclerview)
 
-    implementation(Deps.multitype)
     implementation(Deps.paging)
     implementation(Deps.pagingKtx)
 

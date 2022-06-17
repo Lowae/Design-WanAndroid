@@ -3,7 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.drakeet.multitype.MultiTypeAdapter
+import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityTutorialChapterListLayoutBinding
 import com.lowe.wanandroid.services.model.Article
