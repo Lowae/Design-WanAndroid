@@ -3,7 +3,6 @@ package com.lowe.multitype.paging
 import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.CheckResult
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lowe.multitype.*
 import kotlin.reflect.KClass
@@ -154,7 +153,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
         position: Int,
         payloads: List<Any>
     ) {
-        getOutDelegateByViewHolder(position).onBindViewHolder(holder, getItem(position), payloads)
+        getOutDelegateByViewHolder(holder).onBindViewHolder(holder, getItem(position), payloads)
     }
 
     /**
@@ -227,7 +226,7 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
 
     private fun getOutDelegateByViewHolder(holder: RecyclerView.ViewHolder): ItemViewBaseDelegate<Any, RecyclerView.ViewHolder> {
         @Suppress("UNCHECKED_CAST")
-        return getOutDelegateByViewHolder(holder.bindingAdapterPosition)
+        return types.getType<Any>(holder.itemViewType).delegate as ItemViewBaseDelegate<Any, RecyclerView.ViewHolder>
     }
 
     private fun getOutDelegateByViewHolder(position: Int): ItemViewBaseDelegate<Any, RecyclerView.ViewHolder> {
@@ -254,8 +253,4 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
     companion object {
         private const val TAG = "MultiTypeAdapter"
     }
-}
-
-operator fun MultiTypeBaseAdapter.plus(adapter: MultiTypeBaseAdapter) {
-    ConcatAdapter(ConcatAdapter.Config.DEFAULT, this, adapter)
 }

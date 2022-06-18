@@ -30,7 +30,7 @@ class NavigatorRepository @Inject constructor(private val service: NavigatorServ
             IntKeyPagingSource(
                 BaseService.DEFAULT_PAGE_START_NO,
                 service = service
-            ) { service, page ->
+            ) { service, page, size ->
                 service.getSeriesDetailList(page, id, size).run {
                     if (isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                     this to this.data.datas

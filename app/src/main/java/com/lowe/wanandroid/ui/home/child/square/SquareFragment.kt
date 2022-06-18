@@ -3,22 +3,24 @@ package com.lowe.wanandroid.ui.home.child.square
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
+import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildSquareBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
 import com.lowe.wanandroid.ui.home.HomeViewModel
-import com.lowe.wanandroid.ui.home.child.square.repository.SquareViewModel
-import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.loadMore
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class SquareFragment :
     BaseFragment<SquareViewModel, FragmentHomeChildSquareBinding>(R.layout.fragment_home_child_square) {
 
@@ -37,34 +39,30 @@ class SquareFragment :
             HomeChildFragmentAdapter.HOME_TAB_SQUARE
         )
     }
-    private val squareAdapter = MultiTypeAdapter()
+    private val squareAdapter = MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        register(HomeArticleItemBinderV2(this@SquareFragment::onItemClick))
+    }
 
     override val viewModel: SquareViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
-        squareAdapter.register(HomeArticleItemBinder(this::onItemClick))
         viewBinding.apply {
             with(squareList) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = squareAdapter
-                loadMore(loadFinish = { this@SquareFragment.viewModel.isLoading.not() }) {
-                    this@SquareFragment.viewModel.fetchSquareList()
-                }
+                setHasFixedSize(true)
             }
         }
     }
 
-    private fun initObserve() {
-        viewModel.apply {
-            this.squareListLiveData.observe(
-                viewLifecycleOwner,
-                this@SquareFragment::dispatchToAdapter
-            )
+    private fun initEvents() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getSquareFlow().collectLatest(squareAdapter::submitData)
         }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
@@ -81,12 +79,7 @@ class SquareFragment :
     }
 
     private fun onRefresh() {
-        viewModel.fetchSquareList(true)
-    }
-
-    private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
-        squareAdapter.items = result.first
-        result.second.dispatchUpdatesTo(squareAdapter)
+        squareAdapter.refresh()
     }
 
     private fun onItemClick(position: Int, article: Article) {

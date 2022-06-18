@@ -25,7 +25,7 @@ class ShareListRepository @Inject constructor(
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = profileService) { profileService, page ->
+        IntKeyPagingSource(service = profileService) { profileService, page, _ ->
             profileService.getMyShareList(page).run {
                 if (this.isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                 _shareBeanFlow.emit(this.data)

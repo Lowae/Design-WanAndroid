@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.findViewTreeLifecycleOwner
-import com.lowe.multitype.ItemViewBinder
+import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeBannerLayoutBinding
@@ -13,7 +13,7 @@ import com.lowe.wanandroid.services.model.Banners
 import com.youth.banner.indicator.CircleIndicator
 
 class HomeBannerItemBinder(onClick: (Banner, Int) -> Unit) :
-    ItemViewBinder<Banners, ViewBindingHolder<ItemHomeBannerLayoutBinding>>() {
+    PagingItemViewBinder<Banners, ViewBindingHolder<ItemHomeBannerLayoutBinding>>() {
 
     private val bannerAdapter = HomeBannerAdapter(emptyList(), onClick)
 

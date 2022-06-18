@@ -17,7 +17,7 @@ class MessageRepository @Inject constructor(private val service: ProfileService)
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = service) { service, page ->
+        IntKeyPagingSource(service = service) { service, page, _ ->
             service.getReadiedMessageList(page).run {
                 if (this.isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                 this to this.data.datas
@@ -32,7 +32,7 @@ class MessageRepository @Inject constructor(private val service: ProfileService)
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = service) { service, page ->
+        IntKeyPagingSource(service = service) { service, page, _ ->
             service.getUnReadMessageList(page).run {
                 if (this.isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                 this to this.data.datas

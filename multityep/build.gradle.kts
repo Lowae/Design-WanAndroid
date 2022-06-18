@@ -12,6 +12,7 @@ android {
 }
 
 dependencies {
+    implementation(Deps.recyclerview)
     implementation(Deps.paging)
     implementation(Deps.pagingKtx)
     testImplementation(Deps.testJunit)

@@ -19,7 +19,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     }
 
     private lateinit var childAdapter: HomeChildFragmentAdapter
-    private lateinit var tabLayoutMediator: TabLayoutMediator
 
     private val mainViewModel by activityViewModels<MainViewModel>()
 

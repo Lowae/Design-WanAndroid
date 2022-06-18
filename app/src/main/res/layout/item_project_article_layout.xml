@@ -5,19 +5,21 @@
 
     <data>
 
-        <variable
-            name="binder"
-            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
+        <import type="kotlin.jvm.functions.Function2" />
+
+        <import type="com.lowe.wanandroid.services.model.Article" />
 
         <variable
             name="article"
-            type="com.lowe.wanandroid.services.model.Article" />
+            type="Article" />
 
         <variable
             name="position"
             type="int" />
 
-        <import type="android.text.Html" />
+        <variable
+            name="onClickFunc"
+            type="Function2&lt;Integer, Article, kotlin.Unit&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -36,7 +38,7 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_light_secondaryContainer"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{()->binder.onItemClick(position)}"
+            android:onClick="@{()->onClickFunc.invoke(position, article)}"
             android:paddingBottom="10dp">
 
             <TextView
@@ -46,7 +48,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:text='@{Html.fromHtml(article.getArticleAuthor)}'
+                android:text='@{article.getArticleAuthor}'
                 android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +87,7 @@
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{Html.fromHtml(article.title)}"
+                android:text="@{article.title}"
                 android:textColor="@color/_333333"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -106,7 +108,7 @@
                 android:lineSpacingMultiplier="1.4"
                 android:maxLines="3"
                 android:minLines="3"
-                android:text="@{Html.fromHtml(article.desc)}"
+                android:text="@{article.desc}"
                 android:textColor="@color/_333333"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/iv_collect"
@@ -120,7 +122,7 @@
                 android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Html.fromHtml(article.superChapterName+'·'+article.chapterName)}"
+                android:text="@{article.superChapterName+'·'+article.chapterName}"
                 android:textColor="@color/md_theme_dark_surfaceVariant"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_collect"

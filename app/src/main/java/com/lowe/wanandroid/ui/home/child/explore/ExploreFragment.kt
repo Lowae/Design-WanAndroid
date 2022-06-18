@@ -3,24 +3,26 @@ package com.lowe.wanandroid.ui.home.child.explore
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
+import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeChildExploreBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Banner
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
 import com.lowe.wanandroid.ui.home.HomeViewModel
-import com.lowe.wanandroid.ui.home.child.explore.repository.ExploreViewModel
-import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinder
+import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.loadMore
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class ExploreFragment :
     BaseFragment<ExploreViewModel, FragmentHomeChildExploreBinding>(R.layout.fragment_home_child_explore) {
 
@@ -33,10 +35,13 @@ class ExploreFragment :
             )
             this
         }
-
     }
 
-    private val homeAdapter = MultiTypeAdapter()
+    private val homeAdapter =
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+            register(HomeBannerItemBinder(this@ExploreFragment::onBannerItemClick))
+            register(HomeArticleItemBinderV2(this@ExploreFragment::onItemClick))
+        }
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
     private val exploreTabBean by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE) ?: HomeTabBean(
@@ -48,7 +53,7 @@ class ExploreFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
         if (savedInstanceState == null) {
             onRefresh()
         } else {
@@ -67,22 +72,16 @@ class ExploreFragment :
     }
 
     private fun initView() {
-        homeAdapter.register(HomeArticleItemBinder(this::onItemClick))
-        homeAdapter.register(HomeBannerItemBinder(this::onBannerItemClick))
         viewBinding.homeList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
-            loadMore(loadFinish = { viewModel.isLoading.not() }) {
-                viewModel.fetchArticleList()
-            }
+            setHasFixedSize(true)
         }
     }
 
-    private fun initObserve() {
-        viewModel.apply {
-            articleListLiveData.observe(viewLifecycleOwner) {
-                it?.let(this@ExploreFragment::afterLoadArticle)
-            }
+    private fun initEvents() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getArticlesFlow().collectLatest(homeAdapter::submitData)
         }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
@@ -98,13 +97,8 @@ class ExploreFragment :
         viewBinding.homeList.scrollToPosition(0)
     }
 
-    private fun afterLoadArticle(result: Pair<List<Any>, DiffUtil.DiffResult>) {
-        homeAdapter.items = result.first
-        result.second.dispatchUpdatesTo(homeAdapter)
-    }
-
     private fun onRefresh() {
-        viewModel.refreshArticleList()
+        homeAdapter.refresh()
     }
 
     private fun onBannerItemClick(data: Banner, position: Int) {

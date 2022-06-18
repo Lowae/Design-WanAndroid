@@ -19,8 +19,8 @@ class GroupRepository @Inject constructor(private val service: GroupService) {
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = service) { service, page ->
-            service.getAuthorArticles(id, page, BaseViewModel.DEFAULT_PAGE_SIZE).run {
+        IntKeyPagingSource(service = service) { service, page, size ->
+            service.getAuthorArticles(id, page, size).run {
                 if (this.isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                 this to this.data.datas
             }

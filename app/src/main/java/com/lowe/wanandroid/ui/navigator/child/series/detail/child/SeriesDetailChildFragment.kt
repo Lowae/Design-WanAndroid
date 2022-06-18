@@ -6,10 +6,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypeLoadStateAdapter
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.LoadingItemDelegate
 import com.lowe.wanandroid.databinding.FragmentSeriesDetailChildBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Classify
@@ -43,11 +41,6 @@ class SeriesDetailChildFragment :
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SeriesDetailChildFragment::onItemClick))
         }
-
-    private val loadingAdapter = MultiTypeLoadStateAdapter().apply {
-        register(LoadingItemDelegate())
-    }
-
     private val seriesDetailViewModel by activityViewModels<SeriesDetailListViewModel>()
 
     override val viewModel: SeriesDetailChildViewModel by viewModels()
@@ -61,7 +54,7 @@ class SeriesDetailChildFragment :
         viewBinding.apply {
             with(seriesDetailList) {
                 setHasFixedSize(true)
-                adapter = detailsAdapter.withLoadStateFooter(loadingAdapter)
+                adapter = detailsAdapter
                 layoutManager = LinearLayoutManager(context)
             }
         }

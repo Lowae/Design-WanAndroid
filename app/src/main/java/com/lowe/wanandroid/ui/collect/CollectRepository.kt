@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.ui.collect.repository
+package com.lowe.wanandroid.ui.collect
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -17,7 +17,7 @@ class CollectRepository @Inject constructor(private val profileService: ProfileS
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = profileService) { profileService, page ->
+        IntKeyPagingSource(service = profileService) { profileService, page, _ ->
             profileService.getCollectList(page).run {
                 if (isSuccess().not()) return@IntKeyPagingSource this to emptyList()
                 this to this.data.datas

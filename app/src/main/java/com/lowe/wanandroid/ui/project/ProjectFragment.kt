@@ -1,6 +1,8 @@
 package com.lowe.wanandroid.ui.project
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
@@ -9,7 +11,9 @@ import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentProjectBinding
 import com.lowe.wanandroid.ui.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProjectFragment :
     BaseFragment<ProjectViewModel, FragmentProjectBinding>(R.layout.fragment_project) {
 
@@ -54,7 +58,11 @@ class ProjectFragment :
                 viewBinding.projectTabLayout,
                 viewBinding.projectViewPager2
             ) { tab: TabLayout.Tab, position: Int ->
-                tab.text = childAdapter.items[position].name
+                tab.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Html.fromHtml(childAdapter.items[position].name, Html.FROM_HTML_MODE_LEGACY);
+                } else {
+                    Html.fromHtml(childAdapter.items[position].name);
+                }
             }.apply(TabLayoutMediator::attach)
         }
     }

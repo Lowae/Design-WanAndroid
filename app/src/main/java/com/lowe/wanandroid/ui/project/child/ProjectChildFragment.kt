@@ -2,18 +2,21 @@ package com.lowe.wanandroid.ui.project.child
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypeAdapter
+import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentChildProjectBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.project.ProjectViewModel
 import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.loadMore
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class ProjectChildFragment :
     BaseFragment<ProjectChildViewModel, FragmentChildProjectBinding>(R.layout.fragment_child_project) {
 
@@ -30,7 +33,10 @@ class ProjectChildFragment :
 
     }
 
-    private val projectAdapter = MultiTypeAdapter()
+    private val projectAdapter =
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+            register(ProjectChildItemBinder(this@ProjectChildFragment::onItemClick))
+        }
     private val projectViewModel by viewModels<ProjectViewModel>(this::requireParentFragment)
     private val categoryId by lazy { arguments?.getInt(KEY_PROJECT_CHILD_CATEGORY_ID, -1) ?: -1 }
 
@@ -38,37 +44,30 @@ class ProjectChildFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
-        onRefresh()
+        initEvents()
     }
 
     private fun initView() {
-        projectAdapter.register(ProjectChildItemBinder(this::onItemClick))
         viewBinding.apply {
             with(childList) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = projectAdapter
-                loadMore(loadFinish = { viewModel.isLoading.not() }) {
-                    viewModel.fetchProjectList(categoryId)
-                }
+                setHasFixedSize(true)
             }
         }
     }
 
-    private fun initObserve() {
-        viewModel.projectListLiveData.observe(viewLifecycleOwner, this::dispatchToAdapter)
+    private fun initEvents() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
+        }
         projectViewModel.parentRefreshLiveData.observe(viewLifecycleOwner, this::onParentRefresh)
         projectViewModel.scrollToTopLiveData.observe(viewLifecycleOwner, this::scrollToTop)
     }
 
-    private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
-        projectAdapter.items = result.first
-        result.second.dispatchUpdatesTo(projectAdapter)
-    }
-
     private fun onParentRefresh(categoryId: Int) {
         if (categoryId != this.categoryId) return
-        onRefresh()
+        projectAdapter.refresh()
     }
 
     private fun scrollToTop(categoryId: Int) {
@@ -76,12 +75,7 @@ class ProjectChildFragment :
         viewBinding.childList.scrollToPosition(0)
     }
 
-    private fun onRefresh() {
-        viewModel.fetchProjectList(categoryId, true)
-    }
-
-    private fun onItemClick(action: Pair<Int, Article>) {
-        val (position, article) = action
+    private fun onItemClick(position: Int, article: Article) {
         WebActivity.loadUrl(this.requireContext(), article.link)
     }
 }

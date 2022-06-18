@@ -18,7 +18,7 @@ object Version {
     const val lifecycleVersion = "2.4.1"
     const val navigationVersion = "2.4.2"
     const val swipeRefreshLayoutVersion = "1.1.0"
-    const val recyclerViewVersion = "1.2.1"
+    const val recyclerViewVersion = "1.3.0-alpha02"
 
     // MultiAdapter
     const val multiTypeVersion = "4.3.0"

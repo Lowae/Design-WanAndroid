@@ -1,9 +1,10 @@
-package com.lowe.wanandroid.ui.project.repository
+package com.lowe.wanandroid.services.impl
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.ProjectService
+import javax.inject.Inject
 
-object ProjectRepository : ProjectService {
+class ProjectServiceImpl @Inject constructor() : ProjectService {
 
     private val service by lazy { RetrofitManager.getService(ProjectService::class.java) }
 
@@ -19,4 +20,5 @@ object ProjectRepository : ProjectService {
         pageNo: Int,
         pageSize: Int
     ) = apiCall { service.getNewProjectPageList(pageNo, pageSize) }
+
 }

@@ -4,10 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypeLoadStateAdapter
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.LoadingItemDelegate
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
 import com.lowe.wanandroid.services.model.CollectBean
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
@@ -28,10 +26,6 @@ class CollectActivity :
             register(CollectItemBinder(this@CollectActivity::onCollectClick))
         }
 
-    private val loadingAdapter = MultiTypeLoadStateAdapter().apply {
-        register(LoadingItemDelegate())
-    }
-
     override val viewModel: CollectViewModel by viewModels()
 
     override fun init(savedInstanceState: Bundle?) {
@@ -42,7 +36,7 @@ class CollectActivity :
     private fun initView() {
         viewDataBinding.apply {
             with(collectList) {
-                adapter = collectPagingAdapter.withLoadStateFooter(loadingAdapter)
+                adapter = collectPagingAdapter
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }

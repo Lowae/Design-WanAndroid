@@ -4,11 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.ProjectTitle
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.project.child.ProjectChildFragment
-import com.lowe.wanandroid.ui.project.repository.ProjectRepository
 import com.lowe.wanandroid.ui.launch
+import com.lowe.wanandroid.ui.project.child.ProjectChildFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ProjectViewModel : BaseViewModel() {
+@HiltViewModel
+class ProjectViewModel @Inject constructor(private val repository: ProjectRepository): BaseViewModel() {
 
     val projectTitleListLiveData = MutableLiveData<List<ProjectTitle>>()
     val parentRefreshLiveData = MutableLiveData<Int>()
@@ -23,7 +25,7 @@ class ProjectViewModel : BaseViewModel() {
             projectTitleListLiveData.value =
                 mutableListOf<ProjectTitle>().apply {
                     add(generateNewestProjectBean())
-                    addAll(ProjectRepository.getProjectTitleList().success()?.data ?: emptyList())
+                    addAll(repository.getProjectTitleList().success()?.data ?: emptyList())
                 }
         })
     }
