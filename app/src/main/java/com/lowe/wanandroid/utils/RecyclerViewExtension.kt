@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.utils
 
-import android.util.Log
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.EdgeEffect
@@ -133,7 +132,6 @@ fun RecyclerView.setDefaultEffectFactory() {
                 }
 
                 private fun handlePull(deltaDistance: Float) {
-                    Log.d("EdgeEffect", "handlePull: $deltaDistance")
                     // This is called on every touch event while the list is scrolled with a finger.
                     // We simply update the view properties without animation.
                     val sign = if (direction == DIRECTION_TOP) 1 else -1
@@ -146,7 +144,6 @@ fun RecyclerView.setDefaultEffectFactory() {
 
                 override fun onRelease() {
                     super.onRelease()
-                    Log.d("EdgeEffect", "onRelease")
                     // The finger is lifted. This is when we should start the animations to bring
                     // the view property values back to their resting states.
                     recyclerView.forEachVisibleHolder { holder: RecyclerView.ViewHolder ->
@@ -156,7 +153,6 @@ fun RecyclerView.setDefaultEffectFactory() {
 
                 override fun onAbsorb(velocity: Int) {
                     super.onAbsorb(velocity)
-                    Log.d("EdgeEffect", "onAbsorb: $velocity")
                     val sign = if (direction == DIRECTION_TOP) 1 else -1
                     // The list has reached the edge on fling.
                     val translationVelocity = sign * velocity * FLING_TRANSLATION_MAGNITUDE

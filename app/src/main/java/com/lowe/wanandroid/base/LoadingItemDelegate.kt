@@ -14,7 +14,7 @@ import com.lowe.wanandroid.R
 
 class LoadingItemDelegate : ItemViewBaseDelegate<LoadState, LoadingItemDelegate.Holder>() {
 
-    class Holder(view: View) : RecyclerView.ViewHolder(view)
+    inner class Holder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(context: Context, parent: ViewGroup): Holder {
         return Holder(

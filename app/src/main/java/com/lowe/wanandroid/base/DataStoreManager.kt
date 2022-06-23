@@ -19,7 +19,7 @@ object DataStoreManager {
 
     lateinit var dataStore: DataStore<Preferences>
 
-    fun init(application: Context){
+    fun init(application: Context) {
         dataStore = createPreferencesDataStore(application)
     }
 
@@ -40,5 +40,13 @@ object CookiePreference {
     private const val KEY_DATA_STORE_COOKIE_NAME = "key_data_store_cookie_name"
 
     val cookiePreference = stringSetPreferencesKey(KEY_DATA_STORE_COOKIE_NAME)
+
+}
+
+object SearchHistoryPreference {
+
+    private const val KEY_DATA_STORE_SEARCH_HISTORY = "key_data_store_search_history"
+
+    val searchHistoryPreferences = stringSetPreferencesKey(KEY_DATA_STORE_SEARCH_HISTORY)
 
 }

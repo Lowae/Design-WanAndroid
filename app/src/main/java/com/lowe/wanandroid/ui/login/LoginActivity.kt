@@ -1,7 +1,6 @@
 package com.lowe.wanandroid.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.account.AccountState
@@ -44,7 +43,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>(R.layou
     private fun initObserve() {
         viewModel.apply {
             loginLiveData.observe(this@LoginActivity) {
-                Log.d("LoginViewModel", "loginLiveData: $it")
                 if (it.isSuccess()) {
                     viewDataBinding.loginInfo.text = it.toString()
                     setResult(RESULT_OK)

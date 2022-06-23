@@ -32,15 +32,18 @@
                 app:tabMode="scrollable"
                 app:tabTextColor="@color/md_theme_light_primary" />
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/searchIcon"
+                style="?attr/actionButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="12dp"
                 android:contentDescription="@string/title_search"
                 android:src="@drawable/ic_baseline_search_24"
                 app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/homeTabLayout" />
+                app:layout_constraintTop_toTopOf="@id/homeTabLayout"
+                app:tint="@color/md_theme_light_primary" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/homeViewPager2"

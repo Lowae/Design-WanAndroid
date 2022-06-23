@@ -26,4 +26,7 @@
     <string name="article_tag_new">新</string>
     <string name="article_tag_top">置顶</string>
     <string name="empty_data_tips">暂无数据~</string>
+    <string name="search_hint">搜索关键词</string>
+    <string name="search_hotkey_title">搜索热词</string>
+    <string name="search_history_title">搜索历史</string>
 </resources>

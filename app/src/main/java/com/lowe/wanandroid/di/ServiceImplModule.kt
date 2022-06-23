@@ -26,4 +26,7 @@ abstract class ServiceImplModule {
     @Binds
     abstract fun getProfileServiceImpl(impl: ProfileServiceImpl): ProfileService
 
+    @Binds
+    abstract fun getSearchServiceImpl(impl: SearchServiceImpl): SearchService
+
 }

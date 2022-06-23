@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentHomeBinding
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.search.SearchActivity
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -35,6 +37,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         viewBinding.apply {
             with(homeViewPager2) {
                 adapter = childAdapter
+            }
+            with(searchIcon){
+                setOnClickListener {
+                    startActivity(Intent(this@HomeFragment.context, SearchActivity::class.java))
+                }
             }
             TabLayoutMediator(
                 homeTabLayout,

@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.services.ApiResponse
@@ -18,9 +17,7 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
 
     fun login(userInfo: LocalUserInfo) {
         launch({
-            Log.d("LoginViewModel", "login: $userInfo")
             loginLiveData.value = repository.login(userInfo)
-            Log.d("LoginViewModel", "login: $userInfo")
         })
     }
 
