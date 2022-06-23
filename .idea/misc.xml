@@ -29,7 +29,7 @@
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_message.xml" value="0.36340316374519027" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_search.xml" value="0.5" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_search.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_series_detail_list_layout.xml" value="0.22937443336355395" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_share_list.xml" value="0.25" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/activity_tools.xml" value="0.20037609694943587" />
@@ -51,7 +51,7 @@
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_navigator_child_tutorial.xml" value="0.45404018811457886" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.1945288753799392" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.2975630611372381" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_profile_item_list.xml" value="0.3685335613510047" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_profile_item_list.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_project.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_search_begin.xml" value="0.38435228730226595" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/SelfWanAndroid/app/src/main/res/layout/fragment_search_list.xml" value="0.38520735356990166" />
