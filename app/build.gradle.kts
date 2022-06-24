@@ -52,6 +52,7 @@ dependencies {
     implementation(Deps.constraintlayout)
     implementation(Deps.lifecycleLiveDataKtx)
     implementation(Deps.lifecycleViewModelKtx)
+    implementation(Deps.lifecucleRuntimeKtx)
     implementation(Deps.navigationFragmentKtx)
     implementation(Deps.navigationUiKtx)
     implementation(Deps.swiperefreshlayout)

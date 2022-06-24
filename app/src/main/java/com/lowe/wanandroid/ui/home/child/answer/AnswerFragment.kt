@@ -7,18 +7,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentHomeChildAnswerBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
 import com.lowe.wanandroid.ui.home.HomeViewModel
+import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AnswerFragment :
@@ -32,6 +36,9 @@ class AnswerFragment :
             this
         }
     }
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
     private val squareTabBean by lazy(LazyThreadSafetyMode.NONE) {
@@ -72,14 +79,37 @@ class AnswerFragment :
                 if (it.title == squareTabBean.title) squareAdapter.refresh()
             }
         }
+        appViewModel.collectArticleEvent.observe(viewLifecycleOwner) { event ->
+            squareAdapter.snapshot().run {
+                val index = indexOfFirst { it is Article && it.id == event.id }
+                if (index >= 0) {
+                    (this[index] as? Article)?.collect = event.isCollected
+                    index
+                } else null
+            }?.apply(squareAdapter::notifyItemChanged)
+        }
     }
 
     private fun scrollToTop() {
         viewBinding.answerList.scrollToPosition(0)
     }
 
-    private fun onItemClick(position: Int, article: Article) {
-        WebActivity.loadUrl(this.requireContext(), article.link)
+    private fun onItemClick(articleAction: ArticleAction) {
+        when (articleAction) {
+            is ArticleAction.ItemClick -> WebActivity.loadUrl(
+                requireContext(),
+                articleAction.article.link
+            )
+            is ArticleAction.CollectClick -> {
+                appViewModel.articleCollectAction(
+                    CollectEvent(
+                        articleAction.article.id,
+                        articleAction.article.link,
+                        articleAction.article.collect.not()
+                    )
+                )
+            }
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutV2Binding
 import com.lowe.wanandroid.services.model.Article
 
-class HomeArticleItemBinderV2(private val onClick: (Int, Article) -> Unit) :
+class HomeArticleItemBinderV2(private val onClick: (ArticleAction) -> Unit) :
     PagingItemViewBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutV2Binding>>() {
 
     override fun onCreateViewHolder(
@@ -31,9 +31,31 @@ class HomeArticleItemBinderV2(private val onClick: (Int, Article) -> Unit) :
         item: Article
     ) {
         holder.binding.apply {
-            onClickFunc = onClick
+            root.setOnClickListener {
+                onClick(
+                    ArticleAction.ItemClick(
+                        holder.bindingAdapterPosition,
+                        item
+                    )
+                )
+            }
+            ivCollect.setOnClickListener {
+                onClick(
+                    ArticleAction.CollectClick(
+                        holder.bindingAdapterPosition,
+                        item
+                    )
+                )
+            }
             article = item
             executePendingBindings()
         }
     }
+}
+
+sealed interface ArticleAction {
+
+    data class ItemClick(val position: Int, val article: Article) : ArticleAction
+
+    data class CollectClick(val position: Int, val article: Article) : ArticleAction
 }

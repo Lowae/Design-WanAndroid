@@ -33,7 +33,7 @@ class TutorialChapterItemBinder(private val onClick: (Int, Article) -> Unit) :
     ) {
         holder.binding.apply {
             ivCollect.isVisible = false
-            onClickFunc = onClick
+            root.setOnClickListener { onClick(holder.bindingAdapterPosition, item) }
             article = item
             executePendingBindings()
         }

@@ -8,11 +8,14 @@ import com.google.android.material.appbar.AppBarLayout
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.ActivityShareListBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.services.model.ShareBean
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
@@ -22,11 +25,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import javax.inject.Inject
 import kotlin.math.abs
 
 @AndroidEntryPoint
 class ShareListActivity :
     BaseActivity<ShareListViewModel, ActivityShareListBinding>(R.layout.activity_share_list) {
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     private val shareAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
@@ -88,6 +95,15 @@ class ShareListActivity :
         lifecycleScope.launchWhenCreated {
             viewModel.getShareBeanFlow().collectLatest(this@ShareListActivity::updateShareUserInfo)
         }
+        appViewModel.collectArticleEvent.observe(this) { event ->
+            shareAdapter.snapshot().run {
+                val index = indexOfFirst { it is Article && it.id == event.id }
+                if (index >= 0) {
+                    (this[index] as? Article)?.collect = event.isCollected
+                    index
+                } else null
+            }?.apply(shareAdapter::notifyItemChanged)
+        }
     }
 
     private fun updateShareUserInfo(shareBean: ShareBean) {
@@ -95,7 +111,18 @@ class ShareListActivity :
         viewDataBinding.notifyPropertyChanged(BR.shareBean)
     }
 
-    private fun onArticleClick(position: Int, article: Article) {
-        WebActivity.loadUrl(this, article.link)
+    private fun onArticleClick(articleAction: ArticleAction) {
+        when (articleAction) {
+            is ArticleAction.ItemClick -> WebActivity.loadUrl(this, articleAction.article.link)
+            is ArticleAction.CollectClick -> {
+                appViewModel.articleCollectAction(
+                    CollectEvent(
+                        articleAction.article.id,
+                        articleAction.article.link,
+                        articleAction.article.collect.not()
+                    )
+                )
+            }
+        }
     }
 }

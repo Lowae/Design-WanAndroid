@@ -61,6 +61,7 @@ object Deps {
         "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycleVersion}"
     const val lifecycleViewModelKtx =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycleVersion}"
+    const val lifecucleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycleVersion}"
     const val navigationFragmentKtx =
         "androidx.navigation:navigation-fragment-ktx:${Version.navigationVersion}"
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Version.navigationVersion}"

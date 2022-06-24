@@ -7,15 +7,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentChildGroupBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.group.GroupViewModel
+import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupChildFragment :
@@ -33,6 +37,9 @@ class GroupChildFragment :
                 this
             }
     }
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     private val authorId by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getInt(
@@ -75,10 +82,33 @@ class GroupChildFragment :
                 if (it == authorId) articlesAdapter.refresh()
             }
         }
+        appViewModel.collectArticleEvent.observe(viewLifecycleOwner) { event ->
+            articlesAdapter.snapshot().run {
+                val index = indexOfFirst { it is Article && it.id == event.id }
+                if (index >= 0) {
+                    (this[index] as? Article)?.collect = event.isCollected
+                    index
+                } else null
+            }?.apply(articlesAdapter::notifyItemChanged)
+        }
     }
 
-    private fun onArticleClick(position: Int, article: Article) {
-        WebActivity.loadUrl(requireContext(), article.link)
+    private fun onArticleClick(articleAction: ArticleAction) {
+        when (articleAction) {
+            is ArticleAction.ItemClick -> WebActivity.loadUrl(
+                requireContext(),
+                articleAction.article.link
+            )
+            is ArticleAction.CollectClick -> {
+                appViewModel.articleCollectAction(
+                    CollectEvent(
+                        articleAction.article.id,
+                        articleAction.article.link,
+                        articleAction.article.collect.not()
+                    )
+                )
+            }
+        }
     }
 
     private fun scrollToTop() {

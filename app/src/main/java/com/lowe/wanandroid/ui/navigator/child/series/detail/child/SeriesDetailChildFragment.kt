@@ -8,16 +8,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentSeriesDetailChildBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Classify
+import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SeriesDetailChildFragment :
@@ -33,6 +37,9 @@ class SeriesDetailChildFragment :
                 this
             }
     }
+
+    @Inject
+    lateinit var appViewModel: AppViewModel
 
     private val classify by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getParcelable(KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
@@ -67,9 +74,32 @@ class SeriesDetailChildFragment :
         seriesDetailViewModel.onRefreshLiveData.observe(viewLifecycleOwner) {
             if (it.id == classify.id) detailsAdapter.refresh()
         }
+        appViewModel.collectArticleEvent.observe(viewLifecycleOwner) { event ->
+            detailsAdapter.snapshot().run {
+                val index = indexOfFirst { it is Article && it.id == event.id }
+                if (index >= 0) {
+                    (this[index] as? Article)?.collect = event.isCollected
+                    index
+                } else null
+            }?.apply(detailsAdapter::notifyItemChanged)
+        }
     }
 
-    private fun onItemClick(position: Int, article: Article) {
-        WebActivity.loadUrl(this.requireContext(), article.link)
+    private fun onItemClick(articleAction: ArticleAction) {
+        when (articleAction) {
+            is ArticleAction.ItemClick -> WebActivity.loadUrl(
+                requireContext(),
+                articleAction.article.link
+            )
+            is ArticleAction.CollectClick -> {
+                appViewModel.articleCollectAction(
+                    CollectEvent(
+                        articleAction.article.id,
+                        articleAction.article.link,
+                        articleAction.article.collect.not()
+                    )
+                )
+            }
+        }
     }
 }

@@ -5,28 +5,39 @@ import com.lowe.wanandroid.services.impl.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class ServiceImplModule {
 
     @Binds
+    @Singleton
+    abstract fun getCommonServiceImpl(impl: CommonServiceImpl): CommonService
+
+    @Binds
+    @Singleton
     abstract fun getHomeServiceImpl(impl: HomeServiceImpl): HomeService
 
     @Binds
+    @Singleton
     abstract fun getProjectServiceImpl(impl: ProjectServiceImpl): ProjectService
 
     @Binds
+    @Singleton
     abstract fun getNavigatorServiceImpl(impl: NavigatorServiceImpl): NavigatorService
 
     @Binds
+    @Singleton
     abstract fun getGroupServiceImpl(impl: GroupServiceImpl): GroupService
 
     @Binds
+    @Singleton
     abstract fun getProfileServiceImpl(impl: ProfileServiceImpl): ProfileService
 
     @Binds
+    @Singleton
     abstract fun getSearchServiceImpl(impl: SearchServiceImpl): SearchService
 
 }
