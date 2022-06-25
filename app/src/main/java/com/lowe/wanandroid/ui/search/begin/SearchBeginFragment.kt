@@ -10,30 +10,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.DataStoreManager
-import com.lowe.wanandroid.base.SearchHistoryPreference
 import com.lowe.wanandroid.databinding.FragmentSearchBeginBinding
-import com.lowe.wanandroid.di.ApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.ui.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchBeginFragment :
     BaseFragment<SearchBeginViewModel, FragmentSearchBeginBinding>(R.layout.fragment_search_begin) {
-
-    @Inject
-    @ApplicationScope
-    lateinit var applicationScope: CoroutineScope
 
     private val hotKeyAdapter = MultiTypeAdapter().apply {
         register(SearchHotKeyTagItemBinder(this@SearchBeginFragment::onHotKeyClick))
@@ -86,10 +76,7 @@ class SearchBeginFragment :
                 .collect(viewModel::historyPut)
         }
         lifecycleScope.launch {
-            DataStoreManager.dataStore.data.map {
-                (it[SearchHistoryPreference.searchHistoryPreferences]
-                    ?: emptySet()).map { SearchState(it) }
-            }.collectLatest { save ->
+            viewModel.searchHistoryFlow().collectLatest { save ->
                 historyAdapter.items = save
                 historyAdapter.notifyDataSetChanged()
                 viewModel.initHistoryCache(save)

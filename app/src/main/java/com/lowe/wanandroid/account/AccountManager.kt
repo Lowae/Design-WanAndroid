@@ -1,12 +1,13 @@
 package com.lowe.wanandroid.account
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.base.DataStoreManager
-import com.lowe.wanandroid.di.ApplicationScope
+import com.lowe.wanandroid.di.IOApplicationScope
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
@@ -14,11 +15,16 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-class AccountManager @Inject constructor(@ApplicationScope private val applicationScope: CoroutineScope) {
+class AccountManager @Inject constructor(
+    @IOApplicationScope private val applicationScope: CoroutineScope,
+    private val dataStore: DataStore<Preferences>
+) {
 
     companion object {
-        val PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO = stringPreferencesKey("key_account_local_user_info")
-        val PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO = stringPreferencesKey("key_account_server_user_info")
+        val PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO =
+            stringPreferencesKey("key_account_local_user_info")
+        val PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO =
+            stringPreferencesKey("key_account_server_user_info")
     }
 
     private val _accountStateFlow: MutableStateFlow<AccountState> =
@@ -30,7 +36,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
 
     fun init() {
         applicationScope.launch {
-            DataStoreManager.dataStore.data
+            dataStore.data
                 .catch {
                     _accountStateFlow.emit(AccountState.LogOut)
                     if (it is IOException) {
@@ -56,7 +62,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
         }
 
         applicationScope.launch {
-            DataStoreManager.dataStore.data
+            dataStore.data
                 .catch {
                     if (it is IOException) {
                         AppLog.e(msg = "Error reading preferences.", exception = it)
@@ -73,7 +79,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
                     } else {
                         null
                     }
-                }.collectLatest { userBaseInfo->
+                }.collectLatest { userBaseInfo ->
                     AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO.name}: ${userBaseInfo?.userInfo?.nickname}")
                     userBaseInfo?.apply { _userBaseInfoStateFlow.emit(this) }
                 }
@@ -82,7 +88,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
 
     fun cacheLocalUser(userInfo: LocalUserInfo) {
         applicationScope.launch {
-            DataStoreManager.dataStore.edit {
+            dataStore.edit {
                 it[PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO] = Gson().toJson(userInfo).apply {
                     AppLog.d(msg = "cacheLocalUser: $this")
                 }
@@ -92,7 +98,7 @@ class AccountManager @Inject constructor(@ApplicationScope private val applicati
 
     fun cacheServeUserInfo(userBaseInfo: UserBaseInfo) {
         applicationScope.launch {
-            DataStoreManager.dataStore.edit {
+            dataStore.edit {
                 it[PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO] = Gson().toJson(userBaseInfo).apply {
                     AppLog.d(msg = "cacheServeUserInfo: $this")
                 }

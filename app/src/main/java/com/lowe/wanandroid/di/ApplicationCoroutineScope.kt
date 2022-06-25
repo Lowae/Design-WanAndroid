@@ -14,7 +14,11 @@ import javax.inject.Singleton
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class ApplicationScope
+annotation class DefaultApplicationScope
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class IOApplicationScope
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -22,15 +26,29 @@ object ApplicationCoroutineScope {
 
     private const val TAG = "ApplicationCoroutineScope"
 
-    @Singleton
-    @Provides
-    @ApplicationScope
-    fun providesCoroutineScope(): CoroutineScope {
-        // providing an instance of CoroutineScope
-        return CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { coroutineContext, throwable ->
+    private val defaultApplicationScope by lazy {
+        CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { coroutineContext, throwable ->
             AppLog.e(
-                TAG, throwable.message.toString(), throwable
+                TAG, "DefaultApplicationScope:\n${throwable.message.toString()}", throwable
             )
         })
     }
+
+    private val ioApplicationScope by lazy {
+        CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
+            AppLog.e(
+                TAG, "IOApplicationScope:\n${throwable.message.toString()}", throwable
+            )
+        })
+    }
+
+    @Singleton
+    @Provides
+    @DefaultApplicationScope
+    fun providesDefaultCoroutineScope() = defaultApplicationScope
+
+    @Singleton
+    @Provides
+    @IOApplicationScope
+    fun providesIOCoroutineScope() = ioApplicationScope
 }

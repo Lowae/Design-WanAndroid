@@ -1,10 +1,7 @@
 package com.lowe.wanandroid.ui.search.begin
 
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.MutableLiveData
-import com.lowe.wanandroid.base.DataStoreManager
-import com.lowe.wanandroid.base.SearchHistoryPreference
-import com.lowe.wanandroid.di.ApplicationScope
+import com.lowe.wanandroid.di.DefaultApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
@@ -20,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchBeginViewModel @Inject constructor(
     private val repository: SearchRepository,
-    @ApplicationScope private val applicationScope: CoroutineScope
+    @DefaultApplicationScope private val applicationScope: CoroutineScope
 ) :
     BaseViewModel() {
 
@@ -37,10 +34,7 @@ class SearchBeginViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         applicationScope.launch {
-            DataStoreManager.dataStore.edit {
-                it[SearchHistoryPreference.searchHistoryPreferences] =
-                    historyLruCache.map { it.keywords }.toSet()
-            }
+            repository.updateSearchHistory(historyLruCache.map { it.keywords }.toSet())
         }
     }
 
@@ -49,6 +43,8 @@ class SearchBeginViewModel @Inject constructor(
             searchHotKeyLiveData.value = repository.getHotKeyList().success()?.data ?: emptyList()
         })
     }
+
+    fun searchHistoryFlow() = repository.searchHistoryCache()
 
     fun initHistoryCache(histories: List<SearchState>) {
         historyLruCache.addAll(histories)

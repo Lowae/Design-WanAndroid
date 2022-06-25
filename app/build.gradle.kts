@@ -64,6 +64,7 @@ dependencies {
 
     implementation(Deps.okhttp)
     implementation(Deps.okhttpLoggingInterceptor)
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.3")
     implementation(Deps.retrofit)
     implementation(Deps.retrofitGsonConverter)
     implementation(Deps.gson)
@@ -74,10 +75,12 @@ dependencies {
 
     implementation(Deps.agentWeb)
     implementation(Deps.dataStore)
+    implementation(Deps.mmkv)
     implementation(Deps.hiltAndroid)
     kapt(Deps.kaptHiltAndroidCompiler)
 
     kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

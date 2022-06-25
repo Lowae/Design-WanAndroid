@@ -7,6 +7,9 @@ import com.lowe.wanandroid.services.CommonService
 import java.lang.reflect.InvocationTargetException
 import javax.inject.Inject
 
+/**
+ * Factory to create [AppViewModel]
+ */
 class AppViewModelFactory @Inject constructor(
     private val application: Application,
     private val commonService: CommonService

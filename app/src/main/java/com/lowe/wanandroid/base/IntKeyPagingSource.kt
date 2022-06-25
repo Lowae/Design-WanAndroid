@@ -2,7 +2,7 @@ package com.lowe.wanandroid.base
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.lowe.wanandroid.base.http.ApiException
+import com.lowe.wanandroid.base.http.exception.ApiException
 import com.lowe.wanandroid.services.ApiResponse
 import com.lowe.wanandroid.services.BaseService
 import com.lowe.wanandroid.services.isSuccess
