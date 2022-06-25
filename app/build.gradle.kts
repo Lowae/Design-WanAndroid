@@ -64,7 +64,6 @@ dependencies {
 
     implementation(Deps.okhttp)
     implementation(Deps.okhttpLoggingInterceptor)
-    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.3")
     implementation(Deps.retrofit)
     implementation(Deps.retrofitGsonConverter)
     implementation(Deps.gson)
@@ -75,7 +74,6 @@ dependencies {
 
     implementation(Deps.agentWeb)
     implementation(Deps.dataStore)
-    implementation(Deps.mmkv)
     implementation(Deps.hiltAndroid)
     kapt(Deps.kaptHiltAndroidCompiler)
 

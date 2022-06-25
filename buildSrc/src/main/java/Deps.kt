@@ -42,7 +42,6 @@ object Version {
 
     const val agentWebVersion = "v4.1.9-androidx"
     const val dataStoreVersion = "1.0.0"
-    const val mmkvVersion = "1.2.13"
 }
 
 object Deps {
@@ -93,5 +92,4 @@ object Deps {
         "com.google.dagger:hilt-android:${Version.ClassPathVersion.hiltPluginVersion}"
     const val kaptHiltAndroidCompiler =
         "com.google.dagger:hilt-android-compiler:${Version.ClassPathVersion.hiltPluginVersion}"
-    const val mmkv = "com.tencent:mmkv:${Version.mmkvVersion}"
 }
