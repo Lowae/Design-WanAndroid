@@ -36,7 +36,7 @@
             android:id="@+id/cl_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_theme_light_secondaryContainer"
+            android:background="@color/backgroundContainer"
             android:foreground="?android:attr/selectableItemBackground"
             android:onClick="@{()->onClickFunc.invoke(position, collect)}">
 

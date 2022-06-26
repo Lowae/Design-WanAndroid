@@ -21,7 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/md_theme_light_secondaryContainer"
+        android:background="@color/backgroundContainer"
         android:foreground="?android:selectableItemBackground"
         android:gravity="center_vertical"
         android:onClick="@{()->binder.onItemClick(position)}">

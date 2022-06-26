@@ -69,7 +69,7 @@ class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Artic
         this.setTextColor(context.getColor(R.color.md_theme_dark_surfaceVariant))
         background = GradientDrawable().also {
             it.cornerRadius = 8.dpF
-            it.setColor(context.getColor(R.color.md_theme_light_secondaryContainer))
+            it.setColor(context.getColor(R.color.backgroundContainer))
         }
         setDefaultSelectableItemForeground()
         this
