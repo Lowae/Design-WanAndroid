@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.base.http.interceptor.cookie
+package com.lowe.wanandroid.base.http.cookie
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor

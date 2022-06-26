@@ -1,15 +1,18 @@
 package com.lowe.wanandroid.base.http
 
 import android.app.Application
-import com.lowe.wanandroid.base.AppLog
 import com.lowe.wanandroid.base.http.converter.GsonConverterFactory
-import com.lowe.wanandroid.base.http.interceptor.cookie.UserCookieJarImpl
-import com.lowe.wanandroid.base.http.interceptor.cookie.cache.DefaultCookieMemoryCache
-import com.lowe.wanandroid.base.http.interceptor.cookie.cache.DefaultCookiePersistenceCache
+import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_NAME
+import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_TOKEN
+import com.lowe.wanandroid.base.http.cookie.UserCookieJarImpl
+import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookieMemoryCache
+import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookiePersistenceCache
 import com.lowe.wanandroid.base.http.interceptor.logInterceptor
 import com.lowe.wanandroid.di.ApplicationCoroutineScope
+import com.lowe.wanandroid.services.BaseService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
 /**
@@ -37,6 +40,7 @@ object RetrofitManager {
             .connectTimeout(TIME_OUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .build()
 
+    private val servicesMap = ConcurrentHashMap<String, BaseService>()
 
     fun init(application: Application) {
         cookieJarImpl = UserCookieJarImpl(
@@ -48,16 +52,29 @@ object RetrofitManager {
         )
     }
 
-    /**
-     * Retrofit相关配置
-     */
-    fun <T> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
-        AppLog.d(msg = BASE_URL)
-        return Retrofit.Builder()
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl ?: BASE_URL)
-            .build()
-            .create(serviceClass)
+    @Suppress("UNCHECKED_CAST")
+    fun <T : BaseService> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
+        return servicesMap.getOrPut(serviceClass.name) {
+            Retrofit.Builder()
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(baseUrl ?: BASE_URL)
+                .build()
+                .create(serviceClass)
+        } as T
+    }
+
+    fun isLoginCookieValid() = cookieJarImpl.checkValid { cache ->
+        var isUserNameValid = false
+        var isUserTokenValid = false
+        cache.forEach {
+            if (it.name == COOKIE_LOGIN_USER_NAME) {
+                isUserNameValid = it.value.isNotBlank()
+            }
+            if (it.name == COOKIE_LOGIN_USER_TOKEN) {
+                isUserTokenValid = it.value.isNotBlank()
+            }
+        }
+        return@checkValid isUserNameValid && isUserTokenValid
     }
 }

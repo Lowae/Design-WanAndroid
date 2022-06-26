@@ -19,6 +19,7 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,10 @@ class ShareListActivity :
 
     @Inject
     lateinit var appViewModel: AppViewModel
+
+    private val userId by lazy(LazyThreadSafetyMode.NONE) {
+        intent.getStringExtra(Activities.ShareList.KEY_SHARE_LIST_USER_ID) ?: ""
+    }
 
     private val shareAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
@@ -90,7 +95,7 @@ class ShareListActivity :
             }
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.getShareFlow().collectLatest(shareAdapter::submitData)
+            viewModel.getShareFlow(userId).collectLatest(shareAdapter::submitData)
         }
         lifecycleScope.launchWhenCreated {
             viewModel.getShareBeanFlow().collectLatest(this@ShareListActivity::updateShareUserInfo)

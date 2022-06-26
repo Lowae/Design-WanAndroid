@@ -35,6 +35,7 @@ class MessageActivity :
             ) { tab: TabLayout.Tab, position: Int ->
                 tab.text = childAdapter.items[position].title
             }.apply(TabLayoutMediator::attach)
+            backIcon.setOnClickListener { finish() }
         }
     }
 

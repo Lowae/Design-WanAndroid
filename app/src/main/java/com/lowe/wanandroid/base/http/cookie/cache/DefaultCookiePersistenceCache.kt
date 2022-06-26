@@ -1,12 +1,12 @@
-package com.lowe.wanandroid.base.http.interceptor.cookie.cache
+package com.lowe.wanandroid.base.http.cookie.cache
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.lowe.wanandroid.base.http.DataStoreFactory
-import com.lowe.wanandroid.base.http.interceptor.cookie.CookieSerializer
-import com.lowe.wanandroid.base.http.interceptor.cookie.key
+import com.lowe.wanandroid.base.http.cookie.CookieSerializer
+import com.lowe.wanandroid.base.http.cookie.key
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest

@@ -1,27 +1,29 @@
 package com.lowe.wanandroid.ui.profile
 
 import androidx.annotation.DrawableRes
+import com.lowe.wanandroid.account.AccountManager
+import com.lowe.wanandroid.services.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
+import com.lowe.wanandroid.ui.profile.usecase.UserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) :
-    BaseViewModel() {
-
-    override fun start() {
-        fetchUserInfo()
-    }
+class ProfileViewModel @Inject constructor(
+    private val userInfoUseCase: UserInfoUseCase
+) : BaseViewModel() {
 
     fun fetchUserInfo() {
         launch({
-            repository.getServerUserInfo()
+            userInfoUseCase.getServerUserInfo()
+                .success()?.data?.apply {
+                    AccountManager.cacheUserBaseInfo(this)
+                }
         })
     }
 
-    fun userBaseInfoStateFlow() = repository.getUserBaseInfoStateFlow()
-
+    fun userStatusFlow() = userInfoUseCase.accountStatusFlow()
 }
 
 class ProfileItemBean(

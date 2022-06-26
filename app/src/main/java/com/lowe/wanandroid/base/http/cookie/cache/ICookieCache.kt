@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.base.http.interceptor.cookie.cache
+package com.lowe.wanandroid.base.http.cookie.cache
 
 import okhttp3.Cookie
 

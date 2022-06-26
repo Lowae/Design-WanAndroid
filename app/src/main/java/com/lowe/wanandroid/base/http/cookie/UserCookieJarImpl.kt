@@ -1,7 +1,7 @@
-package com.lowe.wanandroid.base.http.interceptor.cookie
+package com.lowe.wanandroid.base.http.cookie
 
-import com.lowe.wanandroid.base.http.interceptor.cookie.cache.ICookieMemoryCache
-import com.lowe.wanandroid.base.http.interceptor.cookie.cache.ICookiePersistenceCache
+import com.lowe.wanandroid.base.http.cookie.cache.ICookieMemoryCache
+import com.lowe.wanandroid.base.http.cookie.cache.ICookiePersistenceCache
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
@@ -11,7 +11,13 @@ internal inline val Cookie.key: String
 
 internal fun Cookie.isExpired() = expiresAt < System.currentTimeMillis()
 
-class UserCookieJarImpl(private val memoryCache: ICookieMemoryCache, private val persistenceCache: ICookiePersistenceCache) : CookieJar {
+const val COOKIE_LOGIN_USER_NAME = "loginUserName_wanandroid_com"
+const val COOKIE_LOGIN_USER_TOKEN = "token_pass_wanandroid_com"
+
+class UserCookieJarImpl(
+    private val memoryCache: ICookieMemoryCache,
+    private val persistenceCache: ICookiePersistenceCache
+) : CookieJar {
 
     init {
         persistenceCache.loadAll {
@@ -32,4 +38,6 @@ class UserCookieJarImpl(private val memoryCache: ICookieMemoryCache, private val
         memoryCache.saveAll(cookies)
         persistenceCache.saveAll(cookies.filter { it.persistent })
     }
+
+    fun checkValid(action: (Collection<Cookie>) -> Boolean) = action(memoryCache.snapshot())
 }

@@ -5,7 +5,7 @@ object Version {
     }
 
     const val compileSdk = 32
-    const val applicationId = "com.lowe.selfwanandroid"
+    const val applicationId = "com.lowe.wanandroid"
     const val minSdk = 23
     const val targetSdk = 32
     const val versionCode = 1

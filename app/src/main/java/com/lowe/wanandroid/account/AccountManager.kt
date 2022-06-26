@@ -7,60 +7,35 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.di.IOApplicationScope
+import com.lowe.wanandroid.base.http.DataStoreFactory
+import com.lowe.wanandroid.di.ApplicationCoroutineScope
 import com.lowe.wanandroid.services.model.UserBaseInfo
+import com.lowe.wanandroid.utils.fromJson
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.io.IOException
-import javax.inject.Inject
 
-class AccountManager @Inject constructor(
-    @IOApplicationScope private val applicationScope: CoroutineScope,
-    private val dataStore: DataStore<Preferences>
-) {
+object AccountManager {
 
-    companion object {
-        val PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO =
-            stringPreferencesKey("key_account_local_user_info")
-        val PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO =
-            stringPreferencesKey("key_account_server_user_info")
+    private val PREFERENCE_KEY_ACCOUNT_USER_INFO = stringPreferencesKey("key_account_user_info")
+
+    private val applicationScope: CoroutineScope =
+        ApplicationCoroutineScope.providesIOCoroutineScope()
+    private val dataStore: DataStore<Preferences> =
+        DataStoreFactory.getDefaultPreferencesDataStore()
+
+    private val userBaseInfoStateFlow: MutableStateFlow<UserBaseInfo> =
+        MutableStateFlow(UserBaseInfo())
+
+    init {
+        initUserDataFlow()
     }
 
-    private val _accountStateFlow: MutableStateFlow<AccountState> =
-        MutableStateFlow(AccountState.LogOut)
-    val accountStateFlow: StateFlow<AccountState> = _accountStateFlow
-
-    private val _userBaseInfoStateFlow = MutableStateFlow(UserBaseInfo())
-    val userBaseInfoStateFlow: StateFlow<UserBaseInfo> = _userBaseInfoStateFlow
-
-    fun init() {
-        applicationScope.launch {
-            dataStore.data
-                .catch {
-                    _accountStateFlow.emit(AccountState.LogOut)
-                    if (it is IOException) {
-                        AppLog.e(msg = "Error reading preferences.", exception = it)
-                        emit(emptyPreferences())
-                    } else {
-                        throw it
-                    }
-                }.map {
-                    if (it.contains(PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO)) {
-                        Gson().fromJson(
-                            it[PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO],
-                            LocalUserInfo::class.java
-                        )
-                    } else {
-                        LocalUserInfo()
-                    }
-                }.collectLatest {
-                    AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO.name}: ${it.username}")
-                    if (it.isValid()) _accountStateFlow.emit(AccountState.LogIn(it))
-                    else _accountStateFlow.emit(AccountState.LogOut)
-                }
-        }
-
+    private fun initUserDataFlow() {
         applicationScope.launch {
             dataStore.data
                 .catch {
@@ -71,45 +46,31 @@ class AccountManager @Inject constructor(
                         throw it
                     }
                 }.map {
-                    if (it.contains(PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO)) {
-                        Gson().fromJson(
-                            it[PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO],
-                            UserBaseInfo::class.java
-                        )
+                    if (it.contains(PREFERENCE_KEY_ACCOUNT_USER_INFO)) {
+                        Gson().fromJson<UserBaseInfo>(it[PREFERENCE_KEY_ACCOUNT_USER_INFO])
                     } else {
                         null
                     }
                 }.collectLatest { userBaseInfo ->
-                    AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO.name}: ${userBaseInfo?.userInfo?.nickname}")
-                    userBaseInfo?.apply { _userBaseInfoStateFlow.emit(this) }
+                    AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_USER_INFO.name}: ${userBaseInfo?.userInfo?.nickname}")
+                    userBaseInfo?.apply { userBaseInfoStateFlow.emit(this) }
                 }
         }
     }
 
-    fun cacheLocalUser(userInfo: LocalUserInfo) {
+    fun collectUserInfoFlow() = userBaseInfoStateFlow
+
+    fun cacheUserBaseInfo(userBaseInfo: UserBaseInfo) {
         applicationScope.launch {
             dataStore.edit {
-                it[PREFERENCE_KEY_ACCOUNT_LOCAL_USER_INFO] = Gson().toJson(userInfo).apply {
-                    AppLog.d(msg = "cacheLocalUser: $this")
+                it[PREFERENCE_KEY_ACCOUNT_USER_INFO] = Gson().toJson(userBaseInfo).apply {
+                    AppLog.d(msg = "cacheUserBaseInfo: $this")
                 }
             }
         }
     }
 
-    fun cacheServeUserInfo(userBaseInfo: UserBaseInfo) {
-        applicationScope.launch {
-            dataStore.edit {
-                it[PREFERENCE_KEY_ACCOUNT_SERVER_USER_INFO] = Gson().toJson(userBaseInfo).apply {
-                    AppLog.d(msg = "cacheServeUserInfo: $this")
-                }
-            }
-        }
-    }
+    fun peekUserBaseInfo(): UserBaseInfo = userBaseInfoStateFlow.value
 
-    fun isLogin() = _accountStateFlow.value != AccountState.LogOut
-
-    init {
-        init()
-    }
-
+    fun isMe(userId: String) = peekUserBaseInfo().userInfo.id == userId.toString()
 }

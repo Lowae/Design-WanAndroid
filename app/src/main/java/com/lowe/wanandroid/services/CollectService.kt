@@ -1,21 +1,14 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.services.model.User
-import com.lowe.wanandroid.services.model.UserBaseInfo
-import retrofit2.http.*
+import com.lowe.wanandroid.services.model.CollectBean
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
-interface CommonService : BaseService {
+interface CollectService : BaseService {
 
-    /** 登录 */
-    @FormUrlEncoded
-    @POST("user/login")
-    suspend fun login(
-        @Field("username") username: String,
-        @Field("password") password: String
-    ): ApiResponse<User>
-
-    @GET("user/lg/userinfo/json")
-    suspend fun getUserInfo():ApiResponse<UserBaseInfo>
+    @GET("lg/collect/list/{page}/json")
+    suspend fun getCollectList(@Path("page") page: Int): ApiResponse<PageResponse<CollectBean>>
 
     /** 收藏站内文章 */
     @POST("lg/collect/{id}/json")

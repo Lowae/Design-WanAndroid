@@ -15,6 +15,6 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "SelfWanAndroid"
+rootProject.name = "DesignWanAndroid"
 include(":app")
 include(":multityep")

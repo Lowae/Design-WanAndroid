@@ -14,10 +14,6 @@ abstract class ServiceImplModule {
 
     @Binds
     @Singleton
-    abstract fun getCommonServiceImpl(impl: CommonServiceImpl): CommonService
-
-    @Binds
-    @Singleton
     abstract fun getHomeServiceImpl(impl: HomeServiceImpl): HomeService
 
     @Binds
@@ -39,5 +35,13 @@ abstract class ServiceImplModule {
     @Binds
     @Singleton
     abstract fun getSearchServiceImpl(impl: SearchServiceImpl): SearchService
+
+    @Binds
+    @Singleton
+    abstract fun getCollectServiceImpl(impl: CollectServiceImpl): CollectService
+
+    @Binds
+    @Singleton
+    abstract fun getAccountServiceImpl(impl: AccountServiceImpl): AccountService
 
 }

@@ -1,9 +1,12 @@
 package com.lowe.wanandroid.services
 
+import com.lowe.wanandroid.base.http.RetrofitManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 interface BaseService {
+
+    fun isLogin() = RetrofitManager.isLoginCookieValid()
 
     companion object {
 

@@ -1,9 +1,8 @@
 package com.lowe.wanandroid.ui.profile
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,18 +10,22 @@ import com.google.android.material.appbar.AppBarLayout
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.account.AccountManager
+import com.lowe.wanandroid.account.AccountState
+import com.lowe.wanandroid.account.checkLogin
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.collect.CollectActivity
-import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
-import com.lowe.wanandroid.ui.share.ShareListActivity
 import com.lowe.wanandroid.ui.tools.ToolListActivity
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
+import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import okhttp3.internal.immutableListOf
@@ -63,12 +66,10 @@ class ProfileFragment :
                     }
                 })
             }
-            userName.setOnClickListener {
-                requireActivity().startActivityFromFragment(
-                    this@ProfileFragment,
-                    Intent(context, LoginActivity::class.java),
-                    LoginActivity.REQUEST_CODE_TO_LOGIN_ACTIVITY
-                )
+            arrayOf(userAvatar, userName, userId, userCoinCount).forEach {
+                it.setOnClickListener {
+                    this@ProfileFragment.viewModel.userStatusFlow().value.checkLogin(requireContext()) {}
+                }
             }
         }
     }
@@ -105,27 +106,40 @@ class ProfileFragment :
                 }
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.userBaseInfoStateFlow().collectLatest {
-                userInfoGot(it)
+            viewModel.userStatusFlow().collect {
+                when (it) {
+                    is AccountState.LogIn -> {
+                        viewModel.fetchUserInfo()
+                    }
+                    AccountState.LogOut -> {
+
+                    }
+                }
             }
         }
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                viewModel.fetchUserInfo()
-            }
+        lifecycleScope.launchWhenCreated {
+            AccountManager.collectUserInfoFlow().collect(this@ProfileFragment::userInfoGot)
         }
     }
 
     private fun onOptionClick(position: Int, item: ProfileItemBean) {
         when (item.title) {
             getString(R.string.profile_item_title_message) -> {
-                startActivity(Intent(requireContext(), MessageActivity::class.java))
+                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                    startActivity(Intent(requireContext(), MessageActivity::class.java))
+                }
             }
             getString(R.string.profile_item_title_share) -> {
-                startActivity(Intent(requireContext(), ShareListActivity::class.java))
+                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                    startActivity(intentTo(Activities.ShareList(
+                        bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to AccountManager.peekUserBaseInfo().userInfo.id)
+                    )))
+                }
             }
             getString(R.string.profile_item_title_favorite) -> {
-                startActivity(Intent(requireContext(), CollectActivity::class.java))
+                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                    startActivity(Intent(requireContext(), CollectActivity::class.java))
+                }
             }
             getString(R.string.profile_item_title_tools) -> {
                 startActivity(Intent(requireContext(), ToolListActivity::class.java))

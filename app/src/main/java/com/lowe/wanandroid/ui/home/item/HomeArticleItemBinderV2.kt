@@ -47,6 +47,14 @@ class HomeArticleItemBinderV2(private val onClick: (ArticleAction) -> Unit) :
                     )
                 )
             }
+            tvAuthor.setOnClickListener {
+                onClick(
+                    ArticleAction.AuthorClick(
+                        holder.bindingAdapterPosition,
+                        item
+                    )
+                )
+            }
             article = item
             executePendingBindings()
         }
@@ -58,4 +66,6 @@ sealed interface ArticleAction {
     data class ItemClick(val position: Int, val article: Article) : ArticleAction
 
     data class CollectClick(val position: Int, val article: Article) : ArticleAction
+
+    data class AuthorClick(val position: Int, val article: Article) : ArticleAction
 }

@@ -13,13 +13,29 @@
         android:orientation="vertical"
         tools:context=".ui.project.ProjectFragment">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/messageTabLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="center"
-            app:tabMode="scrollable"
-            app:tabTextColor="@color/md_theme_light_primary" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/messageTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="center"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/md_theme_light_primary" />
+
+            <ImageButton
+                android:id="@+id/backIcon"
+                style="?attr/actionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_arrow_back_24dp"
+                app:tint="@color/md_theme_light_primary"
+                tools:ignore="ContentDescription" />
+
+        </FrameLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/messageViewPager2"

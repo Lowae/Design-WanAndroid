@@ -16,5 +16,5 @@ class ShareListViewModel @Inject constructor(private val repository: ShareListRe
     /**
      * 分享列表数据流
      */
-    fun getShareFlow() = repository.getShareList()
+    fun getShareFlow(userId: String) = repository.getShareList(userId)
 }

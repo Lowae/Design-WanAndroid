@@ -5,21 +5,11 @@
 
     <data>
 
-        <import type="kotlin.jvm.functions.Function2" />
-
         <import type="com.lowe.wanandroid.services.model.Article" />
 
         <variable
             name="article"
             type="Article" />
-
-        <variable
-            name="position"
-            type="int" />
-
-        <variable
-            name="onClickFunc"
-            type="Function2&lt;Integer, Article, kotlin.Unit&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -38,7 +28,6 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_light_secondaryContainer"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{()->onClickFunc.invoke(position, article)}"
             android:paddingBottom="10dp">
 
             <TextView

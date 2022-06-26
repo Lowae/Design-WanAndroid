@@ -22,6 +22,8 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
+import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -135,6 +137,9 @@ class ExploreFragment :
                         articleAction.article.collect.not()
                     )
                 )
+            }
+            is ArticleAction.AuthorClick -> {
+                startActivity(intentTo(Activities.ShareList(bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to articleAction.article.userId.toString()))))
             }
         }
     }
