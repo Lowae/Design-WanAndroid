@@ -124,6 +124,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="12dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@{article.collect?@drawable/ic_collect:@drawable/ic_un_collect}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tv_date"

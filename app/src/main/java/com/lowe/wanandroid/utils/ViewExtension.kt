@@ -14,7 +14,7 @@ fun View.setDefaultSelectableItemForeground() {
     runCatching {
         val typedValue = TypedValue()
         context.theme.resolveAttribute(
-            android.R.attr.selectableItemBackground,
+            android.R.attr.selectableItemBackgroundBorderless,
             typedValue,
             true
         )

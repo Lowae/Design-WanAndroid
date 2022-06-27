@@ -30,6 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="center"
                 app:tabMode="scrollable"
+                app:tabTextAppearance="@style/TabLayout.TextAppearance"
                 app:tabTextColor="@color/md_theme_light_primary" />
 
             <ImageButton

@@ -61,7 +61,7 @@ class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Artic
     private fun generateTagChildrenTextView(
         context: Context,
         layoutParams: ViewGroup.MarginLayoutParams
-    ) = with(TextView(context)) {
+    ) = with(TextView(context, null, android.R.attr.textViewStyle)) {
         layoutParams.setMargins(6.dp)
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER

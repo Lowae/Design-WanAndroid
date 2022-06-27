@@ -80,7 +80,7 @@ class NavigatorChildFragment :
             Chip(
                 this.requireContext(),
                 null,
-                com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
+                R.style.Custom_Widget_MaterialComponents_Chip_Choice
             ).apply {
                 layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

@@ -43,5 +43,7 @@
         <item name="android:colorBackground">@color/md_theme_light_background</item>
         <item name="android:statusBarColor">@color/md_theme_light_background</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fontFamily">@font/noto_sans_sc_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>
