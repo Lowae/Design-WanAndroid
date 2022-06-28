@@ -16,7 +16,7 @@ class GroupViewModel @Inject constructor(private val repository: GroupRepository
     val parentRefreshLiveData = MutableLiveData<Int>()
     val scrollToTopLiveData = MutableLiveData<Int>()
 
-    override fun start() {
+    override fun init() {
         fetchAuthorsName()
     }
 

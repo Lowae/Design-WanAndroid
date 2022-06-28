@@ -7,13 +7,14 @@ import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityTutorialChapterListLayoutBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TutorialChapterListActivity :
-    BaseActivity<TutorialChapterListViewModel, ActivityTutorialChapterListLayoutBinding>(R.layout.activity_tutorial_chapter_list_layout) {
+    BaseActivity<TutorialChapterListViewModel, ActivityTutorialChapterListLayoutBinding>() {
 
     companion object {
         const val KEY_INTENT_TUTORIAL_ID = "key_intent_tutorial_id"
@@ -24,9 +25,14 @@ class TutorialChapterListActivity :
         intent.getIntExtra(KEY_INTENT_TUTORIAL_ID, -1)
     }
 
+    override val viewDataBinding: ActivityTutorialChapterListLayoutBinding by ActivityDataBindingDelegate(
+        R.layout.activity_tutorial_chapter_list_layout
+    )
+
     override val viewModel: TutorialChapterListViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         initObserve()
         viewModel.fetchChapterList(tutorialId)

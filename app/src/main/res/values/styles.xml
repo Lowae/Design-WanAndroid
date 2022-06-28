@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Custom.Base.TextAppearance" parent="TextAppearance.AppCompat">
         <item name="fontFamily">@font/noto_sans_sc_medium</item>
     </style>

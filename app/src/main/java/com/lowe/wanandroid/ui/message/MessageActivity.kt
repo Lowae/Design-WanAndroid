@@ -6,18 +6,21 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityMessageBinding
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MessageActivity :
-    BaseActivity<MessageViewModel, ActivityMessageBinding>(R.layout.activity_message) {
+class MessageActivity : BaseActivity<MessageViewModel, ActivityMessageBinding>() {
 
     private lateinit var childAdapter: MessageChildFragmentAdapter
 
+    override val viewDataBinding: ActivityMessageBinding by ActivityDataBindingDelegate(R.layout.activity_message)
+
     override val viewModel: MessageViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
     }
 

@@ -7,12 +7,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
 import com.lowe.wanandroid.services.model.Classify
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SeriesDetailListActivity :
-    BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>(R.layout.activity_series_detail_list_layout) {
+    BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>() {
 
     companion object {
 
@@ -34,9 +35,14 @@ class SeriesDetailListActivity :
         intent.getIntExtra(KEY_BUNDLE_INIT_TAB_INDEX, -1)
     }
 
+    override val viewDataBinding: ActivitySeriesDetailListLayoutBinding by ActivityDataBindingDelegate(
+        R.layout.activity_series_detail_list_layout
+    )
+
     override val viewModel: SeriesDetailListViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         detailFragmentAdapter =
             SeriesDetailFragmentStateAdapter(classifyList, supportFragmentManager, lifecycle)
         initView()
@@ -65,5 +71,4 @@ class SeriesDetailListActivity :
             viewDataBinding.swipeRefreshLayout.isRefreshing = false
         }
     }
-
 }

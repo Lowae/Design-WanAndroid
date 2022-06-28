@@ -8,6 +8,7 @@ import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
 import com.lowe.wanandroid.services.model.CollectBean
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
@@ -18,17 +19,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class CollectActivity :
-    BaseActivity<CollectViewModel, ActivityCollectBinding>(R.layout.activity_collect) {
+class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>() {
 
     private val collectPagingAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
             register(CollectItemBinder(this@CollectActivity::onCollectClick))
         }
 
+    override val viewDataBinding: ActivityCollectBinding by ActivityDataBindingDelegate(R.layout.activity_collect)
+
     override val viewModel: CollectViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         initEvents()
     }

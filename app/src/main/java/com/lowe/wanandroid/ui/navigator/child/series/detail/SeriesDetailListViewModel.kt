@@ -8,7 +8,7 @@ class SeriesDetailListViewModel : BaseViewModel() {
 
     val onRefreshLiveData = MutableLiveData<Classify>()
 
-    override fun start() {
+    override fun init() {
 
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.lowe.wanandroid.databinding.ActivityMainBinding
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.group.GroupFragment
@@ -15,13 +16,13 @@ import com.lowe.wanandroid.ui.project.ProjectFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     companion object {
         private const val KEY_CURRENT_FRAGMENT_INDEX = "key_current_fragment_index"
     }
 
-    private lateinit var binding: ActivityMainBinding
+    override val viewDataBinding: ActivityMainBinding by ActivityDataBindingDelegate(R.layout.activity_main)
 
     private var fragmentList =
         listOf(
@@ -35,10 +36,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(R.layout.a
 
     override val viewModel: MainViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.navView.setOnItemSelectedListener(
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewDataBinding.navView.setOnItemSelectedListener(
             NavBottomViewDoubleClickListener(
                 this::onBottomItemSelect,
                 this::onBottomDoubleClick

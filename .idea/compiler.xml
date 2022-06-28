@@ -8,6 +8,9 @@
       <module name="SelfWanAndroid.buildSrc" target="11" />
       <module name="SelfWanAndroid.buildSrc.main" target="11" />
       <module name="SelfWanAndroid.buildSrc.test" target="11" />
+      <module name="WanAndroid.buildSrc" target="11" />
+      <module name="WanAndroid.buildSrc.main" target="11" />
+      <module name="WanAndroid.buildSrc.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -103,10 +103,25 @@
         <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/drawable/list_selector_background.xml" value="0.226" />
         <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/activity_list_item.xml" value="0.37708422402736214" />
         <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/shutdown_dialog.xml" value="0.37708422402736214" />
+        <entry key="..\:/Users/Lowae/.gradle/caches/transforms-3/f8a1a5f1d8bddc4b40b34de944180c31/transformed/material-1.6.1/res/layout/m3_alert_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Lowae/.gradle/caches/transforms-3/f8a1a5f1d8bddc4b40b34de944180c31/transformed/material-1.6.1/res/layout/mtrl_alert_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_collect.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_main.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_search.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_child_group.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_group.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home_child_answer.xml" value="0.3151041666666667" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home_child_explore.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.1875" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_navigator_child_tutorial_layout.xml" value="0.30416666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

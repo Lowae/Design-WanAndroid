@@ -16,7 +16,7 @@ class ProjectViewModel @Inject constructor(private val repository: ProjectReposi
     val parentRefreshLiveData = MutableLiveData<Int>()
     val scrollToTopLiveData = MutableLiveData<Int>()
 
-    override fun start() {
+    override fun init() {
         fetchProjectList()
     }
 

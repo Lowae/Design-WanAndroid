@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="viewModel"
-            type="com.lowe.wanandroid.ui.BaseViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

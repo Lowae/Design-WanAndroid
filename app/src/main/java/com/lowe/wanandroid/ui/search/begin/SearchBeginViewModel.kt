@@ -26,8 +26,8 @@ class SearchBeginViewModel @Inject constructor(
 
     private val historyLruCache = LimitedLruQueue<SearchState>(20)
 
-    override fun start() {
-        super.start()
+    override fun init() {
+        super.init()
         getHotKeys()
     }
 

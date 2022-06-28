@@ -16,8 +16,8 @@ class ToolListViewModel @Inject constructor(private val profileService: ProfileS
 
     val toolsLiveData = MutableLiveData<List<ToolBean>>()
 
-    override fun start() {
-        super.start()
+    override fun init() {
+        super.init()
         viewModelScope.launch {
             toolsLiveData.value = getToolList().success()?.data ?: emptyList()
         }

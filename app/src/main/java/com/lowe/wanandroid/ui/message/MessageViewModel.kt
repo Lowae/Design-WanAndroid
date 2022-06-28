@@ -8,8 +8,8 @@ import javax.inject.Inject
 class MessageViewModel @Inject constructor(private val repository: MessageRepository) :
     BaseViewModel() {
 
-    override fun start() {
-        super.start()
+    override fun init() {
+        super.init()
     }
 
 }

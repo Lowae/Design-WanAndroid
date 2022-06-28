@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.lowe.wanandroid.ui.BaseViewModel" />
     </data>
 
     <FrameLayout

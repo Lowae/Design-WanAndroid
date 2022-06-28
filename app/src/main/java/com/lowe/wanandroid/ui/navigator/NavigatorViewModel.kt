@@ -8,7 +8,7 @@ class NavigatorViewModel : BaseViewModel() {
     val scrollToTopLiveData = MutableLiveData<NavigatorTabBean>()
     val refreshLiveData = MutableLiveData<NavigatorTabBean>()
 
-    override fun start() {
+    override fun init() {
 
     }
 }

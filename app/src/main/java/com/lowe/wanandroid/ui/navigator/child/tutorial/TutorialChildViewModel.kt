@@ -16,7 +16,7 @@ class TutorialChildViewModel @Inject constructor(private val repository: Navigat
 
     val tutorialListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
 
-    override fun start() {
+    override fun init() {
         fetchTutorialList()
     }
 

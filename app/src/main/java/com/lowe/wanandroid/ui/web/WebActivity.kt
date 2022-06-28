@@ -10,12 +10,12 @@ import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityWebLayoutBinding
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
 
-class WebActivity :
-    BaseActivity<WebViewModel, ActivityWebLayoutBinding>(R.layout.activity_web_layout) {
+class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
 
     companion object {
 
@@ -50,9 +50,12 @@ class WebActivity :
         intent.getStringExtra(Activities.Web.KEY_WEB_VIEW_URL) ?: ""
     }
 
+    override val viewDataBinding: ActivityWebLayoutBinding by ActivityDataBindingDelegate(R.layout.activity_web_layout)
+
     override val viewModel: WebViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         agentWeb.urlLoader.loadUrl(url)
     }
 }

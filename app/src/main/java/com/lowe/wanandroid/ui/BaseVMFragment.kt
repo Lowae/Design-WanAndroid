@@ -26,16 +26,17 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        viewBinding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
-        return viewBinding.root
-    }
+    ) = DataBindingUtil.inflate<VB>(inflater, layoutResId, container, false)
+        .also {
+            it.lifecycleOwner = viewLifecycleOwner
+            viewBinding = it
+        }
+        .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewModel()
+        viewModel.init()
         init(savedInstanceState)
-        setupDataBinding()
         viewModel.apply {
             requestException.observe(viewLifecycleOwner) {
                 AppLog.e(msg = "错误：${it.message}")
@@ -52,24 +53,5 @@ abstract class BaseVMFragment<VM : BaseViewModel, VB : ViewDataBinding>(private 
         }
     }
 
-    /**
-     * View初始化
-     */
     protected abstract fun init(savedInstanceState: Bundle?)
-
-    private fun initViewModel() {
-        viewModel.start()
-    }
-
-
-    /**
-     * DataBinding相关设置
-     */
-    private fun setupDataBinding() {
-        viewBinding.apply {
-            // 需绑定lifecycleOwner到Fragment,xml绑定的数据才会随着liveData数据源的改变而改变
-            lifecycleOwner = viewLifecycleOwner
-            setVariable(BR.viewModel, viewModel)
-        }
-    }
 }

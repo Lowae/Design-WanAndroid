@@ -30,4 +30,8 @@
     <string name="search_hotkey_title">搜索热词</string>
     <string name="search_history_title">搜索历史</string>
     <string name="account_need_login">请先登录！</string>
+    <string name="login_username">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="not_login">未登陆</string>
+    <string name="login">登陆</string>
 </resources>

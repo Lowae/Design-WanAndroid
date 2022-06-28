@@ -28,7 +28,7 @@ abstract class BaseViewModel : ViewModel() {
     /**
      * 初始化逻辑
      */
-    open fun start() = Unit
+    open fun init() = Unit
 }
 
 fun BaseViewModel.launch(

@@ -16,7 +16,7 @@ class NavigatorChildViewModel @Inject constructor(private val repository: Naviga
 
     val navigationTagListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
 
-    override fun start() {
+    override fun init() {
         fetchNavigationList()
     }
 

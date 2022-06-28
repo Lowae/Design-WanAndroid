@@ -2,7 +2,9 @@ package com.lowe.wanandroid.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -107,6 +109,7 @@ class ProfileFragment :
         }
         lifecycleScope.launchWhenCreated {
             viewModel.userStatusFlow().collect {
+                Log.d("userStatusFlow", it.toString())
                 when (it) {
                     is AccountState.LogIn -> {
                         viewModel.fetchUserInfo()

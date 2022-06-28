@@ -13,6 +13,7 @@ import com.lowe.wanandroid.databinding.ActivityShareListBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.services.model.ShareBean
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.home.item.ArticleAction
@@ -30,8 +31,7 @@ import javax.inject.Inject
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class ShareListActivity :
-    BaseActivity<ShareListViewModel, ActivityShareListBinding>(R.layout.activity_share_list) {
+class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBinding>() {
 
     @Inject
     lateinit var appViewModel: AppViewModel
@@ -48,9 +48,12 @@ class ShareListActivity :
     private var collapsingToolBarStateFlow =
         MutableStateFlow(ProfileCollapsingToolBarState.EXPANDED)
 
+    override val viewDataBinding: ActivityShareListBinding by ActivityDataBindingDelegate(R.layout.activity_share_list)
+
     override val viewModel: ShareListViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initView()
         initObserve()
     }

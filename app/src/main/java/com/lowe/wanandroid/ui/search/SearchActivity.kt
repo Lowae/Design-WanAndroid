@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivitySearchBinding
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.search.begin.SearchBeginFragment
 import com.lowe.wanandroid.ui.search.result.SearchListFragment
@@ -18,15 +19,17 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchActivity :
-    BaseActivity<SearchViewModel, ActivitySearchBinding>(R.layout.activity_search) {
+class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
     private val searchBeginFragment = SearchBeginFragment()
     private val searchListFragment = SearchListFragment()
 
+    override val viewDataBinding: ActivitySearchBinding by ActivityDataBindingDelegate(R.layout.activity_search)
+
     override val viewModel: SearchViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.searchFragmentContainer, searchBeginFragment)

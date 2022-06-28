@@ -46,4 +46,12 @@
         <item name="android:fontFamily">@font/noto_sans_sc_medium</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+
+    <style name="AppTranslucentTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBlurBehindEnabled" tools:targetApi="s">true</item>
+        <item name="android:windowBlurBehindRadius" tools:targetApi="s">50dp</item>
+        <item name="android:windowBackgroundBlurRadius" tools:targetApi="s">30dp</item>
+    </style>
 </resources>

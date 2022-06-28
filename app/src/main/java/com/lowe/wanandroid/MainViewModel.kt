@@ -7,7 +7,7 @@ class MainViewModel: BaseViewModel() {
 
     val mainTabDoubleClickLiveData = MutableLiveData<String>()
 
-    override fun start() {
+    override fun init() {
 
     }
 }

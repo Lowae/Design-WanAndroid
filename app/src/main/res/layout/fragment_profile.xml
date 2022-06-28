@@ -5,9 +5,7 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.lowe.wanandroid.ui.BaseViewModel" />
+        <import type="android.view.View" />
 
         <variable
             name="user"
@@ -56,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="@{@string/profile_user_name(user.userInfo.nickname)}"
+                        android:text="@{user.userInfo.nickname.empty?@string/not_login:@string/profile_user_name(user.userInfo.nickname)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="16sp"
                         android:textStyle="bold"
