@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:progressDrawable="@color/md_theme_light_primary" />
+            android:progressDrawable="@color/md_theme_primary" />
 
 
     </FrameLayout>

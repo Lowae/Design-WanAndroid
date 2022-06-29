@@ -22,7 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Button"
-            app:titleTextColor="@color/md_theme_dark_onSurfaceVariant" />
+            app:titleTextColor="?colorOnSurface" />
 
         <FrameLayout
             android:id="@+id/fl_web"

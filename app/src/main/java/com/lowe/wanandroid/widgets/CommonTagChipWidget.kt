@@ -11,24 +11,27 @@ import com.google.android.material.chip.Chip
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.utils.dp
 import com.lowe.wanandroid.utils.dpF
-import com.lowe.wanandroid.utils.setDefaultSelectableItemForeground
+import com.lowe.wanandroid.utils.setRippleBackground
 
 object CommonTagChipWidget {
 
     fun generateTextViewChip(
         context: Context,
         layoutParams: ViewGroup.MarginLayoutParams
-    ) = with(TextView(context)) {
+    ) = with(TextView(context, null, android.R.attr.textViewStyle)) {
         layoutParams.setMargins(6.dp)
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
-        this.setTextColor(context.getColor(R.color.md_theme_dark_surfaceVariant))
-        background = GradientDrawable().also {
-            it.cornerRadius = 8.dpF
-            it.setColor(context.getColor(R.color.backgroundContainer))
-        }
-        setDefaultSelectableItemForeground()
+        this.textSize = 13F
+        this.setTextColor(context.getColor(R.color.md_theme_on_surface_variant))
+        setRippleBackground(
+            GradientDrawable().also {
+                it.cornerRadius = 8.dpF
+                it.setColor(context.getColor(R.color.secondary_background_container))
+            },
+            cornerRadius = 8.dpF
+        )
         this
     }
 
@@ -46,10 +49,10 @@ object CommonTagChipWidget {
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
-        this.setTextColor(context.getColor(R.color.md_theme_dark_surfaceVariant))
+        this.setTextColor(context.getColor(R.color.md_theme_on_surface))
         background = GradientDrawable().also {
             it.cornerRadius = 8.dpF
-            it.setColor(context.getColor(R.color.backgroundContainer))
+            it.setColor(context.getColor(R.color.secondary_background_container))
         }
         this
     }

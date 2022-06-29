@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:text="@{name}"
-            android:textColor="@color/md_theme_dark_surfaceVariant"
+            android:textColor="?colorOnSurface"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="常用网站" />

@@ -23,7 +23,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:text="@string/search_hotkey_title"
-                android:textColor="@color/md_theme_light_onSurface"
+                android:textColor="@color/md_theme_on_surface"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -42,7 +42,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:text="@string/search_history_title"
-                android:textColor="@color/md_theme_light_onSurface"
+                android:textColor="@color/md_theme_on_surface"
                 android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView

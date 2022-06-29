@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentPadding="0dp"
-                app:contentScrim="@color/md_theme_light_background"
+                app:contentScrim="@color/md_theme_background"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:toolbarId="@+id/toolbar">
 
@@ -48,7 +48,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/homeTabLayout"
-                            app:tint="@color/md_theme_light_primary" />
+                            app:tint="@color/md_theme_primary" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/inputLayout"
@@ -82,7 +82,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/homeTabLayout"
-                            app:tint="@color/md_theme_light_primary" />
+                            app:tint="@color/md_theme_primary" />
 
                     </LinearLayout>
 

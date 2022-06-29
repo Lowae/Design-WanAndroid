@@ -11,9 +11,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="6dp"
         app:banner_auto_loop="true"
-        app:banner_indicator_normal_color="@color/md_theme_light_background"
+        app:banner_indicator_normal_color="@color/md_theme_background"
         app:banner_indicator_radius="16dp"
-        app:banner_indicator_selected_color="@color/md_theme_light_primary"
+        app:banner_indicator_selected_color="@color/md_theme_primary"
         app:banner_infinite_loop="true"
         app:banner_orientation="horizontal"
         app:banner_radius="16dp">

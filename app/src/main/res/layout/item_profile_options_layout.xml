@@ -21,7 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/backgroundContainer"
+        android:background="@color/secondary_background_container"
         android:foreground="?android:selectableItemBackground"
         android:gravity="center_vertical"
         android:onClick="@{()->binder.onItemClick(position)}">
@@ -39,7 +39,7 @@
             android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:text="@{item.title}"
-            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            android:textColor="@color/md_theme_on_secondary_container"
             android:textSize="14sp"
             android:textStyle="bold"
             tools:text="@string/profile_item_title_message" />

@@ -38,7 +38,7 @@
             android:paddingEnd="4dp"
             android:paddingBottom="4dp"
             android:text="@{name}"
-            android:textColor="@color/md_theme_light_outline"
+            android:textColor="@color/md_theme_outline"
             tools:text="常用网站" />
 
     </FrameLayout>

@@ -5,6 +5,6 @@
 
     <gradient
         android:angle="270"
-        android:endColor="@color/white"
-        android:startColor="@color/md_theme_light_secondaryContainer" />
+        android:endColor="@color/secondary_background_container"
+        android:startColor="@color/md_theme_secondary_container" />
 </shape>

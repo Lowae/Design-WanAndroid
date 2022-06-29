@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:padding="12dp"
         tools:ignore="UseCompoundDrawables">
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@{searchHistory}"
-            android:textColor="@color/md_theme_light_onSurface"
+            android:textColor="@color/md_theme_on_surface_variant"
             android:textSize="16sp"
             tools:text="搜索历史" />
 
@@ -31,6 +32,7 @@
             android:id="@+id/historyDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_close_24dp"
             tools:ignore="ContentDescription" />
 

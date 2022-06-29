@@ -28,7 +28,7 @@
                 app:tabGravity="center"
                 app:tabMode="scrollable"
                 app:tabTextAppearance="@style/TabLayout.TextAppearance"
-                app:tabTextColor="@color/md_theme_light_primary" />
+                app:tabTextColor="@color/md_theme_primary" />
 
             <ImageButton
                 android:id="@+id/searchIcon"
@@ -41,7 +41,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/homeTabLayout"
-                app:tint="@color/md_theme_light_primary" />
+                app:tint="@color/md_theme_primary" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/homeViewPager2"

@@ -36,7 +36,7 @@ fun View.setRippleBackground(
     @Px cornerRadius: Float
 ) {
     background = RippleDrawable(
-        ColorStateList.valueOf(rippleColor ?: context.getColor(R.color.md_theme_light_primary)),
+        ColorStateList.valueOf(rippleColor ?: context.getColor(R.color.md_theme_primary)),
         originBackgroundDrawable,
         ShapeDrawable(RoundRectShape(FloatArray(8) { cornerRadius }, null, null))
     )

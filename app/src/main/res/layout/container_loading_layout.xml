@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loadingProgress"
             style="@style/Widget.Material3.CircularProgressIndicator"
             android:layout_width="wrap_content"
@@ -33,14 +33,14 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/empty_data_tips"
                 android:src="@drawable/ic_local_cafe_48dp"
-                app:tint="@color/md_theme_light_secondary" />
+                app:tint="?colorPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/empty_data_tips"
-                android:textColor="@color/md_theme_dark_inversePrimary"
+                android:textColor="?colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

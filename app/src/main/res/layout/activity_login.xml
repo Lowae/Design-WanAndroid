@@ -64,7 +64,7 @@
                     android:maxLength="50"
                     android:singleLine="true"
                     android:text="@={viewModel.userNameObservable}"
-                    android:textColor="@color/md_theme_dark_inverseOnSurface"
+                    android:textColor="?colorOnSurface"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/md_theme_light_primary">
+                app:passwordToggleTint="@color/md_theme_primary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editPassword"
@@ -90,7 +90,7 @@
                     android:maxLength="50"
                     android:singleLine="true"
                     android:text="@={viewModel.passwordObservable}"
-                    android:textColor="@color/md_theme_dark_inverseOnSurface"
+                    android:textColor="?colorOnSurface"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 

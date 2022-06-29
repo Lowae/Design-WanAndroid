@@ -30,6 +30,7 @@ class VerticalScrollChipGroup @JvmOverloads constructor(
     }
 
     private val chipGroup: ChipGroup = ChipGroup(context, attrs, defStyleAttr).apply {
+        id = View.generateViewId()
         layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT

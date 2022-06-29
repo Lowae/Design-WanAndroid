@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 app:tabGravity="center"
                 app:tabMode="scrollable"
-                app:tabTextColor="@color/md_theme_light_primary" />
+                app:tabTextColor="@color/md_theme_primary" />
 
             <ImageButton
                 android:id="@+id/backIcon"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/ic_arrow_back_24dp"
-                app:tint="@color/md_theme_light_primary"
+                app:tint="@color/md_theme_primary"
                 tools:ignore="ContentDescription" />
 
         </FrameLayout>
