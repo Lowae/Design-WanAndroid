@@ -85,10 +85,10 @@
                         android:text="@{@string/profile_user_coin_and_rank(shareBean.coinInfo.coinCount,shareBean.coinInfo.level,shareBean.coinInfo.rank)}"
                         android:textColor="@color/md_theme_dark_surfaceVariant"
                         android:textSize="12sp"
-                        tools:text="积分: 49760 等级: 498 排名: 3"
                         app:layout_constraintBottom_toBottomOf="@+id/userAvatar"
                         app:layout_constraintStart_toStartOf="@+id/userName"
-                        app:layout_constraintTop_toBottomOf="@+id/userShareCount" />
+                        app:layout_constraintTop_toBottomOf="@+id/userShareCount"
+                        tools:text="积分: 49760 等级: 498 排名: 3" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,6 +112,9 @@
             android:paddingTop="12dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

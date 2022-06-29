@@ -6,6 +6,8 @@ import android.os.Parcelable
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,12 +34,8 @@ class SeriesChildFragment :
         fun newInstance(navigatorTabBean: NavigatorTabBean): SeriesChildFragment = with(
             SeriesChildFragment()
         ) {
-            arguments?.apply {
-                putParcelable(
-                    NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE,
-                    navigatorTabBean
-                )
-            }
+            arguments =
+                bundleOf(NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE to navigatorTabBean)
             this
         }
     }
@@ -69,6 +67,7 @@ class SeriesChildFragment :
             seriesListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it, tagChildrenAdapter)
                 generateVerticalScrollChipGroup(it.first)
+                viewBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
         tagOnScrollListener.firstCompletelyVisiblePosChange.observe(

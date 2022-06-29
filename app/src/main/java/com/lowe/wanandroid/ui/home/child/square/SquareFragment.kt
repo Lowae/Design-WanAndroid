@@ -2,8 +2,11 @@ package com.lowe.wanandroid.ui.home.child.square
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -20,7 +23,10 @@ import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -72,6 +78,9 @@ class SquareFragment :
         lifecycleScope.launchWhenCreated {
             viewModel.getSquareFlow().collectLatest(squareAdapter::submitData)
         }
+        lifecycleScope.launchWhenCreated {
+            squareAdapter.loadStateFlow.collect(this@SquareFragment::updateLoadStates)
+        }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
                 if (it.title == squareTabBean.title) scrollToTop()
@@ -114,6 +123,14 @@ class SquareFragment :
                     )
                 )
             }
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && squareAdapter.isEmpty()
+            loadingProgress.isVisible = squareAdapter.isEmpty() && loadStates.isRefreshing
         }
     }
 }

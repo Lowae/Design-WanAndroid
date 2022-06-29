@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.login
 
-import android.database.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

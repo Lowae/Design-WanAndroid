@@ -19,6 +19,10 @@
             layout="@layout/empty_data_layout"
             android:visibility="gone" />
 
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout"/>
+
     </FrameLayout>
 
 </layout>

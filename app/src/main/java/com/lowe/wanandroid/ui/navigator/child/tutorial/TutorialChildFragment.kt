@@ -3,6 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.tutorial
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,10 +60,10 @@ class TutorialChildFragment :
 
     private fun initObserve() {
         viewModel.apply {
-            tutorialListLiveData.observe(
-                viewLifecycleOwner,
-                this@TutorialChildFragment::dispatchToAdapter
-            )
+            tutorialListLiveData.observe(viewLifecycleOwner) {
+                dispatchToAdapter(it)
+                viewBinding.loadingContainer.loadingProgress.isVisible = false
+            }
         }
         parentFragmentViewModel.apply {
             refreshLiveData.observe(viewLifecycleOwner) {

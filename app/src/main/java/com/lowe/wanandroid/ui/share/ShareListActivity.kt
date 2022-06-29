@@ -2,7 +2,10 @@ package com.lowe.wanandroid.ui.share
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.lowe.multitype.paging.MultiTypePagingAdapter
@@ -22,6 +25,8 @@ import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -95,6 +100,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
         lifecycleScope.launchWhenCreated {
             shareAdapter.loadStateFlow.collectLatest { loadState ->
                 loadState.whenError { it.error.message?.showShortToast() }
+                updateLoadStates(loadState)
             }
         }
         lifecycleScope.launchWhenCreated {
@@ -131,6 +137,14 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                     )
                 )
             }
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewDataBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && shareAdapter.isEmpty()
+            loadingProgress.isVisible = shareAdapter.isEmpty() && loadStates.isRefreshing
         }
     }
 }

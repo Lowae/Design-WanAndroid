@@ -5,6 +5,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
@@ -17,6 +18,8 @@ import com.lowe.wanandroid.ui.message.MessageChildFragmentAdapter
 import com.lowe.wanandroid.ui.message.MessageTabBean
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -65,8 +68,7 @@ class MessageTabChildFragment :
         lifecycleScope.launchWhenCreated {
             messagesAdapter.loadStateFlow.collectLatest { loadState ->
                 loadState.whenError { it.error.message?.showShortToast() }
-                viewBinding.emptyLayout.isVisible =
-                    loadState.refresh is LoadState.NotLoading && messagesAdapter.itemCount == 0
+                updateLoadStates(loadState)
             }
         }
         lifecycleScope.launchWhenCreated {
@@ -80,5 +82,13 @@ class MessageTabChildFragment :
 
     private fun onMsgItemClick(position: Int, msgBean: MsgBean) {
         WebActivity.loadUrl(requireContext(), msgBean.fullLink)
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && messagesAdapter.isEmpty()
+            loadingProgress.isVisible = messagesAdapter.isEmpty() && loadStates.isRefreshing
+        }
     }
 }

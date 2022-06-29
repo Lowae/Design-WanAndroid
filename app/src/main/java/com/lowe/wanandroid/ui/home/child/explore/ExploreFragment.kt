@@ -2,8 +2,11 @@ package com.lowe.wanandroid.ui.home.child.explore
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -24,7 +27,10 @@ import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -92,6 +98,9 @@ class ExploreFragment :
         lifecycleScope.launchWhenCreated {
             viewModel.getArticlesFlow().collectLatest(homeAdapter::submitData)
         }
+        lifecycleScope.launchWhenCreated {
+            homeAdapter.loadStateFlow.collect(this@ExploreFragment::updateLoadStates)
+        }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
                 if (it.title == exploreTabBean.title) scrollToTop()
@@ -141,6 +150,14 @@ class ExploreFragment :
             is ArticleAction.AuthorClick -> {
                 startActivity(intentTo(Activities.ShareList(bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to articleAction.article.userId.toString()))))
             }
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && homeAdapter.isEmpty()
+            loadingProgress.isVisible = homeAdapter.isEmpty() && loadStates.isRefreshing
         }
     }
 }

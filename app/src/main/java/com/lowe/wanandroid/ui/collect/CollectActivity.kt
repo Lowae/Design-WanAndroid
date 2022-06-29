@@ -2,7 +2,10 @@ package com.lowe.wanandroid.ui.collect
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -14,8 +17,11 @@ import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
@@ -58,6 +64,9 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
             }
         }
         lifecycleScope.launchWhenCreated {
+            collectPagingAdapter.loadStateFlow.collect(this@CollectActivity::updateLoadStates)
+        }
+        lifecycleScope.launchWhenCreated {
             viewModel.collectFlow().collectLatest(collectPagingAdapter::submitData)
         }
     }
@@ -66,4 +75,11 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
         WebActivity.loadUrl(this, collectBean.link)
     }
 
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewDataBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && collectPagingAdapter.isEmpty()
+            loadingProgress.isVisible = collectPagingAdapter.isEmpty() && loadStates.isRefreshing
+        }
+    }
 }

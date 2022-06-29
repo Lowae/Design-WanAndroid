@@ -2,8 +2,11 @@ package com.lowe.wanandroid.ui.group.child
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -17,7 +20,10 @@ import com.lowe.wanandroid.ui.group.GroupViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -74,6 +80,9 @@ class GroupChildFragment :
         lifecycleScope.launchWhenCreated {
             viewModel.getGroupArticlesFlow(authorId).collectLatest(articlesAdapter::submitData)
         }
+        lifecycleScope.launchWhenCreated {
+            articlesAdapter.loadStateFlow.collect(this@GroupChildFragment::updateLoadStates)
+        }
         groupViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
                 if (it == authorId) scrollToTop()
@@ -113,5 +122,13 @@ class GroupChildFragment :
 
     private fun scrollToTop() {
         viewBinding.childList.scrollToPosition(0)
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && articlesAdapter.isEmpty()
+            loadingProgress.isVisible = articlesAdapter.isEmpty() && loadStates.isRefreshing
+        }
     }
 }

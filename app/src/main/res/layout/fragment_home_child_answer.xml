@@ -6,8 +6,18 @@
     <data>
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/answerList"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/answerList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
+
+    </FrameLayout>
 </layout>

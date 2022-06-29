@@ -6,24 +6,16 @@
         <entry key="..\:/Users/Lero/.gradle/caches/transforms-3/1512b9c7cea3218e717cf0a221514deb/transformed/material-1.6.1/res/layout/design_bottom_navigation_item.xml" value="0.1" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2655" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable/bg_fragment_profile_list_corner.xml" value="0.507" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable/ic_collect.xml" value="0.3985" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2655" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable/ic_tool_48dp.xml" value="0.3985" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/drawable/ic_un_collect.xml" value="0.3985" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/activity_collect.xml" value="0.45404018811457886" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/activity_main.xml" value="0.34315503173164097" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/activity_message.xml" value="0.45404018811457886" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/activity_share_list.xml" value="0.45404018811457886" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_group.xml" value="0.1" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.4326530612244898" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_navigator_child_navigator.xml" value="0.1788549937317175" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_navigator_child_tutorial.xml" value="0.25067996373526746" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.25067996373526746" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.45404018811457886" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.33262077811030355" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_profile_item_list.xml" value="0.45404018811457886" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/fragment_project.xml" value="0.25067996373526746" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_collect_list_article_layout.xml" value="0.45404018811457886" />
-        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.24452133794694347" />
+        <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.9" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_message_child_layout.xml" value="0.45404018811457886" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_navigator_child_tag_children_layout.xml" value="0.45404018811457886" />
         <entry key="..\:/Users/Lero/AndroidStudioProjects/DesignWanAndroid/app/src/main/res/layout/item_navigator_child_tutorial_layout.xml" value="0.45404018811457886" />
@@ -107,15 +99,25 @@
         <entry key="..\:/Users/Lowae/.gradle/caches/transforms-3/f8a1a5f1d8bddc4b40b34de944180c31/transformed/material-1.6.1/res/layout/mtrl_alert_dialog.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_collect.xml" value="0.15081521739130435" />
-        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_main.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_search.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_share_list.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/container_loading_layout.xml" value="0.2234375" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/empty_data_layout.xml" value="0.1578125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_child_group.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_child_project.xml" value="0.2234375" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_group.xml" value="0.2971014492753623" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home.xml" value="0.2971014492753623" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home_child_answer.xml" value="0.3151041666666667" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home_child_explore.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_home_child_square.xml" value="0.315625" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_message_child_list.xml" value="0.23731884057971014" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_navigator.xml" value="0.2453125" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_series.xml" value="0.2453125" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_tutorial.xml" value="0.2453125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_search_result.xml" value="0.1578125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.1875" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_navigator_child_tutorial_layout.xml" value="0.30416666666666664" />
       </map>

@@ -6,20 +6,30 @@
 
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <com.lowe.wanandroid.widgets.VerticalScrollChipGroup
-            android:id="@+id/verticalTagList"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tagChildrenList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <com.lowe.wanandroid.widgets.VerticalScrollChipGroup
+                android:id="@+id/verticalTagList"
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tagChildrenList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
+
+    </FrameLayout>
 </layout>

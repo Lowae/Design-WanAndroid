@@ -11,7 +11,6 @@
 
     </data>
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,7 +63,7 @@
                     android:hint="@string/login_username"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:text="@{viewModel.userNameObservable}"
+                    android:text="@={viewModel.userNameObservable}"
                     android:textColor="@color/md_theme_dark_inverseOnSurface"
                     android:textSize="16sp" />
 
@@ -78,8 +77,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
-                app:endIconDrawable="@drawable/ic_close_24dp"
-                app:endIconMode="clear_text"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/md_theme_light_primary">
 
@@ -92,10 +89,9 @@
                     android:inputType="textPassword"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:text="@{viewModel.passwordObservable"
+                    android:text="@={viewModel.passwordObservable}"
                     android:textColor="@color/md_theme_dark_inverseOnSurface"
                     android:textSize="16sp" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

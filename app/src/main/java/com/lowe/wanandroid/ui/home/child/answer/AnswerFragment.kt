@@ -2,8 +2,11 @@ package com.lowe.wanandroid.ui.home.child.answer
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -20,7 +23,10 @@ import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -46,7 +52,7 @@ class AnswerFragment :
             HomeChildFragmentAdapter.HOME_TAB_ANSWER
         )
     }
-    private val squareAdapter =
+    private val answerAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@AnswerFragment::onItemClick))
         }
@@ -61,7 +67,7 @@ class AnswerFragment :
         viewBinding.apply {
             with(answerList) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = squareAdapter
+                adapter = answerAdapter
                 setHasFixedSize(true)
             }
         }
@@ -69,24 +75,27 @@ class AnswerFragment :
 
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getAnswerListFlow().collectLatest(squareAdapter::submitData)
+            viewModel.getAnswerListFlow().collectLatest(answerAdapter::submitData)
+        }
+        lifecycleScope.launchWhenCreated {
+            answerAdapter.loadStateFlow.collect(this@AnswerFragment::updateLoadStates)
         }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {
                 if (it.title == squareTabBean.title) scrollToTop()
             }
             refreshLiveData.observe(viewLifecycleOwner) {
-                if (it.title == squareTabBean.title) squareAdapter.refresh()
+                if (it.title == squareTabBean.title) answerAdapter.refresh()
             }
         }
         appViewModel.collectArticleEvent.observe(viewLifecycleOwner) { event ->
-            squareAdapter.snapshot().run {
+            answerAdapter.snapshot().run {
                 val index = indexOfFirst { it is Article && it.id == event.id }
                 if (index >= 0) {
                     (this[index] as? Article)?.collect = event.isCollected
                     index
                 } else null
-            }?.apply(squareAdapter::notifyItemChanged)
+            }?.apply(answerAdapter::notifyItemChanged)
         }
     }
 
@@ -109,6 +118,14 @@ class AnswerFragment :
                     )
                 )
             }
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && answerAdapter.isEmpty()
+            loadingProgress.isVisible = answerAdapter.isEmpty() && loadStates.isRefreshing
         }
     }
 }

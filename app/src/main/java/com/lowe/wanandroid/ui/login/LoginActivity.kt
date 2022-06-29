@@ -26,12 +26,13 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     private fun initView() {
+        viewDataBinding.viewModel = viewModel
         viewDataBinding.loginButton.setOnClickListener {
             updateLoginLoadingStatus(true)
             viewModel.login(
                 LocalUserInfo(
-                    viewDataBinding.editName.text.toString(),
-                    viewDataBinding.editPassword.text.toString()
+                    viewModel.userNameObservable.get().toString(),
+                    viewModel.passwordObservable.get().toString()
                 )
             )
         }

@@ -1,8 +1,12 @@
 package com.lowe.wanandroid.ui.project.child
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.paging.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
@@ -16,7 +20,10 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.project.ProjectViewModel
 import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -29,12 +36,8 @@ class ProjectChildFragment :
         const val KEY_PROJECT_CHILD_CATEGORY_ID = "key_project_child_category_id"
 
         fun newInstance(categoryId: Int) = ProjectChildFragment().apply {
-            arguments = with(Bundle()) {
-                putInt(KEY_PROJECT_CHILD_CATEGORY_ID, categoryId)
-                this
-            }
+            arguments = bundleOf(KEY_PROJECT_CHILD_CATEGORY_ID to categoryId)
         }
-
     }
 
     @Inject
@@ -67,6 +70,9 @@ class ProjectChildFragment :
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
             viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
+        }
+        lifecycleScope.launchWhenCreated {
+            projectAdapter.loadStateFlow.collect(this@ProjectChildFragment::updateLoadStates)
         }
         projectViewModel.parentRefreshLiveData.observe(viewLifecycleOwner, this::onParentRefresh)
         projectViewModel.scrollToTopLiveData.observe(viewLifecycleOwner, this::scrollToTop)
@@ -108,6 +114,14 @@ class ProjectChildFragment :
                     )
                 )
             }
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && projectAdapter.isEmpty()
+            loadingProgress.isVisible = projectAdapter.isEmpty() && loadStates.isRefreshing
         }
     }
 }
