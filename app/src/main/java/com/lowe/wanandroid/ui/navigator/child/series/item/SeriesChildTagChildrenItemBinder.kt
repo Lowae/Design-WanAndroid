@@ -17,9 +17,10 @@ import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.Series
 import com.lowe.wanandroid.utils.dp
 import com.lowe.wanandroid.utils.dpF
-import com.lowe.wanandroid.utils.setDefaultSelectableItemForeground
+import com.lowe.wanandroid.utils.fromHtml
+import com.lowe.wanandroid.utils.setRippleBackground
 
-class SeriesChildTagChildrenItemBinder (private val onTagChildrenClick: (Classify) -> Unit) :
+class SeriesChildTagChildrenItemBinder(private val onTagChildrenClick: (Classify) -> Unit) :
     ItemViewBinder<Series, ViewBindingHolder<ItemNavigatorChildTagChildrenLayoutBinding>>() {
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -51,7 +52,7 @@ class SeriesChildTagChildrenItemBinder (private val onTagChildrenClick: (Classif
                         ViewGroup.MarginLayoutParams.WRAP_CONTENT
                     )
                 )
-                tv.text = classify.name
+                tv.text = classify.name.fromHtml()
                 tv.setOnClickListener { onTagChildrenClick(classify) }
                 tagChildrenLayout.addView(tv)
             }
@@ -61,17 +62,20 @@ class SeriesChildTagChildrenItemBinder (private val onTagChildrenClick: (Classif
     private fun generateTagChildrenTextView(
         context: Context,
         layoutParams: ViewGroup.MarginLayoutParams
-    ) = with(TextView(context)) {
+    ) = with(TextView(context, null, android.R.attr.textViewStyle)) {
         layoutParams.setMargins(6.dp)
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
+        this.textSize = 13F
         this.setTextColor(context.getColor(R.color.md_theme_dark_surfaceVariant))
-        background = GradientDrawable().also {
-            it.cornerRadius = 8.dpF
-            it.setColor(context.getColor(R.color.backgroundContainer))
-        }
-        setDefaultSelectableItemForeground()
+        setRippleBackground(
+            GradientDrawable().also {
+                it.cornerRadius = 8.dpF
+                it.setColor(context.getColor(R.color.backgroundContainer))
+            },
+            cornerRadius = 8.dpF
+        )
         this
     }
 }

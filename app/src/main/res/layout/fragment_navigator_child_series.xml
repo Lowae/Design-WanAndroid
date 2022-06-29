@@ -16,8 +16,10 @@
 
             <com.lowe.wanandroid.widgets.VerticalScrollChipGroup
                 android:id="@+id/seriesTagList"
-                android:layout_width="100dp"
-                android:layout_height="match_parent" />
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seriesTagChildrenList"

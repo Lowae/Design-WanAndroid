@@ -19,8 +19,11 @@
             android:id="@+id/tagTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:text="@{name}"
             android:textColor="@color/md_theme_dark_surfaceVariant"
+            android:textSize="15sp"
+            android:textStyle="bold"
             tools:text="常用网站" />
 
         <com.google.android.flexbox.FlexboxLayout

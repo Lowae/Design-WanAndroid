@@ -3,6 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.series
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -99,10 +100,22 @@ class SeriesChildFragment :
                 )
                 setChipBackgroundColorResource(R.color.choice_chip_background_color)
                 text = it.name
+                textSize = 13F
+                chipStartPadding = 0F
+                chipEndPadding = 0F
+                textStartPadding = 0F
+                textEndPadding = 0F
                 isCheckable = true
                 isCheckedIconVisible = false
                 gravity = Gravity.CENTER
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
+                if (paint.measureText(text.toString()) > viewBinding.seriesTagList.width) {
+                    textSize = 11F
+                }
+                Log.d(
+                    "generateVerticalScrollChipGroup",
+                    "text: $text - $textSize - ${paint.measureText(text.toString())} - $width - ${viewBinding.seriesTagList.width} - $paddingStart - $chipStartPadding"
+                )
             }
         }.forEach { chip ->
             chip.setOnClickListener {

@@ -17,7 +17,8 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Navigation
 import com.lowe.wanandroid.utils.dp
 import com.lowe.wanandroid.utils.dpF
-import com.lowe.wanandroid.utils.setDefaultSelectableItemForeground
+import com.lowe.wanandroid.utils.fromHtml
+import com.lowe.wanandroid.utils.setRippleBackground
 
 class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Article) -> Unit) :
     ItemViewBinder<Navigation, ViewBindingHolder<ItemNavigatorChildTagChildrenLayoutBinding>>() {
@@ -51,7 +52,7 @@ class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Artic
                         ViewGroup.MarginLayoutParams.WRAP_CONTENT
                     )
                 )
-                tv.text = article.title
+                tv.text = article.title.fromHtml()
                 tv.setOnClickListener { onTagChildrenClick(article) }
                 tagChildrenLayout.addView(tv)
             }
@@ -66,12 +67,15 @@ class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Artic
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
+        this.textSize = 13F
         this.setTextColor(context.getColor(R.color.md_theme_dark_surfaceVariant))
-        background = GradientDrawable().also {
-            it.cornerRadius = 8.dpF
-            it.setColor(context.getColor(R.color.backgroundContainer))
-        }
-        setDefaultSelectableItemForeground()
+        setRippleBackground(
+            GradientDrawable().also {
+                it.cornerRadius = 8.dpF
+                it.setColor(context.getColor(R.color.backgroundContainer))
+            },
+            cornerRadius = 8.dpF
+        )
         this
     }
 }

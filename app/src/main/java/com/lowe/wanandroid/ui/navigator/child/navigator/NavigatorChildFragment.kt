@@ -79,7 +79,7 @@ class NavigatorChildFragment :
             Chip(
                 this.requireContext(),
                 null,
-                R.style.Custom_Widget_MaterialComponents_Chip_Choice
+                com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
             ).apply {
                 layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -87,6 +87,11 @@ class NavigatorChildFragment :
                 )
                 setChipBackgroundColorResource(R.color.choice_chip_background_color)
                 text = it.name
+                textSize = 12F
+                chipStartPadding = 0F
+                chipEndPadding = 0F
+                textStartPadding = 0F
+                textEndPadding = 0F
                 isCheckable = true
                 isCheckedIconVisible = false
                 gravity = Gravity.CENTER

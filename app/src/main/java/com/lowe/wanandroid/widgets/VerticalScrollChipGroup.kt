@@ -12,12 +12,9 @@ import android.widget.ScrollView
 import androidx.annotation.IdRes
 import androidx.annotation.IntDef
 import androidx.core.view.get
-import androidx.core.view.setPadding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.lowe.wanandroid.utils.dp
 import com.lowe.wanandroid.utils.dpF
-
 
 class VerticalScrollChipGroup @JvmOverloads constructor(
     context: Context?,
@@ -61,7 +58,6 @@ class VerticalScrollChipGroup @JvmOverloads constructor(
                 }
             }
         }
-        this.setPadding(4.dp)
         chipGroup.isSelectionRequired = true
         chipGroup.layoutTransition = LayoutTransition().apply {
             setAnimateParentHierarchy(false)
