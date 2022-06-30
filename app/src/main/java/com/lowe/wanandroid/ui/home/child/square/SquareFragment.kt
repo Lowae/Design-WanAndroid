@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypePagingAdapter
+import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentHomeChildSquareBinding
@@ -16,6 +16,7 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.LoadMoreItemBinder
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
@@ -55,6 +56,7 @@ class SquareFragment :
     private val squareAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SquareFragment::onItemClick))
+            registerFooter(LoadMoreItemBinder())
         }
 
     override val viewModel: SquareViewModel by viewModels()

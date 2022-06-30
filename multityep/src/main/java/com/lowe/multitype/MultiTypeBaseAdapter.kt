@@ -1,10 +1,9 @@
-package com.lowe.multitype.paging
+package com.lowe.multitype
 
 import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.CheckResult
 import androidx.recyclerview.widget.RecyclerView
-import com.lowe.multitype.*
 import kotlin.reflect.KClass
 
 /**
@@ -15,7 +14,28 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
     open var types: Types = MutableTypes(initialCapacity),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var header: Pair<LoadState.Header, ItemViewBaseDelegate<LoadState.Header, *>>? = null
+    private var footer: Pair<LoadState.Footer, ItemViewBaseDelegate<LoadState.Footer, *>>? = null
+
+    fun registerHeader(delegate: ItemViewBaseDelegate<LoadState.Header, *>) {
+        register(delegate)
+        header = LoadState.Header to delegate
+    }
+
+    fun registerFooter(delegate: ItemViewBaseDelegate<LoadState.Footer, *>) {
+        register(delegate)
+        footer = LoadState.Footer to delegate
+    }
+
     abstract fun getItem(position: Int): Any
+
+    abstract fun getRealItemCount(): Int
+
+    final override fun getItemCount() =
+        getRealItemCount().let {
+            if (it == 0) 0
+            else it + (if (header == null) 0 else 1) + (if (footer == null) 0 else 1)
+        }
 
     /**
      * Registers a type class and its item view delegate. If you have registered the class,
@@ -133,9 +153,14 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return indexInTypesOf(position, getItem(position))
-    }
+    override fun getItemViewType(position: Int) =
+        transformPositionHandle(position, { _, header ->
+            types.firstIndexOf(header.javaClass)
+        }, { _, footer ->
+            types.firstIndexOf(footer.javaClass)
+        }, {
+            indexInTypesOf(it, getItem(it))
+        })
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -153,7 +178,13 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
         position: Int,
         payloads: List<Any>
     ) {
-        getOutDelegateByViewHolder(holder).onBindViewHolder(holder, getItem(position), payloads)
+        transformPositionHandle(position, { _, header ->
+            getOutDelegateByViewHolder(holder).onBindViewHolder(holder, header, payloads)
+        }, { _, footer ->
+            getOutDelegateByViewHolder(holder).onBindViewHolder(holder, footer, payloads)
+        }, {
+            getOutDelegateByViewHolder(holder).onBindViewHolder(holder, getItem(it), payloads)
+        })
     }
 
     /**
@@ -167,7 +198,13 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
      */
     override fun getItemId(position: Int): Long {
         val itemViewType = getItemViewType(position)
-        return types.getType<Any>(itemViewType).delegate.getItemId(getItem(position))
+        return transformPositionHandle(position, { _, header ->
+            types.getType<Any>(itemViewType).delegate.getItemId(header)
+        }, { _, footer ->
+            types.getType<Any>(itemViewType).delegate.getItemId(footer)
+        }, {
+            types.getType<Any>(itemViewType).delegate.getItemId(getItem(it))
+        })
     }
 
     /**
@@ -249,6 +286,16 @@ abstract class MultiTypeBaseAdapter @JvmOverloads constructor(
             Log.w(TAG, "The type ${clazz.simpleName} you originally registered is now overwritten.")
         }
     }
+
+    private fun <T> transformPositionHandle(
+        position: Int,
+        whenHeader: (Int, LoadState.Header) -> T,
+        whenFooter: (Int, LoadState.Footer) -> T,
+        whenContent: (Int) -> T
+    ) =
+        if (position == 0 && header != null) whenHeader(position, header!!.first)
+        else if (position == itemCount - 1 && footer != null) whenFooter(position, footer!!.first)
+        else whenContent((position - if (header != null) 1 else 0))
 
     companion object {
         private const val TAG = "MultiTypeAdapter"

@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypePagingAdapter
+import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentChildProjectBinding
@@ -16,6 +16,7 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.LoadMoreItemBinder
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.project.ProjectViewModel
 import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
@@ -46,6 +47,7 @@ class ProjectChildFragment :
     private val projectAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
             register(ProjectChildItemBinder(this@ProjectChildFragment::onItemClick))
+            registerFooter(LoadMoreItemBinder())
         }
     private val projectViewModel by viewModels<ProjectViewModel>(this::requireParentFragment)
     private val categoryId by lazy { arguments?.getInt(KEY_PROJECT_CHILD_CATEGORY_ID, -1) ?: -1 }

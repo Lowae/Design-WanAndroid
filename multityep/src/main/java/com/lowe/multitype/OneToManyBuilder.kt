@@ -17,7 +17,6 @@
 package com.lowe.multitype
 
 import androidx.annotation.CheckResult
-import com.lowe.multitype.paging.MultiTypeBaseAdapter
 
 /**
  * @author Drakeet Xu

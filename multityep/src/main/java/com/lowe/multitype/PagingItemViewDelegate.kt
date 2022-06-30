@@ -17,7 +17,6 @@
 package com.lowe.multitype
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.lowe.multitype.paging.MultiTypePagingAdapter
 
 /***
  * @author Lowae

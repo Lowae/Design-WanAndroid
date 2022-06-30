@@ -1,4 +1,4 @@
-package com.lowe.multitype.paging
+package com.lowe.multitype
 
 import androidx.annotation.IntRange
 import androidx.lifecycle.Lifecycle
@@ -8,8 +8,6 @@ import androidx.paging.ItemSnapshotList
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.DiffUtil
-import com.lowe.multitype.MutableTypes
-import com.lowe.multitype.Types
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -34,15 +32,17 @@ class MultiTypePagingAdapter(
 
     override fun getItem(@IntRange(from = 0) position: Int) = differ.getItem(position) as Any
 
-    override fun getItemCount() = differ.itemCount
+    override fun getRealItemCount() = differ.itemCount
 
-    @Suppress("UNCHECKED_CAST")
-    suspend fun submitData(pagingData: PagingData<*>) =
+    suspend fun submitData(pagingData: PagingData<*>) {
+        @Suppress("UNCHECKED_CAST")
         differ.submitData(pagingData as PagingData<Any>)
+    }
 
-    @Suppress("UNCHECKED_CAST")
-    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<*>) =
+    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<*>) {
+        @Suppress("UNCHECKED_CAST")
         differ.submitData(lifecycle, pagingData as PagingData<Any>)
+    }
 
     fun retry() = differ.retry()
 
@@ -66,33 +66,4 @@ class MultiTypePagingAdapter(
 
     fun removeOnPagesUpdatedListener(listener: () -> Unit) =
         differ.removeOnPagesUpdatedListener(listener)
-
-//    fun withLoadStateHeader(
-//        header: MultiTypeLoadStateAdapter
-//    ): ConcatAdapter {
-//        addLoadStateListener { loadStates ->
-//            header.loadState = loadStates.prepend
-//        }
-//        return header.concat(this)
-//    }
-//
-//    fun withLoadStateFooter(
-//        footer: MultiTypeLoadStateAdapter
-//    ): ConcatAdapter {
-//        addLoadStateListener { loadStates ->
-//            footer.loadState = loadStates.append
-//        }
-//        return this.concat(footer)
-//    }
-//
-//    fun withLoadStateHeaderAndFooter(
-//        header: MultiTypeLoadStateAdapter,
-//        footer: MultiTypeLoadStateAdapter
-//    ): ConcatAdapter {
-//        addLoadStateListener { loadStates ->
-//            header.loadState = loadStates.prepend
-//            footer.loadState = loadStates.append
-//        }
-//        return header.concat(this, footer)
-//    }
 }

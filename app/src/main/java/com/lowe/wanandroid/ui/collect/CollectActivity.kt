@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypePagingAdapter
+import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
 import com.lowe.wanandroid.services.model.CollectBean

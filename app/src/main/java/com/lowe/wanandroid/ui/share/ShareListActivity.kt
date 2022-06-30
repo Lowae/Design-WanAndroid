@@ -8,7 +8,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
-import com.lowe.multitype.paging.MultiTypePagingAdapter
+import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel

@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.paging.MultiTypePagingAdapter
+import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentSeriesDetailChildBinding

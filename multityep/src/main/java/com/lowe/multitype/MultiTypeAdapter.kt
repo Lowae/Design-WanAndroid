@@ -17,7 +17,6 @@
 package com.lowe.multitype
 
 import androidx.recyclerview.widget.RecyclerView
-import com.lowe.multitype.paging.MultiTypeBaseAdapter
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -38,5 +37,5 @@ open class MultiTypeAdapter @JvmOverloads constructor(
 
     override fun getItem(position: Int) = items[position]
 
-    override fun getItemCount() = items.size
+    override fun getRealItemCount() = items.size
 }
