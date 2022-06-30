@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="launcher_background_color">@color/white</color>
+    <color name="launcher_foreground_android_color">#1f5a89</color>
+
     <color name="md_theme_primary">#795554</color>
     <color name="md_theme_on_primary">#FFFFFF</color>
     <color name="md_theme_primary_container">#FFDAD9</color>
