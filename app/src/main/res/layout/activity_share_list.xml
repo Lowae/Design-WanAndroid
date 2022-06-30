@@ -24,6 +24,7 @@
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:collapsedTitleTextColor="?colorPrimary"
                 app:contentScrim="@color/md_theme_background"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
@@ -99,7 +100,7 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_arrow_back_24dp"
-                    app:navigationIconTint="@color/md_theme_primary">
+                    app:navigationIconTint="?colorPrimary">
 
                 </com.google.android.material.appbar.MaterialToolbar>
 

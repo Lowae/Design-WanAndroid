@@ -97,6 +97,7 @@
         <entry key="..\:/Users/Lero/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/shutdown_dialog.xml" value="0.37708422402736214" />
         <entry key="..\:/Users/Lowae/.gradle/caches/transforms-3/f8a1a5f1d8bddc4b40b34de944180c31/transformed/material-1.6.1/res/layout/m3_alert_dialog.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Lowae/.gradle/caches/transforms-3/f8a1a5f1d8bddc4b40b34de944180c31/transformed/material-1.6.1/res/layout/mtrl_alert_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.201" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_activity_login.xml" value="0.176" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.227" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_close_24dp.xml" value="0.206" />
@@ -125,7 +126,9 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_navigator.xml" value="0.16985138004246284" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_series.xml" value="0.2453125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_navigator_child_tutorial.xml" value="0.1" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_notifications.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_project.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_search_begin.xml" value="0.2" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_search_result.xml" value="0.1578125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_collect_list_article_layout.xml" value="0.2" />
@@ -138,6 +141,7 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_profile_options_layout.xml" value="0.264" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_project_article_layout.xml" value="0.264" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_search_history_layout.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.153" />
       </map>
     </option>
   </component>

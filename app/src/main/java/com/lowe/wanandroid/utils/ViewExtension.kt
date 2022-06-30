@@ -35,8 +35,13 @@ fun View.setRippleBackground(
     @ColorInt rippleColor: Int? = null,
     @Px cornerRadius: Float
 ) {
+    val primaryColor = rippleColor ?: runCatching {
+        val typedValue = TypedValue()
+        context.theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true)
+        context.getColor(typedValue.resourceId)
+    }.getOrNull() ?: context.getColor(R.color.md_theme_primary)
     background = RippleDrawable(
-        ColorStateList.valueOf(rippleColor ?: context.getColor(R.color.md_theme_primary)),
+        ColorStateList.valueOf(primaryColor),
         originBackgroundDrawable,
         ShapeDrawable(RoundRectShape(FloatArray(8) { cornerRadius }, null, null))
     )

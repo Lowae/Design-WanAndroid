@@ -48,7 +48,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/homeTabLayout"
-                            app:tint="@color/md_theme_primary" />
+                            app:tint="?colorPrimary" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/inputLayout"
@@ -86,7 +86,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/homeTabLayout"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/homeTabLayout"
-                            app:tint="@color/md_theme_primary" />
+                            app:tint="?colorPrimary" />
 
                     </LinearLayout>
 
