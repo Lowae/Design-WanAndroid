@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,6 +67,9 @@ class ProfileFragment :
                     }
                 })
             }
+            settingFabIcon.setOnClickListener {
+                startActivity(intentTo(Activities.Setting))
+            }
             arrayOf(userAvatar, userName, userId, userCoinCount).forEach {
                 it.setOnClickListener {
                     this@ProfileFragment.viewModel.userStatusFlow().value.checkLogin(requireContext()) {}
@@ -101,10 +103,9 @@ class ProfileFragment :
                 .distinctUntilChanged { old, new ->
                     old == new
                 }.collectLatest {
-                    if (it == ProfileCollapsingToolBarState.COLLAPSED)
-                        viewBinding.collapsingToolbarLayout.title =
-                            viewBinding.user?.userInfo?.nickname
-                    else viewBinding.collapsingToolbarLayout.title = ""
+                    if (it == ProfileCollapsingToolBarState.COLLAPSED) {
+                        viewBinding.collapsingToolbarLayout.title = viewBinding.user?.userInfo?.nickname
+                    } else viewBinding.collapsingToolbarLayout.title = ""
                 }
         }
         lifecycleScope.launchWhenCreated {
@@ -134,9 +135,13 @@ class ProfileFragment :
             }
             getString(R.string.profile_item_title_share) -> {
                 viewModel.userStatusFlow().value.checkLogin(requireContext()) {
-                    startActivity(intentTo(Activities.ShareList(
-                        bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to AccountManager.peekUserBaseInfo().userInfo.id)
-                    )))
+                    startActivity(
+                        intentTo(
+                            Activities.ShareList(
+                                bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to AccountManager.peekUserBaseInfo().userInfo.id)
+                            )
+                        )
+                    )
                 }
             }
             getString(R.string.profile_item_title_favorite) -> {

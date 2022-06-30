@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string-array name="preference_list_dark_mode">
+        <item>@string/preference_list_dark_mode_off</item>
+        <item>@string/preference_list_dark_mode_on</item>
+        <item>@string/preference_list_dark_mode_system</item>
+    </string-array>
+
+    <string-array name="preference_list_dark_mode_value">
+        <item>off</item>
+        <item>on</item>
+        <item>system</item>
+    </string-array>
+</resources>

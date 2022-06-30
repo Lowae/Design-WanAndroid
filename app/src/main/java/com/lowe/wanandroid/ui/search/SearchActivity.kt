@@ -52,14 +52,14 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
             }
             with(searchIcon) {
                 setOnClickListener {
-                    search(searchEdit.text.trim().toString())
+                    search(searchEdit.text?.trim().toString())
                     searchEdit.hideSoftKeyboard()
                 }
             }
             with(searchEdit) {
                 setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_GO) {
-                        search(searchEdit.text.trim().toString())
+                        search(searchEdit.text?.trim().toString())
                         hideSoftKeyboard()
                         true
                     } else {
@@ -68,7 +68,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
                 }
                 setOnKeyListener { _, keyCode, event ->
                     if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                        search(searchEdit.text.trim().toString())
+                        search(searchEdit.text?.trim().toString())
                         hideSoftKeyboard()
                         true
                     } else {

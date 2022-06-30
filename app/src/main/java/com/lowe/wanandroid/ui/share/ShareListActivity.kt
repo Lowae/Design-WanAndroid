@@ -82,6 +82,11 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                     }
                 })
             }
+            with(toolbar) {
+                setNavigationOnClickListener {
+                    finish()
+                }
+            }
         }
     }
 

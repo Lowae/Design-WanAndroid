@@ -24,7 +24,7 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:toolbarId="@+id/toolbar">
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -56,20 +56,24 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            app:endIconDrawable="@drawable/ic_close_24dp"
+                            app:endIconMode="clear_text"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/searchEdit"
                                 android:layout_width="match_parent"
                                 android:layout_height="42dp"
+                                android:cursorVisible="true"
                                 android:hint="@string/search_hint"
                                 android:imeOptions="actionSearch"
                                 android:inputType="textNoSuggestions"
                                 android:paddingTop="0dp"
                                 android:paddingBottom="0dp"
-                                android:selectAllOnFocus="true" />
+                                android:selectAllOnFocus="true"
+                                android:textColor="?colorOnSurface" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <ImageButton
@@ -86,7 +90,7 @@
 
                     </LinearLayout>
 
-                </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.MaterialToolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

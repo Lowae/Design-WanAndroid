@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  */
 object RetrofitManager {
 
-    private const val BASE_URL = "https://www.wanandroid.com"
+    const val BASE_URL = "https://www.wanandroid.com"
 
     /** 请求超时时间 */
     private const val TIME_OUT_SECONDS = 10

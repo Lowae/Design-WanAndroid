@@ -78,6 +78,7 @@ dependencies {
     kapt(Deps.kaptHiltAndroidCompiler)
 
     kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.preference:preference:1.2.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     testImplementation(Deps.testJunit)

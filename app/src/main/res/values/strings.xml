@@ -34,4 +34,14 @@
     <string name="login_password">密码</string>
     <string name="not_login">未登陆</string>
     <string name="login">登陆</string>
+
+    <string name="preference_category_normal">通用</string>
+    <string name="preference_title_dark_mode">深色模式</string>
+    <string name="preference_list_dark_mode_off">关闭</string>
+    <string name="preference_list_dark_mode_on">开启</string>
+    <string name="preference_list_dark_mode_system">跟随系统</string>
+    <string name="preference_category_others">其他</string>
+    <string name="preference_title_about">关于</string>
+    <string name="preference_title_clean_cache">清理缓存</string>
+    <string name="preference_title_home_website">官方网站</string>
 </resources>

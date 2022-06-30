@@ -20,6 +20,13 @@ fun intentTo(addressable: AddressableActivity) =
 
 object Activities {
 
+    object Setting: AddressableActivity {
+        override val className: String
+            get() = "$PACKAGE_NAME.ui.setting.SettingActivity"
+        override val bundle: Bundle
+            get() = bundleOf()
+    }
+
     object Login : AddressableActivity {
 
         override val className: String
