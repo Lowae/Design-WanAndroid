@@ -9,7 +9,7 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 <p>
 
 采用[Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)从图片取色而成。<p>
-实现[Dynamic Colors](https://m3.material.io/styles/color/dynamic-color/overview)，App主题色自动跟随系统主题色，保持一贯的视觉体验(Android 12及以上支持)
+实现[Dynamic Colors](https://m3.material.io/styles/color/dynamic-color/overview)，App主题色自动跟随系统主题色且适配深色模式，保持一贯的视觉体验(Android 12及以上支持)
 
 所以可交互的UI均带有Ripple效果，明确表示这是个可交互控件，且Ripple颜色支持取自当前Dynamic colors的主题色
 
