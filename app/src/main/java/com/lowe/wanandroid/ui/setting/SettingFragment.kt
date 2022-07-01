@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.lowe.wanandroid.BuildConfig
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.http.RetrofitManager
@@ -16,13 +17,15 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, null)
+        findPreference<SwitchPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS)?.apply {
+
+        }
         findPreference<ListPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE)?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 AppCompatDelegate.setDefaultNightMode(SettingConstants.getNightMode(newValue.toString()))
                 true
             }
         }
-
         findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_ABOUT)?.apply {
             summary = "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
         }

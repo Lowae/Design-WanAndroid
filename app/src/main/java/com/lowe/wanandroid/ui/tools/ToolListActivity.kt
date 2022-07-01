@@ -10,6 +10,7 @@ import com.lowe.wanandroid.services.model.ToolBean
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

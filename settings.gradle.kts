@@ -10,9 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            setUrl("https://jitpack.io")
-        }
+        maven("https://jitpack.io")
     }
 }
 rootProject.name = "DesignWanAndroid"

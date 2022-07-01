@@ -21,6 +21,7 @@ import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagChildrenItemBinder
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.smoothSnapToPosition
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -126,7 +127,9 @@ class NavigatorChildFragment :
 
     private fun onTagChildrenItemClick(article: Article) {
         context?.apply {
-            WebActivity.loadUrl(this, article.link)
+            WebActivity.loadUrl(
+                this, Activities.Web.WebIntent(article.link)
+            )
         }
     }
 }

@@ -21,6 +21,7 @@ import com.lowe.wanandroid.ui.group.GroupViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,7 +109,11 @@ class GroupChildFragment :
         when (articleAction) {
             is ArticleAction.ItemClick -> WebActivity.loadUrl(
                 requireContext(),
-                articleAction.article.link
+                Activities.Web.WebIntent(
+                    articleAction.article.link,
+                    articleAction.article.id,
+                    articleAction.article.collect
+                )
             )
             is ArticleAction.CollectClick -> {
                 appViewModel.articleCollectAction(

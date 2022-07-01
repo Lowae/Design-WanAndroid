@@ -132,7 +132,13 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
 
     private fun onArticleClick(articleAction: ArticleAction) {
         when (articleAction) {
-            is ArticleAction.ItemClick -> WebActivity.loadUrl(this, articleAction.article.link)
+            is ArticleAction.ItemClick -> WebActivity.loadUrl(
+                this, Activities.Web.WebIntent(
+                    articleAction.article.link,
+                    articleAction.article.id,
+                    articleAction.article.collect,
+                )
+            )
             is ArticleAction.CollectClick -> {
                 appViewModel.articleCollectAction(
                     CollectEvent(

@@ -6,7 +6,7 @@ import com.lowe.wanandroid.base.app.BaseApp
 
 
 object SettingConstants {
-
+    const val PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS = "normal_dynamic_colors"
     const val PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE = "normal_darkMode"
     private const val DARK_MODE_ON = "on"
     private const val DARK_MODE_OFF = "off"
@@ -30,6 +30,12 @@ object SettingConstants {
             DARK_MODE_ON -> AppCompatDelegate.MODE_NIGHT_YES
             DARK_MODE_OFF -> AppCompatDelegate.MODE_NIGHT_NO
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        }
+
+    val preferenceDynamicColors: Boolean
+        get() {
+            return PreferenceManager.getDefaultSharedPreferences(BaseApp.appContext)
+                .getBoolean(PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS, true)
         }
 
 }

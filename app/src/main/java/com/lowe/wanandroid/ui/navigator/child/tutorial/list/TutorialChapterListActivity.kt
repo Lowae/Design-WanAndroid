@@ -10,6 +10,7 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,6 +57,8 @@ class TutorialChapterListActivity :
     }
 
     private fun onItemClick(position: Int, article: Article) {
-        WebActivity.loadUrl(this, article.link)
+        WebActivity.loadUrl(
+            this, Activities.Web.WebIntent(article.link)
+        )
     }
 }

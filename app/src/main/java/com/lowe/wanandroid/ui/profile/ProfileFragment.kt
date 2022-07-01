@@ -104,7 +104,8 @@ class ProfileFragment :
                     old == new
                 }.collectLatest {
                     if (it == ProfileCollapsingToolBarState.COLLAPSED) {
-                        viewBinding.collapsingToolbarLayout.title = viewBinding.user?.userInfo?.nickname
+                        viewBinding.collapsingToolbarLayout.title =
+                            viewBinding.user?.userInfo?.nickname
                     } else viewBinding.collapsingToolbarLayout.title = ""
                 }
         }

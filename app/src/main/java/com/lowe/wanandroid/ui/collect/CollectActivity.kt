@@ -16,6 +16,7 @@ import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
@@ -72,7 +73,7 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
     }
 
     private fun onCollectClick(position: Int, collectBean: CollectBean) {
-        WebActivity.loadUrl(this, collectBean.link)
+        WebActivity.loadUrl(this, Activities.Web.WebIntent(collectBean.link, collectBean.id, collectBean.collect))
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {

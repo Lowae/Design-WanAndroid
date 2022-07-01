@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Custom.Base.TextAppearance" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/noto_sans_sc_medium</item>
-    </style>
-
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">15sp</item>
@@ -12,10 +8,5 @@
     <style name="TabLayout.TextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="Custom.Widget.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="android:textAppearance">@style/Custom.Base.TextAppearance</item>
-        <item name="fontFamily">@font/noto_sans_sc_medium</item>
     </style>
 </resources>

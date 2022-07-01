@@ -44,4 +44,11 @@
     <string name="preference_title_about">关于</string>
     <string name="preference_title_clean_cache">清理缓存</string>
     <string name="preference_title_home_website">官方网站</string>
+    <string name="setting">设置</string>
+    <string name="collect">收藏</string>
+    <string name="web_action_menu_share">分享</string>
+    <string name="web_action_menu_refresh">刷新</string>
+    <string name="web_action_menu_open_outside">浏览器打开</string>
+    <string name="preference_title_dynamic_color">动态主题色</string>
+    <string name="preference_summary_dynamic_color">App动态跟随系统主题色(操作后重启App生效)</string>
 </resources>

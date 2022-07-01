@@ -6,14 +6,21 @@
         app:key="normalCategory"
         app:title="@string/preference_category_normal">
 
+        <SwitchPreference
+            app:defaultValue="true"
+            app:icon="@drawable/ic_color_palette_32dp"
+            app:key="normal_dynamic_colors"
+            app:summary="@string/preference_summary_dynamic_color"
+            app:title="@string/preference_title_dynamic_color" />
+
         <DropDownPreference
             app:defaultValue="system"
             app:entries="@array/preference_list_dark_mode"
             app:entryValues="@array/preference_list_dark_mode_value"
-            app:icon="@drawable/ic_dark_mode_48dp"
+            app:icon="@drawable/ic_dark_mode_32dp"
             app:key="normal_darkMode"
             app:summary="%s"
-            app:title="深色模式" />
+            app:title="@string/preference_title_dark_mode" />
 
     </PreferenceCategory>
 
@@ -23,7 +30,7 @@
 
         <Preference
             app:key="other_about"
-            app:title="@string/preference_title_about"/>
+            app:title="@string/preference_title_about" />
 
         <Preference
             app:key="other_home_website"

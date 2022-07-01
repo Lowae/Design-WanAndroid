@@ -19,6 +19,7 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.search.SearchViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -82,7 +83,11 @@ class SearchListFragment :
         when (articleAction) {
             is ArticleAction.ItemClick -> WebActivity.loadUrl(
                 requireContext(),
-                articleAction.article.link
+                Activities.Web.WebIntent(
+                    articleAction.article.link,
+                    articleAction.article.id,
+                    articleAction.article.collect,
+                )
             )
             is ArticleAction.CollectClick -> {
                 appViewModel.articleCollectAction(

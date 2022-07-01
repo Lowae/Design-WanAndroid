@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_on_primary</item>
@@ -26,18 +27,10 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_inverse_on_surface</item>
         <item name="colorPrimaryInverse">@color/md_theme_inverse_primary</item>
 
-        <item name="android:colorBackground">@color/md_theme_background</item>
-        <item name="android:statusBarColor">@color/md_theme_background</item>
+        <item name="android:colorBackground">?colorBackgroundFloating</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:fontFamily">@font/noto_sans_sc_medium</item>
         <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="AppTranslucentTheme" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBlurBehindEnabled" tools:targetApi="s">true</item>
-        <item name="android:windowBlurBehindRadius" tools:targetApi="s">50dp</item>
-        <item name="android:windowBackgroundBlurRadius" tools:targetApi="s">30dp</item>
     </style>
 </resources>

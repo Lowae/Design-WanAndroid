@@ -138,7 +138,11 @@ class ExploreFragment :
         when (articleAction) {
             is ArticleAction.ItemClick -> WebActivity.loadUrl(
                 requireContext(),
-                articleAction.article.link
+                Activities.Web.WebIntent(
+                    articleAction.article.link,
+                    articleAction.article.id,
+                    articleAction.article.collect,
+                )
             )
             is ArticleAction.CollectClick -> {
                 appViewModel.articleCollectAction(

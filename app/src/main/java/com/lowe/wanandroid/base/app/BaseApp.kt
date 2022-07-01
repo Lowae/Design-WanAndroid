@@ -28,7 +28,9 @@ open class BaseApp : Application(), ViewModelStoreOwner {
         DataStoreFactory.init(this)
         RetrofitManager.init(this)
         AppCompatDelegate.setDefaultNightMode(SettingConstants.preferenceDarkMode)
-        DynamicColors.applyToActivitiesIfAvailable(this)
+        if (SettingConstants.preferenceDynamicColors) {
+            DynamicColors.applyToActivitiesIfAvailable(this)
+        }
     }
 
     override fun getViewModelStore() = _viewModelStore

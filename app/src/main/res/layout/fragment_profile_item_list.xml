@@ -17,14 +17,14 @@
             android:layout_width="48dp"
             android:layout_height="4dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/bg_line_corner" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profileItemList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="12dp"
             android:overScrollMode="never" />
 
     </LinearLayout>

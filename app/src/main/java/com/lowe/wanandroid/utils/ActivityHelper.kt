@@ -3,7 +3,9 @@ package com.lowe.wanandroid.utils
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.core.os.bundleOf
+import kotlinx.parcelize.Parcelize
 
 private const val PACKAGE_NAME = "com.lowe.wanandroid"
 
@@ -20,7 +22,7 @@ fun intentTo(addressable: AddressableActivity) =
 
 object Activities {
 
-    object Setting: AddressableActivity {
+    object Setting : AddressableActivity {
         override val className: String
             get() = "$PACKAGE_NAME.ui.setting.SettingActivity"
         override val bundle: Bundle
@@ -52,8 +54,17 @@ object Activities {
         override val bundle: Bundle
     ) : AddressableActivity {
 
+        @Parcelize
+        data class WebIntent(
+            val url: String,
+            val id: Int = 0,
+            var isCollected: Boolean = false,
+        ) : Parcelable {
+            fun isNeedShowCollectIcon() = id != 0
+        }
+
         companion object {
-            const val KEY_WEB_VIEW_URL = "key_web_view_url"
+            const val KEY_WEB_VIEW_Intent_bundle = "key_web_view_intent_bundle"
         }
     }
 

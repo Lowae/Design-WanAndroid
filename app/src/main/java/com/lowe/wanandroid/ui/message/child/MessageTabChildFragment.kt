@@ -17,6 +17,7 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.message.MessageChildFragmentAdapter
 import com.lowe.wanandroid.ui.message.MessageTabBean
 import com.lowe.wanandroid.ui.web.WebActivity
+import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
