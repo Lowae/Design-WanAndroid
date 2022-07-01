@@ -9,7 +9,7 @@ import com.lowe.wanandroid.databinding.ActivityLoginBinding
 import com.lowe.wanandroid.services.isSuccess
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

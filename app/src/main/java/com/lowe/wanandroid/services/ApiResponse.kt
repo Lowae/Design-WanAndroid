@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.showShortToast
 
 /**
  * 接口返回外层封装实体

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildTutorialBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.BaseFragment
@@ -35,8 +36,10 @@ class TutorialChildFragment :
     }
 
     private val navigatorTabBean by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getParcelable(NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE)
-            ?: NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
+        BundleCompat.getParcelable(
+            arguments,
+            NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE
+        ) ?: NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
     }
     private val tutorialAdapter = MultiTypeAdapter()
     private val parentFragmentViewModel by viewModels<NavigatorViewModel>(this::requireParentFragment)

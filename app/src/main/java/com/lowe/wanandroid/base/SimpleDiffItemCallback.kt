@@ -2,7 +2,7 @@ package com.lowe.wanandroid.base
 
 import androidx.recyclerview.widget.DiffUtil
 
-class SimpleDiffItemCallback<T>(
+class SimpleDiffItemCallback<T : Any>(
     private val areItemSame: (T, T) -> Boolean,
     private val areContentSame: (T, T) -> Boolean,
     private val changePayload: (T, T) -> Any? = { _: T, _: T -> null }

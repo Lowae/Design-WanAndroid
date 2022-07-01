@@ -2,7 +2,7 @@ package com.lowe.wanandroid.utils
 
 import kotlin.random.Random
 
-object ColorExtension {
+object ColorUtil {
 
 
     fun getRandomWarmColor() =

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
+import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentSeriesDetailChildBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Classify
@@ -43,7 +44,7 @@ class SeriesDetailChildFragment :
     lateinit var appViewModel: AppViewModel
 
     private val classify by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getParcelable(KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
+        BundleCompat.getParcelable(arguments, KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
     }
     private val detailsAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
@@ -105,6 +106,7 @@ class SeriesDetailChildFragment :
                     )
                 )
             }
+            else -> {}
         }
     }
 }

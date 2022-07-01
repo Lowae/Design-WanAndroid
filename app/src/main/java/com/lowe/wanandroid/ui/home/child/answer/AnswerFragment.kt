@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
+import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentHomeChildAnswerBinding
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
@@ -50,9 +51,8 @@ class AnswerFragment :
 
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
     private val squareTabBean by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getParcelable(HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE) ?: HomeTabBean(
-            HomeChildFragmentAdapter.HOME_TAB_ANSWER
-        )
+        BundleCompat.getParcelable(arguments, HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE)
+            ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_ANSWER)
     }
     private val answerAdapter =
         MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
@@ -125,6 +125,7 @@ class AnswerFragment :
                     )
                 )
             }
+            else -> {}
         }
     }
 

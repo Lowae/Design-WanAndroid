@@ -24,7 +24,7 @@ import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.showShortToast
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
 import com.lowe.wanandroid.utils.whenError
@@ -148,6 +148,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                     )
                 )
             }
+            else -> {}
         }
     }
 

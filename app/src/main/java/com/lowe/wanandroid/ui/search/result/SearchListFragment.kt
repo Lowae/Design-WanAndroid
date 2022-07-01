@@ -98,6 +98,7 @@ class SearchListFragment :
                     )
                 )
             }
+            else -> {}
         }
     }
 }

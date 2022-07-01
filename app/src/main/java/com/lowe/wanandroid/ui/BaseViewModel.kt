@@ -16,7 +16,7 @@ abstract class BaseViewModel : ViewModel() {
 
         const val DEFAULT_PAGE_SIZE = 20
 
-        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
             AppLog.e(msg = throwable.message.toString())
         }
     }

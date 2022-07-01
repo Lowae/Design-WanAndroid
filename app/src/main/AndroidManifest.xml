@@ -15,8 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:targetApi="31">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.web.WebActivity" />
+        <activity
+            android:name=".ui.web.WebActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.navigator.child.tutorial.list.TutorialChapterListActivity"
             android:exported="false" />

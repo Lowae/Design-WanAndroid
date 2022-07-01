@@ -1,15 +1,19 @@
-object Version {
+import java.nio.charset.Charset
 
+private const val verName = "1.0"
+private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
+
+object Version {
     object ClassPathVersion {
         const val hiltPluginVersion = "2.42"
     }
 
-    const val compileSdk = 32
+    const val compileSdk = 33
     const val applicationId = "com.lowe.wanandroid"
     const val minSdk = 23
-    const val targetSdk = 32
-    const val versionCode = 1
-    const val versionName = "1.0"
+    const val targetSdk = 33
+    val versionCode = verCode
+    const val versionName = verName
 
     const val coreKtxVersion = "1.8.0"
     const val appCompatVersion = "1.4.2"
@@ -61,7 +65,8 @@ object Deps {
         "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycleVersion}"
     const val lifecycleViewModelKtx =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycleVersion}"
-    const val lifecucleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycleVersion}"
+    const val lifecucleRuntimeKtx =
+        "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycleVersion}"
     const val navigationFragmentKtx =
         "androidx.navigation:navigation-fragment-ktx:${Version.navigationVersion}"
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Version.navigationVersion}"
@@ -93,3 +98,7 @@ object Deps {
     const val kaptHiltAndroidCompiler =
         "com.google.dagger:hilt-android-compiler:${Version.ClassPathVersion.hiltPluginVersion}"
 }
+
+fun String.exec(): String =
+    Runtime.getRuntime().exec(this).inputStream.readBytes().toString(Charset.defaultCharset())
+        .trim()

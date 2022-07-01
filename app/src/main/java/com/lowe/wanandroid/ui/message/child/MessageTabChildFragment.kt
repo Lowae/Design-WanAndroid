@@ -10,6 +10,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentMessageChildListBinding
 import com.lowe.wanandroid.services.model.MsgBean
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
@@ -17,10 +18,9 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.message.MessageChildFragmentAdapter
 import com.lowe.wanandroid.ui.message.MessageTabBean
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.showShortToast
 import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -44,8 +44,10 @@ class MessageTabChildFragment :
             register(MessageTabChildItemBinder(this@MessageTabChildFragment::onMsgItemClick))
         }
     private val messageTabBean by lazy(LazyThreadSafetyMode.NONE) {
-        arguments?.getParcelable(MessageChildFragmentAdapter.KEY_MESSAGE_CHILD_TAB_PARCELABLE)
-            ?: MessageTabBean(MessageChildFragmentAdapter.MESSAGE_TAB_NEW)
+        BundleCompat.getParcelable(
+            arguments,
+            MessageChildFragmentAdapter.KEY_MESSAGE_CHILD_TAB_PARCELABLE
+        ) ?: MessageTabBean(MessageChildFragmentAdapter.MESSAGE_TAB_NEW)
     }
 
     override val viewModel: MessageTabChildViewModel by viewModels()

@@ -27,7 +27,7 @@ object ApplicationCoroutineScope {
     private const val TAG = "ApplicationCoroutineScope"
 
     private val defaultApplicationScope by lazy {
-        CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { coroutineContext, throwable ->
+        CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { _, throwable ->
             AppLog.e(
                 TAG, "DefaultApplicationScope:\n${throwable.message.toString()}", throwable
             )
@@ -35,7 +35,7 @@ object ApplicationCoroutineScope {
     }
 
     private val ioApplicationScope by lazy {
-        CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
+        CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
             AppLog.e(
                 TAG, "IOApplicationScope:\n${throwable.message.toString()}", throwable
             )

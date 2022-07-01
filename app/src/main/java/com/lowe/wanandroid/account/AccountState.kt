@@ -4,8 +4,8 @@ import android.content.Context
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
 import com.lowe.wanandroid.utils.intentTo
+import com.lowe.wanandroid.utils.showShortToast
 
 sealed interface AccountState {
 

@@ -16,6 +16,7 @@ import com.just.agentweb.WebViewClient
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
+import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivityWebLayoutBinding
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
@@ -82,7 +83,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
     }
 
     private val intentData by lazy {
-        intent.getParcelableExtra(Activities.Web.KEY_WEB_VIEW_Intent_bundle)
+        IntentCompat.getParcelableExtra(intent, Activities.Web.KEY_WEB_VIEW_Intent_bundle)
             ?: Activities.Web.WebIntent("")
     }
 

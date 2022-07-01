@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
@@ -26,9 +27,8 @@ class SeriesDetailListActivity :
     private lateinit var tabLayoutMediator: TabLayoutMediator
 
     private val classifyList: List<Classify> by lazy(LazyThreadSafetyMode.NONE) {
-        intent.getParcelableArrayListExtra(
-            KEY_BUNDLE_CLASSIFY_LIST_TAB
-        ) ?: emptyList()
+        IntentCompat.getParcelableArrayListExtra(intent, KEY_BUNDLE_CLASSIFY_LIST_TAB)
+            ?: emptyList()
     }
 
     private val initIndex: Int by lazy(LazyThreadSafetyMode.NONE) {

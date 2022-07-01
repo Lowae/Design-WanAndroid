@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.utils.ToastEx.showLongToast
-import com.lowe.wanandroid.utils.ToastEx.showShortToast
+import com.lowe.wanandroid.utils.showLongToast
+import com.lowe.wanandroid.utils.showShortToast
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
