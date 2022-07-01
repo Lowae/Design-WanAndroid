@@ -27,7 +27,7 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 - 对于网络请求的需要，引入通用的网络请求库，[Retrofit](https://github.com/square/retrofit) + [OkHttp](https://github.com/square/okhttp)。<p>
 - 针对数据层Repository需要以及UseCase需要复用并组合各类Service，引入[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)，解决依赖注入问题，提高可重用性且避免强依赖。
 - 对于网络请求的线程切换使用[Kotlin协程](https://developer.android.com/kotlin/coroutines?hl=zh-cn)，针对复杂且需要进行各类转换处理的数据流使用[Flow](https://developer.android.com/kotlin/flow?hl=zh-cn)，对于轻量数据且需要和Lifecycle相关的数据使用[LiveData](https://developer.android.com/topic/libraries/architecture/livedata?hl=zh-cn)。
-- 对于App内的部分需要持久化数据如Cookie、KV数据等小型数据引入[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn)
+- 对于App内的部分需要持久化数据如Cookie、KV数据等小型数据引入[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn)和[Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
 - 对于RecyclerView引入[Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview?hl=zh-cn)列表的加载及状态处理
 - 针对列表的多类型Item，导入并修改[MultiType](https://github.com/drakeet/MultiType)使其支持配合Paging3使用
 - 对于UI与数据之间的单向或双向绑定使用[DataBinding](https://developer.android.com/topic/libraries/data-binding?hl=zh-cn)减少重复、模板代码
