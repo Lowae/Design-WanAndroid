@@ -21,6 +21,7 @@ import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
+import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -47,20 +48,20 @@ class SeriesDetailChildFragment :
         BundleCompat.getParcelable(arguments, KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
     }
     private val detailsAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SeriesDetailChildFragment::onItemClick))
         }
     private val seriesDetailViewModel by activityViewModels<SeriesDetailListViewModel>()
 
     override val viewModel: SeriesDetailChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(seriesDetailList) {
                 setHasFixedSize(true)
                 adapter = detailsAdapter
@@ -106,7 +107,13 @@ class SeriesDetailChildFragment :
                     )
                 )
             }
-            else -> {}
+            is ArticleAction.AuthorClick -> {
+                startActivity(
+                    intentTo(
+                        Activities.ShareList(bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to articleAction.article.userId.toString()))
+                    )
+                )
+            }
         }
     }
 }

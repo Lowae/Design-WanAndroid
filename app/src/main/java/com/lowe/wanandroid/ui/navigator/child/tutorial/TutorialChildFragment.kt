@@ -46,13 +46,13 @@ class TutorialChildFragment :
 
     override val viewModel: TutorialChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(tutorialList) {
                 tutorialAdapter.register(TutorialChildItemBinder(this@TutorialChildFragment::onTutorialItemClick))
                 adapter = tutorialAdapter
@@ -61,11 +61,11 @@ class TutorialChildFragment :
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.apply {
             tutorialListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it)
-                viewBinding.loadingContainer.loadingProgress.isVisible = false
+                viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
         parentFragmentViewModel.apply {

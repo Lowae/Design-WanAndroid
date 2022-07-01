@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lowe.wanandroid.services.model.CollectEvent
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.services.usecase.ArticleCollectUseCase
 import com.lowe.wanandroid.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

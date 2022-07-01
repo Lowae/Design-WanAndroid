@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.collectLatest
 class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>() {
 
     private val collectPagingAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(CollectItemBinder(this@CollectActivity::onCollectClick))
         }
 

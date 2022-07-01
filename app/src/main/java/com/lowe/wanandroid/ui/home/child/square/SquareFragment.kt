@@ -55,20 +55,20 @@ class SquareFragment :
             ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_SQUARE)
     }
     private val squareAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SquareFragment::onItemClick))
             registerFooter(LoadMoreItemBinder())
         }
 
     override val viewModel: SquareViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(squareList) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = squareAdapter
@@ -104,7 +104,7 @@ class SquareFragment :
     }
 
     private fun scrollToTop() {
-        viewBinding.squareList.scrollToPosition(0)
+        viewDataBinding.squareList.scrollToPosition(0)
     }
 
     private fun onRefresh() {
@@ -135,7 +135,7 @@ class SquareFragment :
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && squareAdapter.isEmpty()
             loadingProgress.isVisible = squareAdapter.isEmpty() && loadStates.isRefreshing

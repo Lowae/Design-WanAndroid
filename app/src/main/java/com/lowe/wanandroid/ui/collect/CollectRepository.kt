@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.services.CollectService
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.BaseViewModel
 import javax.inject.Inject
 

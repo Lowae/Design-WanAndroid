@@ -56,7 +56,7 @@ class GroupChildFragment :
     }
 
     private val articlesAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@GroupChildFragment::onArticleClick))
             registerFooter(LoadMoreItemBinder())
         }
@@ -64,13 +64,13 @@ class GroupChildFragment :
 
     override val viewModel: GroupChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(childList) {
                 adapter = articlesAdapter
                 layoutManager = LinearLayoutManager(context)
@@ -129,11 +129,11 @@ class GroupChildFragment :
     }
 
     private fun scrollToTop() {
-        viewBinding.childList.scrollToPosition(0)
+        viewDataBinding.childList.scrollToPosition(0)
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && articlesAdapter.isEmpty()
             loadingProgress.isVisible = articlesAdapter.isEmpty() && loadStates.isRefreshing

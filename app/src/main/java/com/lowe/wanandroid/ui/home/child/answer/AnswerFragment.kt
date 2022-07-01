@@ -55,19 +55,19 @@ class AnswerFragment :
             ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_ANSWER)
     }
     private val answerAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@AnswerFragment::onItemClick))
             registerFooter(LoadMoreItemBinder())
         }
     override val viewModel: AnswerViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(answerList) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = answerAdapter
@@ -103,7 +103,7 @@ class AnswerFragment :
     }
 
     private fun scrollToTop() {
-        viewBinding.answerList.scrollToPosition(0)
+        viewDataBinding.answerList.scrollToPosition(0)
     }
 
     private fun onItemClick(articleAction: ArticleAction) {
@@ -130,7 +130,7 @@ class AnswerFragment :
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && answerAdapter.isEmpty()
             loadingProgress.isVisible = answerAdapter.isEmpty() && loadStates.isRefreshing

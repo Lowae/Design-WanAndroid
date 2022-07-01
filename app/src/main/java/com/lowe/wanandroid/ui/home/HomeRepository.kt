@@ -6,7 +6,7 @@ import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.services.BaseService
 import com.lowe.wanandroid.services.HomeService
 import com.lowe.wanandroid.services.model.Banners
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope

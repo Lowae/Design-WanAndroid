@@ -42,15 +42,15 @@ class ProfileFragment :
 
     override val viewModel: ProfileViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initItems()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
         profileItemAdapter.register(ProfileItemBinder(this::onOptionClick))
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(this.itemContainer.profileItemList) {
                 adapter = profileItemAdapter
                 layoutManager = LinearLayoutManager(context)
@@ -97,16 +97,16 @@ class ProfileFragment :
     }
 
 
-    private fun initObserve() {
+    private fun initEvents() {
         lifecycleScope.launchWhenCreated {
             collapsingToolBarStateFlow
                 .distinctUntilChanged { old, new ->
                     old == new
                 }.collectLatest {
                     if (it == ProfileCollapsingToolBarState.COLLAPSED) {
-                        viewBinding.collapsingToolbarLayout.title =
-                            viewBinding.user?.userInfo?.nickname
-                    } else viewBinding.collapsingToolbarLayout.title = ""
+                        viewDataBinding.collapsingToolbarLayout.title =
+                            viewDataBinding.user?.userInfo?.nickname
+                    } else viewDataBinding.collapsingToolbarLayout.title = ""
                 }
         }
         lifecycleScope.launchWhenCreated {
@@ -160,7 +160,7 @@ class ProfileFragment :
     }
 
     private fun userInfoGot(response: UserBaseInfo) {
-        viewBinding.user = response
-        viewBinding.notifyPropertyChanged(BR.user)
+        viewDataBinding.user = response
+        viewDataBinding.notifyPropertyChanged(BR.user)
     }
 }

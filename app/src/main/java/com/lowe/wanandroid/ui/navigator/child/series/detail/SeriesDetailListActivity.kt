@@ -46,7 +46,7 @@ class SeriesDetailListActivity :
         detailFragmentAdapter =
             SeriesDetailFragmentStateAdapter(classifyList, supportFragmentManager, lifecycle)
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
@@ -64,7 +64,7 @@ class SeriesDetailListActivity :
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewDataBinding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onRefreshLiveData.value =
                 detailFragmentAdapter.items[viewDataBinding.seriesDetailPager2.currentItem]

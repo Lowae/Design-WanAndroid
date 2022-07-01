@@ -30,7 +30,7 @@ class SearchListFragment :
     BaseFragment<SearchListViewModel, FragmentSearchResultBinding>(R.layout.fragment_search_result) {
 
     private val searchListAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SearchListFragment::onArticleClick))
         }
 
@@ -41,13 +41,13 @@ class SearchListFragment :
 
     override val viewModel: SearchListViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvent()
     }
 
     private fun initView() {
-        viewBinding.searchResultList.apply {
+        viewDataBinding.searchResultList.apply {
             adapter = searchListAdapter
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -61,10 +61,10 @@ class SearchListFragment :
 
         lifecycleScope.launchWhenCreated {
             searchListAdapter.loadStateFlow.collect { loadState ->
-                viewBinding.loadingProgress.isVisible =
+                viewDataBinding.loadingProgress.isVisible =
                     loadState.source.refresh is LoadState.Loading
                 if (loadState.refresh == LoadState.Loading) {
-                    viewBinding.searchResultList.scrollToPosition(0)
+                    viewDataBinding.searchResultList.scrollToPosition(0)
                 }
             }
         }

@@ -22,9 +22,9 @@ class NavigatorFragment :
 
     override val viewModel: NavigatorViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
@@ -34,7 +34,7 @@ class NavigatorFragment :
                 this.childFragmentManager,
                 lifecycle
             )
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(navigatorPager2) {
                 adapter = childAdapter
             }
@@ -47,18 +47,18 @@ class NavigatorFragment :
             with(swipeRefreshLayout) {
                 setOnRefreshListener {
                     this@NavigatorFragment.viewModel.refreshLiveData.value =
-                        childAdapter.items[viewBinding.navigatorPager2.currentItem]
+                        childAdapter.items[viewDataBinding.navigatorPager2.currentItem]
                     this.isRefreshing = false
                 }
             }
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
                 viewModel.scrollToTopLiveData.value =
-                    childAdapter.items[viewBinding.navigatorPager2.currentItem]
+                    childAdapter.items[viewDataBinding.navigatorPager2.currentItem]
             }
         }
     }

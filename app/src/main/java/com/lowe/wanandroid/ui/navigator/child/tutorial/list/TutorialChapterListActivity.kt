@@ -35,7 +35,7 @@ class TutorialChapterListActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initObserve()
+        initEvents()
         viewModel.fetchChapterList(tutorialId)
     }
 
@@ -49,7 +49,7 @@ class TutorialChapterListActivity :
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.chaptersLiveData.observe(this) {
             chapterAdapter.items = it
             chapterAdapter.notifyItemRangeInserted(0, chapterAdapter.itemCount)

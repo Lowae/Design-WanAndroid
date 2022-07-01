@@ -2,33 +2,35 @@ package com.lowe.wanandroid.ui
 
 import com.lowe.wanandroid.base.SimpleDiffCallback
 import com.lowe.wanandroid.base.SimpleDiffItemCallback
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.Banners
-import com.lowe.wanandroid.services.model.CollectBean
-import com.lowe.wanandroid.services.model.MsgBean
+import com.lowe.wanandroid.services.model.*
 
 object ArticleDiffCalculator {
 
-    fun getCommonArticleDiffCalculator(oldList: List<Any>, newList: List<Any>) =
+    fun getCommonDiffCallback(oldList: List<Any>, newList: List<Any>) =
         SimpleDiffCallback(
             oldList,
             newList,
-            areItemSame = { oldItem: Any, newItem: Any ->
+            { oldItem: Any, newItem: Any ->
                 when {
+                    oldItem is Navigation && newItem is Navigation -> oldItem.name == newItem.name
                     oldItem is Article && newItem is Article -> oldItem.id == newItem.id
-                    oldItem is Banners && newItem is Banners -> true
-                    else -> oldItem::class.java == newItem::class.java
+                    oldItem is Series && newItem is Series -> oldItem.id == newItem.id
+                    oldItem is Classify && newItem is Classify -> oldItem.id == newItem.id
+                    else -> oldItem.javaClass == newItem.javaClass
                 }
             },
-            areContentSame = { oldItem: Any, newItem: Any ->
+            { oldItem: Any, newItem: Any ->
                 when {
+                    oldItem is Navigation && newItem is Navigation -> oldItem == newItem
+                    oldItem is Series && newItem is Series -> oldItem == newItem
+                    oldItem is Classify && newItem is Classify -> oldItem == newItem
                     oldItem is Article && newItem is Article -> oldItem == newItem
-                    oldItem is Banners && newItem is Banners -> oldItem == newItem
-                    else -> oldItem == newItem
+                    else -> oldItem.javaClass == newItem.javaClass && oldItem == newItem
                 }
-            })
+            }
+        )
 
-    fun getCommonArticleDiffItemCallback() =
+    fun getCommonDiffItemCallback() =
         SimpleDiffItemCallback(
             areItemSame = { oldItem: Any, newItem: Any ->
                 when {

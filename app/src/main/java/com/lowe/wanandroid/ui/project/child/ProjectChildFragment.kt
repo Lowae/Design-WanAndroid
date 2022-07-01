@@ -46,7 +46,7 @@ class ProjectChildFragment :
     lateinit var appViewModel: AppViewModel
 
     private val projectAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(ProjectChildItemBinder(this@ProjectChildFragment::onItemClick))
             registerFooter(LoadMoreItemBinder())
         }
@@ -55,13 +55,13 @@ class ProjectChildFragment :
 
     override val viewModel: ProjectChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(childList) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = projectAdapter
@@ -89,7 +89,7 @@ class ProjectChildFragment :
 
     private fun scrollToTop(categoryId: Int) {
         if (categoryId != this.categoryId) return
-        viewBinding.childList.scrollToPosition(0)
+        viewDataBinding.childList.scrollToPosition(0)
     }
 
     private fun refreshCollectStatus(event: CollectEvent) {
@@ -126,7 +126,7 @@ class ProjectChildFragment :
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && projectAdapter.isEmpty()
             loadingProgress.isVisible = projectAdapter.isEmpty() && loadStates.isRefreshing

@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.services
 
+import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import retrofit2.http.Field
@@ -18,5 +19,5 @@ interface AccountService : BaseService {
     ): ApiResponse<User>
 
     @GET("user/lg/userinfo/json")
-    suspend fun getUserInfo():ApiResponse<UserBaseInfo>
+    suspend fun getUserInfo(): ApiResponse<UserBaseInfo>
 }

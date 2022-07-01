@@ -46,7 +46,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     }
 
     private val shareAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@ShareListActivity::onArticleClick))
         }
 
@@ -60,7 +60,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
@@ -90,7 +90,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         lifecycleScope.launchWhenCreated {
             collapsingToolBarStateFlow
                 .distinctUntilChanged { old, new ->

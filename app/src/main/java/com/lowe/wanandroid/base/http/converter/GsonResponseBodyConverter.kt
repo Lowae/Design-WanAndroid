@@ -21,7 +21,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonIOException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonToken
-import com.lowe.wanandroid.services.ApiResponse
+import com.lowe.wanandroid.services.model.ApiResponse
 import okhttp3.ResponseBody
 import retrofit2.Converter
 

@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.group
 
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import dagger.hilt.android.lifecycle.HiltViewModel

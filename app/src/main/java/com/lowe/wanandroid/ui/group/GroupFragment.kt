@@ -21,14 +21,14 @@ class GroupFragment :
 
     override val viewModel: GroupViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         childAdapter =
             GroupChildFragmentAdapter(emptyList(), this.childFragmentManager, lifecycle)
         initView()
-        initObserve()
+        initEvents()
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.authorsNameLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
             childAdapter.notifyItemRangeInserted(0, childAdapter.itemCount)
@@ -36,12 +36,12 @@ class GroupFragment :
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
             if (childAdapter.items.isEmpty()) return@observe
             viewModel.scrollToTopLiveData.value =
-                childAdapter.items[viewBinding.groupViewPager2.currentItem].id
+                childAdapter.items[viewDataBinding.groupViewPager2.currentItem].id
         }
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(groupViewPager2) {
                 adapter = childAdapter
             }
@@ -53,8 +53,8 @@ class GroupFragment :
                 }
             }
             tabLayoutMediator = TabLayoutMediator(
-                viewBinding.groupTabLayout,
-                viewBinding.groupViewPager2
+                viewDataBinding.groupTabLayout,
+                viewDataBinding.groupViewPager2
             ) { tab: TabLayout.Tab, position: Int ->
                 tab.text = childAdapter.items[position].name
             }.apply(TabLayoutMediator::attach)

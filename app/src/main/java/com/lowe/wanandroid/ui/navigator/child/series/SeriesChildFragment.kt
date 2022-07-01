@@ -46,14 +46,14 @@ class SeriesChildFragment :
 
     override val viewModel: SeriesChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
         onRefresh()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(seriesTagChildrenList) {
                 tagChildrenAdapter.register(SeriesChildTagChildrenItemBinder(this@SeriesChildFragment::onTagChildrenItemClick))
                 adapter = tagChildrenAdapter
@@ -63,12 +63,12 @@ class SeriesChildFragment :
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.apply {
             seriesListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it, tagChildrenAdapter)
                 generateVerticalScrollChipGroup(it.first)
-                viewBinding.loadingContainer.loadingProgress.isVisible = false
+                viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
         tagOnScrollListener.firstCompletelyVisiblePosChange.observe(
@@ -109,23 +109,23 @@ class SeriesChildFragment :
                 isCheckedIconVisible = false
                 gravity = Gravity.CENTER
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
-                if (paint.measureText(text.toString()) > viewBinding.seriesTagList.width) {
+                if (paint.measureText(text.toString()) > viewDataBinding.seriesTagList.width) {
                     textSize = 11F
                 }
                 Log.d(
                     "generateVerticalScrollChipGroup",
-                    "text: $text - $textSize - ${paint.measureText(text.toString())} - $width - ${viewBinding.seriesTagList.width} - $paddingStart - $chipStartPadding"
+                    "text: $text - $textSize - ${paint.measureText(text.toString())} - $width - ${viewDataBinding.seriesTagList.width} - $paddingStart - $chipStartPadding"
                 )
             }
         }.forEach { chip ->
             chip.setOnClickListener {
                 onTagClick(
-                    viewBinding.seriesTagList.getChipGroup().indexOfChild(it)
+                    viewDataBinding.seriesTagList.getChipGroup().indexOfChild(it)
                 )
             }
-            viewBinding.seriesTagList.addOneView(chip)
+            viewDataBinding.seriesTagList.addOneView(chip)
         }
-        viewBinding.seriesTagList.checkByPosition(0)
+        viewDataBinding.seriesTagList.checkByPosition(0)
     }
 
     private fun onRefresh() {
@@ -133,7 +133,7 @@ class SeriesChildFragment :
     }
 
     private fun onTagClick(pos: Int) {
-        viewBinding.seriesTagChildrenList.smoothSnapToPosition(pos)
+        viewDataBinding.seriesTagChildrenList.smoothSnapToPosition(pos)
     }
 
     private fun onTagChildrenItemClick(classify: Classify) {
@@ -152,6 +152,6 @@ class SeriesChildFragment :
     }
 
     private fun tagSelectedChange(pos: Int) {
-        viewBinding.seriesTagList.checkByPosition(pos)
+        viewDataBinding.seriesTagList.checkByPosition(pos)
     }
 }

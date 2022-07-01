@@ -3,7 +3,7 @@ package com.lowe.wanandroid.ui.search.begin
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.di.DefaultApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.search.SearchRepository

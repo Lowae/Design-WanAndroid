@@ -11,7 +11,7 @@ import com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder
 import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemProfileOptionsLayoutBinding
 import com.lowe.wanandroid.ui.profile.ProfileItemBean
-import com.lowe.wanandroid.utils.ColorUtil
+import com.lowe.wanandroid.utils.getPrimaryColor
 
 class ProfileItemBinder(private val onClick: (Int, ProfileItemBean) -> Unit) :
     ItemViewDataBindingBinder<ProfileItemBean, ViewBindingHolder<ItemProfileOptionsLayoutBinding>>() {
@@ -38,7 +38,7 @@ class ProfileItemBinder(private val onClick: (Int, ProfileItemBean) -> Unit) :
             profileItemIcon.setImageDrawable(
                 AppCompatResources.getDrawable(root.context, item.iconRes)?.apply {
                     colorFilter = PorterDuffColorFilter(
-                        ColorUtil.getRandomWarmColor(),
+                        root.context.getPrimaryColor(),
                         PorterDuff.Mode.SRC_IN
                     )
                 }

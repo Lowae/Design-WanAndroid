@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.project
 
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.ProjectTitle
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.project.child.ProjectChildFragment

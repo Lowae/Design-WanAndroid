@@ -4,7 +4,6 @@ import kotlin.random.Random
 
 object ColorUtil {
 
-
     fun getRandomWarmColor() =
         hsvToRgb(Random.nextDouble(0.0, 360.0).toFloat(), 1f, 1f)
 

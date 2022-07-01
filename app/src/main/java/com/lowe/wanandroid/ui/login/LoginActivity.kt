@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.databinding.ActivityLoginBinding
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.utils.showShortToast
@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         overridePendingTransition(R.anim.activity_anim_login_in, R.anim.activity_anim_dummy)
         super.onCreate(savedInstanceState)
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewDataBinding.backIcon.setOnClickListener { finish() }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.apply {
             loginLiveData.observe(this@LoginActivity) {
                 updateLoginLoadingStatus(false)

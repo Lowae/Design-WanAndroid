@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.profile
 
 import androidx.annotation.DrawableRes
 import com.lowe.wanandroid.account.AccountManager
-import com.lowe.wanandroid.services.success
+import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.profile.usecase.UserInfoUseCase

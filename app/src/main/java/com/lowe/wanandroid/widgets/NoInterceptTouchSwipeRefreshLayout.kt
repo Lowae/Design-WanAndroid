@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.lowe.wanandroid.R
 import com.lowe.wanandroid.utils.getPrimaryColor
 
 class NoInterceptTouchSwipeRefreshLayout(context: Context, attrs: AttributeSet?) :
@@ -11,6 +12,7 @@ class NoInterceptTouchSwipeRefreshLayout(context: Context, attrs: AttributeSet?)
 
     init {
         setColorSchemeColors(context.getPrimaryColor())
+        setProgressBackgroundColorSchemeResource(R.color.md_theme_background)
     }
 
     /**

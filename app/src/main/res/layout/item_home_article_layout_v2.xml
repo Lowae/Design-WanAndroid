@@ -41,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:background="?android:attr/selectableItemBackground"
                 android:text="@{article.articleAuthor}"
                 android:textColor="@color/md_theme_on_surface_variant"
                 android:textSize="13sp"

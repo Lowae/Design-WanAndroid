@@ -55,7 +55,7 @@ class ExploreFragment :
     lateinit var appViewModel: AppViewModel
 
     private val homeAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeBannerItemBinder(this@ExploreFragment::onBannerItemClick))
             register(HomeArticleItemBinderV2(this@ExploreFragment::onItemClick))
             registerFooter(LoadMoreItemBinder())
@@ -68,13 +68,13 @@ class ExploreFragment :
 
     override val viewModel: ExploreViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
         if (savedInstanceState == null) {
             onRefresh()
         } else {
-            viewBinding.homeList.layoutManager?.onRestoreInstanceState(
+            viewDataBinding.homeList.layoutManager?.onRestoreInstanceState(
                 BundleCompat.getParcelable(
                     savedInstanceState,
                     KEY_HOME_FRAGMENT_LIST_SAVE_STATE
@@ -87,12 +87,12 @@ class ExploreFragment :
         super.onSaveInstanceState(outState)
         outState.putParcelable(
             KEY_HOME_FRAGMENT_LIST_SAVE_STATE,
-            viewBinding.homeList.layoutManager?.onSaveInstanceState()
+            viewDataBinding.homeList.layoutManager?.onSaveInstanceState()
         )
     }
 
     private fun initView() {
-        viewBinding.homeList.apply {
+        viewDataBinding.homeList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
             setHasFixedSize(true)
@@ -126,7 +126,7 @@ class ExploreFragment :
     }
 
     private fun scrollToTop() {
-        viewBinding.homeList.scrollToPosition(0)
+        viewDataBinding.homeList.scrollToPosition(0)
     }
 
     private fun onRefresh() {
@@ -163,7 +163,7 @@ class ExploreFragment :
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && homeAdapter.isEmpty()
             loadingProgress.isVisible = homeAdapter.isEmpty() && loadStates.isRefreshing

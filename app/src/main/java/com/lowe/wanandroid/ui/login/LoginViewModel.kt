@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.account.LocalUserInfo
-import com.lowe.wanandroid.services.ApiResponse
+import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.repository.AccountRepository
 import com.lowe.wanandroid.ui.BaseViewModel

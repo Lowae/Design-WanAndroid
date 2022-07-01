@@ -1,7 +1,5 @@
 package com.lowe.wanandroid.services.model
 
-import com.lowe.wanandroid.services.PageResponse
-
 /**
  * 分享数据
  */

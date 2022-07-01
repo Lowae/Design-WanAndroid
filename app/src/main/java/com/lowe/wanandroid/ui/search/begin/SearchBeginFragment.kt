@@ -41,13 +41,13 @@ class SearchBeginFragment :
 
     override val viewModel: SearchBeginViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvent()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(hotkeyList) {
                 adapter = hotKeyAdapter
                 layoutManager = FlexboxLayoutManager(context)

@@ -26,15 +26,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
 
     override val viewModel: HomeViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
         childAdapter =
             HomeChildFragmentAdapter(generateHomeTabs(), this.childFragmentManager, lifecycle)
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(homeViewPager2) {
                 adapter = childAdapter
             }
@@ -52,18 +52,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             with(swipeRefreshLayout) {
                 setOnRefreshListener {
                     this@HomeFragment.viewModel.refreshLiveData.value =
-                        childAdapter.items[viewBinding.homeViewPager2.currentItem]
+                        childAdapter.items[viewDataBinding.homeViewPager2.currentItem]
                     this.isRefreshing = false
                 }
             }
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
                 viewModel.scrollToTopLiveData.value =
-                    childAdapter.items[viewBinding.homeViewPager2.currentItem]
+                    childAdapter.items[viewDataBinding.homeViewPager2.currentItem]
             }
         }
     }

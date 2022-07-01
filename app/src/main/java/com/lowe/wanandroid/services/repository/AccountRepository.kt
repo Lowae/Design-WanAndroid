@@ -3,8 +3,8 @@ package com.lowe.wanandroid.services.repository
 import com.lowe.wanandroid.account.AccountState
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.services.AccountService
-import com.lowe.wanandroid.services.ApiResponse
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.ApiResponse
+import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.services.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.services.model.ShareBean
 import com.lowe.wanandroid.ui.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

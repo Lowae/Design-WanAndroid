@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.services.BaseService
 import com.lowe.wanandroid.services.ProjectService
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.isSuccess
 import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(

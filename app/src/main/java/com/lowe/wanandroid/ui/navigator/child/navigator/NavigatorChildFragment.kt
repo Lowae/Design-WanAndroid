@@ -43,13 +43,13 @@ class NavigatorChildFragment :
 
     override val viewModel: NavigatorChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
-        initObserve()
+        initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(tagChildrenList) {
                 tagChildrenAdapter.register(NavigatorChildTagChildrenItemBinder(this@NavigatorChildFragment::onTagChildrenItemClick))
                 adapter = tagChildrenAdapter
@@ -59,12 +59,12 @@ class NavigatorChildFragment :
         }
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.apply {
             navigationTagListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it, tagChildrenAdapter)
                 generateVerticalScrollChipGroup(it.first)
-                viewBinding.loadingContainer.loadingProgress.isVisible = false
+                viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
         tagOnScrollListener.firstCompletelyVisiblePosChange.observe(
@@ -101,12 +101,12 @@ class NavigatorChildFragment :
         }.forEach { chip ->
             chip.setOnClickListener {
                 onTagClick(
-                    viewBinding.verticalTagList.getChipGroup().indexOfChild(it)
+                    viewDataBinding.verticalTagList.getChipGroup().indexOfChild(it)
                 )
             }
-            viewBinding.verticalTagList.addOneView(chip)
+            viewDataBinding.verticalTagList.addOneView(chip)
         }
-        viewBinding.verticalTagList.checkByPosition(0)
+        viewDataBinding.verticalTagList.checkByPosition(0)
     }
 
     private fun dispatchToAdapter(
@@ -118,11 +118,11 @@ class NavigatorChildFragment :
     }
 
     private fun onTagClick(pos: Int) {
-        viewBinding.tagChildrenList.smoothSnapToPosition(pos)
+        viewDataBinding.tagChildrenList.smoothSnapToPosition(pos)
     }
 
     private fun tagSelectedChange(pos: Int) {
-        viewBinding.verticalTagList.checkByPosition(pos)
+        viewDataBinding.verticalTagList.checkByPosition(pos)
     }
 
     private fun onTagChildrenItemClick(article: Article) {

@@ -40,7 +40,7 @@ class MessageTabChildFragment :
     }
 
     private val messagesAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonArticleDiffItemCallback()).apply {
+        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(MessageTabChildItemBinder(this@MessageTabChildFragment::onMsgItemClick))
         }
     private val messageTabBean by lazy(LazyThreadSafetyMode.NONE) {
@@ -52,13 +52,13 @@ class MessageTabChildFragment :
 
     override val viewModel: MessageTabChildViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(messageList) {
                 adapter = messagesAdapter
                 layoutManager = LinearLayoutManager(context)
@@ -88,7 +88,7 @@ class MessageTabChildFragment :
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
-        viewBinding.loadingContainer.apply {
+        viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && messagesAdapter.isEmpty()
             loadingProgress.isVisible = messagesAdapter.isEmpty() && loadStates.isRefreshing

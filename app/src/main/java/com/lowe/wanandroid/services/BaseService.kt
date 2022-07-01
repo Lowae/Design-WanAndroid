@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.services
 
 import com.lowe.wanandroid.base.http.RetrofitManager
+import com.lowe.wanandroid.services.model.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

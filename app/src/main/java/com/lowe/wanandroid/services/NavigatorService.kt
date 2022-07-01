@@ -1,9 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.services.model.Navigation
-import com.lowe.wanandroid.services.model.Series
+import com.lowe.wanandroid.services.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

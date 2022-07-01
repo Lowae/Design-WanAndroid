@@ -8,7 +8,7 @@ import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.base.http.SearchHistoryPreference
 import com.lowe.wanandroid.services.SearchService
-import com.lowe.wanandroid.services.isSuccess
+import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.BaseViewModel
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

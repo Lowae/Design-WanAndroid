@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:background="?android:attr/selectableItemBackground"
                 android:text='@{article.getArticleAuthor}'
                 android:textColor="?colorOnSurfaceVariant"
                 android:textSize="13sp"

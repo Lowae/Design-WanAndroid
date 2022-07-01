@@ -22,14 +22,14 @@ class ProjectFragment :
 
     override val viewModel: ProjectViewModel by viewModels()
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun onViewCreated(savedInstanceState: Bundle?) {
         childAdapter =
             ProjectChildFragmentAdapter(emptyList(), this.childFragmentManager, lifecycle)
         initView()
-        initObserve()
+        initEvents()
     }
 
-    private fun initObserve() {
+    private fun initEvents() {
         viewModel.projectTitleListLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
             childAdapter.notifyItemRangeInserted(0, childAdapter.itemCount)
@@ -37,12 +37,12 @@ class ProjectFragment :
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
             if (childAdapter.items.isEmpty()) return@observe
             viewModel.scrollToTopLiveData.value =
-                childAdapter.items[viewBinding.projectViewPager2.currentItem].id
+                childAdapter.items[viewDataBinding.projectViewPager2.currentItem].id
         }
     }
 
     private fun initView() {
-        viewBinding.apply {
+        viewDataBinding.apply {
             with(projectViewPager2) {
                 adapter = childAdapter
             }
@@ -54,8 +54,8 @@ class ProjectFragment :
                 }
             }
             tabLayoutMediator = TabLayoutMediator(
-                viewBinding.projectTabLayout,
-                viewBinding.projectViewPager2
+                viewDataBinding.projectTabLayout,
+                viewDataBinding.projectViewPager2
             ) { tab: TabLayout.Tab, position: Int ->
                 tab.text = childAdapter.items[position].name.fromHtml()
             }.apply(TabLayoutMediator::attach)

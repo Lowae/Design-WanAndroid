@@ -26,11 +26,10 @@
         <item name="colorSurfaceInverse">@color/md_theme_inverse_surface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_inverse_on_surface</item>
         <item name="colorPrimaryInverse">@color/md_theme_inverse_primary</item>
+        <item name="colorBackgroundFloating">@color/md_theme_background</item>
 
         <item name="android:colorBackground">?colorBackgroundFloating</item>
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:fontFamily">@font/noto_sans_sc_medium</item>
-        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>
