@@ -1,4 +1,4 @@
-# 🦄Material Design WanAndroid
+# 🦄Design WanAndroid
 ## 界面：
 App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝半完成式Material带来的UI的割裂感。<p>
 所有Icon取自[Material Symbols](https://fonts.google.com/icons)，统一而规范的设计。<p>
