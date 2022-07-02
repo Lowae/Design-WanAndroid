@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
@@ -8,8 +9,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.lowe.wanandroid.BuildConfig
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.constant.SettingConstants
+import com.lowe.wanandroid.ui.about.AboutActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 
 
@@ -27,13 +28,16 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
         findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_ABOUT)?.apply {
-            summary = "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
+            summary = getString(R.string.app_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE.toString())
+            setOnPreferenceClickListener {
+                startActivity(Intent(this@SettingFragment.requireContext(), AboutActivity::class.java))
+                true
+            }
         }
 
-        findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_HOME_WEBSITE)?.apply {
-            summary = RetrofitManager.BASE_URL
+        findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_GITHUB)?.apply {
             setOnPreferenceClickListener {
-                WebActivity.loadUrl(requireContext(), RetrofitManager.BASE_URL)
+                WebActivity.loadUrl(requireContext(), summary.toString())
                 true
             }
         }

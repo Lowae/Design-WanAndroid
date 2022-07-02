@@ -13,7 +13,7 @@ object SettingConstants {
     private const val DARK_MODE_FOLLOW_SYSTEM = "system"
 
     const val PREFERENCE_KEY_OTHER_CATEGORY_ABOUT = "other_about"
-    const val PREFERENCE_KEY_OTHER_CATEGORY_HOME_WEBSITE = "other_home_website"
+    const val PREFERENCE_KEY_OTHER_CATEGORY_GITHUB = "other_github"
 
     @AppCompatDelegate.NightMode
     val preferenceDarkMode: Int

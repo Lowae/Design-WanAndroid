@@ -2,8 +2,6 @@ package com.lowe.wanandroid.services
 
 import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.services.model.ApiResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 interface BaseService {
 
@@ -19,6 +17,5 @@ interface BaseService {
         const val DEFAULT_PAGE_START_NO_1 = 1
     }
 
-    suspend fun <T> BaseService.apiCall(api: suspend () -> ApiResponse<T>) =
-        withContext(Dispatchers.IO) { api() }
+    suspend fun <T> BaseService.apiCall(api: suspend () -> ApiResponse<T>) = api()
 }

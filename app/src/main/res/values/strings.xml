@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DesignWanAndroid</string>
+    <string name="app_version">版本号: %s(%s)</string>
     <string name="retry">重试</string>
 
     <string name="title_home">首页</string>
@@ -15,7 +16,6 @@
     <string name="profile_item_title_favorite">收藏文章</string>
 
     <string name="profile_item_title_tools">工具列表</string>
-    <string name="profile_item_title_project_page">项目网址</string>
     <string name="profile_user_name">用户名: %s</string>
     <string name="profile_user_id">id: %s</string>
     <string name="profile_user_coin_and_rank">积分: %s 等级: %s 排名: %s</string>
@@ -43,7 +43,7 @@
     <string name="preference_category_others">其他</string>
     <string name="preference_title_about">关于</string>
     <string name="preference_title_clean_cache">清理缓存</string>
-    <string name="preference_title_home_website">官方网站</string>
+    <string name="preference_title_home_website">源代码</string>
     <string name="setting">设置</string>
     <string name="collect">收藏</string>
     <string name="web_action_menu_share">分享</string>

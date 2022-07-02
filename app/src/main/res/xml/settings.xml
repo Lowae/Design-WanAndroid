@@ -29,11 +29,14 @@
         app:title="@string/preference_category_others">
 
         <Preference
+            app:icon="@drawable/ic_launcher_icon_32dp_color_primary"
             app:key="other_about"
             app:title="@string/preference_title_about" />
 
         <Preference
-            app:key="other_home_website"
+            app:key="other_github"
+            app:icon="@drawable/ic_code_32dp_color_primary"
+            app:summary="https://github.com/Lowae/Design-WanAndroid"
             app:title="@string/preference_title_home_website" />
 
     </PreferenceCategory>

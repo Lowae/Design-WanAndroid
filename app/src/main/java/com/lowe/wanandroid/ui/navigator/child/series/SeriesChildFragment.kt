@@ -3,7 +3,6 @@ package com.lowe.wanandroid.ui.navigator.child.series
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -112,10 +111,6 @@ class SeriesChildFragment :
                 if (paint.measureText(text.toString()) > viewDataBinding.seriesTagList.width) {
                     textSize = 11F
                 }
-                Log.d(
-                    "generateVerticalScrollChipGroup",
-                    "text: $text - $textSize - ${paint.measureText(text.toString())} - $width - ${viewDataBinding.seriesTagList.width} - $paddingStart - $chipStartPadding"
-                )
             }
         }.forEach { chip ->
             chip.setOnClickListener {

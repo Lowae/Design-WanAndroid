@@ -8,24 +8,27 @@ import com.lowe.wanandroid.utils.SDKUtils
 import java.io.Serializable
 
 object IntentCompat {
-    inline fun <reified T : Parcelable> getParcelableExtra(intent: Intent, name: String) =
+    inline fun <reified T : Parcelable> getParcelableExtra(intent: Intent, name: String): T? =
         if (SDKUtils.atLeast33()) {
-            intent.getParcelableExtra(name, T::class.java)
+            intent.getParcelableExtra(name)
         } else {
             intent.getParcelableExtra(name)
         }
 
-    inline fun <reified T : Parcelable> getParcelableArrayListExtra(intent: Intent, name: String) =
+    inline fun <reified T : Parcelable> getParcelableArrayListExtra(
+        intent: Intent,
+        name: String
+    ): ArrayList<T>? =
         if (SDKUtils.atLeast33()) {
-            intent.getParcelableArrayListExtra(name, T::class.java)
+            intent.getParcelableArrayListExtra(name)
         } else {
             intent.getParcelableArrayListExtra(name)
         }
 
-    inline fun <reified T : Serializable> getSerializableExtra(intent: Intent, name: String) =
+    inline fun <reified T : Serializable> getSerializableExtra(intent: Intent, name: String): Serializable? =
         if (SDKUtils.atLeast33()) {
-            intent.getSerializableExtra(name, T::class.java)
+            intent.getSerializableExtra(name)
         } else {
-            intent.getSerializableExtra(name) as T?
+            intent.getSerializableExtra(name)
         }
 }

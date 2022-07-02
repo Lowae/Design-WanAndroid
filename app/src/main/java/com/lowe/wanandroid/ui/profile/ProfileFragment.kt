@@ -21,7 +21,6 @@ import com.lowe.wanandroid.ui.collect.CollectActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.tools.ToolListActivity
-import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,11 +86,7 @@ class ProfileFragment :
             ),
             ProfileItemBean(R.drawable.ic_share_48dp, getString(R.string.profile_item_title_share)),
             ProfileItemBean(R.drawable.ic_collect, getString(R.string.profile_item_title_favorite)),
-            ProfileItemBean(R.drawable.ic_tool_48dp, getString(R.string.profile_item_title_tools)),
-            ProfileItemBean(
-                R.drawable.ic_code_48dp,
-                getString(R.string.profile_item_title_project_page)
-            ),
+            ProfileItemBean(R.drawable.ic_tool_48dp, getString(R.string.profile_item_title_tools))
         )
         profileItemAdapter.notifyItemRangeChanged(0, profileItemAdapter.itemCount)
     }
@@ -152,9 +147,6 @@ class ProfileFragment :
             }
             getString(R.string.profile_item_title_tools) -> {
                 startActivity(Intent(requireContext(), ToolListActivity::class.java))
-            }
-            getString(R.string.profile_item_title_project_page) -> {
-                WebActivity.loadUrl(requireContext(), "https://github.com/Lowae/WanAndroid")
             }
         }
     }

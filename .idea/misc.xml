@@ -102,15 +102,22 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_line_corner.xml" value="0.153" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.227" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_close_24dp.xml" value="0.206" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_close_48dp.xml" value="0.1795" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_code_32dp_color_primary.xml" value="0.1795" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_code_48dp.xml" value="0.181" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_color_palette_32dp.xml" value="0.1605" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_color_palette_48dp.xml" value="0.144" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_dark_mode_48dp.xml" value="0.12" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_favorite_48dp.xml" value="0.1" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.14" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_launcher_icon_32dp.xml" value="0.112" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_launcher_monochrome.xml" value="0.14" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_right_arrow_48dp.xml" value="0.227" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_unfavorite_48dp.xml" value="0.1" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_wanandroid.xml" value="0.1825" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/selected_tag_corner.xml" value="0.14" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_about.xml" value="0.264" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_collect.xml" value="0.4" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -141,7 +148,7 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_collect_list_article_layout.xml" value="0.2" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_footer_layout.xml" value="0.6" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout.xml" value="0.264" />
-        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.4" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.3078817733990148" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_loading_layout.xml" value="0.2" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_message_child_layout.xml" value="0.4" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_navigator_child_tag_children_layout.xml" value="0.264" />
@@ -153,7 +160,7 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/menu/web_action_menu.xml" value="0.178125" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.153" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14" />
-        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/xml/settings.xml" value="0.264" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/xml/settings.xml" value="0.4" />
       </map>
     </option>
   </component>
