@@ -11,6 +11,9 @@ import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.utils.fromHtml
 
+/**
+ * 关于页面
+ */
 class AboutActivity : BaseActivity<AboutViewModel, ActivityAboutBinding>() {
 
     override val viewDataBinding: ActivityAboutBinding by ActivityDataBindingDelegate(R.layout.activity_about)

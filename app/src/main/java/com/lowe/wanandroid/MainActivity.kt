@@ -69,7 +69,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun onBottomDoubleClick(item: MenuItem) {
-        viewModel.mainTabDoubleClickLiveData.value = getTagFromItemId(item.itemId)
+        viewModel.bottomDoubleClick(getTagFromItemId(item.itemId))
     }
 
     private fun switchFragment(fragmentIndex: Int) {

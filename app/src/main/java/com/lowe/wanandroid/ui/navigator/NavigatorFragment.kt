@@ -10,6 +10,9 @@ import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNotificationsBinding
 import com.lowe.wanandroid.ui.BaseFragment
 
+/**
+ * 导航Fragment
+ */
 class NavigatorFragment :
     BaseFragment<NavigatorViewModel, FragmentNotificationsBinding>(R.layout.fragment_notifications) {
 
@@ -44,21 +47,13 @@ class NavigatorFragment :
             ) { tab: TabLayout.Tab, position: Int ->
                 tab.text = childAdapter.items[position].title
             }.apply(TabLayoutMediator::attach)
-            with(swipeRefreshLayout) {
-                setOnRefreshListener {
-                    this@NavigatorFragment.viewModel.refreshLiveData.value =
-                        childAdapter.items[viewDataBinding.navigatorPager2.currentItem]
-                    this.isRefreshing = false
-                }
-            }
         }
     }
 
     private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-                viewModel.scrollToTopLiveData.value =
-                    childAdapter.items[viewDataBinding.navigatorPager2.currentItem]
+                viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.navigatorPager2.currentItem])
             }
         }
     }

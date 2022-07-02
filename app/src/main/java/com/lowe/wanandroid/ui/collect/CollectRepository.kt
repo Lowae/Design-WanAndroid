@@ -8,6 +8,9 @@ import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.BaseViewModel
 import javax.inject.Inject
 
+/**
+ * 收藏Repository
+ */
 class CollectRepository @Inject constructor(private val service: CollectService) {
 
     fun getCollectFlow() = Pager(

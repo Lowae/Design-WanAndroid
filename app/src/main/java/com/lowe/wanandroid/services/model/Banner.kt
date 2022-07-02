@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.services.model
 
 /**
- * 轮播图实体
+ * 轮播图
  */
 data class Banner(
     var desc: String = "",

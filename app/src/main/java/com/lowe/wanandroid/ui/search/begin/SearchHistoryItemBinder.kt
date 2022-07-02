@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemSearchHistoryLayoutBinding
+import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.ui.search.SearchState
 
 class SearchHistoryItemBinder(

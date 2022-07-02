@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
+import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutV2Binding
 import com.lowe.wanandroid.services.model.Article
 

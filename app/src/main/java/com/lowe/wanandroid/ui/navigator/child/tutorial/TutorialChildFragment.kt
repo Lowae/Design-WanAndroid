@@ -16,11 +16,13 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorChildFragmentAdapter
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
-import com.lowe.wanandroid.ui.navigator.NavigatorViewModel
 import com.lowe.wanandroid.ui.navigator.child.tutorial.item.TutorialChildItemBinder
 import com.lowe.wanandroid.ui.navigator.child.tutorial.list.TutorialChapterListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 教程子Fragment页面
+ */
 @AndroidEntryPoint
 class TutorialChildFragment :
     BaseFragment<TutorialChildViewModel, FragmentNavigatorChildTutorialBinding>(R.layout.fragment_navigator_child_tutorial) {
@@ -42,8 +44,6 @@ class TutorialChildFragment :
         ) ?: NavigatorTabBean(NavigatorChildFragmentAdapter.NAVIGATOR_TAB_TUTORIAL)
     }
     private val tutorialAdapter = MultiTypeAdapter()
-    private val parentFragmentViewModel by viewModels<NavigatorViewModel>(this::requireParentFragment)
-
     override val viewModel: TutorialChildViewModel by viewModels()
 
     override fun onViewCreated(savedInstanceState: Bundle?) {
@@ -68,12 +68,6 @@ class TutorialChildFragment :
                 viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
-        parentFragmentViewModel.apply {
-            refreshLiveData.observe(viewLifecycleOwner) {
-                if (it.title == navigatorTabBean.title)
-                    viewModel.fetchTutorialList()
-            }
-        }
     }
 
     private fun dispatchToAdapter(result: Pair<List<Any>, DiffUtil.DiffResult>) {
@@ -81,8 +75,7 @@ class TutorialChildFragment :
         result.second.dispatchUpdatesTo(tutorialAdapter)
     }
 
-    private fun onTutorialItemClick(action: Pair<Int, Classify>) {
-        val (pos, classify) = action
+    private fun onTutorialItemClick(position: Int, classify: Classify) {
         startActivity(Intent(this.context, TutorialChapterListActivity::class.java).apply {
             putExtra(TutorialChapterListActivity.KEY_INTENT_TUTORIAL_ID, classify.id)
         })

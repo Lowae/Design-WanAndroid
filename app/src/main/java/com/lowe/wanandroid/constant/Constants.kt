@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.lowe.wanandroid.base.app.BaseApp
 
-
+/**
+ * 设置页常量
+ */
 object SettingConstants {
     const val PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS = "normal_dynamic_colors"
     const val PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE = "normal_darkMode"
@@ -15,6 +17,9 @@ object SettingConstants {
     const val PREFERENCE_KEY_OTHER_CATEGORY_ABOUT = "other_about"
     const val PREFERENCE_KEY_OTHER_CATEGORY_GITHUB = "other_github"
 
+    /**
+     * 是否开启深色模式
+     */
     @AppCompatDelegate.NightMode
     val preferenceDarkMode: Int
         get() {
@@ -32,6 +37,9 @@ object SettingConstants {
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
 
+    /**
+     * 是否开启动态主题色
+     */
     val preferenceDynamicColors: Boolean
         get() {
             return PreferenceManager.getDefaultSharedPreferences(BaseApp.appContext)

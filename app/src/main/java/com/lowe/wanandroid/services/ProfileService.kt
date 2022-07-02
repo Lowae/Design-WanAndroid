@@ -18,15 +18,24 @@ interface ProfileService : BaseService {
     @GET("message/lg/unread_list//{page}/json")
     suspend fun getUnReadMessageList(@Path("page") page: Int): ApiResponse<PageResponse<MsgBean>>
 
+    /**
+     * 我的分享文章列表
+     */
     @GET("user/lg/private_articles/{page}/json")
     suspend fun getMyShareList(@Path("page") page: Int): ApiResponse<ShareBean>
 
+    /**
+     * 对应用户的分享文章列表
+     */
     @GET("user/{userId}/share_articles/{page}/json")
     suspend fun getUserShareList(
         @Path("userId") userId: String,
         @Path("page") page: Int
     ): ApiResponse<ShareBean>
 
+    /**
+     * 工具列表
+     */
     @GET("tools/list/json")
     suspend fun getToolList(): ApiResponse<List<ToolBean>>
 }

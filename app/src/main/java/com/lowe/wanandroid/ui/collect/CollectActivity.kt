@@ -21,6 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
+/**
+ * 收藏页面
+ */
 @AndroidEntryPoint
 class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>() {
 

@@ -9,6 +9,9 @@ import javax.inject.Inject
 class ExploreViewModel @Inject constructor(private val repository: HomeRepository) :
     BaseViewModel() {
 
+    /**
+     * 首页列表数据Flow
+     */
     fun getArticlesFlow() = repository.getArticlePageList(20)
 
 }

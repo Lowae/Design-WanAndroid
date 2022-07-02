@@ -2,12 +2,10 @@ package com.lowe.wanandroid.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
@@ -31,6 +29,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import okhttp3.internal.immutableListOf
 import kotlin.math.abs
 
+/**
+ * 个人页面
+ */
 @AndroidEntryPoint
 class ProfileFragment :
     BaseFragment<ProfileViewModel, FragmentProfileBinding>(R.layout.fragment_profile) {
@@ -55,7 +56,7 @@ class ProfileFragment :
                 layoutManager = LinearLayoutManager(context)
             }
             with(appBarLayout) {
-                addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                addOnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when {
                         verticalOffset == 0 -> collapsingToolBarStateFlow.value =
                             ProfileCollapsingToolBarState.EXPANDED
@@ -64,7 +65,7 @@ class ProfileFragment :
                         else -> collapsingToolBarStateFlow.value =
                             ProfileCollapsingToolBarState.INTERMEDIATE
                     }
-                })
+                }
             }
             settingFabIcon.setOnClickListener {
                 startActivity(intentTo(Activities.Setting))
@@ -106,7 +107,6 @@ class ProfileFragment :
         }
         lifecycleScope.launchWhenCreated {
             viewModel.userStatusFlow().collect {
-                Log.d("userStatusFlow", it.toString())
                 when (it) {
                     is AccountState.LogIn -> {
                         viewModel.fetchUserInfo()

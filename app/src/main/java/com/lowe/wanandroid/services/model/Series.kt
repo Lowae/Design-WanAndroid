@@ -1,5 +1,8 @@
 package com.lowe.wanandroid.services.model
 
+/**
+ * 体系
+ */
 data class Series(
     val author: String,
     val children: List<Classify>,
@@ -14,7 +17,5 @@ data class Series(
     val parentChapterId: Int,
     val userControlSetTop: Boolean,
     val visible: Int
-) {
-    var isSelected = false
-}
+)
 

@@ -10,6 +10,9 @@ import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 消息页面
+ */
 @AndroidEntryPoint
 class MessageActivity : BaseActivity<MessageViewModel, ActivityMessageBinding>() {
 

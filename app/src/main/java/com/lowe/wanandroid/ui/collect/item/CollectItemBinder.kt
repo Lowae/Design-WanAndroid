@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemCollectListArticleLayoutBinding
 import com.lowe.wanandroid.services.model.CollectBean
+import com.lowe.wanandroid.ui.ViewBindingHolder
 
 class CollectItemBinder(private val onClick: (Int, CollectBean) -> Unit) :
     PagingItemViewBinder<CollectBean, ViewBindingHolder<ItemCollectListArticleLayoutBinding>>() {

@@ -10,6 +10,9 @@ import javax.inject.Inject
 
 class MessageRepository @Inject constructor(private val service: ProfileService) {
 
+    /**
+     * 已读消息Flow
+     */
     fun getReadiedMsgFlow() = Pager(
         PagingConfig(
             pageSize = BaseViewModel.DEFAULT_PAGE_SIZE,
@@ -25,6 +28,9 @@ class MessageRepository @Inject constructor(private val service: ProfileService)
         }
     }.flow
 
+    /**
+     * 未读消息Flow
+     */
     fun getUnreadMsgFlow() = Pager(
         PagingConfig(
             pageSize = BaseViewModel.DEFAULT_PAGE_SIZE,

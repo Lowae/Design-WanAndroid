@@ -29,6 +29,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * 公众号TabLayout下的子Fragment
+ */
 @AndroidEntryPoint
 class GroupChildFragment :
     BaseFragment<GroupChildViewModel, FragmentChildGroupBinding>(R.layout.fragment_child_group) {

@@ -24,7 +24,7 @@
                 app:collapsedTitleTextColor="?colorPrimary"
                 app:contentScrim="@color/md_theme_background"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="Design WanAndroid"
+                app:title="@string/app_name"
                 app:titleCollapseMode="scale"
                 app:toolbarId="@id/toolbar">
 

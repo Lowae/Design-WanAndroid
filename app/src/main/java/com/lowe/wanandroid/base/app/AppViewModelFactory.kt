@@ -7,7 +7,7 @@ import com.lowe.wanandroid.services.usecase.ArticleCollectUseCase
 import javax.inject.Inject
 
 /**
- * Factory to create [AppViewModel]
+ * 用于创建[AppViewModel]实例
  */
 class AppViewModelFactory @Inject constructor(
     private val application: Application,

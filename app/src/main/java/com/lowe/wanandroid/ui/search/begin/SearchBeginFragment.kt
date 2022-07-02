@@ -21,6 +21,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
+/**
+ * 搜索起始页
+ */
 @AndroidEntryPoint
 class SearchBeginFragment :
     BaseFragment<SearchBeginViewModel, FragmentSearchBeginBinding>(R.layout.fragment_search_begin) {

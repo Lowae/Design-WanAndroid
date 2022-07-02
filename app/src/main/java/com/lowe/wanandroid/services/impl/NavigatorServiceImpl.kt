@@ -8,15 +8,15 @@ class NavigatorServiceImpl @Inject constructor() : NavigatorService {
 
     private val service by lazy { RetrofitManager.getService(NavigatorService::class.java) }
 
-    override suspend fun getNavigationList() = apiCall { service.getNavigationList() }
+    override suspend fun getNavigationList() = service.getNavigationList()
 
-    override suspend fun getTreeList() = apiCall { service.getTreeList() }
+    override suspend fun getTreeList() = service.getTreeList()
 
-    override suspend fun getTutorialList() = apiCall { service.getTutorialList() }
+    override suspend fun getTutorialList() = service.getTutorialList()
 
     override suspend fun getTutorialChapterList(id: Int, orderType: Int) =
-        apiCall { service.getTutorialChapterList(id, orderType) }
+        service.getTutorialChapterList(id, orderType)
 
     override suspend fun getSeriesDetailList(page: Int, id: Int, size: Int) =
-        apiCall { service.getSeriesDetailList(page, id, size) }
+        service.getSeriesDetailList(page, id, size)
 }

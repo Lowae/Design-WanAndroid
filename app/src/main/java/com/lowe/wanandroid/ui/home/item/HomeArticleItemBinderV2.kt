@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutV2Binding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.ui.ViewBindingHolder
 
+/**
+ * 文章[PagingItemViewBinder]
+ */
 class HomeArticleItemBinderV2(private val onClick: (ArticleAction) -> Unit) :
     PagingItemViewBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutV2Binding>>() {
 
@@ -61,11 +64,23 @@ class HomeArticleItemBinderV2(private val onClick: (ArticleAction) -> Unit) :
     }
 }
 
+/**
+ * 文章行为
+ */
 sealed interface ArticleAction {
 
+    /**
+     * 主体点击
+     */
     data class ItemClick(val position: Int, val article: Article) : ArticleAction
 
+    /**
+     * 收藏点击
+     */
     data class CollectClick(val position: Int, val article: Article) : ArticleAction
 
+    /**
+     * 作者点击
+     */
     data class AuthorClick(val position: Int, val article: Article) : ArticleAction
 }

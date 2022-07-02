@@ -25,6 +25,9 @@ import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
+/**
+ * 消息子Fragment
+ */
 @AndroidEntryPoint
 class MessageTabChildFragment :
     BaseFragment<MessageTabChildViewModel, FragmentMessageChildListBinding>(R.layout.fragment_message_child_list) {

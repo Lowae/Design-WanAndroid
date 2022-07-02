@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.lowe.multitype.MultiTypePagingAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
@@ -23,11 +22,7 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.showShortToast
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.whenError
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -35,6 +30,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 import kotlin.math.abs
 
+/**
+ * 分享文章页
+ */
 @AndroidEntryPoint
 class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBinding>() {
 
@@ -71,7 +69,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                 setHasFixedSize(true)
             }
             with(appBarLayout) {
-                addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                addOnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when {
                         verticalOffset == 0 -> collapsingToolBarStateFlow.value =
                             ProfileCollapsingToolBarState.EXPANDED
@@ -80,7 +78,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                         else -> collapsingToolBarStateFlow.value =
                             ProfileCollapsingToolBarState.INTERMEDIATE
                     }
-                })
+                }
             }
             with(toolbar) {
                 setNavigationOnClickListener {

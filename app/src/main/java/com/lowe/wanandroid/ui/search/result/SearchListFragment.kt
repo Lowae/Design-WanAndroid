@@ -25,6 +25,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * 搜索结果列表Fragment
+ */
 @AndroidEntryPoint
 class SearchListFragment :
     BaseFragment<SearchListViewModel, FragmentSearchResultBinding>(R.layout.fragment_search_result) {

@@ -7,9 +7,6 @@ import kotlinx.parcelize.RawValue
 @Parcelize
 data class Classify(
     val author: String = "",
-    /**
-     * 暂时用不到，忽略序列化
-     */
     val children: List<@RawValue Any> = emptyList(),
     val courseId: Int = 0,
     val cover: String = "",

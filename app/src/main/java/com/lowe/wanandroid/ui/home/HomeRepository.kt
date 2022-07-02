@@ -12,6 +12,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
+/**
+ * 首页Tab Repository
+ */
 class HomeRepository @Inject constructor(private val service: HomeService) {
 
     private suspend fun getBanner() = service.getBanner()
@@ -30,7 +33,13 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
                 BaseService.DEFAULT_PAGE_START_NO,
                 service = service
             ) { service, page, size ->
+                /**
+                 * 根据Page来区分是否需要拉取Banner和置顶文章
+                 */
                 if (page == BaseService.DEFAULT_PAGE_START_NO) {
+                    /**
+                     * 使用async并行请求
+                     */
                     val (articlesDeferred, topsDeferred, bannersDeferred) =
                         supervisorScope {
                             Triple(
@@ -41,6 +50,9 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
                     val articles = articlesDeferred.await()
                     val tops = topsDeferred.await().success()?.data ?: emptyList()
                     val banners = bannersDeferred.await().success()?.data ?: emptyList()
+                    /**
+                     * 汇总数据
+                     */
                     return@IntKeyPagingSource articles to with(ArrayList<Any>(1 + tops.size + articles.data.datas.size)) {
                         add(Banners(banners))
                         addAll(tops)
@@ -48,6 +60,9 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
                         this
                     }
                 } else {
+                    /**
+                     * page不为0则只是加载更多即可
+                     */
                     service.getArticlePageList(page, size).run {
                         this to this.data.datas
                     }

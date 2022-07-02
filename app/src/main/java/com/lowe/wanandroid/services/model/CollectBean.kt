@@ -21,5 +21,8 @@ data class CollectBean(
     val visible: Int = 0,
     val zan: Int = 0,
 ){
+    /**
+     * 是否收藏状态
+     */
     var collect: Boolean = true
 }

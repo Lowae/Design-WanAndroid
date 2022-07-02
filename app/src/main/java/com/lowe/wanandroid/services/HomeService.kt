@@ -10,27 +10,39 @@ import retrofit2.http.Query
 
 interface HomeService : BaseService {
 
-    /** 获取首页banner数据 */
+    /**
+     * 首页banner
+     */
     @GET("banner/json")
     suspend fun getBanner(): ApiResponse<List<Banner>>
 
-    /** 获取首页文章数据 */
+    /**
+     * 首页文章
+     */
     @GET("article/list/{pageNo}/json")
     suspend fun getArticlePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
     ): ApiResponse<PageResponse<Article>>
 
-    /** 获取置顶文章集合数据 */
+    /**
+     * 首页置顶文章
+     */
     @GET("article/top/json")
     suspend fun getArticleTopList(): ApiResponse<List<Article>>
 
+    /**
+     * 广场文章
+     */
     @GET("user_article/list/{pageNo}/json")
     suspend fun getSquarePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
     ): ApiResponse<PageResponse<Article>>
 
+    /**
+     * 问答列表
+     */
     @GET("wenda/list/{pageNo}/json")
     suspend fun getAnswerPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Article>>
 }

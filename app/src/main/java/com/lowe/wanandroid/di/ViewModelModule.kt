@@ -11,6 +11,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * [AppViewModel] 提供者
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object ViewModelModule {

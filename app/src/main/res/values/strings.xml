@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DesignWanAndroid</string>
+    <string name="app_name">Design WanAndroid</string>
     <string name="app_version">版本号: %s(%s)</string>
     <string name="retry">重试</string>
 

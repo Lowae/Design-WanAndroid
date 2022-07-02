@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.services.model
 
 /**
- * 文章实体
+ * 文章
  */
 data class Article(
     var apkLink: String,
@@ -39,6 +39,9 @@ data class Article(
     var zan: Int
 ){
 
+    /**
+     * 获取文章作者
+     */
     fun getArticleAuthor(): String = author.ifEmpty { shareUser }
 
 }

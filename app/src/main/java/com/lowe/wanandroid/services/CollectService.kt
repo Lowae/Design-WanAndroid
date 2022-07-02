@@ -9,14 +9,21 @@ import retrofit2.http.Path
 
 interface CollectService : BaseService {
 
+    /**
+     * 收藏列表
+     */
     @GET("lg/collect/list/{page}/json")
     suspend fun getCollectList(@Path("page") page: Int): ApiResponse<PageResponse<CollectBean>>
 
-    /** 收藏站内文章 */
+    /**
+     * 收藏站内文章
+     */
     @POST("lg/collect/{id}/json")
     suspend fun collectArticle(@Path("id") id: Int): ApiResponse<Any?>
 
-    /** 取消收藏站内文章 */
+    /**
+     * 取消收藏站内文章
+     */
     @POST("lg/uncollect_originId/{id}/json")
     suspend fun unCollectArticle(@Path("id") id: Int): ApiResponse<Any?>
 

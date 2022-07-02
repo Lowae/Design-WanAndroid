@@ -12,6 +12,9 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.utils.fromHtml
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 项目Tab
+ */
 @AndroidEntryPoint
 class ProjectFragment :
     BaseFragment<ProjectViewModel, FragmentProjectBinding>(R.layout.fragment_project) {

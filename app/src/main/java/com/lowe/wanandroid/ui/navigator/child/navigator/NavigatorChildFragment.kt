@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
@@ -24,7 +25,14 @@ import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.smoothSnapToPosition
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+/**
+ * 导航子Fragment页面
+ */
 @AndroidEntryPoint
 class NavigatorChildFragment :
     BaseFragment<NavigatorChildViewModel, FragmentNavigatorChildNavigatorBinding>(R.layout.fragment_navigator_child_navigator) {
@@ -41,6 +49,13 @@ class NavigatorChildFragment :
     private val tagChildrenAdapter = MultiTypeAdapter()
     private val tagOnScrollListener = NavigatorTagOnScrollListener()
 
+    /**
+     * 延迟到verticalTagList已经加载完成后再启动协程
+     */
+    private val tagChildrenFirstCompletelyVisiblePosChange: Job =
+        lifecycleScope.launch(start = CoroutineStart.LAZY) {
+            tagOnScrollListener.firstCompletelyVisiblePosChange.collect(this@NavigatorChildFragment::tagSelectedChange)
+        }
     override val viewModel: NavigatorChildViewModel by viewModels()
 
     override fun onViewCreated(savedInstanceState: Bundle?) {
@@ -64,15 +79,17 @@ class NavigatorChildFragment :
             navigationTagListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it, tagChildrenAdapter)
                 generateVerticalScrollChipGroup(it.first)
+                if (tagChildrenFirstCompletelyVisiblePosChange.isActive.not()) {
+                    tagChildrenFirstCompletelyVisiblePosChange.start()
+                }
                 viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
-        tagOnScrollListener.firstCompletelyVisiblePosChange.observe(
-            viewLifecycleOwner,
-            this::tagSelectedChange
-        )
     }
 
+    /**
+     * 生成竖向列表Chip
+     */
     private fun generateVerticalScrollChipGroup(tags: List<Any>) {
         tags.asSequence().mapNotNull {
             it as? Navigation
@@ -106,7 +123,6 @@ class NavigatorChildFragment :
             }
             viewDataBinding.verticalTagList.addOneView(chip)
         }
-        viewDataBinding.verticalTagList.checkByPosition(0)
     }
 
     private fun dispatchToAdapter(

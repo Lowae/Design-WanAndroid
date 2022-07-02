@@ -7,6 +7,9 @@ import android.os.Parcelable
 import com.lowe.wanandroid.utils.SDKUtils
 import java.io.Serializable
 
+/**
+ * Bundle Compat类
+ */
 object BundleCompat {
     inline fun <reified T : Parcelable> getParcelable(bundle: Bundle?, key: String?) =
         if (SDKUtils.atLeast33()) {

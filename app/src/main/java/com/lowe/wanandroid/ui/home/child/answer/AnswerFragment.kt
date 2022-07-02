@@ -33,6 +33,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * 问答页面
+ */
 @AndroidEntryPoint
 class AnswerFragment :
     BaseFragment<AnswerViewModel, FragmentHomeChildAnswerBinding>(R.layout.fragment_home_child_answer) {

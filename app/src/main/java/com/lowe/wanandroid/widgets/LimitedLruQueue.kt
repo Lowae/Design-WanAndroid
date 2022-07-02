@@ -2,6 +2,9 @@ package com.lowe.wanandroid.widgets
 
 import java.util.*
 
+/**
+ * LinkedList实现的LruCache
+ */
 class LimitedLruQueue<E>(private val limit: Int) : LinkedList<E>() {
     override fun add(element: E): Boolean {
         remove(element)

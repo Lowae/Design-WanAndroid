@@ -8,6 +8,9 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupChildViewModel @Inject constructor(private val repository: GroupRepository) : BaseViewModel() {
 
+    /**
+     * 公众号文章Flow
+     */
     fun getGroupArticlesFlow(id: Int) = repository.getAuthorArticles(id)
 
 }

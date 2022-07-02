@@ -16,6 +16,9 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.lowe.wanandroid.utils.dpF
 
+/**
+ * 使Chip的ViewGroup能够竖向滚动
+ */
 class VerticalScrollChipGroup @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,

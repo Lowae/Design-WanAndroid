@@ -9,5 +9,8 @@ import javax.inject.Inject
 class AnswerViewModel @Inject constructor(private val repository: HomeRepository) :
     BaseViewModel() {
 
+    /**
+     * 问答列表数据Flow
+     */
     fun getAnswerListFlow() = repository.getAnswerPageList()
 }

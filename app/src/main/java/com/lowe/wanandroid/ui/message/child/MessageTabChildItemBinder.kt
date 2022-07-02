@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemMessageChildLayoutBinding
 import com.lowe.wanandroid.services.model.MsgBean
+import com.lowe.wanandroid.ui.ViewBindingHolder
 
 class MessageTabChildItemBinder(private val onClick: (Int, MsgBean) -> Unit) :
     PagingItemViewBinder<MsgBean, ViewBindingHolder<ItemMessageChildLayoutBinding>>() {

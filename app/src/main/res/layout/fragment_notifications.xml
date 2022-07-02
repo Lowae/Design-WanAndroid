@@ -7,34 +7,28 @@
 
     </data>
 
-    <com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.project.ProjectFragment">
 
-        <LinearLayout
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/navigatorTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".ui.project.ProjectFragment">
+            android:layout_height="wrap_content"
+            app:tabGravity="center"
+            app:tabMode="scrollable"
+            app:tabTextAppearance="@style/TabLayout.TextAppearance"
+            app:tabTextColor="?colorPrimary" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/navigatorPager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/navigatorTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="center"
-                app:tabMode="scrollable"
-                app:tabTextAppearance="@style/TabLayout.TextAppearance"
-                app:tabTextColor="?colorPrimary" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/navigatorPager2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
-    </com.lowe.wanandroid.widgets.NoInterceptTouchSwipeRefreshLayout>
+    </LinearLayout>
 
 </layout>

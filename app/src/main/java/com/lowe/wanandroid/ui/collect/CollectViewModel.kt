@@ -8,5 +8,8 @@ import javax.inject.Inject
 class CollectViewModel @Inject constructor(private val repository: CollectRepository) :
     BaseViewModel() {
 
+    /**
+     * 收藏文章列表Flow
+     */
     fun collectFlow() = repository.getCollectFlow()
 }

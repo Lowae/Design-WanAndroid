@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.services.model
 
 /**
- * 导航实体
+ * 导航
  */
 data class Navigation(
     var articles: List<Article>,

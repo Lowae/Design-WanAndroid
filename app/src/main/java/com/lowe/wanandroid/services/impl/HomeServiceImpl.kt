@@ -8,20 +8,15 @@ class HomeServiceImpl @Inject constructor() : HomeService {
 
     private val service by lazy { RetrofitManager.getService(HomeService::class.java) }
 
-    override suspend fun getBanner() = apiCall { service.getBanner() }
+    override suspend fun getBanner() = service.getBanner()
 
-    override suspend fun getArticleTopList() = apiCall { service.getArticleTopList() }
+    override suspend fun getArticleTopList() = service.getArticleTopList()
 
-    override suspend fun getArticlePageList(
-        pageNo: Int,
-        pageSize: Int
-    ) = apiCall { service.getArticlePageList(pageNo, pageSize) }
+    override suspend fun getArticlePageList(pageNo: Int, pageSize: Int) =
+        service.getArticlePageList(pageNo, pageSize)
 
     override suspend fun getSquarePageList(pageNo: Int, pageSize: Int) =
-        apiCall { service.getSquarePageList(pageNo, pageSize) }
+        service.getSquarePageList(pageNo, pageSize)
 
-    override suspend fun getAnswerPageList(pageNo: Int) =
-        apiCall { service.getAnswerPageList(pageNo) }
-
-
+    override suspend fun getAnswerPageList(pageNo: Int) = service.getAnswerPageList(pageNo)
 }

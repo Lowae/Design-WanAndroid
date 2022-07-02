@@ -28,6 +28,7 @@
                 app:collapsedTitleTextColor="?colorPrimary"
                 app:contentScrim="?android:attr/colorBackground"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleCollapseMode="scale"
                 app:toolbarId="@+id/toolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout

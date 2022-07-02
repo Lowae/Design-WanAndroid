@@ -9,7 +9,7 @@ class AccountServiceImpl @Inject constructor() : AccountService {
     private val service by lazy { RetrofitManager.getService(AccountService::class.java) }
 
     override suspend fun login(username: String, password: String) =
-        apiCall { service.login(username, password) }
+        service.login(username, password)
 
-    override suspend fun getUserInfo() = apiCall { service.getUserInfo() }
+    override suspend fun getUserInfo() = service.getUserInfo()
 }

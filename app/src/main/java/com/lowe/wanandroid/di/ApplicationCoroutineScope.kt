@@ -20,12 +20,18 @@ annotation class DefaultApplicationScope
 @Qualifier
 annotation class IOApplicationScope
 
+/**
+ * Application周期内的[CoroutineScope]提供者，当需要在页面生命周期之外开启协程时使用
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object ApplicationCoroutineScope {
 
     private const val TAG = "ApplicationCoroutineScope"
 
+    /**
+     * 默认[Dispatchers.Default]
+     */
     private val defaultApplicationScope by lazy {
         CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { _, throwable ->
             AppLog.e(
@@ -34,6 +40,9 @@ object ApplicationCoroutineScope {
         })
     }
 
+    /**
+     * 默认[Dispatchers.IO]
+     */
     private val ioApplicationScope by lazy {
         CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
             AppLog.e(

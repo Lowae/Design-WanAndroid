@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.group
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.services.model.success
@@ -12,17 +13,34 @@ import javax.inject.Inject
 class GroupViewModel @Inject constructor(private val repository: GroupRepository) :
     BaseViewModel() {
 
-    val authorsNameLiveData = MutableLiveData<List<Classify>>()
-    val parentRefreshLiveData = MutableLiveData<Int>()
-    val scrollToTopLiveData = MutableLiveData<Int>()
+    private val _authorsNameLiveData = MutableLiveData<List<Classify>>()
+    val authorsNameLiveData: LiveData<List<Classify>> = _authorsNameLiveData
+    private val _parentRefreshLiveData = MutableLiveData<Int>()
+    val parentRefreshLiveData: LiveData<Int> = _parentRefreshLiveData
+    private val _scrollToTopLiveData = MutableLiveData<Int>()
+    val scrollToTopLiveData: LiveData<Int> = _scrollToTopLiveData
 
     override fun init() {
         fetchAuthorsName()
     }
 
+    /**
+     * 用于公众号子Fragment滚到顶部
+     */
+    fun scrollToTopEvent(id: Int) {
+        _scrollToTopLiveData.value = id
+    }
+
+    /**
+     * 用于公众号子Fragment触发刷新
+     */
+    fun parentRefreshEvent(id: Int) {
+        _parentRefreshLiveData.value = id
+    }
+
     private fun fetchAuthorsName() {
         launch({
-            authorsNameLiveData.value =
+            _authorsNameLiveData.value =
                 repository.getAuthorTitleList().success()?.data ?: emptyList()
         })
     }

@@ -26,6 +26,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * 体系tag下的子Fragment
+ */
 @AndroidEntryPoint
 class SeriesDetailChildFragment :
     BaseFragment<SeriesDetailChildViewModel, FragmentSeriesDetailChildBinding>(R.layout.fragment_series_detail_child) {

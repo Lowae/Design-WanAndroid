@@ -12,6 +12,9 @@ import com.lowe.wanandroid.base.http.RetrofitManager
 import com.lowe.wanandroid.constant.SettingConstants
 import dagger.hilt.android.HiltAndroidApp
 
+/**
+ * App
+ */
 @HiltAndroidApp
 open class BaseApp : Application(), ViewModelStoreOwner {
 

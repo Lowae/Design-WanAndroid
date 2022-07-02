@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.services.model
 
 /**
- * 项目标题实体
+ * 项目标题
  */
 data class ProjectTitle(
     val author: String = "",

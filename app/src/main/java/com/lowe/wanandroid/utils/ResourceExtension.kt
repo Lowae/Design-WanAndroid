@@ -5,9 +5,6 @@ import android.content.res.Resources
 import android.util.TypedValue
 import com.lowe.wanandroid.R
 
-/**
- * sp to float value
- */
 inline val Float.spF: Float
     get() {
         return TypedValue.applyDimension(
@@ -17,25 +14,16 @@ inline val Float.spF: Float
         )
     }
 
-/**
- * sp to int value
- */
 inline val Int.sp: Int
     get() {
         return this.toFloat().sp
     }
 
-/**
- * sp to int value
- */
 inline val Float.sp: Int
     get() {
         return spF.toInt()
     }
 
-/**
- * dp to float value
- */
 inline val Float.dpF: Float
     get() {
         return TypedValue.applyDimension(
@@ -45,30 +33,24 @@ inline val Float.dpF: Float
         )
     }
 
-/**
- * dp to float value
- */
 inline val Int.dpF: Float
     get() {
         return toFloat().dpF
     }
 
-/**
- * dp to int value
- */
 inline val Int.dp: Int
     get() {
         return toFloat().dp
     }
 
-/**
- * dp to int value
- */
 inline val Float.dp: Int
     get() {
         return dpF.toInt()
     }
 
+/**
+ * 获取Primary Color
+ */
 fun Context.getPrimaryColor() = runCatching {
     TypedValue().let {
         this.theme.resolveAttribute(android.R.attr.colorPrimary, it, true)

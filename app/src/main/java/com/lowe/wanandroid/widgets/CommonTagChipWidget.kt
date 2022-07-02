@@ -15,6 +15,9 @@ import com.lowe.wanandroid.utils.setRippleBackground
 
 object CommonTagChipWidget {
 
+    /**
+     * 生成TextView实现的Chip，Material的[Chip]可定制空间太低了
+     */
     fun generateTextViewChip(
         context: Context,
         layoutParams: ViewGroup.MarginLayoutParams

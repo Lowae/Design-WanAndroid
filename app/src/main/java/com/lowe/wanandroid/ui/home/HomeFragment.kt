@@ -12,6 +12,9 @@ import com.lowe.wanandroid.databinding.FragmentHomeBinding
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.search.SearchActivity
 
+/**
+ * 首页Tab
+ */
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
 
     companion object {
@@ -38,7 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             with(homeViewPager2) {
                 adapter = childAdapter
             }
-            with(searchIcon){
+            with(searchIcon) {
                 setOnClickListener {
                     startActivity(Intent(this@HomeFragment.context, SearchActivity::class.java))
                 }
@@ -51,8 +54,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             }.apply(TabLayoutMediator::attach)
             with(swipeRefreshLayout) {
                 setOnRefreshListener {
-                    this@HomeFragment.viewModel.refreshLiveData.value =
-                        childAdapter.items[viewDataBinding.homeViewPager2.currentItem]
+                    this@HomeFragment.viewModel.refreshEvent(childAdapter.items[viewDataBinding.homeViewPager2.currentItem])
                     this.isRefreshing = false
                 }
             }
@@ -62,8 +64,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-                viewModel.scrollToTopLiveData.value =
-                    childAdapter.items[viewDataBinding.homeViewPager2.currentItem]
+                viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.homeViewPager2.currentItem])
             }
         }
     }

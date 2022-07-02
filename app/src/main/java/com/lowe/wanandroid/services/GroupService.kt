@@ -10,10 +10,15 @@ import retrofit2.http.Query
 
 interface GroupService : BaseService {
 
-    /** 获取公众号作者列表 */
+    /**
+     * 公众号作者列表
+     */
     @GET("wxarticle/chapters/json")
     suspend fun getAuthorTitleList(): ApiResponse<List<Classify>>
 
+    /**
+     * 对于id作者的文章
+     */
     @GET("wxarticle/list/{id}/{page}/json")
     suspend fun getAuthorArticles(
         @Path("id") id: Int,

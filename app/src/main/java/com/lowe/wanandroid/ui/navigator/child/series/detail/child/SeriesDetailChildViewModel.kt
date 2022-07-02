@@ -9,6 +9,9 @@ import javax.inject.Inject
 class SeriesDetailChildViewModel @Inject constructor(private val repository: NavigatorRepository) :
     BaseViewModel() {
 
+    /**
+     * 获取对应Tag的体系文章列表
+     */
     fun getSeriesDetailListFlow(id: Int) = repository.getSeriesDetailList(id, DEFAULT_PAGE_SIZE)
 
 }

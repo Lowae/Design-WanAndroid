@@ -15,6 +15,9 @@ inline fun <T : View> T?.showIf(needShow: Boolean, afterShown: (T) -> Unit) {
     if (needShow && this != null) afterShown(this)
 }
 
+/**
+ * 设置Ripple背景
+ */
 fun View.setRippleBackground(
     originBackgroundDrawable: Drawable,
     @ColorInt rippleColor: Int? = null,

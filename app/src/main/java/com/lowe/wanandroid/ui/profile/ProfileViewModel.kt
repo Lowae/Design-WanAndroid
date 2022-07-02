@@ -26,8 +26,10 @@ class ProfileViewModel @Inject constructor(
     fun userStatusFlow() = userInfoUseCase.accountStatusFlow()
 }
 
+/**
+ * 个人页选项
+ */
 class ProfileItemBean(
-
     @DrawableRes
     val iconRes: Int,
     val title: String,

@@ -8,7 +8,7 @@ import androidx.core.view.children
 import kotlin.math.abs
 
 /**
- * 避免ViewPager2内部RecyclerView滑到底后事件被ViewPager2拦截1
+ * 避免ViewPager2内部RecyclerView滑到底后事件被ViewPager2拦截
  */
 class NestedScrollMediateContainer @JvmOverloads constructor(
     context: Context,

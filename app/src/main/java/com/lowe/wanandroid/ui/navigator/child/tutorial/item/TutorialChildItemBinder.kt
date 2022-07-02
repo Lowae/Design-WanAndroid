@@ -3,14 +3,14 @@ package com.lowe.wanandroid.ui.navigator.child.tutorial.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTutorialLayoutBinding
 import com.lowe.wanandroid.services.model.Classify
+import com.lowe.wanandroid.ui.ViewBindingHolder
 
-class TutorialChildItemBinder(private val onClick: (Pair<Int, Classify>) -> Unit) :
-    ItemViewDataBindingBinder<Classify, ViewBindingHolder<ItemNavigatorChildTutorialLayoutBinding>>() {
+class TutorialChildItemBinder(private val onClick: (Int, Classify) -> Unit) :
+    ItemViewBinder<Classify, ViewBindingHolder<ItemNavigatorChildTutorialLayoutBinding>>() {
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup
@@ -29,14 +29,12 @@ class TutorialChildItemBinder(private val onClick: (Pair<Int, Classify>) -> Unit
         holder: ViewBindingHolder<ItemNavigatorChildTutorialLayoutBinding>,
         item: Classify
     ) {
-        super.onBindViewHolder(holder, item)
         holder.binding.apply {
             classify = item
             executePendingBindings()
+            root.setOnClickListener {
+                onClick(holder.bindingAdapterPosition, item)
+            }
         }
-    }
-
-    override fun onItemClick(position: Int) {
-        position.takeIf { it >= 0 }?.also { onClick(it to adapterItems[it] as Classify) }
     }
 }

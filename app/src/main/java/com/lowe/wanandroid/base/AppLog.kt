@@ -3,21 +3,23 @@ package com.lowe.wanandroid.base
 import android.util.Log
 import com.lowe.wanandroid.BuildConfig
 
+/**
+ * App 日志类
+ */
 object AppLog {
 
     private const val DEFAULT_TAG = "WanAndroid"
 
-    /** 是否是调试状态，即是否打印日志 */
+    /**
+     * Debug 下开启
+     */
     private val isDebug
         get() = BuildConfig.DEBUG
 
-    /**
-     * 默认日志tag
-     */
-    var tag = DEFAULT_TAG
+    private const val tag = DEFAULT_TAG
 
     /**
-     * 打印VERBOSE类型的日志
+     * [Log.VERBOSE]
      */
     fun v(tag: String = DEFAULT_TAG, msg: String) {
         if (isDebug) {
@@ -26,7 +28,7 @@ object AppLog {
     }
 
     /**
-     * 打印DEBUG类型的日志
+     * [Log.DEBUG]
      */
     fun d(tag: String = DEFAULT_TAG, msg: String) {
         if (isDebug) {
@@ -35,7 +37,7 @@ object AppLog {
     }
 
     /**
-     * 打印INFO类型的日志
+     * [Log.INFO]
      */
     fun i(tag: String = DEFAULT_TAG, msg: String) {
         if (isDebug) {
@@ -44,7 +46,7 @@ object AppLog {
     }
 
     /**
-     * 打印WARN类型的日志
+     * [Log.WARN]
      */
     fun w(tag: String = DEFAULT_TAG, msg: String) {
         if (isDebug) {
@@ -53,7 +55,7 @@ object AppLog {
     }
 
     /**
-     * 打印ERROR类型的日志
+     * [Log.ERROR]
      */
     fun e(tag: String = DEFAULT_TAG, msg: String) {
         if (isDebug) {
@@ -61,6 +63,9 @@ object AppLog {
         }
     }
 
+    /**
+     * [Log.ERROR]
+     */
     fun e(tag: String = DEFAULT_TAG, msg: String, exception: Throwable) {
         if (isDebug) {
             Log.e(tag, msg, exception)

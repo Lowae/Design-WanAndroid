@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
@@ -25,7 +26,14 @@ import com.lowe.wanandroid.ui.navigator.child.series.item.SeriesChildTagChildren
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
 import com.lowe.wanandroid.utils.smoothSnapToPosition
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+/**
+ * 体系在导航Tab下的子Fragment页面
+ */
 @AndroidEntryPoint
 class SeriesChildFragment :
     BaseFragment<SeriesChildViewModel, FragmentNavigatorChildSeriesBinding>(R.layout.fragment_navigator_child_series) {
@@ -42,6 +50,10 @@ class SeriesChildFragment :
 
     private val tagChildrenAdapter = MultiTypeAdapter()
     private val tagOnScrollListener = NavigatorTagOnScrollListener()
+    private val tagChildrenFirstCompletelyVisiblePosChange: Job =
+        lifecycleScope.launch(start = CoroutineStart.LAZY) {
+            tagOnScrollListener.firstCompletelyVisiblePosChange.collect(this@SeriesChildFragment::tagSelectedChange)
+        }
 
     override val viewModel: SeriesChildViewModel by viewModels()
 
@@ -67,13 +79,12 @@ class SeriesChildFragment :
             seriesListLiveData.observe(viewLifecycleOwner) {
                 dispatchToAdapter(it, tagChildrenAdapter)
                 generateVerticalScrollChipGroup(it.first)
+                if (tagChildrenFirstCompletelyVisiblePosChange.isActive.not()) {
+                    tagChildrenFirstCompletelyVisiblePosChange.start()
+                }
                 viewDataBinding.loadingContainer.loadingProgress.isVisible = false
             }
         }
-        tagOnScrollListener.firstCompletelyVisiblePosChange.observe(
-            viewLifecycleOwner,
-            this::tagSelectedChange
-        )
     }
 
     private fun dispatchToAdapter(
@@ -120,7 +131,6 @@ class SeriesChildFragment :
             }
             viewDataBinding.seriesTagList.addOneView(chip)
         }
-        viewDataBinding.seriesTagList.checkByPosition(0)
     }
 
     private fun onRefresh() {

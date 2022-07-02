@@ -3,10 +3,13 @@ package com.lowe.wanandroid.base
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.lowe.wanandroid.base.http.exception.ApiException
-import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.BaseService
+import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.model.isSuccess
 
+/**
+ * PagingSource 通用封装类
+ */
 class IntKeyPagingSource<S : BaseService, V : Any>(
     private val pageStart: Int = BaseService.DEFAULT_PAGE_START_NO_1,
     private val service: S,

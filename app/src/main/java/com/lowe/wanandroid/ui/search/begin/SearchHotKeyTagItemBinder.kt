@@ -10,6 +10,9 @@ import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.widgets.CommonTagChipWidget
 
+/**
+ * 搜索热词Tag Item
+ */
 class SearchHotKeyTagItemBinder(private val onTagChildrenClick: (HotKeyBean) -> Unit) :
     ItemViewBinder<HotKeyBean, SearchHotKeyTagItemBinder.Holder>() {
 

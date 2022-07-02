@@ -1,5 +1,6 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import com.lowe.wanandroid.services.model.success
@@ -14,7 +15,8 @@ import javax.inject.Inject
 class TutorialChildViewModel @Inject constructor(private val repository: NavigatorRepository) :
     BaseViewModel() {
 
-    val tutorialListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
+    private val _tutorialListLiveData = MutableLiveData<Pair<List<Any>, DiffUtil.DiffResult>>()
+    val tutorialListLiveData: LiveData<Pair<List<Any>, DiffUtil.DiffResult>> = _tutorialListLiveData
 
     override fun init() {
         fetchTutorialList()
@@ -23,8 +25,8 @@ class TutorialChildViewModel @Inject constructor(private val repository: Navigat
     fun fetchTutorialList() {
         launch({
             val tutorials = repository.getTutorialList().success()?.data ?: emptyList()
-            tutorialListLiveData.value =
-                getDiffResultPair(tutorialListLiveData.value?.first ?: emptyList(), tutorials)
+            _tutorialListLiveData.value =
+                getDiffResultPair(_tutorialListLiveData.value?.first ?: emptyList(), tutorials)
         })
     }
 

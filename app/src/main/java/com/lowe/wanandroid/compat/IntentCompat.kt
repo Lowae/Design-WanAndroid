@@ -7,6 +7,9 @@ import android.os.Parcelable
 import com.lowe.wanandroid.utils.SDKUtils
 import java.io.Serializable
 
+/**
+ * Intent Compat类
+ */
 object IntentCompat {
     inline fun <reified T : Parcelable> getParcelableExtra(intent: Intent, name: String): T? =
         if (SDKUtils.atLeast33()) {

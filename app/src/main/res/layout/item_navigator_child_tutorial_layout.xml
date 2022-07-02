@@ -4,18 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="binder"
-            type="com.lowe.wanandroid.base.binder.ItemViewDataBindingBinder" />
-
         <variable
             name="classify"
             type="com.lowe.wanandroid.services.model.Classify" />
-
-        <variable
-            name="position"
-            type="int" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -34,7 +25,6 @@
             android:layout_height="wrap_content"
             android:background="@color/secondary_background_container"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{()->binder.onItemClick(position)}"
             android:padding="10dp">
 
             <com.facebook.drawee.view.SimpleDraweeView

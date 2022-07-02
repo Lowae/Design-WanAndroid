@@ -12,6 +12,9 @@ import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 体系tag页面
+ */
 @AndroidEntryPoint
 class SeriesDetailListActivity :
     BaseActivity<SeriesDetailListViewModel, ActivitySeriesDetailListLayoutBinding>() {
@@ -66,8 +69,7 @@ class SeriesDetailListActivity :
 
     private fun initEvents() {
         viewDataBinding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.onRefreshLiveData.value =
-                detailFragmentAdapter.items[viewDataBinding.seriesDetailPager2.currentItem]
+            viewModel.onRefreshEvent(detailFragmentAdapter.items[viewDataBinding.seriesDetailPager2.currentItem])
             viewDataBinding.swipeRefreshLayout.isRefreshing = false
         }
     }

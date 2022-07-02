@@ -10,12 +10,14 @@ import retrofit2.http.Query
 
 interface ProjectService : BaseService {
 
-    /** 获取项目分类数据 */
+    /**
+     * 项目分类数据
+     */
     @GET("project/tree/json")
     suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>>
 
     /**
-     * 项目文章列表数据
+     * 项目文章列表
      */
     @GET("project/list/{pageNo}/json")
     suspend fun getProjectPageList(
@@ -24,7 +26,9 @@ interface ProjectService : BaseService {
         @Query("cid") categoryId: Int
     ): ApiResponse<PageResponse<Article>>
 
-    /** 获取最新项目列表分页数据 */
+    /**
+     * 最新项目列表
+     */
     @GET("article/listproject/{pageNo}/json")
     suspend fun getNewProjectPageList(
         @Path("pageNo") pageNo: Int,

@@ -10,7 +10,9 @@ import retrofit2.http.POST
 
 interface AccountService : BaseService {
 
-    /** 登录 */
+    /**
+     * 登录
+     */
     @FormUrlEncoded
     @POST("user/login")
     suspend fun login(
@@ -18,6 +20,9 @@ interface AccountService : BaseService {
         @Field("password") password: String
     ): ApiResponse<User>
 
+    /**
+     * 获取用户信息
+     */
     @GET("user/lg/userinfo/json")
     suspend fun getUserInfo(): ApiResponse<UserBaseInfo>
 }

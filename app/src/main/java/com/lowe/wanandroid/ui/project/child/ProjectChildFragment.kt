@@ -29,6 +29,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
+/**
+ * 项目子Fragment
+ */
 @AndroidEntryPoint
 class ProjectChildFragment :
     BaseFragment<ProjectChildViewModel, FragmentChildProjectBinding>(R.layout.fragment_child_project) {

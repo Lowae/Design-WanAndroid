@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.binder.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemProjectArticleLayoutBinding
 import com.lowe.wanandroid.services.model.Article
+import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 
 class ProjectChildItemBinder(private val onClick: (ArticleAction) -> Unit) :

@@ -20,6 +20,9 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
     private val _loginLiveData = MutableLiveData<ApiResponse<User>>()
     val loginLiveData: LiveData<ApiResponse<User>> = _loginLiveData
 
+    /**
+     * 数据绑定
+     */
     val userNameObservable = ObservableField<String>()
     val passwordObservable = ObservableField<String>()
     val loginEnable = object : ObservableBoolean(userNameObservable, passwordObservable) {

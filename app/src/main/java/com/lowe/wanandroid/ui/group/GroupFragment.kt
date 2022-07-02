@@ -11,6 +11,9 @@ import com.lowe.wanandroid.databinding.FragmentGroupBinding
 import com.lowe.wanandroid.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 公众号Tab Fragment
+ */
 @AndroidEntryPoint
 class GroupFragment :
     BaseFragment<GroupViewModel, FragmentGroupBinding>(R.layout.fragment_group) {
@@ -35,8 +38,7 @@ class GroupFragment :
         }
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
             if (childAdapter.items.isEmpty()) return@observe
-            viewModel.scrollToTopLiveData.value =
-                childAdapter.items[viewDataBinding.groupViewPager2.currentItem].id
+            viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.groupViewPager2.currentItem].id)
         }
     }
 
@@ -47,8 +49,7 @@ class GroupFragment :
             }
             with(groupSwipeRefresh) {
                 setOnRefreshListener {
-                    this@GroupFragment.viewModel.parentRefreshLiveData.value =
-                        childAdapter.items[groupViewPager2.currentItem].id
+                    this@GroupFragment.viewModel.parentRefreshEvent(childAdapter.items[groupViewPager2.currentItem].id)
                     this.isRefreshing = false
                 }
             }

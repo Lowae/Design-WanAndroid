@@ -1,7 +1,8 @@
 package com.lowe.wanandroid.ui.search.begin
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lowe.wanandroid.di.DefaultApplicationScope
+import com.lowe.wanandroid.di.IOApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
@@ -17,13 +18,18 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchBeginViewModel @Inject constructor(
     private val repository: SearchRepository,
-    @DefaultApplicationScope private val applicationScope: CoroutineScope
+    @IOApplicationScope private val applicationScope: CoroutineScope
 ) :
     BaseViewModel() {
 
-    val searchHotKeyLiveData = MutableLiveData<List<HotKeyBean>>()
-    val historyLiveData = MutableLiveData<List<SearchState>>()
+    private val _searchHotKeyLiveData = MutableLiveData<List<HotKeyBean>>()
+    val searchHotKeyLiveData: LiveData<List<HotKeyBean>> = _searchHotKeyLiveData
+    private val _historyLiveData = MutableLiveData<List<SearchState>>()
+    val historyLiveData: LiveData<List<SearchState>> = _historyLiveData
 
+    /**
+     * 保存搜查记录的LRUCache
+     */
     private val historyLruCache = LimitedLruQueue<SearchState>(20)
 
     override fun init() {
@@ -33,6 +39,9 @@ class SearchBeginViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
+        /**
+         * 更新搜索记录，在ViewModel生命周期结束后触发，所以需要applicationScope来开启协程
+         */
         applicationScope.launch {
             repository.updateSearchHistory(historyLruCache.map { it.keywords }.toSet())
         }
@@ -40,7 +49,7 @@ class SearchBeginViewModel @Inject constructor(
 
     private fun getHotKeys() {
         launch({
-            searchHotKeyLiveData.value = repository.getHotKeyList().success()?.data ?: emptyList()
+            _searchHotKeyLiveData.value = repository.getHotKeyList().success()?.data ?: emptyList()
         })
     }
 
@@ -52,12 +61,12 @@ class SearchBeginViewModel @Inject constructor(
 
     fun historyPut(state: SearchState) {
         historyLruCache.add(state)
-        historyLiveData.value = historyLruCache.toList()
+        _historyLiveData.value = historyLruCache.toList()
     }
 
     fun historyRemove(state: SearchState) {
         historyLruCache.remove(state)
-        historyLiveData.value = historyLruCache.toList()
+        _historyLiveData.value = historyLruCache.toList()
     }
 
 }

@@ -19,10 +19,19 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
     private val _shortcutSearchLiveData = MutableLiveData<String>()
     val shortcutSearchLiveData: LiveData<String> = _shortcutSearchLiveData
 
+    /**
+     * 搜索状态StateFlow
+     */
     val searchState: StateFlow<SearchState>
 
+    /**
+     * Pager Flow
+     */
     val pagingDataFlow: Flow<PagingData<Article>>
 
+    /**
+     * 搜索触发
+     */
     val searchAccept: (SearchAction) -> Unit
 
     init {
@@ -31,10 +40,16 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
             .filterIsInstance<SearchAction.Search>()
             .distinctUntilChanged()
 
+        /**
+         * 将搜索行为转换为Pager流
+         */
         pagingDataFlow = searches
             .flatMapLatest { repository.search(it.query) }
             .cachedIn(viewModelScope)
 
+        /**
+         * 搜索状态流
+         */
         searchState = searches
             .map { SearchState(it.query) }
             .stateIn(
@@ -44,6 +59,9 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
             )
 
         searchAccept = {
+            /**
+             * 对搜索流actionSharedFlow emit搜索动作
+             */
             viewModelScope.launch { actionSharedFlow.emit(it) }
         }
     }
@@ -53,11 +71,17 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
     }
 
 
+    /**
+     * 所以的搜索行为（热词、历史记录、手动查询）最终都会走到此处
+     */
     fun search(keywords: String) {
         searchAccept(SearchAction.Search(keywords))
     }
 }
 
+/**
+ * 目前暂时只有纯粹的搜索行为
+ */
 sealed class SearchAction {
     data class Search(val query: String) : SearchAction()
 }

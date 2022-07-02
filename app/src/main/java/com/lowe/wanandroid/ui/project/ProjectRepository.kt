@@ -8,12 +8,13 @@ import com.lowe.wanandroid.services.ProjectService
 import com.lowe.wanandroid.services.model.isSuccess
 import javax.inject.Inject
 
-class ProjectRepository @Inject constructor(
-    private val service: ProjectService
-) {
+class ProjectRepository @Inject constructor(private val service: ProjectService) {
 
     suspend fun getProjectTitleList() = service.getProjectTitleList()
 
+    /**
+     * 项目列表Flow
+     */
     fun getProjectListFlow(pageSize: Int, categoryId: Int) =
         Pager(
             PagingConfig(
@@ -32,6 +33,9 @@ class ProjectRepository @Inject constructor(
             }
         }.flow
 
+    /**
+     * 最新项目列表Flow
+     */
     fun getNewProjectListFlow(pageSize: Int) =
         Pager(
             PagingConfig(

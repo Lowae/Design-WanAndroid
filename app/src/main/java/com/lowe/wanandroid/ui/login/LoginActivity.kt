@@ -12,6 +12,9 @@ import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.utils.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 登陆页面
+ */
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
