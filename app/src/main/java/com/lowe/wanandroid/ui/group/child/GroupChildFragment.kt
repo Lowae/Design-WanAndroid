@@ -8,7 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingLoadStateAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentChildGroupBinding
@@ -16,7 +17,7 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.LoadMoreItemBinder
+import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.group.GroupViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
@@ -59,9 +60,8 @@ class GroupChildFragment :
     }
 
     private val articlesAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@GroupChildFragment::onArticleClick))
-            registerFooter(LoadMoreItemBinder())
         }
     private val groupViewModel by viewModels<GroupViewModel>(this::requireParentFragment)
 
@@ -75,7 +75,12 @@ class GroupChildFragment :
     private fun initView() {
         viewDataBinding.apply {
             with(childList) {
-                adapter = articlesAdapter
+                adapter = articlesAdapter.withLoadStateFooter(
+                    PagingLoadStateAdapter(
+                        SimpleFooterItemBinder(),
+                        articlesAdapter.types
+                    )
+                )
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }

@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
@@ -44,7 +44,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     }
 
     private val shareAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@ShareListActivity::onArticleClick))
         }
 
@@ -110,7 +110,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
             viewModel.getShareFlow(userId).collectLatest(shareAdapter::submitData)
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.getShareBeanFlow().collectLatest(this@ShareListActivity::updateShareUserInfo)
+            viewModel.getShareBeanFlow.collectLatest(this@ShareListActivity::updateShareUserInfo)
         }
         appViewModel.collectArticleEvent.observe(this) { event ->
             shareAdapter.snapshot().run {

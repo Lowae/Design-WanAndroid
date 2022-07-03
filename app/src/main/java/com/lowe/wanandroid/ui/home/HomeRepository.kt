@@ -97,7 +97,7 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
             )
         ) {
             IntKeyPagingSource(
-                BaseService.DEFAULT_PAGE_START_NO,
+                BaseService.DEFAULT_PAGE_START_NO_1,
                 service = service
             ) { service, page, _ ->
                 service.getAnswerPageList(page).run {

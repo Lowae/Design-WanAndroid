@@ -64,7 +64,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-                viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.homeViewPager2.currentItem])
+                if (it == this@HomeFragment.tag){
+                    viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.homeViewPager2.currentItem])
+                }
             }
         }
     }

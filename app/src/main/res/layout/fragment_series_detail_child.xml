@@ -5,9 +5,18 @@
 
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/seriesDetailList"
+    <com.lowe.wanandroid.widgets.NestedScrollMediateContainer
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/seriesDetailList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
+
+    </com.lowe.wanandroid.widgets.NestedScrollMediateContainer>
 
 </layout>

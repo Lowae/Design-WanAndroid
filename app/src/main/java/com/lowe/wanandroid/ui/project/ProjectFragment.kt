@@ -35,10 +35,10 @@ class ProjectFragment :
     private fun initEvents() {
         viewModel.projectTitleListLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
-            childAdapter.notifyItemRangeInserted(0, childAdapter.itemCount)
+            childAdapter.notifyDataSetChanged()
         }
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-            if (childAdapter.items.isEmpty()) return@observe
+            if (childAdapter.items.isEmpty() || it != this.tag) return@observe
             viewModel.scrollToTopLiveData.value =
                 childAdapter.items[viewDataBinding.projectViewPager2.currentItem].id
         }

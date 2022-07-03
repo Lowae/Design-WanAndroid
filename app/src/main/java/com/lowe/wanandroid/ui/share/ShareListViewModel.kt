@@ -11,7 +11,7 @@ class ShareListViewModel @Inject constructor(private val repository: ShareListRe
     /**
      * ShareBean数据流
      */
-    fun getShareBeanFlow() = repository.shareBeanFlow
+    val getShareBeanFlow = repository.shareBeanFlow
 
     /**
      * 分享列表数据流

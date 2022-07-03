@@ -34,10 +34,10 @@ class GroupFragment :
     private fun initEvents() {
         viewModel.authorsNameLiveData.observe(viewLifecycleOwner) {
             childAdapter.items = it
-            childAdapter.notifyItemRangeInserted(0, childAdapter.itemCount)
+            childAdapter.notifyDataSetChanged()
         }
         mainViewModel.mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-            if (childAdapter.items.isEmpty()) return@observe
+            if (childAdapter.items.isEmpty() || it != this.tag) return@observe
             viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.groupViewPager2.currentItem].id)
         }
     }

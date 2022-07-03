@@ -22,7 +22,7 @@ import androidx.annotation.CheckResult
  * @author Drakeet Xu
  */
 internal class OneToManyBuilder<T>(
-    private val adapter: MultiTypeBaseAdapter,
+    private val adapter: BaseMultiTypeAdapter,
     private val clazz: Class<T>
 ) : OneToManyFlow<T>, OneToManyEndpoint<T> {
 

@@ -32,5 +32,6 @@
     <color name="md_theme_inverse_primary">#EABBBA</color>
     <color name="seed">#B38988</color>
 
+    <color name="placeholer_gray_300">@color/material_grey_300</color>
     <color name="secondary_background_container">#eff0f3</color>
 </resources>

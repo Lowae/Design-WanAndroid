@@ -24,20 +24,20 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 abstract class PagingItemViewDelegate<T, VH : ViewHolder>:ItemViewBaseDelegate<T, VH>() {
 
   /**
-   * This is a [MultiTypePagingAdapter] like PagingDataAdapter
+   * This is a [PagingMultiTypeAdapter] like PagingDataAdapter
    */
   @Suppress("PropertyName")
-  internal var _adapter: MultiTypePagingAdapter? = null
+  internal var _adapter: PagingMultiTypeAdapter? = null
 
   /**
-   * Gets the associated [MultiTypePagingAdapter].
+   * Gets the associated [PagingMultiTypeAdapter].
    * @since v2.3.4
    */
-  val adapter: MultiTypePagingAdapter
+  val adapter: PagingMultiTypeAdapter
     get() {
       if (_adapter == null) {
         throw IllegalStateException(
-          "This $this has not been attached to MultiTypePagingAdapter yet. " +
+          "This $this has not been attached to PagingMultiTypeAdapter yet. " +
               "You should not call the method before registering the delegate."
         )
       }

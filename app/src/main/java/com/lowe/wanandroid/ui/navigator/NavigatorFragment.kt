@@ -53,7 +53,9 @@ class NavigatorFragment :
     private fun initEvents() {
         mainViewModel.apply {
             mainTabDoubleClickLiveData.observe(viewLifecycleOwner) {
-                viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.navigatorPager2.currentItem])
+                if (it == this@NavigatorFragment.tag) {
+                    viewModel.scrollToTopEvent(childAdapter.items[viewDataBinding.navigatorPager2.currentItem])
+                }
             }
         }
     }

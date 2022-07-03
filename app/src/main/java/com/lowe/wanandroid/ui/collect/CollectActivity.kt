@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
 import com.lowe.wanandroid.services.model.CollectBean
@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.collectLatest
 class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>() {
 
     private val collectPagingAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(CollectItemBinder(this@CollectActivity::onCollectClick))
         }
 
@@ -67,7 +67,7 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
             collectPagingAdapter.loadStateFlow.collect(this@CollectActivity::updateLoadStates)
         }
         lifecycleScope.launchWhenCreated {
-            viewModel.collectFlow().collectLatest(collectPagingAdapter::submitData)
+            viewModel.collectFlow.collectLatest(collectPagingAdapter::submitData)
         }
     }
 

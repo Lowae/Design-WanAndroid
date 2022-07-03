@@ -8,7 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
+import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.compat.BundleCompat
@@ -18,7 +19,7 @@ import com.lowe.wanandroid.services.model.Banner
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.LoadMoreItemBinder
+import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
@@ -58,10 +59,9 @@ class ExploreFragment :
     lateinit var appViewModel: AppViewModel
 
     private val homeAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeBannerItemBinder(this@ExploreFragment::onBannerItemClick))
             register(HomeArticleItemBinderV2(this@ExploreFragment::onItemClick))
-            registerFooter(LoadMoreItemBinder())
         }
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
     private val exploreTabBean by lazy(LazyThreadSafetyMode.NONE) {
@@ -97,7 +97,12 @@ class ExploreFragment :
     private fun initView() {
         viewDataBinding.homeList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = homeAdapter
+            adapter = homeAdapter.withLoadStateFooter(
+                PagingLoadStateAdapter(
+                    SimpleFooterItemBinder(),
+                    homeAdapter.types
+                )
+            )
             setHasFixedSize(true)
         }
     }

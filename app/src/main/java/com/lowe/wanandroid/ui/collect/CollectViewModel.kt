@@ -1,5 +1,7 @@
 package com.lowe.wanandroid.ui.collect
 
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.lowe.wanandroid.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -11,5 +13,5 @@ class CollectViewModel @Inject constructor(private val repository: CollectReposi
     /**
      * 收藏文章列表Flow
      */
-    fun collectFlow() = repository.getCollectFlow()
+    val collectFlow = repository.getCollectFlow().cachedIn(viewModelScope)
 }

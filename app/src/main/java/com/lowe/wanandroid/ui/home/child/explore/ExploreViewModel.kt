@@ -1,5 +1,7 @@
 package com.lowe.wanandroid.ui.home.child.explore
 
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.home.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,6 +14,6 @@ class ExploreViewModel @Inject constructor(private val repository: HomeRepositor
     /**
      * 首页列表数据Flow
      */
-    fun getArticlesFlow() = repository.getArticlePageList(20)
+    fun getArticlesFlow() = repository.getArticlePageList(20).cachedIn(viewModelScope)
 
 }

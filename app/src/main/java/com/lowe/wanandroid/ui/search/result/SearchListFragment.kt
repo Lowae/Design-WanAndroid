@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentSearchResultBinding
@@ -33,7 +33,7 @@ class SearchListFragment :
     BaseFragment<SearchListViewModel, FragmentSearchResultBinding>(R.layout.fragment_search_result) {
 
     private val searchListAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@SearchListFragment::onArticleClick))
         }
 

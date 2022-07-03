@@ -51,4 +51,5 @@
     <string name="web_action_menu_open_outside">浏览器打开</string>
     <string name="preference_title_dynamic_color">动态主题色</string>
     <string name="preference_summary_dynamic_color">App动态跟随系统主题色(操作后重启App生效)</string>
+    <string name="item_footer_not_more">没有更多数据了</string>
 </resources>

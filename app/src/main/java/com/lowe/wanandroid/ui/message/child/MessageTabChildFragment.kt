@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentMessageChildListBinding
@@ -43,7 +43,7 @@ class MessageTabChildFragment :
     }
 
     private val messagesAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(MessageTabChildItemBinder(this@MessageTabChildFragment::onMsgItemClick))
         }
     private val messageTabBean by lazy(LazyThreadSafetyMode.NONE) {
@@ -79,9 +79,9 @@ class MessageTabChildFragment :
         }
         lifecycleScope.launchWhenCreated {
             if (messageTabBean.title == MessageChildFragmentAdapter.MESSAGE_TAB_NEW) {
-                viewModel.getUnreadMsgFlow()
+                viewModel.getUnreadMsgFlow
             } else {
-                viewModel.getReadiedMsgFlow()
+                viewModel.getReadiedMsgFlow
             }.collectLatest(messagesAdapter::submitData)
         }
     }

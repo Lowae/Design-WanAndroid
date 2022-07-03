@@ -27,6 +27,7 @@
     <color name="md_theme_inverse_surface">#E8E1E0</color>
     <color name="md_theme_inverse_on_surface">#33302F</color>
     <color name="md_theme_inverse_primary">#795554</color>
-    
+
+    <color name="placeholer_gray_300">@color/material_grey_700</color>
     <color name="secondary_background_container">#272529</color>
 </resources>

@@ -33,9 +33,9 @@ open class MultiTypeAdapter @JvmOverloads constructor(
      * @since v2.4.1
      */
     open var items: List<Any> = emptyList(),
-) : MultiTypeBaseAdapter() {
+) : BaseMultiTypeAdapter() {
 
     override fun getItem(position: Int) = items[position]
 
-    override fun getRealItemCount() = items.size
+    override fun getItemCount() = items.size
 }

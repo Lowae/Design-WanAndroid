@@ -8,7 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.MultiTypePagingAdapter
+import com.lowe.multitype.PagingLoadStateAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.compat.BundleCompat
@@ -17,7 +18,7 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
-import com.lowe.wanandroid.ui.LoadMoreItemBinder
+import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.HomeTabBean
@@ -58,10 +59,10 @@ class AnswerFragment :
             ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_ANSWER)
     }
     private val answerAdapter =
-        MultiTypePagingAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
+        PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(HomeArticleItemBinderV2(this@AnswerFragment::onItemClick))
-            registerFooter(LoadMoreItemBinder())
         }
+
     override val viewModel: AnswerViewModel by viewModels()
 
     override fun onViewCreated(savedInstanceState: Bundle?) {
@@ -73,7 +74,7 @@ class AnswerFragment :
         viewDataBinding.apply {
             with(answerList) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = answerAdapter
+                adapter = answerAdapter.withLoadStateFooter(PagingLoadStateAdapter(SimpleFooterItemBinder(), answerAdapter.types))
                 setHasFixedSize(true)
             }
         }

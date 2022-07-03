@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 app:tabGravity="center"
                 app:tabMode="scrollable"
-                app:tabTextColor="@color/md_theme_primary" />
+                app:tabTextColor="?colorPrimary" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/seriesDetailPager2"
