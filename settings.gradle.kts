@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DesignWanAndroid"
 include(":app")
-include(":multityep")
+include(":multitye")

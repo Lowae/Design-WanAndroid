@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:\\Users\\Lowae\\keystore\\Design WanAndroid.jks")
+            storePassword = "990428"
+            keyAlias = "design_wanandroid"
+            keyPassword = "990428"
+        }
+    }
     compileSdk = Version.compileSdk
 
     defaultConfig {
