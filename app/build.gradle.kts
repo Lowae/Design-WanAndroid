@@ -52,8 +52,8 @@ android {
 }
 
 dependencies {
-
-    implementation(project(mapOf("path" to ":multitye")))
+    implementation(project(mapOf("path" to ":multitype")))
+    
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
     implementation(Deps.material)
@@ -65,10 +65,13 @@ dependencies {
     implementation(Deps.navigationUiKtx)
     implementation(Deps.swiperefreshlayout)
     implementation(Deps.recyclerview)
-
     implementation(Deps.paging)
     implementation(Deps.pagingKtx)
-
+    implementation(Deps.dataStore)
+    implementation(Deps.hiltAndroid)
+    implementation(Deps.preferences)
+    kapt(Deps.kaptHiltAndroidCompiler)
+    kapt(Deps.kaptHiltCompiler)
 
     implementation(Deps.okhttp)
     implementation(Deps.okhttpLoggingInterceptor)
@@ -79,15 +82,9 @@ dependencies {
 
     implementation(Deps.banner)
     implementation(Deps.flexbox)
-
     implementation(Deps.agentWeb)
-    implementation(Deps.dataStore)
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.kaptHiltAndroidCompiler)
 
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
-    implementation("androidx.preference:preference:1.2.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation(Deps.kotlinSerial)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

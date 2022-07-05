@@ -6,6 +6,7 @@ private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 object Version {
     object ClassPathVersion {
         const val hiltPluginVersion = "2.42"
+        const val hiltCompilerVersion = "1.0.0"
     }
 
     const val compileSdk = 32
@@ -23,9 +24,7 @@ object Version {
     const val navigationVersion = "2.4.2"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val recyclerViewVersion = "1.3.0-alpha02"
-
-    // MultiAdapter
-    const val multiTypeVersion = "4.3.0"
+    const val preferenceVersion = "1.2.0"
 
     // paging3
     const val pagingVersion = "3.1.1"
@@ -46,6 +45,8 @@ object Version {
 
     const val agentWebVersion = "v4.1.9-androidx"
     const val dataStoreVersion = "1.0.0"
+
+    const val kotlinSerialVersion = "1.3.3"
 }
 
 object Deps {
@@ -73,7 +74,7 @@ object Deps {
     const val swiperefreshlayout =
         "androidx.swiperefreshlayout:swiperefreshlayout:${Version.swipeRefreshLayoutVersion}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Version.recyclerViewVersion}"
-    const val multitype = "com.drakeet.multitype:multitype:${Version.multiTypeVersion}"
+    const val preferences = "androidx.preference:preference:${Version.preferenceVersion}"
     const val testJunit = "junit:junit:${Version.testJunitVersion}"
     const val androidTestJunit = "androidx.test.ext:junit:${Version.androidTestJunitAndroidExt}"
     const val androidTestEspresso =
@@ -95,8 +96,12 @@ object Deps {
     const val dataStore = "androidx.datastore:datastore-preferences:${Version.dataStoreVersion}"
     const val hiltAndroid =
         "com.google.dagger:hilt-android:${Version.ClassPathVersion.hiltPluginVersion}"
+    const val kotlinSerial =
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Version.kotlinSerialVersion}"
     const val kaptHiltAndroidCompiler =
         "com.google.dagger:hilt-android-compiler:${Version.ClassPathVersion.hiltPluginVersion}"
+    const val kaptHiltCompiler =
+        "androidx.hilt:hilt-compiler:${Version.ClassPathVersion.hiltCompilerVersion}"
 }
 
 fun String.exec(): String =

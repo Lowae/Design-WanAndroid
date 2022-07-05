@@ -42,7 +42,6 @@
         <Preference
             app:key="other_logout"
             app:layout="@layout/preference_logout_layout"
-            app:selectable="false"
             app:title="@string/logout" />
 
     </PreferenceCategory>

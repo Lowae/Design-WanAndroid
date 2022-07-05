@@ -50,10 +50,6 @@ object AccountManager {
     private fun initUserDataFlow() {
         applicationScope.launch {
             dataStore.data
-                .map {
-                    AppLog.d(msg = "${Thread.currentThread()} - initUserDataFlow map: ${it.asMap().keys.toString()} ")
-                    it
-                }
                 .catch {
                     AppLog.e(msg = "Error reading preferences.", exception = it)
                     emit(emptyPreferences())

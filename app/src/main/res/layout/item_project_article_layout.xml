@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.lowe.wanandroid.services.model.Article" />
+        <import type="android.text.Html" />
 
         <variable
             name="article"
-            type="Article" />
+            type="com.lowe.wanandroid.services.model.Article" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -75,7 +75,7 @@
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{article.title}"
+                android:text="@{Html.fromHtml(article.title)}"
                 android:textColor="?colorOnSurface"
                 android:textSize="14sp"
                 android:textStyle="bold"

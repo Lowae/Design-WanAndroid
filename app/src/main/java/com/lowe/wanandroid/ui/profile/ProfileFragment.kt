@@ -77,10 +77,8 @@ class ProfileFragment :
                 }
             }
             userCoinCount.setOnClickListener {
-                it.setOnClickListener {
-                    viewModel.userStatusFlow().value.checkLogin(requireContext()) {
-                        startActivity(Intent(requireContext(), MyCoinInfoActivity::class.java))
-                    }
+                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                    startActivity(Intent(requireContext(), MyCoinInfoActivity::class.java))
                 }
             }
         }
