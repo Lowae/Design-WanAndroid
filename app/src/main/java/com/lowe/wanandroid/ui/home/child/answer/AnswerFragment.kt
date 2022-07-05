@@ -82,7 +82,7 @@ class AnswerFragment :
 
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getAnswerListFlow().collectLatest(answerAdapter::submitData)
+            viewModel.getAnswerListFlow.collectLatest(answerAdapter::submitData)
         }
         lifecycleScope.launchWhenCreated {
             answerAdapter.loadStateFlow.collect(this@AnswerFragment::updateLoadStates)

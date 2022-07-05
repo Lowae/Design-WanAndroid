@@ -11,6 +11,6 @@ import javax.inject.Inject
 class SquareViewModel @Inject constructor(private val repository: HomeRepository) :
     BaseViewModel() {
 
-    fun getSquareFlow() = repository.getSquarePageList(DEFAULT_PAGE_SIZE).cachedIn(viewModelScope)
+    val getSquareFlow = repository.getSquarePageList(DEFAULT_PAGE_SIZE).cachedIn(viewModelScope)
 
 }

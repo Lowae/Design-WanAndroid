@@ -2,11 +2,11 @@ package com.lowe.wanandroid.ui.search.begin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.lowe.wanandroid.di.IOApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.search.SearchRepository
 import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.widgets.LimitedLruQueue
@@ -22,8 +22,11 @@ class SearchBeginViewModel @Inject constructor(
 ) :
     BaseViewModel() {
 
-    private val _searchHotKeyLiveData = MutableLiveData<List<HotKeyBean>>()
-    val searchHotKeyLiveData: LiveData<List<HotKeyBean>> = _searchHotKeyLiveData
+    val searchHotKeyLiveData: LiveData<List<HotKeyBean>> = liveData {
+        emit(
+            repository.getHotKeyList().success()?.data ?: emptyList()
+        )
+    }
     private val _historyLiveData = MutableLiveData<List<SearchState>>()
     val historyLiveData: LiveData<List<SearchState>> = _historyLiveData
 
@@ -31,11 +34,6 @@ class SearchBeginViewModel @Inject constructor(
      * 保存搜查记录的LRUCache
      */
     private val historyLruCache = LimitedLruQueue<SearchState>(20)
-
-    override fun init() {
-        super.init()
-        getHotKeys()
-    }
 
     override fun onCleared() {
         super.onCleared()
@@ -45,12 +43,6 @@ class SearchBeginViewModel @Inject constructor(
         applicationScope.launch {
             repository.updateSearchHistory(historyLruCache.map { it.keywords }.toSet())
         }
-    }
-
-    private fun getHotKeys() {
-        launch({
-            _searchHotKeyLiveData.value = repository.getHotKeyList().success()?.data ?: emptyList()
-        })
     }
 
     fun searchHistoryFlow() = repository.searchHistoryCache()

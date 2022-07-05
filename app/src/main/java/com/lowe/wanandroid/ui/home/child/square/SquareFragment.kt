@@ -87,7 +87,7 @@ class SquareFragment :
 
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getSquareFlow().collectLatest(squareAdapter::submitData)
+            viewModel.getSquareFlow.collectLatest(squareAdapter::submitData)
         }
         lifecycleScope.launchWhenCreated {
             squareAdapter.loadStateFlow.collect(this@SquareFragment::updateLoadStates)

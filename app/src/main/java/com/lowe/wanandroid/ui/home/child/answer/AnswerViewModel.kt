@@ -14,5 +14,5 @@ class AnswerViewModel @Inject constructor(private val repository: HomeRepository
     /**
      * 问答列表数据Flow
      */
-    fun getAnswerListFlow() = repository.getAnswerPageList().cachedIn(viewModelScope)
+    val getAnswerListFlow = repository.getAnswerPageList().cachedIn(viewModelScope)
 }

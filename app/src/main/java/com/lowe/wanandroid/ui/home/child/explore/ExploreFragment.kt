@@ -109,7 +109,7 @@ class ExploreFragment :
 
     private fun initEvents() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getArticlesFlow().collectLatest(homeAdapter::submitData)
+            viewModel.getArticlesFlow.collectLatest(homeAdapter::submitData)
         }
         lifecycleScope.launchWhenCreated {
             homeAdapter.loadStateFlow.collect(this@ExploreFragment::updateLoadStates)

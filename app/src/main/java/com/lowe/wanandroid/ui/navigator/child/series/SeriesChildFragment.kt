@@ -60,7 +60,6 @@ class SeriesChildFragment :
     override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
-        onRefresh()
     }
 
     private fun initView() {
@@ -131,10 +130,6 @@ class SeriesChildFragment :
             }
             viewDataBinding.seriesTagList.addOneView(chip)
         }
-    }
-
-    private fun onRefresh() {
-        viewModel.fetchSeriesList()
     }
 
     private fun onTagClick(pos: Int) {
