@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userInfo"
+            type="com.lowe.wanandroid.services.model.UserBaseInfo" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:colorBackground"
+                app:collapsedTitleTextColor="?colorPrimary"
+                app:contentScrim="?android:colorBackground"
+                app:expandedTitleTextColor="?android:colorBackground"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="我的积分"
+                app:titleCollapseMode="scale"
+                app:toolbarId="@id/toolbar">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="parallax">
+
+                    <TextView
+                        android:id="@+id/coinCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:text="@{Integer.toString(userInfo.coinInfo.coinCount)}"
+                        android:textColor="?colorPrimary"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        tools:text="100" />
+
+                    <TextView
+                        android:id="@+id/level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@{@string/user_coin_level(userInfo.coinInfo.level)}"
+                        android:textColor="?colorOnSurfaceVariant"
+                        tools:text="等级: 10" />
+
+                    <TextView
+                        android:id="@+id/rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@{@string/user_coin_rank(userInfo.coinInfo.rank)}"
+                        android:textColor="?colorOnSurfaceVariant"
+                        tools:text="排名: 1000" />
+
+                </LinearLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_arrow_back_24dp"
+                    app:navigationIconTint="?colorPrimary">
+
+                    <ImageView
+                        android:id="@+id/coinRulesHelp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="12dp"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/content_description_coin_rules"
+                        android:src="@drawable/ic_help_24dp"
+                        app:tint="?colorPrimary" />
+
+                    <ImageView
+                        android:id="@+id/coinRanking"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="12dp"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/content_description_coin_ranking"
+                        android:src="@drawable/ic_coin_ranking_24dp"
+                        app:tint="?colorPrimary" />
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/coinList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

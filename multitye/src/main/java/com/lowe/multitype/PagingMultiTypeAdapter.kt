@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.Flow
  * a [RecyclerView].
  * more @see [PagingDataAdapter]
  */
-class PagingMultiTypeAdapter(
-    diffCallback: DiffUtil.ItemCallback<Any>,
+class PagingMultiTypeAdapter<T : Any>(
+    diffCallback: DiffUtil.ItemCallback<T>,
     mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
     workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
     override val initialCapacity: Int = 0,
@@ -40,11 +40,11 @@ class PagingMultiTypeAdapter(
 
     @Suppress("UNCHECKED_CAST")
     suspend fun submitData(pagingData: PagingData<*>) =
-        differ.submitData(pagingData as PagingData<Any>)
+        differ.submitData(pagingData as PagingData<T>)
 
     @Suppress("UNCHECKED_CAST")
     fun submitData(lifecycle: Lifecycle, pagingData: PagingData<*>) =
-        differ.submitData(lifecycle, pagingData as PagingData<Any>)
+        differ.submitData(lifecycle, pagingData as PagingData<T>)
 
     fun retry() = differ.retry()
 
@@ -52,7 +52,7 @@ class PagingMultiTypeAdapter(
 
     fun peek(@IntRange(from = 0) index: Int) = differ.peek(index)
 
-    fun snapshot(): ItemSnapshotList<Any> = differ.snapshot()
+    fun snapshot(): ItemSnapshotList<T> = differ.snapshot()
 
     val loadStateFlow: Flow<CombinedLoadStates> = differ.loadStateFlow
 

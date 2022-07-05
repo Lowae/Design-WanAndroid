@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -100,6 +101,26 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
         viewModel.webDataObservable.set(intentData)
     }
 
+    override fun onResume() {
+        super.onResume()
+        agentWeb.webLifeCycle.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        agentWeb.webLifeCycle.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        agentWeb.webLifeCycle.onDestroy()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (agentWeb.handleKeyEvent(keyCode, event)) return true
+        return super.onKeyDown(keyCode, event)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.web_action_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -127,7 +148,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
             }
             R.id.web_action_open_outside -> {
                 startActivity(
-                    Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse(intentData.url))
+                    Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse(currentUrl))
                 )
                 true
             }

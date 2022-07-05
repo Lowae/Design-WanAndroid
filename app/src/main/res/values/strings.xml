@@ -19,21 +19,27 @@
     <string name="profile_user_name">用户名: %s</string>
     <string name="profile_user_id">id: %s</string>
     <string name="profile_user_coin_and_rank">积分: %s 等级: %s 排名: %s</string>
+    <string name="user_coin_level">等级: %s</string>
+    <string name="user_coin_rank">排名: %s</string>
 
     <string name="share_count_description">分享了%s篇文章</string>
     <string name="classify_chapter_name">分类·%s</string>
     <string name="author_name">作者·%s</string>
     <string name="article_tag_new">新</string>
     <string name="article_tag_top">置顶</string>
-    <string name="empty_data_tips">暂无数据~</string>
+    <string name="empty_data_tips">暂无数据</string>
     <string name="search_hint">搜索关键词</string>
     <string name="search_hotkey_title">搜索热词</string>
     <string name="search_history_title">搜索历史</string>
     <string name="account_need_login">请先登录！</string>
     <string name="login_username">用户名</string>
     <string name="login_password">密码</string>
-    <string name="not_login">未登陆</string>
-    <string name="login">登陆</string>
+    <string name="login_confirm_password">确认密码</string>
+    <string name="not_login">未登录</string>
+    <string name="login">登录</string>
+    <string name="logout">退出登录</string>
+    <string name="register">注册</string>
+    <string name="register_success">注册成功！</string>
 
     <string name="preference_category_normal">通用</string>
     <string name="preference_title_dark_mode">深色模式</string>
@@ -50,6 +56,9 @@
     <string name="web_action_menu_refresh">刷新</string>
     <string name="web_action_menu_open_outside">浏览器打开</string>
     <string name="preference_title_dynamic_color">动态主题色</string>
-    <string name="preference_summary_dynamic_color">App动态跟随系统主题色(操作后重启App生效)</string>
+    <string name="preference_summary_dynamic_color">应用动态跟随系统主题色(操作后重启应用生效，仅Android 12及以上版本可开启)</string>
     <string name="item_footer_not_more">没有更多数据了</string>
+    <string name="content_description_coin_rules">积分规则</string>
+    <string name="content_description_coin_ranking">积分排行榜</string>
+    <string name="title_coin_ranking">积分排行榜</string>
 </resources>

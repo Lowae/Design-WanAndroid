@@ -8,10 +8,10 @@ object Version {
         const val hiltPluginVersion = "2.42"
     }
 
-    const val compileSdk = 33
+    const val compileSdk = 32
     const val applicationId = "com.lowe.wanandroid"
     const val minSdk = 23
-    const val targetSdk = 33
+    const val targetSdk = 32
     val versionCode = verCode
     const val versionName = verName
 

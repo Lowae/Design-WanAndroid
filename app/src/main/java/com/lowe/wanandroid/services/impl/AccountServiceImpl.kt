@@ -11,5 +11,13 @@ class AccountServiceImpl @Inject constructor() : AccountService {
     override suspend fun login(username: String, password: String) =
         service.login(username, password)
 
+    override suspend fun logout() = service.logout()
+
+    override suspend fun register(
+        username: String,
+        password: String,
+        confirmPassword: String
+    ) = service.register(username, password, confirmPassword)
+
     override suspend fun getUserInfo() = service.getUserInfo()
 }

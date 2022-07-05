@@ -20,6 +20,20 @@ interface AccountService : BaseService {
         @Field("password") password: String
     ): ApiResponse<User>
 
+    @GET("user/logout/json")
+    suspend fun logout(): ApiResponse<Any?>
+
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("repassword") confirmPassword: String
+    ): ApiResponse<Any?>
+
     /**
      * 获取用户信息
      */

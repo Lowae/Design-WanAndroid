@@ -14,15 +14,15 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/header_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="?android:colorBackground"
                 app:collapsedTitleTextColor="?colorPrimary"
-                app:contentScrim="@color/md_theme_background"
+                app:contentScrim="?android:colorBackground"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@string/app_name"
                 app:titleCollapseMode="scale"

@@ -9,14 +9,22 @@ import com.lowe.wanandroid.databinding.ActivityLoginBinding
 import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.ui.login.register.RegisterDialog
 import com.lowe.wanandroid.utils.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * 登陆页面
+ * 登录页面
  */
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
+
+    private val registerDialog by lazy(LazyThreadSafetyMode.NONE) {
+        RegisterDialog(
+            this,
+            viewModel
+        )
+    }
 
     override val viewDataBinding: ActivityLoginBinding by ActivityDataBindingDelegate(R.layout.activity_login)
     override val viewModel: LoginViewModel by viewModels()
@@ -39,6 +47,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 )
             )
         }
+        viewDataBinding.register.setOnClickListener { registerDialog.show() }
         viewDataBinding.backIcon.setOnClickListener { finish() }
     }
 

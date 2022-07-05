@@ -27,13 +27,13 @@ abstract class PagingItemViewDelegate<T, VH : ViewHolder>:ItemViewBaseDelegate<T
    * This is a [PagingMultiTypeAdapter] like PagingDataAdapter
    */
   @Suppress("PropertyName")
-  internal var _adapter: PagingMultiTypeAdapter? = null
+  internal var _adapter: PagingMultiTypeAdapter<*>? = null
 
   /**
    * Gets the associated [PagingMultiTypeAdapter].
    * @since v2.3.4
    */
-  val adapter: PagingMultiTypeAdapter
+  val adapter: PagingMultiTypeAdapter<*>
     get() {
       if (_adapter == null) {
         throw IllegalStateException(

@@ -16,6 +16,7 @@ object SettingConstants {
 
     const val PREFERENCE_KEY_OTHER_CATEGORY_ABOUT = "other_about"
     const val PREFERENCE_KEY_OTHER_CATEGORY_GITHUB = "other_github"
+    const val PREFERENCE_KEY_OTHER_CATEGORY_LOGOUT = "other_logout"
 
     /**
      * 是否开启深色模式

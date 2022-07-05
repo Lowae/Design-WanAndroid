@@ -47,4 +47,8 @@ abstract class ServiceImplModule {
     @Singleton
     abstract fun getAccountServiceImpl(impl: AccountServiceImpl): AccountService
 
+    @Binds
+    @Singleton
+    abstract fun getCoinServiceImpl(impl: CoinServiceImpl): CoinService
+
 }

@@ -15,6 +15,7 @@ import com.lowe.wanandroid.account.checkLogin
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.coin.MyCoinInfoActivity
 import com.lowe.wanandroid.ui.collect.CollectActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
@@ -38,7 +39,7 @@ class ProfileFragment :
 
     private val profileItemAdapter = MultiTypeAdapter()
     private var collapsingToolBarStateFlow =
-        MutableStateFlow(ProfileCollapsingToolBarState.EXPANDED)
+        MutableStateFlow(CollapsingToolBarState.EXPANDED)
 
     override val viewModel: ProfileViewModel by viewModels()
 
@@ -59,11 +60,11 @@ class ProfileFragment :
                 addOnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when {
                         verticalOffset == 0 -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.EXPANDED
+                            CollapsingToolBarState.EXPANDED
                         abs(verticalOffset) >= appBarLayout.totalScrollRange -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.COLLAPSED
+                            CollapsingToolBarState.COLLAPSED
                         else -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.INTERMEDIATE
+                            CollapsingToolBarState.INTERMEDIATE
                     }
                 }
             }
@@ -72,7 +73,14 @@ class ProfileFragment :
             }
             arrayOf(userAvatar, userName, userId, userCoinCount).forEach {
                 it.setOnClickListener {
-                    this@ProfileFragment.viewModel.userStatusFlow().value.checkLogin(requireContext()) {}
+                    viewModel.userStatusFlow().value.checkLogin(requireContext()) {}
+                }
+            }
+            userCoinCount.setOnClickListener {
+                it.setOnClickListener {
+                    viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                        startActivity(Intent(requireContext(), MyCoinInfoActivity::class.java))
+                    }
                 }
             }
         }
@@ -99,7 +107,7 @@ class ProfileFragment :
                 .distinctUntilChanged { old, new ->
                     old == new
                 }.collectLatest {
-                    if (it == ProfileCollapsingToolBarState.COLLAPSED) {
+                    if (it == CollapsingToolBarState.COLLAPSED) {
                         viewDataBinding.collapsingToolbarLayout.title =
                             viewDataBinding.user?.userInfo?.nickname
                     } else viewDataBinding.collapsingToolbarLayout.title = ""

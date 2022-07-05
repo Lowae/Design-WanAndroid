@@ -85,12 +85,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:background="?android:selectableItemBackground"
+                        android:gravity="center"
                         android:text="@{@string/profile_user_coin_and_rank(user.coinInfo.coinCount,user.coinInfo.level,user.coinInfo.rank)}"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="12sp"
+                        app:drawableEndCompat="@drawable/ic_right_arrow_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/userAvatar"
                         app:layout_constraintStart_toStartOf="@+id/userName"
-                        app:layout_constraintTop_toBottomOf="@+id/userId" />
+                        app:layout_constraintTop_toBottomOf="@+id/userId"
+                        tools:text="积分: 100 等级: 1 排名: 1000" />
 
                     <androidx.constraintlayout.widget.Group
                         android:id="@+id/userinfoArea"

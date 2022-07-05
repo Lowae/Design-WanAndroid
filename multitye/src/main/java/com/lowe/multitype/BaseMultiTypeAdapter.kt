@@ -83,7 +83,7 @@ abstract class BaseMultiTypeAdapter @JvmOverloads constructor(
                 type.delegate._adapter = this
             }
             is PagingItemViewDelegate -> {
-                check(this is PagingMultiTypeAdapter) { IllegalArgumentException("Are you register ${type.delegate} to PagingMultiTypeAdapter correctly?") }
+                check(this is PagingMultiTypeAdapter<*>) { IllegalArgumentException("Are you register ${type.delegate} to PagingMultiTypeAdapter correctly?") }
                 type.delegate._adapter = this
             }
         }

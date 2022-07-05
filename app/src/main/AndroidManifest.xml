@@ -37,7 +37,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.message.MessageActivity"
             android:exported="false" />
@@ -55,6 +55,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.setting.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.coin.MyCoinInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.coin.ranking.CoinRankingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.about.AboutActivity"

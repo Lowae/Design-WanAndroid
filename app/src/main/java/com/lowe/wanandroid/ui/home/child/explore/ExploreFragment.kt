@@ -8,8 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.multitype.PagingLoadStateAdapter
+import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.compat.BundleCompat

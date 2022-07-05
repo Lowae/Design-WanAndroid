@@ -9,6 +9,9 @@ object SDKUtils {
     @ChecksSdkIntAtLeast(api = 33)
     fun atLeast33() = Build.VERSION.SDK_INT >= 33
 
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S_V2)
+    fun atLeast32() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2
+
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
     fun atLeast31() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 

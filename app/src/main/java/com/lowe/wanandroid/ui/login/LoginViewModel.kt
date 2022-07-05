@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.account.LocalUserInfo
+import com.lowe.wanandroid.account.RegisterInfo
 import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.repository.AccountRepository
@@ -20,6 +21,9 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
     private val _loginLiveData = MutableLiveData<ApiResponse<User>>()
     val loginLiveData: LiveData<ApiResponse<User>> = _loginLiveData
 
+    private val _registerLiveData = MutableLiveData<ApiResponse<Any?>>()
+    val registerLiveData: LiveData<ApiResponse<Any?>> = _registerLiveData
+
     /**
      * 数据绑定
      */
@@ -34,6 +38,12 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
     fun login(userInfo: LocalUserInfo) {
         launch({
             _loginLiveData.value = accountRepository.login(userInfo)
+        })
+    }
+
+    fun register(registerInfo: RegisterInfo) {
+        launch({
+            _registerLiveData.value = accountRepository.register(registerInfo)
         })
     }
 }

@@ -20,7 +20,7 @@ import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
-import com.lowe.wanandroid.ui.profile.ProfileCollapsingToolBarState
+import com.lowe.wanandroid.ui.profile.CollapsingToolBarState
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +49,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
         }
 
     private var collapsingToolBarStateFlow =
-        MutableStateFlow(ProfileCollapsingToolBarState.EXPANDED)
+        MutableStateFlow(CollapsingToolBarState.EXPANDED)
 
     override val viewDataBinding: ActivityShareListBinding by ActivityDataBindingDelegate(R.layout.activity_share_list)
 
@@ -72,11 +72,11 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                 addOnOffsetChangedListener { appBarLayout, verticalOffset ->
                     when {
                         verticalOffset == 0 -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.EXPANDED
+                            CollapsingToolBarState.EXPANDED
                         abs(verticalOffset) >= appBarLayout.totalScrollRange -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.COLLAPSED
+                            CollapsingToolBarState.COLLAPSED
                         else -> collapsingToolBarStateFlow.value =
-                            ProfileCollapsingToolBarState.INTERMEDIATE
+                            CollapsingToolBarState.INTERMEDIATE
                     }
                 }
             }
@@ -94,7 +94,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
                 .distinctUntilChanged { old, new ->
                     old == new
                 }.collectLatest {
-                    if (it == ProfileCollapsingToolBarState.COLLAPSED)
+                    if (it == CollapsingToolBarState.COLLAPSED)
                         viewDataBinding.collapsingToolbarLayout.title =
                             viewDataBinding.shareBean?.coinInfo?.nickname
                     else viewDataBinding.collapsingToolbarLayout.title = ""
