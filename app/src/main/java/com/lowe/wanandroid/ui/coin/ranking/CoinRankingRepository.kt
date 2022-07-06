@@ -3,8 +3,8 @@ package com.lowe.wanandroid.ui.coin.ranking
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
+import com.lowe.wanandroid.base.http.adapter.getOrNull
 import com.lowe.wanandroid.services.CoinService
-import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.BaseViewModel
 import javax.inject.Inject
 
@@ -18,10 +18,7 @@ class CoinRankingRepository @Inject constructor(private val service: CoinService
         )
     ) {
         IntKeyPagingSource(service = service) { service, page, _ ->
-            service.getCoinRanking(page).run {
-                if (isSuccess().not()) return@IntKeyPagingSource this to emptyList()
-                this to this.data.datas
-            }
+            service.getCoinRanking(page).getOrNull()?.datas ?: emptyList()
         }
     }.flow
 

@@ -4,8 +4,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.base.IntKeyPagingSource
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
+import com.lowe.wanandroid.base.http.adapter.getOrNull
+import com.lowe.wanandroid.base.http.adapter.whenSuccess
 import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.services.model.ShareBean
 import com.lowe.wanandroid.ui.BaseViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,15 +29,13 @@ class ShareListRepository @Inject constructor(
         )
     ) {
         IntKeyPagingSource(service = profileService) { profileService, page, _ ->
-            if (AccountManager.isMe(userId)) {
+            val result: NetworkResponse<ShareBean> = if (AccountManager.isMe(userId)) {
                 profileService.getMyShareList(page)
             } else {
                 profileService.getUserShareList(userId, page)
-            }.run {
-                if (this.isSuccess().not()) return@IntKeyPagingSource this to emptyList()
-                _shareBeanFlow.emit(this.data)
-                this to this.data.shareArticles.datas
             }
+            result.whenSuccess { _shareBeanFlow.emit(it.data) }
+            result.getOrNull()?.shareArticles?.datas ?: emptyList()
         }
     }.flow
 

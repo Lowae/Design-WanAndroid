@@ -66,7 +66,7 @@ object AppLog {
     /**
      * [Log.ERROR]
      */
-    fun e(tag: String = DEFAULT_TAG, msg: String, exception: Throwable) {
+    fun e(tag: String = DEFAULT_TAG, msg: String = "", exception: Throwable) {
         if (isDebug) {
             Log.e(tag, msg, exception)
         }

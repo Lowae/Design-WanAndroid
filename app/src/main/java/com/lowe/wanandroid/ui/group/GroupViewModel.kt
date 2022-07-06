@@ -3,8 +3,8 @@ package com.lowe.wanandroid.ui.group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.lowe.wanandroid.base.http.adapter.getOrElse
 import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class GroupViewModel @Inject constructor(private val repository: GroupRepository
 
     val authorsNameLiveData: LiveData<List<Classify>> = liveData {
         emit(
-            repository.getAuthorTitleList().success()?.data ?: emptyList()
+            repository.getAuthorTitleList().getOrElse { emptyList() }
         )
     }
     private val _parentRefreshLiveData = MutableLiveData<Int>()

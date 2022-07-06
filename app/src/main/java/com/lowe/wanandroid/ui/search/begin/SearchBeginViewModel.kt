@@ -3,9 +3,9 @@ package com.lowe.wanandroid.ui.search.begin
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.lowe.wanandroid.base.http.adapter.getOrElse
 import com.lowe.wanandroid.di.IOApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
-import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.search.SearchRepository
 import com.lowe.wanandroid.ui.search.SearchState
@@ -24,7 +24,7 @@ class SearchBeginViewModel @Inject constructor(
 
     val searchHotKeyLiveData: LiveData<List<HotKeyBean>> = liveData {
         emit(
-            repository.getHotKeyList().success()?.data ?: emptyList()
+            repository.getHotKeyList().getOrElse { emptyList() }
         )
     }
     private val _historyLiveData = MutableLiveData<List<SearchState>>()

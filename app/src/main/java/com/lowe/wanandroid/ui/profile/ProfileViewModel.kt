@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.profile
 
 import androidx.annotation.DrawableRes
 import com.lowe.wanandroid.account.AccountManager
-import com.lowe.wanandroid.services.model.success
+import com.lowe.wanandroid.base.http.adapter.whenSuccess
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.profile.usecase.UserInfoUseCase
@@ -16,10 +16,9 @@ class ProfileViewModel @Inject constructor(
 
     fun fetchUserInfo() {
         launch({
-            userInfoUseCase.getServerUserInfo()
-                .success()?.data?.apply {
-                    AccountManager.cacheUserBaseInfo(this)
-                }
+            userInfoUseCase.getServerUserInfo().whenSuccess {
+                AccountManager.cacheUserBaseInfo(it.data)
+            }
         })
     }
 

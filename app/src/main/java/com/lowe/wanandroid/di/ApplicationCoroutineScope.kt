@@ -14,6 +14,10 @@ import javax.inject.Singleton
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
+annotation class MainApplicationScope
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
 annotation class DefaultApplicationScope
 
 @Retention(AnnotationRetention.RUNTIME)
@@ -28,6 +32,14 @@ annotation class IOApplicationScope
 object ApplicationCoroutineScope {
 
     private const val TAG = "ApplicationCoroutineScope"
+
+    private val mainApplicationScope by lazy {
+        CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate + CoroutineExceptionHandler { _, throwable ->
+            AppLog.e(
+                TAG, "mainApplicationScope:\n${throwable.message.toString()}", throwable
+            )
+        })
+    }
 
     /**
      * 默认[Dispatchers.Default]
@@ -50,6 +62,11 @@ object ApplicationCoroutineScope {
             )
         })
     }
+
+    @Singleton
+    @Provides
+    @MainApplicationScope
+    fun providesMainCoroutineScope() = mainApplicationScope
 
     @Singleton
     @Provides

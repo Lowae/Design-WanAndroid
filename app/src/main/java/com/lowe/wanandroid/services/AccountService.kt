@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.services.model.ApiResponse
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import retrofit2.http.Field
@@ -18,10 +18,10 @@ interface AccountService : BaseService {
     suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
-    ): ApiResponse<User>
+    ): NetworkResponse<User>
 
     @GET("user/logout/json")
-    suspend fun logout(): ApiResponse<Any?>
+    suspend fun logout(): NetworkResponse<Any?>
 
     /**
      * 注册
@@ -32,11 +32,11 @@ interface AccountService : BaseService {
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("repassword") confirmPassword: String
-    ): ApiResponse<Any?>
+    ): NetworkResponse<Any?>
 
     /**
      * 获取用户信息
      */
     @GET("user/lg/userinfo/json")
-    suspend fun getUserInfo(): ApiResponse<UserBaseInfo>
+    suspend fun getUserInfo(): NetworkResponse<UserBaseInfo>
 }

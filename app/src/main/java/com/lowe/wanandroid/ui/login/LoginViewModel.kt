@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.account.RegisterInfo
-import com.lowe.wanandroid.services.model.ApiResponse
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.repository.AccountRepository
 import com.lowe.wanandroid.ui.BaseViewModel
@@ -18,11 +18,11 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val accountRepository: AccountRepository) :
     BaseViewModel() {
 
-    private val _loginLiveData = MutableLiveData<ApiResponse<User>>()
-    val loginLiveData: LiveData<ApiResponse<User>> = _loginLiveData
+    private val _loginLiveData = MutableLiveData<NetworkResponse<User>>()
+    val loginLiveData: LiveData<NetworkResponse<User>> = _loginLiveData
 
-    private val _registerLiveData = MutableLiveData<ApiResponse<Any?>>()
-    val registerLiveData: LiveData<ApiResponse<Any?>> = _registerLiveData
+    private val _registerLiveData = MutableLiveData<NetworkResponse<Any?>>()
+    val registerLiveData: LiveData<NetworkResponse<Any?>> = _registerLiveData
 
     /**
      * 数据绑定

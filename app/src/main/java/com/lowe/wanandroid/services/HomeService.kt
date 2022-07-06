@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.services.model.ApiResponse
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.Banner
 import com.lowe.wanandroid.services.model.PageResponse
@@ -14,7 +14,7 @@ interface HomeService : BaseService {
      * 首页banner
      */
     @GET("banner/json")
-    suspend fun getBanner(): ApiResponse<List<Banner>>
+    suspend fun getBanner(): NetworkResponse<List<Banner>>
 
     /**
      * 首页文章
@@ -23,13 +23,13 @@ interface HomeService : BaseService {
     suspend fun getArticlePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
-    ): ApiResponse<PageResponse<Article>>
+    ): NetworkResponse<PageResponse<Article>>
 
     /**
      * 首页置顶文章
      */
     @GET("article/top/json")
-    suspend fun getArticleTopList(): ApiResponse<List<Article>>
+    suspend fun getArticleTopList(): NetworkResponse<List<Article>>
 
     /**
      * 广场文章
@@ -38,11 +38,11 @@ interface HomeService : BaseService {
     suspend fun getSquarePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
-    ): ApiResponse<PageResponse<Article>>
+    ): NetworkResponse<PageResponse<Article>>
 
     /**
      * 问答列表
      */
     @GET("wenda/list/{pageNo}/json")
-    suspend fun getAnswerPageList(@Path("pageNo") pageNo: Int): ApiResponse<PageResponse<Article>>
+    suspend fun getAnswerPageList(@Path("pageNo") pageNo: Int): NetworkResponse<PageResponse<Article>>
 }

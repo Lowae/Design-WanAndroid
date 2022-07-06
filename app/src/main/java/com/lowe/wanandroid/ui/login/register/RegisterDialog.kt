@@ -9,8 +9,8 @@ import androidx.databinding.ObservableField
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.account.RegisterInfo
+import com.lowe.wanandroid.base.http.adapter.isSuccess
 import com.lowe.wanandroid.databinding.DialogRegisterAccountLayoutBinding
-import com.lowe.wanandroid.services.model.isSuccess
 import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.login.LoginViewModel
 import com.lowe.wanandroid.utils.showShortToast
@@ -70,10 +70,10 @@ class RegisterDialog(activity: LoginActivity, viewModel: LoginViewModel) {
 
         }
         viewModel.registerLiveData.observe(activity) {
-            if (it.isSuccess()) {
+            if (it.isSuccess) {
                 registerDialog.dismiss()
                 activity.getString(R.string.register_success).showShortToast()
-            } else it.errorMsg.showShortToast()
+            }
             dialogViewDataBinding.Loading.isVisible = false
         }
     }

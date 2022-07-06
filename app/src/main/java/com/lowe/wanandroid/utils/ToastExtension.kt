@@ -7,18 +7,22 @@ import com.lowe.wanandroid.base.app.BaseApp
 /**
  * 显示短时间的Toast
  */
-fun String.showShortToast() =
-    Toast.makeText(BaseApp.appContext, this, Toast.LENGTH_SHORT).show()
+fun String?.showShortToast() = takeIf { it.isNullOrBlank().not() }?.also {
+    Toast.makeText(BaseApp.appContext, it, Toast.LENGTH_SHORT).show()
+}
+
 
 /**
  * 显示长时间的Toast
  */
-fun String.showLongToast() = Toast.makeText(BaseApp.appContext, this, Toast.LENGTH_LONG).show()
+fun String?.showLongToast() = takeIf { it.isNullOrBlank().not() }?.also {
+    Toast.makeText(BaseApp.appContext, this, Toast.LENGTH_LONG).show()
+}
 
 /**
  * 居中显示短时间的Toast
  */
-fun String.showShortToastInCenter() {
+fun String?.showShortToastInCenter() = takeIf { it.isNullOrBlank().not() }?.also {
     Toast.makeText(BaseApp.appContext, this, Toast.LENGTH_SHORT).apply {
         setGravity(Gravity.CENTER, 0, 0)
         show()
@@ -28,7 +32,7 @@ fun String.showShortToastInCenter() {
 /**
  * 居中显示短时间的Toast
  */
-fun String.showLongToastInCenter() {
+fun String?.showLongToastInCenter() = takeIf { it.isNullOrBlank().not() }?.also {
     Toast.makeText(BaseApp.appContext, this, Toast.LENGTH_LONG).apply {
         setGravity(Gravity.CENTER, 0, 0)
         show()

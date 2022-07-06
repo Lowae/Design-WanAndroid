@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Converter
 import retrofit2.Retrofit
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 class GsonConverterFactory(private val gson: Gson) : Converter.Factory() {
@@ -24,7 +25,18 @@ class GsonConverterFactory(private val gson: Gson) : Converter.Factory() {
         type: Type,
         annotations: Array<out Annotation>,
         retrofit: Retrofit
-    ) = GsonResponseBodyConverter(gson, gson.getAdapter(TypeToken.get(type)))
+    ): GsonResponseBodyConverter<out Any> {
+        check(type is ParameterizedType) {
+            "type must be parameterized as Call<NetworkResponse<<Foo>> or Call<NetworkResponse<out Foo>>"
+        }
+        return GsonResponseBodyConverter(
+            gson,
+            /**
+             * 获取NetWorkResponse包装内的第一个泛型
+             */
+            gson.getAdapter(TypeToken.get(getParameterUpperBound(0, type)))
+        )
+    }
 
     override fun requestBodyConverter(
         type: Type,

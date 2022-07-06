@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.base.http.exception
 
-class ApiException(var code: Int, override var message: String?) : RuntimeException(message) {
+class ApiException(val code: Int, override val message: String?) : RuntimeException(message) {
 
     companion object {
         const val CODE_NOT_LOGGED_IN = -1001

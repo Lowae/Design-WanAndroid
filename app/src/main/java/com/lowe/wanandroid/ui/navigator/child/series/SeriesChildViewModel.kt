@@ -3,7 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.series
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
-import com.lowe.wanandroid.services.model.success
+import com.lowe.wanandroid.base.http.adapter.getOrElse
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
@@ -15,7 +15,7 @@ class SeriesChildViewModel @Inject constructor(private val repository: Navigator
     BaseViewModel() {
 
     val seriesListLiveData: LiveData<Pair<List<Any>, DiffUtil.DiffResult>> = liveData {
-        val series = repository.getTreeList().success()?.data ?: emptyList()
+        val series = repository.getTreeList().getOrElse { emptyList() }
         val oldList = this.latestValue?.first ?: emptyList()
         emit(getDiffResultPair(oldList, oldList + series))
     }

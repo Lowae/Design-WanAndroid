@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.services
 
-import com.lowe.wanandroid.services.model.ApiResponse
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.PageResponse
 import com.lowe.wanandroid.services.model.ProjectTitle
@@ -14,7 +14,7 @@ interface ProjectService : BaseService {
      * 项目分类数据
      */
     @GET("project/tree/json")
-    suspend fun getProjectTitleList(): ApiResponse<List<ProjectTitle>>
+    suspend fun getProjectTitleList(): NetworkResponse<List<ProjectTitle>>
 
     /**
      * 项目文章列表
@@ -24,7 +24,7 @@ interface ProjectService : BaseService {
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int,
         @Query("cid") categoryId: Int
-    ): ApiResponse<PageResponse<Article>>
+    ): NetworkResponse<PageResponse<Article>>
 
     /**
      * 最新项目列表
@@ -33,5 +33,5 @@ interface ProjectService : BaseService {
     suspend fun getNewProjectPageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
-    ): ApiResponse<PageResponse<Article>>
+    ): NetworkResponse<PageResponse<Article>>
 }

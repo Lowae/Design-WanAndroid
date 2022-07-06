@@ -18,6 +18,14 @@ android {
         minSdk = Version.minSdk
         targetSdk = Version.targetSdk
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    compileOptions {
+        targetCompatibility(JavaVersion.VERSION_11)
+        sourceCompatibility(JavaVersion.VERSION_11)
+    }
 }
 
 dependencies {

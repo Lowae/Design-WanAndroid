@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.lowe.wanandroid.base.http.adapter.getOrNull
 import com.lowe.wanandroid.services.model.CollectEvent
-import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.services.usecase.ArticleCollectUseCase
 import com.lowe.wanandroid.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +33,7 @@ class AppViewModel @Inject constructor(
      */
     fun articleCollectAction(event: CollectEvent) {
         this.viewModelScope.launch(BaseViewModel.exceptionHandler) {
-            articleCollectUseCase.articleCollectAction(event).success() ?: return@launch
+            articleCollectUseCase.articleCollectAction(event).getOrNull() ?: return@launch
             _collectArticleLiveData.value = event
         }
     }

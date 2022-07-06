@@ -12,6 +12,7 @@ import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.SimpleDiffItemCallback
+import com.lowe.wanandroid.base.http.exception.ApiException
 import com.lowe.wanandroid.databinding.ActivityMyCoinInfoBinding
 import com.lowe.wanandroid.services.model.CoinHistory
 import com.lowe.wanandroid.services.model.UserBaseInfo
@@ -23,6 +24,8 @@ import com.lowe.wanandroid.ui.coin.ranking.CoinRankingActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.showShortToast
+import com.lowe.wanandroid.utils.whenError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -95,6 +98,9 @@ class MyCoinInfoActivity : BaseActivity<MyCoinInfoViewModel, ActivityMyCoinInfoB
     }
 
     private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        loadStates.whenError {
+            (it.error as? ApiException)?.message?.showShortToast()
+        }
         viewDataBinding.loadingContainer.apply {
             emptyLayout.isVisible =
                 loadStates.refresh is LoadState.NotLoading && coinHistoryAdapter.isEmpty()

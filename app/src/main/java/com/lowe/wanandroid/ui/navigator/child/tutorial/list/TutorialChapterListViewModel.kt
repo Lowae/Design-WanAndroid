@@ -1,8 +1,8 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 
 import androidx.lifecycle.MutableLiveData
+import com.lowe.wanandroid.base.http.adapter.getOrNull
 import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.success
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
@@ -18,8 +18,7 @@ class TutorialChapterListViewModel @Inject constructor(private val repository: N
     fun fetchChapterList(tutorialId: Int) {
         launch({
             chaptersLiveData.value =
-                repository.getTutorialChapterList(tutorialId).success()?.data?.datas
-                    ?: emptyList()
+                repository.getTutorialChapterList(tutorialId).getOrNull()?.datas ?: emptyList()
         })
 
     }

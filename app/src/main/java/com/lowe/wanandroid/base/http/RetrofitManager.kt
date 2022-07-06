@@ -1,6 +1,9 @@
 package com.lowe.wanandroid.base.http
 
 import android.app.Application
+import com.lowe.wanandroid.base.AppLog
+import com.lowe.wanandroid.base.http.adapter.ErrorHandler
+import com.lowe.wanandroid.base.http.adapter.NetworkResponseAdapterFactory
 import com.lowe.wanandroid.base.http.converter.GsonConverterFactory
 import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_NAME
 import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_TOKEN
@@ -10,6 +13,8 @@ import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookiePersistenceCache
 import com.lowe.wanandroid.base.http.interceptor.logInterceptor
 import com.lowe.wanandroid.di.ApplicationCoroutineScope
 import com.lowe.wanandroid.services.BaseService
+import com.lowe.wanandroid.utils.showShortToast
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.ConcurrentHashMap
@@ -57,6 +62,20 @@ object RetrofitManager {
         return servicesMap.getOrPut(serviceClass.name) {
             Retrofit.Builder()
                 .client(client)
+                .addCallAdapterFactory(NetworkResponseAdapterFactory(object : ErrorHandler {
+                    override fun bizError(code: Int, msg: String) {
+                        ApplicationCoroutineScope.providesMainCoroutineScope().launch {
+                            msg.showShortToast()
+                        }
+                    }
+
+                    override fun otherError(throwable: Throwable) {
+                        ApplicationCoroutineScope.providesMainCoroutineScope().launch {
+                            "请求失败".showShortToast()
+                        }
+                        AppLog.e(msg = throwable.message.toString(), exception = throwable)
+                    }
+                }))
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl ?: BASE_URL)
                 .build()

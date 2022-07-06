@@ -4,10 +4,11 @@ import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.account.AccountState
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.account.RegisterInfo
+import com.lowe.wanandroid.base.http.adapter.NetworkResponse
+import com.lowe.wanandroid.base.http.adapter.isSuccess
+import com.lowe.wanandroid.base.http.adapter.whenSuccess
 import com.lowe.wanandroid.services.AccountService
-import com.lowe.wanandroid.services.model.ApiResponse
 import com.lowe.wanandroid.services.model.User
-import com.lowe.wanandroid.services.model.isSuccess
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,18 +21,17 @@ class AccountRepository @Inject constructor(private val service: AccountService)
 
     val accountStatusFlow: StateFlow<AccountState> = AccountManager.accountStateFlow()
 
-    suspend fun login(userInfo: LocalUserInfo): ApiResponse<User> {
+    suspend fun login(userInfo: LocalUserInfo): NetworkResponse<User> {
         val result = service.login(userInfo.username, userInfo.password)
-        if (result.isSuccess()) {
-            AccountManager.logIn(result.data)
+        result.whenSuccess {
+            AccountManager.logIn(it.data)
         }
         return result
     }
 
-
-    suspend fun logout(): ApiResponse<Any?> {
+    suspend fun logout(): NetworkResponse<Any?> {
         return service.logout().also {
-            if (it.isSuccess()) {
+            if (it.isSuccess) {
                 AccountManager.logout()
             }
         }

@@ -3,7 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.navigator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
-import com.lowe.wanandroid.services.model.success
+import com.lowe.wanandroid.base.http.adapter.getOrElse
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
@@ -21,7 +21,7 @@ class NavigatorChildViewModel @Inject constructor(private val repository: Naviga
         emit(
             getDiffResultPair(
                 this.latestValue?.first ?: emptyList(),
-                repository.getNavigationList().success()?.data ?: emptyList()
+                repository.getNavigationList().getOrElse { emptyList() }
             )
         )
     }
