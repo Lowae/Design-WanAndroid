@@ -1,5 +1,6 @@
 # 🦄Design WanAndroid
 ## 界面：
+**原WanAndroid开放的Api功能均已实现**<p>
 App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝半完成式Material带来的UI的割裂感。<p>
 所有Icon取自[Material Symbols](https://fonts.google.com/icons)，统一而规范的设计。<p>
 主题色遵循[Material3 Color system](https://m3.material.io/styles/color/the-color-system/key-colors-tones)。
@@ -35,11 +36,11 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 
 当你采用某项东西，应是为了解决某些特定的问题，不能单纯为了用而用。在该架构下：<p>
 - 对于网络请求的需要，引入通用的网络请求库，[Retrofit](https://github.com/square/retrofit) + [OkHttp](https://github.com/square/okhttp)。<p>
+- 对于网络异常处理的需要，自定义Retrofit [CallAdapter](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/adapter)和[Converter](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/converter)实现全局的接口错误或业务逻辑错误处理，同时下游也可按需获取错误类型。
 - 针对数据层Repository需要以及UseCase需要复用并组合各类Service，引入[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)，解决依赖注入问题，提高可重用性且避免强依赖。
 - 对于网络请求的线程切换使用[Kotlin协程](https://developer.android.com/kotlin/coroutines?hl=zh-cn)，针对复杂且需要进行各类转换处理的数据流使用[Flow](https://developer.android.com/kotlin/flow?hl=zh-cn)，对于One-shot数据使用[LiveData](https://developer.android.com/topic/libraries/architecture/livedata?hl=zh-cn)，因为LiveData设计初衷并非用于处理复杂的响应数据流。
-- 对于App内的部分需要持久化数据如Cookie、KV数据等小型数据引入[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn)和[Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
+- 对于App内的部分需要持久化数据如[登陆状态的Cookie](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/cookie)、KV数据等小型数据引入[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn)和[Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
 - 对于RecyclerView引入[Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview?hl=zh-cn)列表的加载及状态处理
-- 针对列表的多类型Item，导入并修改[MultiType](https://github.com/drakeet/MultiType)使其支持配合Paging3使用
-- 对于UI与数据之间的单向或双向绑定使用[DataBinding](https://developer.android.com/topic/libraries/data-binding?hl=zh-cn)减少重复、模板代码
+- 针对列表的多类型Item，导入并自定义修改MultiType实现[PagingMultiTypeAdapter](https://github.com/Lowae/Design-WanAndroid/blob/main/multitype/src/main/java/com/lowe/multitype/PagingMultiTypeAdapter.kt)使其能够支持配合Paging3使用
 
-除以上主要依赖外，其余功能均自己实现。
+除以上主要依赖外，其他引入有[Banner](https://github.com/youth5201314/banner)和[AgentWeb](https://github.com/Justson/AgentWeb)，除此之外其余功能均自己实现。
