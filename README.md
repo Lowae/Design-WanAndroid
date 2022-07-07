@@ -36,7 +36,7 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 
 当你采用某项东西，应是为了解决某些特定的问题，不能单纯为了用而用。在该架构下：<p>
 - 对于网络请求的需要，引入通用的网络请求库，[Retrofit](https://github.com/square/retrofit) + [OkHttp](https://github.com/square/okhttp)。<p>
-- 对于网络异常处理的需要，自定义Retrofit [CallAdapter](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/adapter)和[Converter](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/converter)实现全局的接口错误或业务逻辑错误处理，同时下游也可按需获取错误类型。
+- 对于网络异常处理的需要，自定义Retrofit [NetworkResponseAdapterFactory](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/adapter)和[GsonConverterFactory](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/converter)实现全局的接口错误或业务逻辑错误处理，同时下游也可按需获取错误类型。
 - 针对数据层Repository需要以及UseCase需要复用并组合各类Service，引入[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)，解决依赖注入问题，提高可重用性且避免强依赖。
 - 对于网络请求的线程切换使用[Kotlin协程](https://developer.android.com/kotlin/coroutines?hl=zh-cn)，针对复杂且需要进行各类转换处理的数据流使用[Flow](https://developer.android.com/kotlin/flow?hl=zh-cn)，对于One-shot数据使用[LiveData](https://developer.android.com/topic/libraries/architecture/livedata?hl=zh-cn)，因为LiveData设计初衷并非用于处理复杂的响应数据流。
 - 对于App内的部分需要持久化数据如[登陆状态的Cookie](https://github.com/Lowae/Design-WanAndroid/tree/main/app/src/main/java/com/lowe/wanandroid/base/http/cookie)、KV数据等小型数据引入[DataStore](https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn)和[Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
