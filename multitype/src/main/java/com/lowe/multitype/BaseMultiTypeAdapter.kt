@@ -8,6 +8,8 @@ import kotlin.reflect.KClass
 
 /**
  * [MultiTypeAdapter] or [PagingMultiTypeAdapter] base implements, used for abstract main functions.
+ *
+ * @author Lowae
  */
 abstract class BaseMultiTypeAdapter @JvmOverloads constructor(
     open val initialCapacity: Int = 0,

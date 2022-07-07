@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.lowe.wanandroid.compat
 
 import android.content.Intent
@@ -13,8 +11,9 @@ import java.io.Serializable
 object IntentCompat {
     inline fun <reified T : Parcelable> getParcelableExtra(intent: Intent, name: String): T? =
         if (SDKUtils.atLeast33()) {
-            intent.getParcelableExtra(name)
+            intent.getParcelableExtra(name, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             intent.getParcelableExtra(name)
         }
 
@@ -23,15 +22,20 @@ object IntentCompat {
         name: String
     ): ArrayList<T>? =
         if (SDKUtils.atLeast33()) {
-            intent.getParcelableArrayListExtra(name)
+            intent.getParcelableArrayListExtra(name, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             intent.getParcelableArrayListExtra(name)
         }
 
-    inline fun <reified T : Serializable> getSerializableExtra(intent: Intent, name: String): Serializable? =
+    inline fun <reified T : Serializable> getSerializableExtra(
+        intent: Intent,
+        name: String
+    ): Serializable? =
         if (SDKUtils.atLeast33()) {
-            intent.getSerializableExtra(name)
+            intent.getSerializableExtra(name, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             intent.getSerializableExtra(name)
         }
 }

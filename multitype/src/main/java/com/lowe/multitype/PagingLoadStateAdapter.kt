@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ConcatAdapter
  * more @see [LoadStateAdapter]
  *
  * @param types must passed base [PagingMultiTypeAdapter.types] to share since set [ConcatAdapter.Config.isolateViewTypes] is FALSE
+ *
+ * @author Lowae
  */
 open class PagingLoadStateAdapter(footer: FooterStateItemBinder<*>, override var types: Types) :
     BaseMultiTypeAdapter() {

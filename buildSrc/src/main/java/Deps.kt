@@ -1,10 +1,11 @@
 import java.nio.charset.Charset
 
-private const val verName = "1.0.0"
+private const val verName = "1.0.1"
 private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 
 object Version {
     object ClassPathVersion {
+        const val kotlinVersion = "1.7.0"
         const val hiltPluginVersion = "2.42"
         const val hiltCompilerVersion = "1.0.0"
     }

@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.Flow
  * [RecyclerView.Adapter] base class for presenting paged data from [PagingData]s in
  * a [RecyclerView].
  * more @see [PagingDataAdapter]
+ *
+ * @author Lowae
  */
 class PagingMultiTypeAdapter<T : Any>(
     diffCallback: DiffUtil.ItemCallback<T>,

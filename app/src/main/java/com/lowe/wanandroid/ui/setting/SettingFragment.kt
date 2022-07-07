@@ -27,8 +27,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, null)
         findPreference<SwitchPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS)?.apply {
             if (DynamicColors.isDynamicColorAvailable().not()) {
-                isEnabled = false
                 setDefaultValue(false)
+                isEnabled = false
             }
         }
         findPreference<ListPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE)?.apply {

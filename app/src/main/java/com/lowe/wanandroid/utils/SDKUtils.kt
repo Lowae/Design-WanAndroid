@@ -6,8 +6,8 @@ import androidx.annotation.ChecksSdkIntAtLeast
 
 object SDKUtils {
 
-    @ChecksSdkIntAtLeast(api = 33)
-    fun atLeast33() = Build.VERSION.SDK_INT >= 33
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.TIRAMISU)
+    fun atLeast33() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S_V2)
     fun atLeast32() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2

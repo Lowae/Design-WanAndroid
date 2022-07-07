@@ -9,8 +9,8 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.1")
-        classpath(kotlin("gradle-plugin", "1.7.0"))
-        classpath(kotlin("serialization", "1.7.0"))
+        classpath(kotlin("gradle-plugin", Version.ClassPathVersion.kotlinVersion))
+        classpath(kotlin("serialization", Version.ClassPathVersion.kotlinVersion))
         classpath(Deps.ClassPath.hiltPlugin)
     }
 }

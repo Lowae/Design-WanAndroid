@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.lowe.wanandroid.compat
 
 import android.os.Bundle
@@ -13,22 +11,25 @@ import java.io.Serializable
 object BundleCompat {
     inline fun <reified T : Parcelable> getParcelable(bundle: Bundle?, key: String?) =
         if (SDKUtils.atLeast33()) {
-            bundle?.getParcelable(key) as T?
+            bundle?.getParcelable(key, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             bundle?.getParcelable(key)
         }
 
     inline fun <reified T : Serializable> getSerializable(bundle: Bundle?, key: String?) =
         if (SDKUtils.atLeast33()) {
-            bundle?.getSerializable(key)
+            bundle?.getSerializable(key, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             bundle?.getSerializable(key) as T?
         }
 
     inline fun <reified T : Parcelable> getParcelableArrayList(bundle: Bundle?, key: String?) =
         if (SDKUtils.atLeast33()) {
-            bundle?.getParcelableArrayList<T>(key)
+            bundle?.getParcelableArrayList(key, T::class.java)
         } else {
+            @Suppress("DEPRECATION")
             bundle?.getParcelableArrayList(key)
         }
 }
