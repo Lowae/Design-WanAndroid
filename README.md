@@ -44,3 +44,6 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 - 针对列表的多类型Item，导入并自定义修改MultiType实现[PagingMultiTypeAdapter](https://github.com/Lowae/Design-WanAndroid/blob/main/multitype/src/main/java/com/lowe/multitype/PagingMultiTypeAdapter.kt)使其能够支持配合Paging3使用
 
 除以上主要依赖外，其他引入有[Banner](https://github.com/youth5201314/banner)和[AgentWeb](https://github.com/Justson/AgentWeb)，除此之外其余功能均自己实现。
+	
+##最后:
+有任何问题欢迎提Issue，如果喜欢的话也可以给个⭐Star
