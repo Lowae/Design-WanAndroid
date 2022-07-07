@@ -15,8 +15,8 @@ import javax.inject.Inject
 class SettingViewModel @Inject constructor(private val accountRepository: AccountRepository) :
     ViewModel() {
 
-    private val _logoutLiveData = MutableLiveData<NetworkResponse<Any?>>()
-    val logoutLiveData: LiveData<NetworkResponse<Any?>> = _logoutLiveData
+    private val _logoutLiveData = MutableLiveData<NetworkResponse<Any>>()
+    val logoutLiveData: LiveData<NetworkResponse<Any>> = _logoutLiveData
 
     fun logout() {
         viewModelScope.launch {

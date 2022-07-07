@@ -1,6 +1,6 @@
 import java.nio.charset.Charset
 
-private const val verName = "1.0"
+private const val verName = "1.0.0"
 private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 
 object Version {
@@ -9,10 +9,10 @@ object Version {
         const val hiltCompilerVersion = "1.0.0"
     }
 
-    const val compileSdk = 32
+    const val compileSdk = 33
     const val applicationId = "com.lowe.wanandroid"
     const val minSdk = 23
-    const val targetSdk = 32
+    const val targetSdk = 33
     val versionCode = verCode
     const val versionName = verName
 
@@ -47,9 +47,15 @@ object Version {
     const val dataStoreVersion = "1.0.0"
 
     const val kotlinSerialVersion = "1.3.3"
+
+    const val leakcanaryVersion = "2.9.1"
 }
 
 object Deps {
+
+    object DebugDependency{
+        const val debugLeakCanary = "com.squareup.leakcanary:leakcanary-android:${Version.leakcanaryVersion}"
+    }
 
     object ClassPath {
 

@@ -21,8 +21,8 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
     private val _loginLiveData = MutableLiveData<NetworkResponse<User>>()
     val loginLiveData: LiveData<NetworkResponse<User>> = _loginLiveData
 
-    private val _registerLiveData = MutableLiveData<NetworkResponse<Any?>>()
-    val registerLiveData: LiveData<NetworkResponse<Any?>> = _registerLiveData
+    private val _registerLiveData = MutableLiveData<NetworkResponse<Any>>()
+    val registerLiveData: LiveData<NetworkResponse<Any>> = _registerLiveData
 
     /**
      * 数据绑定

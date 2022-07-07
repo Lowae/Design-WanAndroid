@@ -5,11 +5,11 @@ import com.lowe.wanandroid.base.http.exception.ApiException
 /**
  * 接口的返回类型包装类
  */
-sealed class NetworkResponse<out T> {
+sealed class NetworkResponse<out T: Any> {
     /**
      * 成功
      */
-    data class Success<T>(val data: T) : NetworkResponse<T>()
+    data class Success<T: Any>(val data: T) : NetworkResponse<T>()
 
     /**
      * 业务错误
@@ -28,33 +28,33 @@ inline val NetworkResponse<*>.isSuccess: Boolean
         return this is NetworkResponse.Success
     }
 
-fun <T> NetworkResponse<T>.getOrNull(): T? =
+fun <T : Any> NetworkResponse<T>.getOrNull(): T? =
     when (this) {
         is NetworkResponse.Success -> data
         is NetworkResponse.BizError -> null
         is NetworkResponse.UnknownError -> null
     }
 
-fun <T> NetworkResponse<T>.getOrThrow(): T =
+fun <T : Any> NetworkResponse<T>.getOrThrow(): T =
     when (this) {
         is NetworkResponse.Success -> data
         is NetworkResponse.BizError -> throw ApiException(errorCode, errorMessage)
         is NetworkResponse.UnknownError -> throw throwable
     }
 
-inline fun <T> NetworkResponse<T>.getOrElse(default: (NetworkResponse<T>) -> T): T =
+inline fun <T : Any> NetworkResponse<T>.getOrElse(default: (NetworkResponse<T>) -> T): T =
     when (this) {
         is NetworkResponse.Success -> data
         else -> default(this)
     }
 
-inline fun <T> NetworkResponse<T>.whenSuccess(
+inline fun <T : Any> NetworkResponse<T>.whenSuccess(
     block: (NetworkResponse.Success<T>) -> Unit
 ) {
     (this as? NetworkResponse.Success)?.also(block)
 }
 
-inline fun <T> NetworkResponse<T>.guardSuccess(
+inline fun <T : Any> NetworkResponse<T>.guardSuccess(
     block: () -> Nothing
 ): T {
     if (this !is NetworkResponse.Success) {

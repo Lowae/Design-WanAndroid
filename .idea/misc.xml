@@ -105,6 +105,7 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_fragment_profile_list_corner.xml" value="0.148" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_level_corner.xml" value="0.148" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/bg_line_corner.xml" value="0.153" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_arrow_back_24dp.xml" value="0.139" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_baseline_explore_24.xml" value="0.148" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_baseline_navigation_24.xml" value="0.148" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.227" />
@@ -177,7 +178,7 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/fragment_series_detail_child.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_coin_history_layout.xml" value="0.4" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_coin_info_layout.xml" value="0.4" />
-        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_collect_list_article_layout.xml" value="0.2" />
+        <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_collect_list_article_layout.xml" value="0.4" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_footer_layout.xml" value="0.6" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout.xml" value="0.264" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/layout/item_home_article_layout_v2.xml" value="0.3078817733990148" />

@@ -102,18 +102,18 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
     }
 
     override fun onResume() {
-        super.onResume()
         agentWeb.webLifeCycle.onResume()
+        super.onResume()
     }
 
     override fun onPause() {
-        super.onPause()
         agentWeb.webLifeCycle.onPause()
+        super.onPause()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         agentWeb.webLifeCycle.onDestroy()
+        super.onDestroy()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

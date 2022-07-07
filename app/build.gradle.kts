@@ -30,6 +30,13 @@ android {
         dataBinding = true
     }
 
+    applicationVariants.all {
+        outputs.all {
+            (this as? com.android.build.gradle.internal.api.ApkVariantOutputImpl)?.outputFileName =
+                "Design WanAndroid-${Version.versionName}-${name}.apk"
+        }
+    }
+
     buildTypes {
         debug {
         }
@@ -53,7 +60,6 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":multitype")))
-    
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
     implementation(Deps.material)
@@ -85,6 +91,7 @@ dependencies {
     implementation(Deps.agentWeb)
 
     implementation(Deps.kotlinSerial)
+    debugImplementation(Deps.DebugDependency.debugLeakCanary)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

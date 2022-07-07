@@ -21,7 +21,7 @@ interface AccountService : BaseService {
     ): NetworkResponse<User>
 
     @GET("user/logout/json")
-    suspend fun logout(): NetworkResponse<Any?>
+    suspend fun logout(): NetworkResponse<Any>
 
     /**
      * 注册
@@ -32,7 +32,7 @@ interface AccountService : BaseService {
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("repassword") confirmPassword: String
-    ): NetworkResponse<Any?>
+    ): NetworkResponse<Any>
 
     /**
      * 获取用户信息

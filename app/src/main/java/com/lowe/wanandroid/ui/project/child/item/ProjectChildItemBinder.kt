@@ -40,7 +40,7 @@ class ProjectChildItemBinder(private val onClick: (ArticleAction) -> Unit) :
                     )
                 )
             }
-            ivCollect.setOnClickListener {
+            projectCollect.setOnClickListener {
                 onClick(
                     ArticleAction.CollectClick(
                         holder.bindingAdapterPosition,

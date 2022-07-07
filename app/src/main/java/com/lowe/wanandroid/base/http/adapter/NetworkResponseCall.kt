@@ -35,6 +35,10 @@ internal class NetworkResponseCall(
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
+                if (call.isCanceled) {
+                    // 忽略请求被Canceled的情况
+                    return
+                }
                 errorHandler?.otherError(t)
                 callback.onResponse(
                     this@NetworkResponseCall,

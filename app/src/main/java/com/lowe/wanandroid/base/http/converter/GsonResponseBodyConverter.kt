@@ -16,7 +16,6 @@
 package com.lowe.wanandroid.base.http.converter
 
 import com.google.gson.Gson
-import com.google.gson.JsonIOException
 import com.google.gson.TypeAdapter
 import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import okhttp3.ResponseBody
@@ -43,10 +42,14 @@ class GsonResponseBodyConverter<T : Any>(
                 }
             }
             jsonReader.endObject()
-            return if (data == null) {
-                NetworkResponse.UnknownError(JsonIOException("JSON document consumed failed"))
-            } else if (errorCode != 0) {
+            return if (errorCode != 0) {
                 NetworkResponse.BizError(errorCode, errorMsg)
+            } else if (data == null) {
+                /**
+                 * 由于接口会有"data":null的情况，这里兜底替换为Any()，保证Success里data的非空性
+                 */
+                @Suppress("UNCHECKED_CAST")
+                NetworkResponse.Success(Any()) as NetworkResponse<T>
             } else {
                 NetworkResponse.Success(data)
             }

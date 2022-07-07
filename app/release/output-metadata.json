@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 52,
+      "versionCode": 54,
       "versionName": "1.0",
-      "outputFile": "app-release.apk"
+      "outputFile": "Design WanAndroid-1.0-release.apk"
     }
   ],
   "elementType": "File"

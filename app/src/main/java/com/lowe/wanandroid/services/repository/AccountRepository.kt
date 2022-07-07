@@ -29,7 +29,7 @@ class AccountRepository @Inject constructor(private val service: AccountService)
         return result
     }
 
-    suspend fun logout(): NetworkResponse<Any?> {
+    suspend fun logout(): NetworkResponse<Any> {
         return service.logout().also {
             if (it.isSuccess) {
                 AccountManager.logout()
