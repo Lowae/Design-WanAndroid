@@ -25,6 +25,7 @@ App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝
 所以可交互的UI均带有Ripple效果，明确表示这是个可交互控件，且Ripple颜色支持取自当前Dynamic colors的主题色
 
 ## 逻辑：
+具体细节可转到[Design WanAndroid（WanAndroid的最佳可使用的Android客户端）](https://juejin.cn/post/7117594416235151367)<p>
 使用buildSrc，实现全局且统一的依赖管理。<p>
 严格遵循[MVVM架构](https://developer.android.com/topic/architecture)，逻辑分为：
 - 界面层(UI Layer)
