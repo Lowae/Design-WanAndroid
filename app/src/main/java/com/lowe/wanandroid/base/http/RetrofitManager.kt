@@ -66,6 +66,7 @@ object RetrofitManager {
 
                     override fun otherError(throwable: Throwable) {
                         ApplicationCoroutineScope.providesMainCoroutineScope().launch {
+                            // todo()
                             "请求失败".showShortToast()
                         }
                         AppLog.e(msg = throwable.message.toString(), exception = throwable)
