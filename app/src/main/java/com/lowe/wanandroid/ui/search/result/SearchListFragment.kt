@@ -5,8 +5,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
@@ -15,11 +17,14 @@ import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
 import com.lowe.wanandroid.ui.BaseFragment
+import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.search.SearchViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
+import com.lowe.wanandroid.utils.isEmpty
+import com.lowe.wanandroid.utils.isRefreshing
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -51,7 +56,7 @@ class SearchListFragment :
 
     private fun initView() {
         viewDataBinding.searchResultList.apply {
-            adapter = searchListAdapter
+            adapter = searchListAdapter.withLoadStateFooter(PagingLoadStateAdapter(SimpleFooterItemBinder(), searchListAdapter.types))
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
@@ -64,8 +69,7 @@ class SearchListFragment :
 
         lifecycleScope.launchWhenCreated {
             searchListAdapter.loadStateFlow.collect { loadState ->
-                viewDataBinding.loadingProgress.isVisible =
-                    loadState.source.refresh is LoadState.Loading
+                updateLoadStates(loadState)
                 if (loadState.refresh == LoadState.Loading) {
                     viewDataBinding.searchResultList.scrollToPosition(0)
                 }
@@ -102,6 +106,14 @@ class SearchListFragment :
                 )
             }
             else -> {}
+        }
+    }
+
+    private fun updateLoadStates(loadStates: CombinedLoadStates) {
+        viewDataBinding.loadingContainer.apply {
+            emptyLayout.isVisible =
+                loadStates.refresh is LoadState.NotLoading && searchListAdapter.isEmpty()
+            loadingProgress.isVisible = loadStates.isRefreshing
         }
     }
 }

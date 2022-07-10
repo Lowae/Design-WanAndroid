@@ -17,14 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ProgressBar
-            android:id="@+id/loadingProgress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:progressDrawable="@color/md_theme_primary" />
-
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/container_loading_layout" />
 
     </FrameLayout>
 

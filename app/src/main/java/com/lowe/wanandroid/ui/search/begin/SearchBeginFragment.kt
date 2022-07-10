@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.search.begin
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -63,13 +62,12 @@ class SearchBeginFragment :
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initEvent() {
-        viewModel.searchHotKeyLiveData.observe(this) {
+        viewModel.searchHotKeyLiveData.observe(viewLifecycleOwner) {
             hotKeyAdapter.items = it
             hotKeyAdapter.notifyItemRangeInserted(0, hotKeyAdapter.itemCount)
         }
-        viewModel.historyLiveData.observe(this) {
+        viewModel.historyLiveData.observe(viewLifecycleOwner) {
             historyAdapter.items = it
             historyAdapter.notifyDataSetChanged()
         }
