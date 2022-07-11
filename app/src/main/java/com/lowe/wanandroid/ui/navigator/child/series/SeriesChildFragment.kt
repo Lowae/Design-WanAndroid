@@ -95,41 +95,41 @@ class SeriesChildFragment :
     }
 
     private fun generateVerticalScrollChipGroup(tags: List<Any>) {
-        tags.asSequence().mapNotNull {
-            it as? Series
-        }.map {
-            Chip(
-                this.requireContext(),
-                null,
-                com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
-            ).apply {
-                layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                setChipBackgroundColorResource(R.color.choice_chip_background_color)
-                text = it.name
-                textSize = 13F
-                chipStartPadding = 0F
-                chipEndPadding = 0F
-                textStartPadding = 0F
-                textEndPadding = 0F
-                isCheckable = true
-                isCheckedIconVisible = false
-                gravity = Gravity.CENTER
-                textAlignment = View.TEXT_ALIGNMENT_CENTER
-                if (paint.measureText(text.toString()) > viewDataBinding.seriesTagList.width) {
-                    textSize = 11F
+        viewDataBinding.seriesTagList.setViews(
+            tags.map {
+                val series = it as Series
+                Chip(
+                    this.requireContext(),
+                    null,
+                    com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice
+                ).apply {
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                    setChipBackgroundColorResource(R.color.choice_chip_background_color)
+                    text = series.name
+                    textSize = 13F
+                    chipStartPadding = 0F
+                    chipEndPadding = 0F
+                    textStartPadding = 0F
+                    textEndPadding = 0F
+                    isCheckable = true
+                    isCheckedIconVisible = false
+                    gravity = Gravity.CENTER
+                    textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    if (paint.measureText(text.toString()) > viewDataBinding.seriesTagList.width) {
+                        textSize = 11F
+                    }
+                }
+            }.onEach { chip ->
+                chip.setOnClickListener {
+                    onTagClick(
+                        viewDataBinding.seriesTagList.getChipGroup().indexOfChild(it)
+                    )
                 }
             }
-        }.forEach { chip ->
-            chip.setOnClickListener {
-                onTagClick(
-                    viewDataBinding.seriesTagList.getChipGroup().indexOfChild(it)
-                )
-            }
-            viewDataBinding.seriesTagList.addOneView(chip)
-        }
+        )
     }
 
     private fun onTagClick(pos: Int) {

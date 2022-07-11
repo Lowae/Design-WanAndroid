@@ -11,7 +11,6 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ScrollView
 import androidx.annotation.IdRes
 import androidx.annotation.IntDef
-import androidx.core.view.get
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.lowe.wanandroid.utils.dpF
@@ -86,10 +85,6 @@ class VerticalScrollChipGroup @JvmOverloads constructor(
         }
     }
 
-    fun addOneView(child: View?, index: Int = -1) {
-        chipGroup.addView(child, index)
-    }
-
     fun setScrollMode(@ScrollMode mode: Int) {
         scrollMode = mode
     }
@@ -97,7 +92,9 @@ class VerticalScrollChipGroup @JvmOverloads constructor(
     fun getChipGroup() = chipGroup
 
     fun checkByPosition(position: Int) {
-        checkById(getChipGroup()[position].id)
+        getChipGroup().getChildAt(position)?.also {
+            checkById(it.id)
+        }
     }
 
     fun checkById(@IdRes id: Int) {

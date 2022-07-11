@@ -87,7 +87,10 @@ class PagingMultiTypeAdapter<T : Any>(
         footerStateAdapter: PagingLoadStateAdapter,
     ): ConcatAdapter {
         addLoadStateListener { loadStates ->
-            footerStateAdapter.loadState = loadStates.append
+            // Avoid of shown footer when adapter is empty
+            if (itemCount != 0) {
+                footerStateAdapter.loadState = loadStates.append
+            }
         }
         return ConcatAdapter(concatAdapterConfig(), this, footerStateAdapter)
     }

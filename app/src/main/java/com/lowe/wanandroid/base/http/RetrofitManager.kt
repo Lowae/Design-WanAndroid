@@ -13,7 +13,6 @@ import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookiePersistenceCache
 import com.lowe.wanandroid.base.http.interceptor.logInterceptor
 import com.lowe.wanandroid.di.ApplicationCoroutineScope
 import com.lowe.wanandroid.services.BaseService
-import com.lowe.wanandroid.utils.showShortToast
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,7 +26,6 @@ object RetrofitManager {
 
     const val BASE_URL = "https://www.wanandroid.com"
 
-    /** 请求超时时间 */
     private const val TIME_OUT_SECONDS = 10
 
     private lateinit var cookieJarImpl: UserCookieJarImpl
@@ -41,6 +39,7 @@ object RetrofitManager {
             .build()
 
     private val servicesMap = ConcurrentHashMap<String, BaseService>()
+    private val errorHandlers = mutableListOf<ErrorHandler>(ErrorToastHandler)
 
     fun init(application: Application) {
         cookieJarImpl = UserCookieJarImpl(
@@ -52,6 +51,10 @@ object RetrofitManager {
         )
     }
 
+    fun addErrorHandlerListener(handler: ErrorHandler) {
+        errorHandlers.add(handler)
+    }
+
     @Suppress("UNCHECKED_CAST")
     fun <T : BaseService> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
         return servicesMap.getOrPut(serviceClass.name) {
@@ -60,14 +63,14 @@ object RetrofitManager {
                 .addCallAdapterFactory(NetworkResponseAdapterFactory(object : ErrorHandler {
                     override fun bizError(code: Int, msg: String) {
                         ApplicationCoroutineScope.providesMainCoroutineScope().launch {
-                            msg.showShortToast()
+                            errorHandlers.forEach { it.bizError(code, msg) }
                         }
+                        AppLog.d(msg = "bizError: code:$code - msg: $msg")
                     }
 
                     override fun otherError(throwable: Throwable) {
                         ApplicationCoroutineScope.providesMainCoroutineScope().launch {
-                            // todo()
-                            "请求失败".showShortToast()
+                            errorHandlers.forEach { it.otherError(throwable) }
                         }
                         AppLog.e(msg = throwable.message.toString(), exception = throwable)
                     }

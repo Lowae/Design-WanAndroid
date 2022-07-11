@@ -1,6 +1,5 @@
 package com.lowe.wanandroid.ui.home
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
@@ -49,7 +48,9 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
                     val tops = topsDeferred.await().getOrElse { emptyList() }
                     val banners = bannersDeferred.await().getOrElse { emptyList() }
                     with(ArrayList<Any>(1 + tops.size + articles.size)) {
-                        add(Banners(banners))
+                        if (banners.isNotEmpty()) {
+                            add(Banners(banners))
+                        }
                         addAll(tops)
                         addAll(articles)
                         this
