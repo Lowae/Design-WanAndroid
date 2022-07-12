@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.home.child.explore
 
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -123,6 +124,7 @@ class ExploreFragment :
             }
         }
         appViewModel.collectArticleEvent.observe(viewLifecycleOwner) { event ->
+            Log.d("collectArticleEvent", "event: $event")
             homeAdapter.snapshot().run {
                 val index = indexOfFirst { it is Article && it.id == event.id }
                 if (index >= 0) {

@@ -4,22 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="kotlin.jvm.functions.Function2" />
-
         <import type="com.lowe.wanandroid.services.model.CollectBean" />
 
         <variable
             name="collect"
             type="CollectBean" />
 
-        <variable
-            name="position"
-            type="int" />
-
-        <variable
-            name="onClickFunc"
-            type="Function2&lt;Integer, CollectBean, kotlin.Unit&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/secondary_background_container"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{()->onClickFunc.invoke(position, collect)}">
+            android:foreground="?android:attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/tv_date"

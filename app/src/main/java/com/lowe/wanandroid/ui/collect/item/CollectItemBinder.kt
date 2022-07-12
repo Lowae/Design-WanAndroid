@@ -7,9 +7,10 @@ import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemCollectListArticleLayoutBinding
 import com.lowe.wanandroid.services.model.CollectBean
+import com.lowe.wanandroid.ui.ItemClickType
 import com.lowe.wanandroid.ui.ViewBindingHolder
 
-class CollectItemBinder(private val onClick: (Int, CollectBean) -> Unit) :
+class CollectItemBinder(private val onClick: (Int, CollectBean, type: ItemClickType) -> Unit) :
     PagingItemViewBinder<CollectBean, ViewBindingHolder<ItemCollectListArticleLayoutBinding>>() {
 
     override fun onBindViewHolder(
@@ -18,7 +19,8 @@ class CollectItemBinder(private val onClick: (Int, CollectBean) -> Unit) :
     ) {
         holder.binding.apply {
             collect = item
-            onClickFunc = onClick
+            root.setOnClickListener { onClick(holder.bindingAdapterPosition, item, ItemClickType.CONTENT) }
+            ivCollect.setOnClickListener { onClick(holder.bindingAdapterPosition, item, ItemClickType.COLLECT) }
             executePendingBindings()
         }
     }

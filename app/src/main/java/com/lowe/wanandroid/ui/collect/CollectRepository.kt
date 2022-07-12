@@ -4,7 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.base.http.adapter.getOrNull
+import com.lowe.wanandroid.services.BaseService
 import com.lowe.wanandroid.services.CollectService
+import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.BaseViewModel
 import javax.inject.Inject
 
@@ -20,11 +22,14 @@ class CollectRepository @Inject constructor(private val service: CollectService)
             enablePlaceholders = false
         )
     ) {
-        IntKeyPagingSource(service = service) { profileService, page, _ ->
+        IntKeyPagingSource(
+            BaseService.DEFAULT_PAGE_START_NO,
+            service = service
+        ) { profileService, page, _ ->
             profileService.getCollectList(page).getOrNull()?.datas ?: emptyList()
         }
     }.flow
 
-    suspend fun articleCollectAction(collect: Boolean, id: Int) =
-        service.isCollectArticle(collect, id)
+    suspend fun articleCollectAction(event: CollectEvent) =
+        service.isCollectArticle(event.isCollected, event.id)
 }
