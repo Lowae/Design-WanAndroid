@@ -12,7 +12,7 @@
             type="com.lowe.wanandroid.services.model.Article" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -20,7 +20,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="12dp">
+        app:cardElevation="12dp"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/projectContainer"
@@ -30,7 +31,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:padding="12dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/projectAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="@id/projectDate"
                 tools:text="falkcmzxxczmxz" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/projectDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +77,7 @@
                 app:viewAspectRatio="0.63"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/projectTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -95,7 +96,7 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="我是标题\n" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/projectContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -125,5 +126,5 @@
                 tools:src="@drawable/ic_un_collect" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

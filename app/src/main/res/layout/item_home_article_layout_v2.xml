@@ -17,7 +17,7 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -26,6 +26,7 @@
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="4dp"
+        app:strokeWidth="0dp"
         app:cardPreventCornerOverlap="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@
             android:background="@color/secondary_background_container"
             android:foreground="?android:attr/selectableItemBackground">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="张鸿洋" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_isTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +64,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_author"
                 app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +79,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_isTop"
                 app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_tag1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +95,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_author"
                 tools:text="本站发布" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_tag2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +111,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_author"
                 tools:text="问答" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_author"
                 tools:text="1小时前" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,7 +140,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_author"
                 tools:text="这是一个根据JetpackMvvm框架开发玩Android的一个APP" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_type2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,5 +169,5 @@
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

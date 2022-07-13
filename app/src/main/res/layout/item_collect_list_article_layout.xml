@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.lowe.wanandroid.services.model.CollectBean" />
 
         <variable
@@ -12,7 +13,7 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -20,7 +21,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_item"
@@ -90,5 +92,5 @@
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
