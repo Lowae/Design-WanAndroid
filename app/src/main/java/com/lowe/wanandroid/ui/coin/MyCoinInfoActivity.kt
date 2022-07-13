@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.lowe.multitype.PagingLoadStateAdapter
@@ -22,13 +21,11 @@ import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.coin.item.CoinHistoryItemBinder
 import com.lowe.wanandroid.ui.coin.ranking.CoinRankingActivity
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.showShortToast
-import com.lowe.wanandroid.utils.whenError
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * 我的积分记录页面
@@ -81,14 +78,16 @@ class MyCoinInfoActivity : BaseActivity<MyCoinInfoViewModel, ActivityMyCoinInfoB
     }
 
     private fun initEvent() {
-        lifecycleScope.launchWhenCreated {
-            coinHistoryAdapter.loadStateFlow.collect(this@MyCoinInfoActivity::updateLoadStates)
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.userBaseInfoFlow.collectLatest(this@MyCoinInfoActivity::updateUserCoinInfo)
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.coinHistoryFlow.collectLatest(coinHistoryAdapter::submitData)
+        repeatOnStarted {
+            launch {
+                coinHistoryAdapter.loadStateFlow.collect(this@MyCoinInfoActivity::updateLoadStates)
+            }
+            launch {
+                viewModel.userBaseInfoFlow.collectLatest(this@MyCoinInfoActivity::updateUserCoinInfo)
+            }
+            launch {
+                viewModel.coinHistoryFlow.collectLatest(coinHistoryAdapter::submitData)
+            }
         }
     }
 

@@ -3,7 +3,6 @@ package com.lowe.wanandroid.ui.search.begin
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -14,6 +13,7 @@ import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.ui.search.SearchViewModel
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -71,16 +71,19 @@ class SearchBeginFragment :
             historyAdapter.items = it
             historyAdapter.notifyDataSetChanged()
         }
-        lifecycleScope.launch {
-            searchActivityViewModel.searchState
-                .filter { it.keywords.isNotBlank() }
-                .collect(viewModel::historyPut)
-        }
-        lifecycleScope.launch {
-            viewModel.searchHistoryFlow().collectLatest { save ->
-                historyAdapter.items = save
-                historyAdapter.notifyDataSetChanged()
-                viewModel.initHistoryCache(save)
+        repeatOnStarted {
+            launch {
+                searchActivityViewModel.searchState
+                    .filter { it.keywords.isNotBlank() }
+                    .collect(viewModel::historyPut)
+            }
+
+            launch {
+                viewModel.searchHistoryFlow().collectLatest { save ->
+                    historyAdapter.items = save
+                    historyAdapter.notifyDataSetChanged()
+                    viewModel.initHistoryCache(save)
+                }
             }
         }
     }

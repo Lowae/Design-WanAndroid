@@ -3,7 +3,6 @@ package com.lowe.wanandroid.ui.coin.ranking
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.lowe.multitype.PagingLoadStateAdapter
@@ -18,9 +17,11 @@ import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.coin.ranking.item.CoinInfoItemBinder
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CoinRankingActivity : BaseActivity<CoinRankingViewModel, ActivityCoinRankingBinding>() {
@@ -61,11 +62,13 @@ class CoinRankingActivity : BaseActivity<CoinRankingViewModel, ActivityCoinRanki
     }
 
     private fun initEvent() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.coinRankingFlow.collectLatest(rankingAdapter::submitData)
-        }
-        lifecycleScope.launchWhenCreated {
-            rankingAdapter.loadStateFlow.collect(this@CoinRankingActivity::updateLoadStates)
+        repeatOnStarted {
+            launch {
+                viewModel.coinRankingFlow.collectLatest(rankingAdapter::submitData)
+            }
+            launch {
+                rankingAdapter.loadStateFlow.collect(this@CoinRankingActivity::updateLoadStates)
+            }
         }
     }
 

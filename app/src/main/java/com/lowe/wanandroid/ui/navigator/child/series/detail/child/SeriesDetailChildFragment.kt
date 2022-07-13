@@ -5,7 +5,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,13 +24,11 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.navigator.child.series.detail.SeriesDetailListViewModel
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.intentTo
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -86,11 +83,14 @@ class SeriesDetailChildFragment :
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getSeriesDetailListFlow(classify.id).collectLatest(detailsAdapter::submitData)
-        }
-        lifecycleScope.launchWhenCreated {
-            detailsAdapter.loadStateFlow.collect(this@SeriesDetailChildFragment::updateLoadStates)
+        repeatOnStarted {
+            launch {
+                viewModel.getSeriesDetailListFlow(classify.id).collectLatest(detailsAdapter::submitData)
+            }
+
+            launch {
+                detailsAdapter.loadStateFlow.collect(this@SeriesDetailChildFragment::updateLoadStates)
+            }
         }
         seriesDetailViewModel.onRefreshLiveData.observe(viewLifecycleOwner) {
             if (it.id == classify.id) detailsAdapter.refresh()

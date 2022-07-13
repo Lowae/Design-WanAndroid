@@ -3,7 +3,6 @@ package com.lowe.wanandroid.ui.collect
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +20,7 @@ import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -76,16 +76,20 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            collectPagingAdapter.loadStateFlow.collectLatest { loadState ->
-                loadState.whenError { it.error.message?.showShortToast() }
+        repeatOnStarted {
+            launch {
+                collectPagingAdapter.loadStateFlow.collectLatest { loadState ->
+                    loadState.whenError { it.error.message?.showShortToast() }
+                }
             }
-        }
-        lifecycleScope.launchWhenCreated {
-            collectPagingAdapter.loadStateFlow.collect(this@CollectActivity::updateLoadStates)
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.collectFlow.collectLatest(collectPagingAdapter::submitData)
+
+            launch {
+                collectPagingAdapter.loadStateFlow.collect(this@CollectActivity::updateLoadStates)
+            }
+
+            launch {
+                viewModel.collectFlow.collectLatest(collectPagingAdapter::submitData)
+            }
         }
         appViewModel.collectArticleEvent.observe(this) { event ->
             collectPagingAdapter.snapshot().run {
@@ -102,7 +106,11 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
         when (type) {
             ItemClickType.CONTENT -> WebActivity.loadUrl(
                 this,
-                Activities.Web.WebIntent(collectBean.link, collectBean.originId, collectBean.collect)
+                Activities.Web.WebIntent(
+                    collectBean.link,
+                    collectBean.originId,
+                    collectBean.collect
+                )
             )
             ItemClickType.COLLECT -> {
                 /**

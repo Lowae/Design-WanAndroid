@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivitySearchBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
@@ -12,11 +11,11 @@ import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.search.begin.SearchBeginFragment
 import com.lowe.wanandroid.ui.search.result.SearchListFragment
 import com.lowe.wanandroid.utils.hideSoftKeyboard
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
@@ -79,7 +78,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
     private fun initEvent() {
         viewModel.shortcutSearchLiveData.observe(this, this::search)
-        lifecycleScope.launch {
+        repeatOnStarted {
             viewModel.searchState
                 .map { it.keywords }
                 .distinctUntilChanged()

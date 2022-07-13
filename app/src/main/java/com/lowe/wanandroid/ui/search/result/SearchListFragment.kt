@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,9 +24,11 @@ import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -63,15 +64,17 @@ class SearchListFragment :
     }
 
     private fun initEvent() {
-        lifecycleScope.launchWhenCreated {
-            searchActivityViewModel.pagingDataFlow.collectLatest(searchListAdapter::submitData)
-        }
+        repeatOnStarted {
+            launch {
+                searchActivityViewModel.pagingDataFlow.collectLatest(searchListAdapter::submitData)
+            }
 
-        lifecycleScope.launchWhenCreated {
-            searchListAdapter.loadStateFlow.collect { loadState ->
-                updateLoadStates(loadState)
-                if (loadState.refresh == LoadState.Loading) {
-                    viewDataBinding.searchResultList.scrollToPosition(0)
+            launch {
+                searchListAdapter.loadStateFlow.collect { loadState ->
+                    updateLoadStates(loadState)
+                    if (loadState.refresh == LoadState.Loading) {
+                        viewDataBinding.searchResultList.scrollToPosition(0)
+                    }
                 }
             }
         }

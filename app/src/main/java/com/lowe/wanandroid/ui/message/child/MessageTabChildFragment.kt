@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +17,10 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.message.MessageChildFragmentAdapter
 import com.lowe.wanandroid.ui.message.MessageTabBean
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.showShortToast
-import com.lowe.wanandroid.utils.whenError
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * 消息子Fragment
@@ -71,18 +68,20 @@ class MessageTabChildFragment :
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            messagesAdapter.loadStateFlow.collectLatest { loadState ->
-                loadState.whenError { it.error.message?.showShortToast() }
-                updateLoadStates(loadState)
+        repeatOnStarted {
+            launch {
+                messagesAdapter.loadStateFlow.collectLatest { loadState ->
+                    loadState.whenError { it.error.message?.showShortToast() }
+                    updateLoadStates(loadState)
+                }
             }
-        }
-        lifecycleScope.launchWhenCreated {
-            if (messageTabBean.title == MessageChildFragmentAdapter.MESSAGE_TAB_NEW) {
-                viewModel.getUnreadMsgFlow
-            } else {
-                viewModel.getReadiedMsgFlow
-            }.collectLatest(messagesAdapter::submitData)
+            launch {
+                if (messageTabBean.title == MessageChildFragmentAdapter.MESSAGE_TAB_NEW) {
+                    viewModel.getUnreadMsgFlow
+                } else {
+                    viewModel.getReadiedMsgFlow
+                }.collectLatest(messagesAdapter::submitData)
+            }
         }
     }
 

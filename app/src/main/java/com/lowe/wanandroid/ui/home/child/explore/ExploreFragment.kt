@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,13 +28,11 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.intentTo
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -109,11 +106,13 @@ class ExploreFragment :
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getArticlesFlow.collectLatest(homeAdapter::submitData)
-        }
-        lifecycleScope.launchWhenCreated {
-            homeAdapter.loadStateFlow.collect(this@ExploreFragment::updateLoadStates)
+        repeatOnStarted {
+            launch {
+                viewModel.getArticlesFlow.collectLatest(homeAdapter::submitData)
+            }
+            launch {
+                homeAdapter.loadStateFlow.collect(this@ExploreFragment::updateLoadStates)
+            }
         }
         homeViewModel.apply {
             scrollToTopLiveData.observe(viewLifecycleOwner) {

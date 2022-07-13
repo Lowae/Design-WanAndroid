@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,9 +24,11 @@ import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -79,11 +80,13 @@ class ProjectChildFragment :
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
-        }
-        lifecycleScope.launchWhenCreated {
-            projectAdapter.loadStateFlow.collect(this@ProjectChildFragment::updateLoadStates)
+        repeatOnStarted {
+            launch {
+                viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
+            }
+            launch {
+                projectAdapter.loadStateFlow.collect(this@ProjectChildFragment::updateLoadStates)
+            }
         }
         projectViewModel.parentRefreshLiveData.observe(viewLifecycleOwner, this::onParentRefresh)
         projectViewModel.scrollToTopLiveData.observe(viewLifecycleOwner, this::scrollToTop)

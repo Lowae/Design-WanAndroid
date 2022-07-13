@@ -3,7 +3,6 @@ package com.lowe.wanandroid.ui.share
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -89,28 +89,33 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     }
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            collapsingToolBarStateFlow
-                .distinctUntilChanged { old, new ->
-                    old == new
-                }.collectLatest {
-                    if (it == CollapsingToolBarState.COLLAPSED)
-                        viewDataBinding.collapsingToolbarLayout.title =
-                            viewDataBinding.shareBean?.coinInfo?.nickname
-                    else viewDataBinding.collapsingToolbarLayout.title = ""
-                }
-        }
-        lifecycleScope.launchWhenCreated {
-            shareAdapter.loadStateFlow.collectLatest { loadState ->
-                loadState.whenError { it.error.message?.showShortToast() }
-                updateLoadStates(loadState)
+        repeatOnStarted {
+            launch {
+                collapsingToolBarStateFlow
+                    .distinctUntilChanged { old, new ->
+                        old == new
+                    }.collectLatest {
+                        if (it == CollapsingToolBarState.COLLAPSED)
+                            viewDataBinding.collapsingToolbarLayout.title =
+                                viewDataBinding.shareBean?.coinInfo?.nickname
+                        else viewDataBinding.collapsingToolbarLayout.title = ""
+                    }
             }
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.getShareFlow(userId).collectLatest(shareAdapter::submitData)
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.getShareBeanFlow.collectLatest(this@ShareListActivity::updateShareUserInfo)
+
+            launch {
+                shareAdapter.loadStateFlow.collectLatest { loadState ->
+                    loadState.whenError { it.error.message?.showShortToast() }
+                    updateLoadStates(loadState)
+                }
+            }
+
+            launch {
+                viewModel.getShareFlow(userId).collectLatest(shareAdapter::submitData)
+            }
+
+            launch {
+                viewModel.getShareBeanFlow.collectLatest(this@ShareListActivity::updateShareUserInfo)
+            }
         }
         appViewModel.collectArticleEvent.observe(this) { event ->
             shareAdapter.snapshot().run {

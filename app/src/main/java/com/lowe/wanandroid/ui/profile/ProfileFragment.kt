@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.BR
@@ -22,11 +21,13 @@ import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.tools.ToolListActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
+import com.lowe.wanandroid.utils.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import okhttp3.internal.immutableListOf
 import kotlin.math.abs
 
@@ -100,31 +101,35 @@ class ProfileFragment :
 
 
     private fun initEvents() {
-        lifecycleScope.launchWhenCreated {
-            collapsingToolBarStateFlow
-                .distinctUntilChanged { old, new ->
-                    old == new
-                }.collectLatest {
-                    if (it == CollapsingToolBarState.COLLAPSED) {
-                        viewDataBinding.collapsingToolbarLayout.title =
-                            viewDataBinding.user?.userInfo?.nickname
-                    } else viewDataBinding.collapsingToolbarLayout.title = ""
-                }
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.userStatusFlow().collect {
-                when (it) {
-                    is AccountState.LogIn -> {
-                        viewModel.fetchUserInfo()
+        repeatOnStarted {
+            launch {
+                collapsingToolBarStateFlow
+                    .distinctUntilChanged { old, new ->
+                        old == new
+                    }.collectLatest {
+                        if (it == CollapsingToolBarState.COLLAPSED) {
+                            viewDataBinding.collapsingToolbarLayout.title =
+                                viewDataBinding.user?.userInfo?.nickname
+                        } else viewDataBinding.collapsingToolbarLayout.title = ""
                     }
-                    AccountState.LogOut -> {
+            }
 
+            launch {
+                viewModel.userStatusFlow().collect {
+                    when (it) {
+                        is AccountState.LogIn -> {
+                            viewModel.fetchUserInfo()
+                        }
+                        AccountState.LogOut -> {
+
+                        }
                     }
                 }
             }
-        }
-        lifecycleScope.launchWhenCreated {
-            AccountManager.collectUserInfoFlow().collect(this@ProfileFragment::userInfoGot)
+
+            launch {
+                AccountManager.collectUserInfoFlow().collect(this@ProfileFragment::userInfoGot)
+            }
         }
     }
 
