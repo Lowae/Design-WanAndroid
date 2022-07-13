@@ -13,7 +13,7 @@ import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.ui.search.SearchViewModel
-import com.lowe.wanandroid.utils.repeatOnStarted
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -71,7 +71,7 @@ class SearchBeginFragment :
             historyAdapter.items = it
             historyAdapter.notifyDataSetChanged()
         }
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 searchActivityViewModel.searchState
                     .filter { it.keywords.isNotBlank() }

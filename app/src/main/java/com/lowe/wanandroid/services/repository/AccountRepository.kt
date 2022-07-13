@@ -38,7 +38,7 @@ class AccountRepository @Inject constructor(private val service: AccountService)
     }
 
     suspend fun register(registerInfo: RegisterInfo) =
-        service.register(registerInfo.username, registerInfo.password, registerInfo.confirmPassowrd)
+        service.register(registerInfo.username, registerInfo.password, registerInfo.confirmPassword)
 
     suspend fun getServerUserInfo() = service.getUserInfo()
 

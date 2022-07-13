@@ -30,6 +30,7 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
     val userNameObservable = ObservableField<String>()
     val passwordObservable = ObservableField<String>()
     val loginEnable = object : ObservableBoolean(userNameObservable, passwordObservable) {
+
         override fun get() =
             userNameObservable.get()?.trim().isNullOrBlank().not() && passwordObservable.get()
                 ?.trim().isNullOrBlank().not()

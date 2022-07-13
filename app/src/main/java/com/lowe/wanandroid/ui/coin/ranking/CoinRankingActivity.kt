@@ -17,7 +17,7 @@ import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.coin.ranking.item.CoinInfoItemBinder
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.repeatOnStarted
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -62,7 +62,7 @@ class CoinRankingActivity : BaseActivity<CoinRankingViewModel, ActivityCoinRanki
     }
 
     private fun initEvent() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 viewModel.coinRankingFlow.collectLatest(rankingAdapter::submitData)
             }

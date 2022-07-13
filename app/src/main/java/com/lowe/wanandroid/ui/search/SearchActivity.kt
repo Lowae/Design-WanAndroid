@@ -11,7 +11,7 @@ import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.search.begin.SearchBeginFragment
 import com.lowe.wanandroid.ui.search.result.SearchListFragment
 import com.lowe.wanandroid.utils.hideSoftKeyboard
-import com.lowe.wanandroid.utils.repeatOnStarted
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -78,7 +78,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
     private fun initEvent() {
         viewModel.shortcutSearchLiveData.observe(this, this::search)
-        repeatOnStarted {
+        launchRepeatOnStarted {
             viewModel.searchState
                 .map { it.keywords }
                 .distinctUntilChanged()

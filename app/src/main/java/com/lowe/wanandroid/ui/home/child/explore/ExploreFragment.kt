@@ -106,7 +106,7 @@ class ExploreFragment :
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 viewModel.getArticlesFlow.collectLatest(homeAdapter::submitData)
             }

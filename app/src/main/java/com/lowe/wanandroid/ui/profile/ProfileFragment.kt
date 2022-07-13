@@ -21,7 +21,7 @@ import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.tools.ToolListActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
-import com.lowe.wanandroid.utils.repeatOnStarted
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
@@ -101,7 +101,7 @@ class ProfileFragment :
 
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 collapsingToolBarStateFlow
                     .distinctUntilChanged { old, new ->

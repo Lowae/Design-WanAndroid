@@ -8,37 +8,37 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-fun ComponentActivity.repeatOnCreated(block: suspend CoroutineScope.() -> Unit) {
+fun ComponentActivity.launchRepeatOnCreated(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.CREATED, block)
     }
 }
 
-fun ComponentActivity.repeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
+fun ComponentActivity.launchRepeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED, block)
     }
 }
 
-fun ComponentActivity.repeatOnResumed(block: suspend CoroutineScope.() -> Unit) {
+fun ComponentActivity.launchRepeatOnResumed(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.RESUMED, block)
     }
 }
 
-fun Fragment.repeatOnCreated(block: suspend CoroutineScope.() -> Unit) {
+fun Fragment.launchRepeatOnCreated(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.CREATED, block)
     }
 }
 
-fun Fragment.repeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
+fun Fragment.launchRepeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED, block)
     }
 }
 
-fun Fragment.repeatOnResumed(block: suspend CoroutineScope.() -> Unit) {
+fun Fragment.launchRepeatOnResumed(block: suspend CoroutineScope.() -> Unit) {
     lifecycle.coroutineScope.launch {
         repeatOnLifecycle(Lifecycle.State.RESUMED, block)
     }

@@ -68,7 +68,7 @@ class MessageTabChildFragment :
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 messagesAdapter.loadStateFlow.collectLatest { loadState ->
                     loadState.whenError { it.error.message?.showShortToast() }

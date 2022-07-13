@@ -83,7 +83,7 @@ class SeriesDetailChildFragment :
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 viewModel.getSeriesDetailListFlow(classify.id).collectLatest(detailsAdapter::submitData)
             }

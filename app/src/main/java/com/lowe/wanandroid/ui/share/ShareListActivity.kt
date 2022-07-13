@@ -89,7 +89,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 collapsingToolBarStateFlow
                     .distinctUntilChanged { old, new ->

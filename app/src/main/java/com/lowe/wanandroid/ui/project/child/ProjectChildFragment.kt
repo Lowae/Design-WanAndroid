@@ -24,7 +24,7 @@ import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.isEmpty
 import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.repeatOnStarted
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -80,7 +80,7 @@ class ProjectChildFragment :
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
             }

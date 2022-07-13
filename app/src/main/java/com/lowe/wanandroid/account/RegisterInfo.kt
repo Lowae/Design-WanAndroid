@@ -3,5 +3,5 @@ package com.lowe.wanandroid.account
 data class RegisterInfo(
     val username: String,
     val password: String,
-    val confirmPassowrd: String
+    val confirmPassword: String
 )

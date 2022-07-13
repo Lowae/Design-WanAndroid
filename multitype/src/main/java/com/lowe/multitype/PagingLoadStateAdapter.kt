@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.ConcatAdapter
  *
  * @author Lowae
  */
-open class PagingLoadStateAdapter(footer: FooterStateItemBinder<*>, override var types: Types) :
+open class PagingLoadStateAdapter(binder: FooterStateItemBinder<*>, override var types: Types) :
     BaseMultiTypeAdapter() {
 
     init {
-        register(footer)
+        register(binder)
     }
 
     var loadState: LoadState = LoadState.NotLoading(endOfPaginationReached = false)

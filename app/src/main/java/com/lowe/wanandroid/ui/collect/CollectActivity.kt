@@ -76,7 +76,7 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
     }
 
     private fun initEvents() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 collectPagingAdapter.loadStateFlow.collectLatest { loadState ->
                     loadState.whenError { it.error.message?.showShortToast() }

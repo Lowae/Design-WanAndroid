@@ -78,7 +78,7 @@ class MyCoinInfoActivity : BaseActivity<MyCoinInfoViewModel, ActivityMyCoinInfoB
     }
 
     private fun initEvent() {
-        repeatOnStarted {
+        launchRepeatOnStarted {
             launch {
                 coinHistoryAdapter.loadStateFlow.collect(this@MyCoinInfoActivity::updateLoadStates)
             }
