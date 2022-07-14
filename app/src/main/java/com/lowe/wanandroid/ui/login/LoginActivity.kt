@@ -39,7 +39,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewDataBinding.viewModel = viewModel
         viewDataBinding.loginButton.setOnClickListener {
             updateLoginLoadingStatus(true)
-            viewModel.login(
+            viewModel.userLogin(
                 LocalUserInfo(
                     viewModel.userNameObservable.get().toString(),
                     viewModel.passwordObservable.get().toString()

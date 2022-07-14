@@ -59,6 +59,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
         super.onCreate(savedInstanceState)
         initView()
         initEvents()
+        viewModel.fetch(userId)
     }
 
     private fun initView() {
@@ -110,7 +111,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
             }
 
             launch {
-                viewModel.getShareFlow(userId).collectLatest(shareAdapter::submitData)
+                viewModel.shareListFlow.collectLatest(shareAdapter::submitData)
             }
 
             launch {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.lowe.wanandroid.base.http.adapter.getOrElse
-import com.lowe.wanandroid.di.IOApplicationScope
+import com.lowe.wanandroid.di.ApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.search.SearchRepository
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchBeginViewModel @Inject constructor(
     private val repository: SearchRepository,
-    @IOApplicationScope private val applicationScope: CoroutineScope
+    @ApplicationScope private val applicationScope: CoroutineScope
 ) :
     BaseViewModel() {
 

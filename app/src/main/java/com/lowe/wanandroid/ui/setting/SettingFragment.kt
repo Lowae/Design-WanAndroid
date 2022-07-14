@@ -12,7 +12,6 @@ import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lowe.wanandroid.BuildConfig
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.constant.SettingConstants
 import com.lowe.wanandroid.ui.about.AboutActivity
 import com.lowe.wanandroid.ui.web.WebActivity
@@ -62,7 +61,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_LOGOUT)?.apply {
-            isEnabled = AccountManager.isLogin()
+            isEnabled = settingViewModel.isLogin
         }
     }
 
@@ -85,7 +84,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                         .setPositiveButton("确认") { dialogInterface, _ ->
                             dialogInterface.dismiss()
                             this.activity?.finish()
-                            settingViewModel.logout()
+                            settingViewModel.userLogout()
                         }
                         .setNegativeButton("取消") { dialogInterface, _ ->
                             dialogInterface.dismiss()

@@ -7,51 +7,75 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.base.http.DataStoreFactory
-import com.lowe.wanandroid.base.http.RetrofitManager
-import com.lowe.wanandroid.di.ApplicationCoroutineScope
+import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_NAME
+import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_TOKEN
+import com.lowe.wanandroid.base.http.cookie.UserCookieJarImpl
+import com.lowe.wanandroid.di.ApplicationScope
+import com.lowe.wanandroid.di.IoDispatcher
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.utils.fromJson
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-object AccountManager {
+class AccountManager @Inject constructor(
+    private val dataStore: DataStore<Preferences>,
+    private val cookieJar: UserCookieJarImpl,
+    @ApplicationScope private val applicationScope: CoroutineScope,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
+) {
 
-    private val PREFERENCE_KEY_ACCOUNT_USER_INFO = stringPreferencesKey("key_account_user_info")
-
-    private val applicationScope: CoroutineScope =
-        ApplicationCoroutineScope.providesIOCoroutineScope()
-    private val dataStore: DataStore<Preferences> =
-        DataStoreFactory.getDefaultPreferencesDataStore()
+    companion object {
+        private val PREFERENCE_KEY_ACCOUNT_USER_INFO = stringPreferencesKey("key_account_user_info")
+    }
 
     private val userBaseInfoStateFlow: MutableStateFlow<UserBaseInfo> =
         MutableStateFlow(UserBaseInfo())
 
-    private val accountStatusFlow: MutableStateFlow<AccountState> = MutableStateFlow(
-        if (RetrofitManager.isLoginCookieValid()) AccountState.LogIn(true) else AccountState.LogOut
-    )
+    private val accountStatusFlow: MutableStateFlow<AccountState>
 
     init {
-        initUserDataFlow()
-    }
+        val isCookieValid = cookieJar.checkValid { cache ->
+            var isUserNameValid = false
+            var isUserTokenValid = false
+            cache.forEach {
+                if (it.name == COOKIE_LOGIN_USER_NAME) {
+                    isUserNameValid = it.value.isNotBlank()
+                }
+                if (it.name == COOKIE_LOGIN_USER_TOKEN) {
+                    isUserTokenValid = it.value.isNotBlank()
+                }
+            }
+            return@checkValid isUserNameValid && isUserTokenValid
+        }
 
-    /**
-     * 用户信息，基于dataStore
-     */
-    fun collectUserInfoFlow(): StateFlow<UserBaseInfo> = userBaseInfoStateFlow
+        accountStatusFlow = MutableStateFlow(
+            if (isCookieValid) AccountState.LogIn(true) else AccountState.LogOut
+        )
 
-    /**
-     * 用户状态信息
-     */
-    fun accountStateFlow(): StateFlow<AccountState> = accountStatusFlow
+        applicationScope.launch(dispatcher) {
+            launch {
+                cookieJar.checkValid { cache ->
+                    var isUserNameValid = false
+                    var isUserTokenValid = false
+                    cache.forEach {
+                        if (it.name == COOKIE_LOGIN_USER_NAME) {
+                            isUserNameValid = it.value.isNotBlank()
+                        }
+                        if (it.name == COOKIE_LOGIN_USER_TOKEN) {
+                            isUserTokenValid = it.value.isNotBlank()
+                        }
+                    }
+                    return@checkValid isUserNameValid && isUserTokenValid
+                }
+            }
 
-    private fun initUserDataFlow() {
-        applicationScope.launch {
             dataStore.data
                 .catch {
-                    AppLog.e(msg = "Error reading preferences.", exception = it)
+                    AppLog.e(msg = "Error reading preferences.", throwable = it)
                     emit(emptyPreferences())
                 }.map {
                     AppLog.d(msg = "initUserDataFlow fromJson: ${it.asMap().keys.toString()} ")
@@ -67,8 +91,18 @@ object AccountManager {
         }
     }
 
+    /**
+     * 用户信息，基于dataStore
+     */
+    fun collectUserInfoFlow(): StateFlow<UserBaseInfo> = userBaseInfoStateFlow
+
+    /**
+     * 用户状态信息
+     */
+    fun accountStateFlow(): StateFlow<AccountState> = accountStatusFlow
+
     fun cacheUserBaseInfo(userBaseInfo: UserBaseInfo) {
-        applicationScope.launch {
+        applicationScope.launch(dispatcher) {
             dataStore.edit {
                 it[PREFERENCE_KEY_ACCOUNT_USER_INFO] = Gson().toJson(userBaseInfo).apply {
                     AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_USER_INFO.name} cacheUserBaseInfo : $this}")
@@ -78,7 +112,7 @@ object AccountManager {
     }
 
     fun clearUserBaseInfo() {
-        applicationScope.launch {
+        applicationScope.launch(dispatcher) {
             dataStore.edit {
                 it[PREFERENCE_KEY_ACCOUNT_USER_INFO] = ""
                 AppLog.d(msg = "${PREFERENCE_KEY_ACCOUNT_USER_INFO.name} clearUserBaseInfo")
@@ -89,14 +123,15 @@ object AccountManager {
     fun peekUserBaseInfo(): UserBaseInfo = userBaseInfoStateFlow.value
 
     fun logIn(user: User) {
-        applicationScope.launch {
+        applicationScope.launch(dispatcher) {
             accountStatusFlow.emit(AccountState.LogIn(true, user))
         }
     }
 
     fun logout() {
-        applicationScope.launch {
+        applicationScope.launch(dispatcher) {
             clearUserBaseInfo()
+            cookieJar.clear()
             accountStatusFlow.emit(AccountState.LogOut)
         }
     }

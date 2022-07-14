@@ -1,29 +1,15 @@
 package com.lowe.wanandroid.ui.profile
 
 import androidx.annotation.DrawableRes
-import com.lowe.wanandroid.account.AccountManager
-import com.lowe.wanandroid.base.http.adapter.whenSuccess
+import com.lowe.wanandroid.account.IAccountViewModelDelegate
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.launch
-import com.lowe.wanandroid.ui.profile.usecase.UserInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userInfoUseCase: UserInfoUseCase
-) : BaseViewModel() {
-
-    fun fetchUserInfo() {
-        launch({
-            userInfoUseCase.getServerUserInfo().whenSuccess {
-                AccountManager.cacheUserBaseInfo(it.data)
-            }
-        })
-    }
-
-    fun userStatusFlow() = userInfoUseCase.accountStatusFlow()
-}
+    private val accountViewModelDelegate: IAccountViewModelDelegate
+) : BaseViewModel(), IAccountViewModelDelegate by accountViewModelDelegate
 
 /**
  * 个人页选项

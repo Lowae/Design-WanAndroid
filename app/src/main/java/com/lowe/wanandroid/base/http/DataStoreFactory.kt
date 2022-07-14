@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.lowe.wanandroid.di.ApplicationCoroutineScope
+import java.util.concurrent.ConcurrentHashMap
 
 object SearchHistoryPreference {
 
@@ -21,11 +22,15 @@ object SearchHistoryPreference {
 
 object DataStoreFactory {
 
+    object Name {
+        const val DATA_STORE_NAME_COOKIE = "data_store_cookie_name"
+    }
+
     private const val USER_PREFERENCES = "wan_android_preferences"
 
     private lateinit var defaultDataStore: DataStore<Preferences>
 
-    private val dataStoreMaps = hashMapOf<String, DataStore<Preferences>>()
+    private val dataStoreMaps = ConcurrentHashMap<String, DataStore<Preferences>>()
 
     fun init(appContext: Context) {
         getDefaultPreferencesDataStore(appContext)
@@ -40,7 +45,7 @@ object DataStoreFactory {
 
     fun getDefaultPreferencesDataStore() = defaultDataStore
 
-    fun getPreferencesDataStore(appContext: Context, name: String) =
+    fun getPreferencesDataStore(appContext: Context, name: String): DataStore<Preferences> =
         dataStoreMaps.getOrPut(name) {
             createPreferencesDataStore(appContext, name)
         }

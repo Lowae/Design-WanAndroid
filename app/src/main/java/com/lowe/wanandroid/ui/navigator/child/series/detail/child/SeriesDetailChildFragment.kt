@@ -66,6 +66,7 @@ class SeriesDetailChildFragment :
     override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
+        viewModel.fetch(classify.id)
     }
 
     private fun initView() {
@@ -85,7 +86,7 @@ class SeriesDetailChildFragment :
     private fun initEvents() {
         launchRepeatOnStarted {
             launch {
-                viewModel.getSeriesDetailListFlow(classify.id).collectLatest(detailsAdapter::submitData)
+                viewModel.seriesDetailListFlow.collectLatest(detailsAdapter::submitData)
             }
 
             launch {

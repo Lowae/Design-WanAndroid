@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.account.AccountState
 import com.lowe.wanandroid.account.checkLogin
 import com.lowe.wanandroid.databinding.FragmentProfileBinding
@@ -21,6 +20,7 @@ import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.tools.ToolListActivity
 import com.lowe.wanandroid.utils.Activities
 import com.lowe.wanandroid.utils.intentTo
+import com.lowe.wanandroid.utils.launchRepeatOnCreated
 import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -74,11 +74,11 @@ class ProfileFragment :
             }
             arrayOf(userAvatar, userName, userId, userCoinCount).forEach {
                 it.setOnClickListener {
-                    viewModel.userStatusFlow().value.checkLogin(requireContext()) {}
+                    viewModel.accountState.value.checkLogin(requireContext()) {}
                 }
             }
             userCoinCount.setOnClickListener {
-                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                viewModel.accountState.value.checkLogin(requireContext()) {
                     startActivity(Intent(requireContext(), MyCoinInfoActivity::class.java))
                 }
             }
@@ -101,6 +101,23 @@ class ProfileFragment :
 
 
     private fun initEvents() {
+        launchRepeatOnCreated {
+            launch {
+                viewModel.accountState.collect {
+                    when (it) {
+                        is AccountState.LogIn -> {
+                            viewModel.fetchUserInfo()
+                        }
+                        AccountState.LogOut -> {
+
+                        }
+                    }
+                }
+            }
+            launch {
+                viewModel.accountInfo.collect(this@ProfileFragment::userInfoGot)
+            }
+        }
         launchRepeatOnStarted {
             launch {
                 collapsingToolBarStateFlow
@@ -113,46 +130,29 @@ class ProfileFragment :
                         } else viewDataBinding.collapsingToolbarLayout.title = ""
                     }
             }
-
-            launch {
-                viewModel.userStatusFlow().collect {
-                    when (it) {
-                        is AccountState.LogIn -> {
-                            viewModel.fetchUserInfo()
-                        }
-                        AccountState.LogOut -> {
-
-                        }
-                    }
-                }
-            }
-
-            launch {
-                AccountManager.collectUserInfoFlow().collect(this@ProfileFragment::userInfoGot)
-            }
         }
     }
 
     private fun onOptionClick(position: Int, item: ProfileItemBean) {
         when (item.title) {
             getString(R.string.profile_item_title_message) -> {
-                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                viewModel.accountState.value.checkLogin(requireContext()) {
                     startActivity(Intent(requireContext(), MessageActivity::class.java))
                 }
             }
             getString(R.string.profile_item_title_share) -> {
-                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                viewModel.accountState.value.checkLogin(requireContext()) {
                     startActivity(
                         intentTo(
                             Activities.ShareList(
-                                bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to AccountManager.peekUserBaseInfo().userInfo.id)
+                                bundle = bundleOf(Activities.ShareList.KEY_SHARE_LIST_USER_ID to viewModel.userId)
                             )
                         )
                     )
                 }
             }
             getString(R.string.profile_item_title_favorite) -> {
-                viewModel.userStatusFlow().value.checkLogin(requireContext()) {
+                viewModel.accountState.value.checkLogin(requireContext()) {
                     startActivity(Intent(requireContext(), CollectActivity::class.java))
                 }
             }

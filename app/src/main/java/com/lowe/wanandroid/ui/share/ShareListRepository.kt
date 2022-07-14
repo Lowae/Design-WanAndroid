@@ -2,7 +2,6 @@ package com.lowe.wanandroid.ui.share
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.account.AccountManager
 import com.lowe.wanandroid.base.IntKeyPagingSource
 import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.base.http.adapter.getOrNull
@@ -21,7 +20,7 @@ class ShareListRepository @Inject constructor(
     private val _shareBeanFlow = MutableSharedFlow<ShareBean>(1)
     val shareBeanFlow: SharedFlow<ShareBean> = _shareBeanFlow
 
-    fun getShareList(userId: String) = Pager(
+    fun getShareList(userId: String, isMe: Boolean) = Pager(
         PagingConfig(
             pageSize = BaseViewModel.DEFAULT_PAGE_SIZE,
             initialLoadSize = BaseViewModel.DEFAULT_PAGE_SIZE,
@@ -29,12 +28,12 @@ class ShareListRepository @Inject constructor(
         )
     ) {
         IntKeyPagingSource(service = profileService) { profileService, page, _ ->
-            val result: NetworkResponse<ShareBean> = if (AccountManager.isMe(userId)) {
+            val result: NetworkResponse<ShareBean> = if (isMe) {
                 profileService.getMyShareList(page)
             } else {
                 profileService.getUserShareList(userId, page)
             }
-            result.whenSuccess { _shareBeanFlow.emit(it.data) }
+            result.whenSuccess { _shareBeanFlow.emit(it) }
             result.getOrNull()?.shareArticles?.datas ?: emptyList()
         }
     }.flow

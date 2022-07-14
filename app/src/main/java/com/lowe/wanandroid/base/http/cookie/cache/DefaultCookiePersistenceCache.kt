@@ -1,12 +1,13 @@
 package com.lowe.wanandroid.base.http.cookie.cache
 
-import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.lowe.wanandroid.base.http.DataStoreFactory
 import com.lowe.wanandroid.base.http.cookie.CookieSerializer
 import com.lowe.wanandroid.base.http.cookie.key
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
@@ -17,22 +18,16 @@ import okhttp3.Cookie
 import java.io.IOException
 
 class DefaultCookiePersistenceCache(
-    context: Context,
-    private val ioApplicationScope: CoroutineScope
+    private val cookieDataStore: DataStore<Preferences>,
+    private val applicationScope: CoroutineScope,
+    private val ioDispatcher: CoroutineDispatcher
 ) : ICookiePersistenceCache {
 
-    companion object {
-
-        private const val DATA_STORE_COOKIE_NAME = "data_store_cookie_name"
-    }
-
-    private val cookieDataStore =
-        DataStoreFactory.getPreferencesDataStore(context, DATA_STORE_COOKIE_NAME)
     private var persistenceCookies: List<Cookie> = emptyList()
     private var result: ((Collection<Cookie>) -> Unit)? = null
 
     init {
-        ioApplicationScope.launch {
+        applicationScope.launch(ioDispatcher) {
             cookieDataStore.data
                 .catch {
                     if (it is IOException) {
@@ -57,7 +52,7 @@ class DefaultCookiePersistenceCache(
     override fun snapshot() = persistenceCookies.toList()
 
     override fun saveAll(cookies: Collection<Cookie>) {
-        ioApplicationScope.launch {
+        applicationScope.launch(ioDispatcher) {
             cookieDataStore.edit { preferences ->
                 preferences.putAll(
                     *cookies.map {
@@ -69,7 +64,7 @@ class DefaultCookiePersistenceCache(
     }
 
     override fun removeAll(cookies: Collection<Cookie>) {
-        ioApplicationScope.launch {
+        applicationScope.launch(ioDispatcher) {
             cookieDataStore.edit { preferences ->
                 cookies.forEach {
                     preferences.remove(stringPreferencesKey(it.key))
@@ -80,7 +75,7 @@ class DefaultCookiePersistenceCache(
 
     override fun clear() {
         persistenceCookies = emptyList()
-        ioApplicationScope.launch {
+        applicationScope.launch(ioDispatcher) {
             cookieDataStore.edit { preferences ->
                 preferences.clear()
             }

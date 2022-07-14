@@ -49,9 +49,9 @@ inline fun <T : Any> NetworkResponse<T>.getOrElse(default: (NetworkResponse<T>) 
     }
 
 inline fun <T : Any> NetworkResponse<T>.whenSuccess(
-    block: (NetworkResponse.Success<T>) -> Unit
+    block: (T) -> Unit
 ) {
-    (this as? NetworkResponse.Success)?.also(block)
+    (this as? NetworkResponse.Success)?.data?.also(block)
 }
 
 inline fun <T : Any> NetworkResponse<T>.guardSuccess(

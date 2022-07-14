@@ -1,17 +1,13 @@
 package com.lowe.wanandroid.base.http
 
-import android.app.Application
 import com.lowe.wanandroid.base.AppLog
 import com.lowe.wanandroid.base.http.adapter.ErrorHandler
 import com.lowe.wanandroid.base.http.adapter.NetworkResponseAdapterFactory
 import com.lowe.wanandroid.base.http.converter.GsonConverterFactory
-import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_NAME
-import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_TOKEN
 import com.lowe.wanandroid.base.http.cookie.UserCookieJarImpl
-import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookieMemoryCache
-import com.lowe.wanandroid.base.http.cookie.cache.DefaultCookiePersistenceCache
 import com.lowe.wanandroid.base.http.interceptor.logInterceptor
 import com.lowe.wanandroid.di.ApplicationCoroutineScope
+import com.lowe.wanandroid.di.CoroutinesModule
 import com.lowe.wanandroid.services.BaseService
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -41,20 +37,17 @@ object RetrofitManager {
     private val servicesMap = ConcurrentHashMap<String, BaseService>()
     private val errorHandlers = mutableListOf<ErrorHandler>(ErrorToastHandler)
 
-    fun init(application: Application) {
-        cookieJarImpl = UserCookieJarImpl(
-            DefaultCookieMemoryCache(),
-            DefaultCookiePersistenceCache(
-                application,
-                ApplicationCoroutineScope.providesIOCoroutineScope()
-            )
-        )
+    fun init(cookieJar: UserCookieJarImpl) {
+        cookieJarImpl = cookieJar
     }
 
     fun addErrorHandlerListener(handler: ErrorHandler) {
         errorHandlers.add(handler)
     }
 
+    /**
+     * Todo(Inject Implementation)
+     */
     @Suppress("UNCHECKED_CAST")
     fun <T : BaseService> getService(serviceClass: Class<T>, baseUrl: String? = null): T {
         return servicesMap.getOrPut(serviceClass.name) {
@@ -62,17 +55,19 @@ object RetrofitManager {
                 .client(client)
                 .addCallAdapterFactory(NetworkResponseAdapterFactory(object : ErrorHandler {
                     override fun bizError(code: Int, msg: String) {
-                        ApplicationCoroutineScope.providesMainCoroutineScope().launch {
-                            errorHandlers.forEach { it.bizError(code, msg) }
-                        }
+                        ApplicationCoroutineScope.provideApplicationScope()
+                            .launch(CoroutinesModule.providesMainImmediateDispatcher()) {
+                                errorHandlers.forEach { it.bizError(code, msg) }
+                            }
                         AppLog.d(msg = "bizError: code:$code - msg: $msg")
                     }
 
                     override fun otherError(throwable: Throwable) {
-                        ApplicationCoroutineScope.providesMainCoroutineScope().launch {
-                            errorHandlers.forEach { it.otherError(throwable) }
-                        }
-                        AppLog.e(msg = throwable.message.toString(), exception = throwable)
+                        ApplicationCoroutineScope.provideApplicationScope()
+                            .launch(CoroutinesModule.providesMainImmediateDispatcher()) {
+                                errorHandlers.forEach { it.otherError(throwable) }
+                            }
+                        AppLog.e(msg = throwable.message.toString(), throwable = throwable)
                     }
                 }))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -82,17 +77,4 @@ object RetrofitManager {
         } as T
     }
 
-    fun isLoginCookieValid() = cookieJarImpl.checkValid { cache ->
-        var isUserNameValid = false
-        var isUserTokenValid = false
-        cache.forEach {
-            if (it.name == COOKIE_LOGIN_USER_NAME) {
-                isUserNameValid = it.value.isNotBlank()
-            }
-            if (it.name == COOKIE_LOGIN_USER_TOKEN) {
-                isUserTokenValid = it.value.isNotBlank()
-            }
-        }
-        return@checkValid isUserNameValid && isUserTokenValid
-    }
 }

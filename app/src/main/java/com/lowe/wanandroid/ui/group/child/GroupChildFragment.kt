@@ -71,6 +71,7 @@ class GroupChildFragment :
     override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
+        viewModel.fetch(authorId)
     }
 
     private fun initView() {
@@ -91,7 +92,7 @@ class GroupChildFragment :
     private fun initEvents() {
         launchRepeatOnStarted {
             launch {
-                viewModel.getGroupArticlesFlow(authorId).collectLatest(articlesAdapter::submitData)
+                viewModel.groupArticlesFlow.collectLatest(articlesAdapter::submitData)
             }
             launch {
                 articlesAdapter.loadStateFlow.collect(this@GroupChildFragment::updateLoadStates)

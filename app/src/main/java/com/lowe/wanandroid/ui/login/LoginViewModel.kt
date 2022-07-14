@@ -4,19 +4,21 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.lowe.wanandroid.account.IAccountViewModelDelegate
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.account.RegisterInfo
 import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.User
-import com.lowe.wanandroid.services.repository.AccountRepository
 import com.lowe.wanandroid.ui.BaseViewModel
 import com.lowe.wanandroid.ui.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val accountRepository: AccountRepository) :
-    BaseViewModel() {
+class LoginViewModel @Inject constructor(
+    accountViewModelDelegate: IAccountViewModelDelegate
+) :
+    BaseViewModel(), IAccountViewModelDelegate by accountViewModelDelegate {
 
     private val _loginLiveData = MutableLiveData<NetworkResponse<User>>()
     val loginLiveData: LiveData<NetworkResponse<User>> = _loginLiveData
@@ -36,15 +38,15 @@ class LoginViewModel @Inject constructor(private val accountRepository: AccountR
                 ?.trim().isNullOrBlank().not()
     }
 
-    fun login(userInfo: LocalUserInfo) {
+    fun userLogin(userInfo: LocalUserInfo) {
         launch({
-            _loginLiveData.value = accountRepository.login(userInfo)
+            _loginLiveData.value = login(userInfo)
         })
     }
 
-    fun register(registerInfo: RegisterInfo) {
+    fun userRegister(registerInfo: RegisterInfo) {
         launch({
-            _registerLiveData.value = accountRepository.register(registerInfo)
+            _registerLiveData.value = register(registerInfo)
         })
     }
 }

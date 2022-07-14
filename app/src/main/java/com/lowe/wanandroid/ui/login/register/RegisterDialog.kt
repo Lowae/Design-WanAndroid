@@ -52,7 +52,7 @@ class RegisterDialog(activity: LoginActivity, viewModel: LoginViewModel) {
                 val password = passwordObservable.get()?.trim().toString()
                 val confirmPassword = confirmPasswordObservable.get()?.trim().toString()
                 if (checkRegisterStatus(name, password, confirmPassword)) {
-                    viewModel.register(RegisterInfo(name, password, confirmPassword))
+                    viewModel.userRegister(RegisterInfo(name, password, confirmPassword))
                     dialogViewDataBinding.Loading.isVisible = true
                 }
             }

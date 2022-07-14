@@ -62,6 +62,7 @@ class ProjectChildFragment :
     override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
+        viewModel.fetch(categoryId)
     }
 
     private fun initView() {
@@ -82,7 +83,7 @@ class ProjectChildFragment :
     private fun initEvents() {
         launchRepeatOnStarted {
             launch {
-                viewModel.getProjectListFlow(categoryId).collectLatest(projectAdapter::submitData)
+                viewModel.getProjectListFlow.collectLatest(projectAdapter::submitData)
             }
             launch {
                 projectAdapter.loadStateFlow.collect(this@ProjectChildFragment::updateLoadStates)

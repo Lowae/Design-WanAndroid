@@ -12,17 +12,15 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class MainApplicationScope
 
-@Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class DefaultApplicationScope
+annotation class ApplicationScope
 
-@Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class IOApplicationScope
+@Deprecated(message = "use provideApplicationScope() instead", replaceWith = ReplaceWith(expression = "@ApplicationScope with @Dispatcher"))
+annotation class IoApplicationScope
 
 /**
  * Application周期内的[CoroutineScope]提供者，当需要在页面生命周期之外开启协程时使用
@@ -31,50 +29,32 @@ annotation class IOApplicationScope
 @Module
 object ApplicationCoroutineScope {
 
-    private const val TAG = "ApplicationCoroutineScope"
-
-    private val mainApplicationScope by lazy {
-        CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate + CoroutineExceptionHandler { _, throwable ->
-            AppLog.e(
-                TAG, "mainApplicationScope:\n${throwable.message.toString()}", throwable
-            )
-        })
-    }
-
-    /**
-     * 默认[Dispatchers.Default]
-     */
-    private val defaultApplicationScope by lazy {
-        CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { _, throwable ->
-            AppLog.e(
-                TAG, "DefaultApplicationScope:\n${throwable.message.toString()}", throwable
-            )
-        })
-    }
-
     /**
      * 默认[Dispatchers.IO]
      */
     private val ioApplicationScope by lazy {
         CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
             AppLog.e(
-                TAG, "IOApplicationScope:\n${throwable.message.toString()}", throwable
+                "IOApplicationScope:\n${throwable.message.toString()}", throwable = throwable
             )
         })
     }
 
-    @Singleton
-    @Provides
-    @MainApplicationScope
-    fun providesMainCoroutineScope() = mainApplicationScope
+    private val applicationScope =
+        CoroutineScope(SupervisorJob() + Dispatchers.Default + CoroutineExceptionHandler { _, throwable ->
+            AppLog.e(
+                "applicationScope:\n${throwable.message.toString()}", throwable = throwable
+            )
+        })
 
     @Singleton
     @Provides
-    @DefaultApplicationScope
-    fun providesDefaultCoroutineScope() = defaultApplicationScope
+    @ApplicationScope
+    fun provideApplicationScope() = applicationScope
 
     @Singleton
     @Provides
-    @IOApplicationScope
+    @IoApplicationScope
+    @Deprecated(message = "use provideApplicationScope() instead", replaceWith = ReplaceWith(expression = "@ApplicationScope with @Dispatcher"))
     fun providesIOCoroutineScope() = ioApplicationScope
 }

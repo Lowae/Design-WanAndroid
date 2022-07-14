@@ -39,5 +39,10 @@ class UserCookieJarImpl(
         persistenceCache.saveAll(cookies.filter { it.persistent })
     }
 
+    fun clear() {
+        memoryCache.clear()
+        persistenceCache.clear()
+    }
+
     fun checkValid(action: (Collection<Cookie>) -> Boolean) = action(memoryCache.snapshot())
 }
