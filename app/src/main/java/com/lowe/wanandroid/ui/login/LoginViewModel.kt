@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    accountViewModelDelegate: IAccountViewModelDelegate
+    private val accountViewModelDelegate: IAccountViewModelDelegate
 ) :
     BaseViewModel(), IAccountViewModelDelegate by accountViewModelDelegate {
 
@@ -40,13 +40,13 @@ class LoginViewModel @Inject constructor(
 
     fun userLogin(userInfo: LocalUserInfo) {
         launch({
-            _loginLiveData.value = login(userInfo)
+            _loginLiveData.value = accountViewModelDelegate.login(userInfo)
         })
     }
 
     fun userRegister(registerInfo: RegisterInfo) {
         launch({
-            _registerLiveData.value = register(registerInfo)
+            _registerLiveData.value = accountViewModelDelegate.register(registerInfo)
         })
     }
 }

@@ -41,6 +41,10 @@ android {
             )
         }
     }
+    lint {
+        baseline = File("lint-baseline.xml")
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
