@@ -27,8 +27,6 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_inverse_on_surface</item>
         <item name="colorPrimaryInverse">@color/md_theme_inverse_primary</item>
         <item name="colorBackgroundFloating">@color/md_theme_background</item>
-        <item name="rippleColor">?colorPrimary</item>
-        <item name="itemRippleColor">?colorPrimary</item>
 
         <item name="android:colorBackground">?colorBackgroundFloating</item>
         <item name="android:statusBarColor">?android:colorBackground</item>

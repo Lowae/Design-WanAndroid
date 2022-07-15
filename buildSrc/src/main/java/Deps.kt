@@ -1,6 +1,6 @@
 import java.nio.charset.Charset
 
-private const val verName = "1.0.6"
+private const val verName = "1.0.7"
 private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 
 object Version {
@@ -54,8 +54,9 @@ object Version {
 
 object Deps {
 
-    object DebugDependency{
-        const val debugLeakCanary = "com.squareup.leakcanary:leakcanary-android:${Version.leakcanaryVersion}"
+    object DebugDependency {
+        const val debugLeakCanary =
+            "com.squareup.leakcanary:leakcanary-android:${Version.leakcanaryVersion}"
     }
 
     object ClassPath {
