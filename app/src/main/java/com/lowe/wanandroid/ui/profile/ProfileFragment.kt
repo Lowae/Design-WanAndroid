@@ -16,6 +16,7 @@ import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.coin.MyCoinInfoActivity
 import com.lowe.wanandroid.ui.collect.CollectActivity
 import com.lowe.wanandroid.ui.message.MessageActivity
+import com.lowe.wanandroid.ui.message.UnreadMessage
 import com.lowe.wanandroid.ui.profile.item.ProfileItemBinder
 import com.lowe.wanandroid.ui.tools.ToolListActivity
 import com.lowe.wanandroid.utils.Activities
@@ -28,7 +29,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import okhttp3.internal.immutableListOf
 import kotlin.math.abs
 
 /**
@@ -87,7 +87,7 @@ class ProfileFragment :
 
 
     private fun initItems() {
-        profileItemAdapter.items = immutableListOf(
+        profileItemAdapter.items = listOf(
             ProfileItemBean(
                 R.drawable.ic_notification_48dp,
                 getString(R.string.profile_item_title_message)
@@ -119,6 +119,9 @@ class ProfileFragment :
             }
         }
         launchRepeatOnStarted {
+
+            viewModel.clearProfileUnread()
+
             launch {
                 collapsingToolBarStateFlow
                     .distinctUntilChanged { old, new ->
@@ -129,6 +132,9 @@ class ProfileFragment :
                                 viewDataBinding.user?.userInfo?.nickname
                         } else viewDataBinding.collapsingToolbarLayout.title = ""
                     }
+            }
+            launch {
+                viewModel.messageUnreadState.collect(this@ProfileFragment::updateMessageBadge)
             }
         }
     }
@@ -165,5 +171,16 @@ class ProfileFragment :
     private fun userInfoGot(response: UserBaseInfo) {
         viewDataBinding.user = response
         viewDataBinding.notifyPropertyChanged(BR.user)
+    }
+
+    private fun updateMessageBadge(unreadMessage: UnreadMessage) {
+        val index =
+            profileItemAdapter.items.indexOfFirst { it is ProfileItemBean && it.title == getString(R.string.profile_item_title_message) }
+        (profileItemAdapter.items[index] as ProfileItemBean).badge =
+            if (unreadMessage.count > 0) Badge(
+                Badge.BadgeType.NUMBER,
+                unreadMessage.count
+            ) else Badge(Badge.BadgeType.NONE)
+        profileItemAdapter.notifyItemChanged(index)
     }
 }

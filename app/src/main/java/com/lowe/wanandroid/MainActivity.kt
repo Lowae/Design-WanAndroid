@@ -13,7 +13,11 @@ import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.profile.ProfileFragment
 import com.lowe.wanandroid.ui.project.ProjectFragment
+import com.lowe.wanandroid.utils.getPrimaryColor
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
@@ -46,6 +50,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         )
         if (savedInstanceState == null) {
             switchFragment(0)
+        }
+        launchRepeatOnStarted {
+            launch {
+                viewModel.profileUnread.collect(this@MainActivity::changeProfileDot)
+            }
         }
     }
 
@@ -104,6 +113,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             R.id.navigation_we_chat_group -> 3
             R.id.navigation_profile -> 4
             else -> 0
+        }
+    }
+
+    private fun changeProfileDot(isShown: Boolean) {
+        viewDataBinding.navView.getOrCreateBadge(R.id.navigation_profile).also { badge ->
+            badge.backgroundColor = getPrimaryColor()
+            badge.isVisible = isShown
         }
     }
 }

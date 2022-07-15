@@ -1,6 +1,7 @@
 package com.lowe.wanandroid.ui.message.child
 
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -20,6 +21,7 @@ import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 /**
@@ -77,7 +79,10 @@ class MessageTabChildFragment :
             }
             launch {
                 if (messageTabBean.title == MessageChildFragmentAdapter.MESSAGE_TAB_NEW) {
-                    viewModel.getUnreadMsgFlow
+                    viewModel.getUnreadMsgFlow.onStart {
+                        viewModel.clearUnreadMessage()
+                        Log.d("getUnreadMsgFlow", "OnStart")
+                    }
                 } else {
                     viewModel.getReadiedMsgFlow
                 }.collectLatest(messagesAdapter::submitData)

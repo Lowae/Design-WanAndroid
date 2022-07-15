@@ -25,11 +25,11 @@ internal class NetworkResponseCall(
                     }
                     callback.onResponse(this@NetworkResponseCall, Response.success(body))
                 } else {
-                    val throwable = HttpException(response)
-                    errorHandler?.otherError(throwable)
+                    val exception = HttpException(response)
+                    errorHandler?.otherError(exception)
                     callback.onResponse(
                         this@NetworkResponseCall,
-                        Response.success(NetworkResponse.UnknownError(throwable))
+                        Response.success(NetworkResponse.UnknownError(exception))
                     )
                 }
             }

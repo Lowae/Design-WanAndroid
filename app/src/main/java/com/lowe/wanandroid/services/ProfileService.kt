@@ -42,4 +42,7 @@ interface ProfileService : BaseService {
      */
     @GET("tools/list/json")
     suspend fun getToolList(): NetworkResponse<List<ToolBean>>
+
+    @GET("message/lg/count_unread/json")
+    suspend fun getUnreadMessageCount(): NetworkResponse<Int>
 }

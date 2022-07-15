@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.services.usecase
 
-import com.google.samples.apps.iosched.shared.result.Result
 import com.lowe.wanandroid.base.http.adapter.NetworkResponse
+import com.lowe.wanandroid.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

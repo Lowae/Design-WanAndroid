@@ -1,15 +1,16 @@
 package com.lowe.wanandroid.base.http.adapter
 
 import com.lowe.wanandroid.base.http.exception.ApiException
+import com.lowe.wanandroid.result.Result
 
 /**
  * 接口的返回类型包装类
  */
-sealed class NetworkResponse<out T: Any> {
+sealed class NetworkResponse<out T : Any> {
     /**
      * 成功
      */
-    data class Success<T: Any>(val data: T) : NetworkResponse<T>()
+    data class Success<T : Any>(val data: T) : NetworkResponse<T>()
 
     /**
      * 业务错误
@@ -33,6 +34,13 @@ fun <T : Any> NetworkResponse<T>.getOrNull(): T? =
         is NetworkResponse.Success -> data
         is NetworkResponse.BizError -> null
         is NetworkResponse.UnknownError -> null
+    }
+
+fun <T : Any> NetworkResponse<T>.exceptionOrNull(): Throwable? =
+    when (this) {
+        is NetworkResponse.Success -> null
+        is NetworkResponse.BizError -> ApiException(errorCode, errorMessage)
+        is NetworkResponse.UnknownError -> throwable
     }
 
 fun <T : Any> NetworkResponse<T>.getOrThrow(): T =
@@ -61,4 +69,12 @@ inline fun <T : Any> NetworkResponse<T>.guardSuccess(
         block()
     }
     return this.data
+}
+
+fun <T : Any> NetworkResponse<T>.toResult(): Result<T> {
+    return if (this is NetworkResponse.Success<T>) {
+        Result.Success(this.data)
+    } else {
+        Result.Error(exceptionOrNull())
+    }
 }

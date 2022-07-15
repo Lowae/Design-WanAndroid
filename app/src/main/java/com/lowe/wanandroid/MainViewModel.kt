@@ -2,9 +2,17 @@ package com.lowe.wanandroid
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.wanandroid.ui.message.UnreadMessageManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(unreadMessageManager: UnreadMessageManager) :
+    BaseViewModel() {
 
     /**
      * 首页NavigationBottomTab双击事件
@@ -16,7 +24,9 @@ class MainViewModel : BaseViewModel() {
         _mainTabDoubleClickLiveData.value = tag
     }
 
-    override fun init() {
-
-    }
+    val profileUnread = unreadMessageManager.profileUnreadState.stateIn(
+        viewModelScope,
+        SharingStarted.Lazily,
+        false
+    )
 }
