@@ -39,11 +39,6 @@
 -keep class * extends androidx.fragment.app.Fragment{}
 -keep public class * extends androidx.preference.Preference
 
-
--dontnote com.android.vending.licensing.ILicensingService
--dontnote com.google.vending.licensing.ILicensingService
--dontnote com.google.android.vending.licensing.ILicensingService
-
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -144,7 +139,9 @@
 -keepclasseswithmembers class com.lowe.wanandroid.base.http.adapter.NetworkResponse {*;}
 -keepclasseswithmembers class * extends com.lowe.wanandroid.base.http.adapter.NetworkResponse {*;}
 
--keep class com.lowe.wanandroid.account.** {*;}
+-keepclasseswithmembers class com.lowe.wanandroid.account.AccountState {*;}
+-keepclasseswithmembers class com.lowe.wanandroid.account.LocalUserInfo {*;}
+-keepclasseswithmembers class com.lowe.wanandroid.account.RegisterInfo {*;}
 
 # AgentWeb
 -keep class com.just.agentweb.** {

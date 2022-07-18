@@ -55,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(fileTree("dir" to "libs", "include" to listOf("*.jar", "*.aar")))
     implementation(project(mapOf("path" to ":multitype")))
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
@@ -84,7 +85,6 @@ dependencies {
 
     implementation(Deps.banner)
     implementation(Deps.flexbox)
-    implementation(Deps.agentWeb)
 
     implementation(Deps.kotlinSerial)
     debugImplementation(Deps.DebugDependency.debugLeakCanary)
