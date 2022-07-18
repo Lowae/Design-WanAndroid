@@ -1,15 +1,15 @@
 package com.lowe.wanandroid.ui.message
 
+import android.util.Log
+import com.lowe.wanandroid.account.IAccountViewModelDelegate
+import com.lowe.wanandroid.account.isLogin
 import com.lowe.wanandroid.base.http.adapter.getOrNull
 import com.lowe.wanandroid.di.ApplicationScope
 import com.lowe.wanandroid.di.IoDispatcher
 import com.lowe.wanandroid.services.usecase.UnreadMessageCountUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,9 +17,10 @@ import javax.inject.Singleton
 @Singleton
 class UnreadMessageManager @Inject constructor(
     private val unreadMessageCountUseCase: UnreadMessageCountUseCase,
+    private val accountViewModelDelegate: IAccountViewModelDelegate,
     @ApplicationScope applicationScope: CoroutineScope,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) {
+) : IAccountViewModelDelegate by accountViewModelDelegate {
 
 
     private val _unreadMessage: MutableStateFlow<UnreadMessage> = MutableStateFlow(UnreadMessage(0))
@@ -33,12 +34,15 @@ class UnreadMessageManager @Inject constructor(
         }
 
     init {
+
         applicationScope.launch(ioDispatcher) {
-            _unreadMessage.emit(
-                UnreadMessage(
-                    unreadMessageCountUseCase(Unit).getOrNull() ?: 0
+            accountViewModelDelegate.accountState.collect {
+                _unreadMessage.emit(
+                    UnreadMessage(
+                        if (it.isLogin) unreadMessageCountUseCase(Unit).getOrNull() ?: 0 else 0
+                    )
                 )
-            )
+             }
         }
     }
 

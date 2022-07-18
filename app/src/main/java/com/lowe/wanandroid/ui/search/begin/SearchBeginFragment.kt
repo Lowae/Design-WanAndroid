@@ -79,10 +79,9 @@ class SearchBeginFragment :
             }
 
             launch {
-                viewModel.searchHistoryFlow().collectLatest { save ->
+                viewModel.searchHistoryFlow.collectLatest { save ->
                     historyAdapter.items = save
                     historyAdapter.notifyDataSetChanged()
-                    viewModel.initHistoryCache(save)
                 }
             }
         }

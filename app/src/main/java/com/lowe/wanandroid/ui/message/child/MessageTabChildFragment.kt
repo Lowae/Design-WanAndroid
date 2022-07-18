@@ -1,7 +1,6 @@
 package com.lowe.wanandroid.ui.message.child
 
 import android.os.Bundle
-import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -81,7 +80,6 @@ class MessageTabChildFragment :
                 if (messageTabBean.title == MessageChildFragmentAdapter.MESSAGE_TAB_NEW) {
                     viewModel.getUnreadMsgFlow.onStart {
                         viewModel.clearUnreadMessage()
-                        Log.d("getUnreadMsgFlow", "OnStart")
                     }
                 } else {
                     viewModel.getReadiedMsgFlow

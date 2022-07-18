@@ -62,7 +62,9 @@ class ProjectChildFragment :
     override fun onViewCreated(savedInstanceState: Bundle?) {
         initView()
         initEvents()
-        viewModel.fetch(categoryId)
+        if (savedInstanceState == null) {
+            viewModel.fetch(categoryId)
+        }
     }
 
     private fun initView() {

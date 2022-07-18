@@ -1,7 +1,6 @@
 package com.lowe.wanandroid.ui
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -31,7 +30,6 @@ open class SimpleFooterItemBinder :
         holder: ViewBindingHolder<ItemFooterLayoutBinding>,
         state: LoadState
     ) {
-        Log.d("onBindViewHolder", "state: $state")
         holder.binding.apply {
             if (state is LoadState.Error) {
                 errorMsg.text = state.error.localizedMessage

@@ -19,9 +19,12 @@ class UserCookieJarImpl(
     private val persistenceCache: ICookiePersistenceCache
 ) : CookieJar {
 
+    var onCookieLoaded: ((Collection<Cookie>) -> Unit)? = null
+
     init {
         persistenceCache.loadAll {
             memoryCache.saveAll(it)
+            onCookieLoaded?.invoke(it)
         }
     }
 
@@ -35,8 +38,11 @@ class UserCookieJarImpl(
 
     @Synchronized
     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-        memoryCache.saveAll(cookies)
-        persistenceCache.saveAll(cookies.filter { it.persistent })
+        val (expiredCookies, validCookies) = cookies.partition { it.isExpired() }
+        memoryCache.removeAll(expiredCookies)
+        persistenceCache.removeAll(expiredCookies)
+        memoryCache.saveAll(validCookies)
+        persistenceCache.saveAll(validCookies.filter { it.persistent })
     }
 
     fun clear() {
@@ -44,5 +50,17 @@ class UserCookieJarImpl(
         persistenceCache.clear()
     }
 
-    fun checkValid(action: (Collection<Cookie>) -> Boolean) = action(memoryCache.snapshot())
+    fun isLoginCookieValid(): Boolean {
+        var isUserNameValid = false
+        var isUserTokenValid = false
+        memoryCache.snapshot().forEach {
+            if (it.name == COOKIE_LOGIN_USER_NAME) {
+                isUserNameValid = it.value.isNotBlank()
+            }
+            if (it.name == COOKIE_LOGIN_USER_TOKEN) {
+                isUserTokenValid = it.value.isNotBlank()
+            }
+        }
+        return isUserNameValid && isUserTokenValid
+    }
 }

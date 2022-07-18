@@ -16,12 +16,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
 
-    private val searchBeginFragment = SearchBeginFragment()
-    private val searchListFragment = SearchListFragment()
+    private var searchBeginFragment = SearchBeginFragment()
+    private var searchListFragment = SearchListFragment()
 
     override val viewDataBinding: ActivitySearchBinding by ActivityDataBindingDelegate(R.layout.activity_search)
 
@@ -31,8 +32,20 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.searchFragmentContainer, searchBeginFragment)
+                .add(
+                    R.id.searchFragmentContainer,
+                    searchBeginFragment,
+                    searchBeginFragment.javaClass.simpleName
+                )
                 .commit()
+        } else {
+            searchBeginFragment =
+                supportFragmentManager.findFragmentByTag(SearchBeginFragment::class.java.simpleName) as? SearchBeginFragment
+                    ?: searchBeginFragment
+
+            searchListFragment =
+                supportFragmentManager.findFragmentByTag(SearchListFragment::class.java.simpleName) as? SearchListFragment
+                    ?: searchListFragment
         }
         initView()
         initEvent()
@@ -77,12 +90,17 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
     }
 
     private fun initEvent() {
-        viewModel.shortcutSearchLiveData.observe(this, this::search)
         launchRepeatOnStarted {
-            viewModel.searchState
-                .map { it.keywords }
-                .distinctUntilChanged()
-                .collect(this@SearchActivity::setSearchText)
+            launch {
+                viewModel.shortcutSearch.collect(this@SearchActivity::search)
+            }
+
+            launch {
+                viewModel.searchState
+                    .map { it.keywords }
+                    .distinctUntilChanged()
+                    .collect(this@SearchActivity::setSearchText)
+            }
         }
     }
 
@@ -92,7 +110,11 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         if (searchListFragment.isAdded.not()) {
             supportFragmentManager.beginTransaction()
                 .hide(searchBeginFragment)
-                .add(R.id.searchFragmentContainer, searchListFragment)
+                .add(
+                    R.id.searchFragmentContainer,
+                    searchListFragment,
+                    searchListFragment.javaClass.simpleName
+                )
                 .addToBackStack(null).commit()
         }
         viewModel.search(keywords)

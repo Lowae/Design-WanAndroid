@@ -7,8 +7,6 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.lowe.wanandroid.base.AppLog
-import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_NAME
-import com.lowe.wanandroid.base.http.cookie.COOKIE_LOGIN_USER_TOKEN
 import com.lowe.wanandroid.base.http.cookie.UserCookieJarImpl
 import com.lowe.wanandroid.di.ApplicationScope
 import com.lowe.wanandroid.di.IoDispatcher
@@ -35,44 +33,16 @@ class AccountManager @Inject constructor(
     private val userBaseInfoStateFlow: MutableStateFlow<UserBaseInfo> =
         MutableStateFlow(UserBaseInfo())
 
-    private val accountStatusFlow: MutableStateFlow<AccountState>
+    private val accountStatusFlow: MutableStateFlow<AccountState> =
+        MutableStateFlow(AccountState.LogOut)
 
     init {
-        val isCookieValid = cookieJar.checkValid { cache ->
-            var isUserNameValid = false
-            var isUserTokenValid = false
-            cache.forEach {
-                if (it.name == COOKIE_LOGIN_USER_NAME) {
-                    isUserNameValid = it.value.isNotBlank()
-                }
-                if (it.name == COOKIE_LOGIN_USER_TOKEN) {
-                    isUserTokenValid = it.value.isNotBlank()
-                }
+        cookieJar.onCookieLoaded = {
+            if (cookieJar.isLoginCookieValid()) {
+                accountStatusFlow.tryEmit(AccountState.LogIn(true))
             }
-            return@checkValid isUserNameValid && isUserTokenValid
         }
-
-        accountStatusFlow = MutableStateFlow(
-            if (isCookieValid) AccountState.LogIn(true) else AccountState.LogOut
-        )
-
         applicationScope.launch(dispatcher) {
-            launch {
-                cookieJar.checkValid { cache ->
-                    var isUserNameValid = false
-                    var isUserTokenValid = false
-                    cache.forEach {
-                        if (it.name == COOKIE_LOGIN_USER_NAME) {
-                            isUserNameValid = it.value.isNotBlank()
-                        }
-                        if (it.name == COOKIE_LOGIN_USER_TOKEN) {
-                            isUserTokenValid = it.value.isNotBlank()
-                        }
-                    }
-                    return@checkValid isUserNameValid && isUserTokenValid
-                }
-            }
-
             dataStore.data
                 .catch {
                     AppLog.e(msg = "Error reading preferences.", throwable = it)

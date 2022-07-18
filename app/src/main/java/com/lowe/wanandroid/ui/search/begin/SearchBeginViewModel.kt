@@ -3,6 +3,7 @@ package com.lowe.wanandroid.ui.search.begin
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.lowe.wanandroid.base.http.adapter.getOrElse
 import com.lowe.wanandroid.di.ApplicationScope
 import com.lowe.wanandroid.services.model.HotKeyBean
@@ -12,6 +13,9 @@ import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.widgets.LimitedLruQueue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,6 +39,15 @@ class SearchBeginViewModel @Inject constructor(
      */
     private val historyLruCache = LimitedLruQueue<SearchState>(20)
 
+    val searchHistoryFlow = repository.searchHistoryCache().onEach {
+        historyLruCache.clear()
+        historyLruCache.addAll(it)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+        initialValue = emptyList()
+    )
+
     override fun onCleared() {
         super.onCleared()
         /**
@@ -43,12 +56,6 @@ class SearchBeginViewModel @Inject constructor(
         applicationScope.launch {
             repository.updateSearchHistory(historyLruCache.map { it.keywords }.toSet())
         }
-    }
-
-    fun searchHistoryFlow() = repository.searchHistoryCache()
-
-    fun initHistoryCache(histories: List<SearchState>) {
-        historyLruCache.addAll(histories)
     }
 
     fun historyPut(state: SearchState) {

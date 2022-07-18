@@ -1,13 +1,13 @@
 package com.lowe.wanandroid.ui.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.wanandroid.utils.tryOffer
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +16,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val repository: SearchRepository) :
     BaseViewModel() {
 
-    private val _shortcutSearchLiveData = MutableLiveData<String>()
-    val shortcutSearchLiveData: LiveData<String> = _shortcutSearchLiveData
+    private val _shortcutSearch = Channel<String>(Channel.CONFLATED)
+    val shortcutSearch = _shortcutSearch.receiveAsFlow()
 
     /**
      * 搜索状态StateFlow
@@ -67,7 +67,7 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
     }
 
     fun shortcutSearch(keywords: String) {
-        _shortcutSearchLiveData.value = keywords
+        _shortcutSearch.tryOffer(keywords)
     }
 
 
