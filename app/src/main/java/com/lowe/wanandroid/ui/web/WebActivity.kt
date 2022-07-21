@@ -8,8 +8,10 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
@@ -70,6 +72,16 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
                     currentUrl = url.orEmpty()
+                }
+
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    if (!request?.url.toString().startsWith("http")) {
+                        return true
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
                 }
             })
             .setWebChromeClient(object : WebChromeClient() {

@@ -2,9 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
-      <module name="DesignWanAndroid.buildSrc" target="11" />
-      <module name="DesignWanAndroid.buildSrc.main" target="11" />
-      <module name="DesignWanAndroid.buildSrc.test" target="11" />
       <module name="SelfWanAndroid.buildSrc" target="11" />
       <module name="SelfWanAndroid.buildSrc.main" target="11" />
       <module name="SelfWanAndroid.buildSrc.test" target="11" />
