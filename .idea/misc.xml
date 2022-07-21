@@ -201,6 +201,12 @@
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.153" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14" />
         <entry key="..\:/Users/Lowae/StudioProjects/WanAndroid/app/src/main/res/xml/settings.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/ic_arrow_back_24dp.xml" value="0.154" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.154" />
+        <entry key="app/src/main/res/drawable/ic_close_24dp.xml" value="0.154" />
+        <entry key="app/src/main/res/layout/activity_web_layout.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/menu/web_action_menu.xml" value="0.24444444444444444" />
       </map>
     </option>
   </component>
