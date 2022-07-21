@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
@@ -71,6 +72,16 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
                     super.onPageFinished(view, url)
                     currentUrl = url.orEmpty()
                 }
+
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    if (!request?.url.toString().startsWith("http")) {
+                        return true
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
             })
             .setWebChromeClient(object : WebChromeClient() {
                 override fun onReceivedTitle(view: WebView?, title: String?) {
@@ -121,6 +132,12 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
         return super.onKeyDown(keyCode, event)
     }
 
+    override fun onBackPressed() {
+        if (!agentWeb.back()) {
+            finish()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.web_action_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -161,7 +178,11 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
             intentObservable = viewModel.webDataObservable
             notifyPropertyChanged(BR.intentObservable)
             setSupportActionBar(toolbar)
-            toolbar.setNavigationOnClickListener { finish() }
+            toolbar.setNavigationOnClickListener {
+                if (!agentWeb.back()) {
+                    finish()
+                }
+            }
             collect.setOnClickListener { changeCollectStatus() }
         }
     }
