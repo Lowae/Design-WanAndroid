@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.children
+import com.lowe.wanandroid.utils.unsafeLazy
 import kotlin.math.abs
 
 /**
@@ -19,7 +20,7 @@ class NestedScrollMediateContainer @JvmOverloads constructor(
 
     private var eventX = 0f
     private var eventY = 0f
-    private val childView by lazy(LazyThreadSafetyMode.NONE) { children.first() }
+    private val childView by unsafeLazy { children.first() }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         ev ?: return super.onInterceptTouchEvent(ev)

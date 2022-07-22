@@ -4,14 +4,15 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lowe.wanandroid.account.IAccountViewModelDelegate
 import com.lowe.wanandroid.account.LocalUserInfo
 import com.lowe.wanandroid.account.RegisterInfo
 import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.services.model.User
 import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.ui.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,14 +40,14 @@ class LoginViewModel @Inject constructor(
     }
 
     fun userLogin(userInfo: LocalUserInfo) {
-        launch({
+        viewModelScope.launch {
             _loginLiveData.value = accountViewModelDelegate.login(userInfo)
-        })
+        }
     }
 
     fun userRegister(registerInfo: RegisterInfo) {
-        launch({
+        viewModelScope.launch {
             _registerLiveData.value = accountViewModelDelegate.register(registerInfo)
-        })
+        }
     }
 }

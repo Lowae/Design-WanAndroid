@@ -52,7 +52,7 @@ class SeriesDetailChildFragment :
     @Inject
     lateinit var appViewModel: AppViewModel
 
-    private val classify by lazy(LazyThreadSafetyMode.NONE) {
+    private val classify by unsafeLazy {
         BundleCompat.getParcelable(arguments, KEY_SERIES_DETAIL_CHILD_TAB) ?: Classify()
     }
     private val detailsAdapter =

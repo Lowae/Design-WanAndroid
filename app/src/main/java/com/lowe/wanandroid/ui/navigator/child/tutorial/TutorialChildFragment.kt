@@ -18,6 +18,7 @@ import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.tutorial.item.TutorialChildItemBinder
 import com.lowe.wanandroid.ui.navigator.child.tutorial.list.TutorialChapterListActivity
+import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -37,7 +38,7 @@ class TutorialChildFragment :
         }
     }
 
-    private val navigatorTabBean by lazy(LazyThreadSafetyMode.NONE) {
+    private val navigatorTabBean by unsafeLazy {
         BundleCompat.getParcelable(
             arguments,
             NavigatorFragment.KEY_NAVIGATOR_CHILD_HOME_TAB_PARCELABLE
@@ -77,6 +78,7 @@ class TutorialChildFragment :
 
     private fun onTutorialItemClick(position: Int, classify: Classify) {
         startActivity(Intent(this.context, TutorialChapterListActivity::class.java).apply {
+            putExtra(TutorialChapterListActivity.KEY_INTENT_TUTORIAL_TITLE, classify.name)
             putExtra(TutorialChapterListActivity.KEY_INTENT_TUTORIAL_ID, classify.id)
         })
     }

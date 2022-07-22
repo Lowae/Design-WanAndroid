@@ -14,6 +14,7 @@ import com.lowe.wanandroid.databinding.DialogRegisterAccountLayoutBinding
 import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.login.LoginViewModel
 import com.lowe.wanandroid.utils.showShortToast
+import com.lowe.wanandroid.utils.unsafeLazy
 
 class RegisterDialog(activity: LoginActivity, viewModel: LoginViewModel) {
 
@@ -38,7 +39,7 @@ class RegisterDialog(activity: LoginActivity, viewModel: LoginViewModel) {
             it.lifecycleOwner = activity
         }
 
-    private val registerDialog by lazy(LazyThreadSafetyMode.NONE) {
+    private val registerDialog by unsafeLazy {
         MaterialAlertDialogBuilder(activity).setView(dialogViewDataBinding.root)
             .setCancelable(true)
             .create()

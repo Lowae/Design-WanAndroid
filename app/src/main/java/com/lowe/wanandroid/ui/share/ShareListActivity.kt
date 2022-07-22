@@ -39,7 +39,7 @@ class ShareListActivity : BaseActivity<ShareListViewModel, ActivityShareListBind
     @Inject
     lateinit var appViewModel: AppViewModel
 
-    private val userId by lazy(LazyThreadSafetyMode.NONE) {
+    private val userId by unsafeLazy {
         intent.getStringExtra(Activities.ShareList.KEY_SHARE_LIST_USER_ID) ?: ""
     }
 

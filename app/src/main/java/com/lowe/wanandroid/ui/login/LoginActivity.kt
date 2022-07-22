@@ -10,6 +10,7 @@ import com.lowe.wanandroid.databinding.ActivityLoginBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.login.register.RegisterDialog
+import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
-    private val registerDialog by lazy(LazyThreadSafetyMode.NONE) {
+    private val registerDialog by unsafeLazy {
         RegisterDialog(
             this,
             viewModel

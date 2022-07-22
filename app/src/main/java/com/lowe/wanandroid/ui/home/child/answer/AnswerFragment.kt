@@ -25,10 +25,7 @@ import com.lowe.wanandroid.ui.home.HomeViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -55,7 +52,7 @@ class AnswerFragment :
     lateinit var appViewModel: AppViewModel
 
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
-    private val squareTabBean by lazy(LazyThreadSafetyMode.NONE) {
+    private val squareTabBean by unsafeLazy {
         BundleCompat.getParcelable(arguments, HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE)
             ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_ANSWER)
     }

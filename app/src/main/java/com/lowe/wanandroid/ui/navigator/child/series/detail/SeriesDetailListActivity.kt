@@ -10,6 +10,7 @@ import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
 import com.lowe.wanandroid.services.model.Classify
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -29,12 +30,12 @@ class SeriesDetailListActivity :
     private lateinit var detailFragmentAdapter: SeriesDetailFragmentStateAdapter
     private lateinit var tabLayoutMediator: TabLayoutMediator
 
-    private val classifyList: List<Classify> by lazy(LazyThreadSafetyMode.NONE) {
+    private val classifyList: List<Classify> by unsafeLazy {
         IntentCompat.getParcelableArrayListExtra(intent, KEY_BUNDLE_CLASSIFY_LIST_TAB)
             ?: emptyList()
     }
 
-    private val initIndex: Int by lazy(LazyThreadSafetyMode.NONE) {
+    private val initIndex: Int by unsafeLazy {
         intent.getIntExtra(KEY_BUNDLE_INIT_TAB_INDEX, -1)
     }
 

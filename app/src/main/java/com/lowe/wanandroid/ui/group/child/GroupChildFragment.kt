@@ -21,10 +21,7 @@ import com.lowe.wanandroid.ui.group.GroupViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
+import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -54,7 +51,7 @@ class GroupChildFragment :
     @Inject
     lateinit var appViewModel: AppViewModel
 
-    private val authorId by lazy(LazyThreadSafetyMode.NONE) {
+    private val authorId by unsafeLazy {
         arguments?.getInt(
             KEY_BUNDLE_GROUP_CHILD_ID, 0
         ) ?: 0

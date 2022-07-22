@@ -61,7 +61,7 @@ class ExploreFragment :
             register(HomeArticleItemBinderV2(this@ExploreFragment::onItemClick))
         }
     private val homeViewModel by viewModels<HomeViewModel>(this::requireParentFragment)
-    private val exploreTabBean by lazy(LazyThreadSafetyMode.NONE) {
+    private val exploreTabBean by unsafeLazy {
         BundleCompat.getParcelable(arguments, HomeFragment.KEY_CHILD_HOME_TAB_PARCELABLE)
             ?: HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_EXPLORE)
     }

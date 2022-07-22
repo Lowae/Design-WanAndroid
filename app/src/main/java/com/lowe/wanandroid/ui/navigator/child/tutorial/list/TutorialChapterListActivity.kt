@@ -11,7 +11,10 @@ import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.Activities
+import com.lowe.wanandroid.utils.launchRepeatOnStarted
+import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class TutorialChapterListActivity :
@@ -19,12 +22,17 @@ class TutorialChapterListActivity :
 
     companion object {
         const val KEY_INTENT_TUTORIAL_ID = "key_intent_tutorial_id"
+        const val KEY_INTENT_TUTORIAL_TITLE = "key_intent_tutorial_title"
     }
 
     private val chapterAdapter = MultiTypeAdapter()
-    private val tutorialId by lazy(LazyThreadSafetyMode.NONE) {
+    private val tutorialId by unsafeLazy {
         intent.getIntExtra(KEY_INTENT_TUTORIAL_ID, -1)
     }
+    private val tutorialTitle by unsafeLazy {
+        intent.getStringExtra(KEY_INTENT_TUTORIAL_TITLE).orEmpty()
+    }
+
 
     override val viewDataBinding: ActivityTutorialChapterListLayoutBinding by ActivityDataBindingDelegate(
         R.layout.activity_tutorial_chapter_list_layout
@@ -36,7 +44,9 @@ class TutorialChapterListActivity :
         super.onCreate(savedInstanceState)
         initView()
         initEvents()
-        viewModel.fetchChapterList(tutorialId)
+        if (savedInstanceState == null) {
+            viewModel.fetchChapterList(tutorialId)
+        }
     }
 
     private fun initView() {
@@ -46,13 +56,19 @@ class TutorialChapterListActivity :
                 adapter = chapterAdapter
                 layoutManager = LinearLayoutManager(context)
             }
+            with(toolbar) {
+                title = tutorialTitle
+                setNavigationOnClickListener { this@TutorialChapterListActivity.finish() }
+            }
         }
     }
 
     private fun initEvents() {
-        viewModel.chaptersLiveData.observe(this) {
-            chapterAdapter.items = it
-            chapterAdapter.notifyItemRangeInserted(0, chapterAdapter.itemCount)
+        launchRepeatOnStarted {
+            viewModel.chaptersFlow.collect {
+                chapterAdapter.items = it
+                chapterAdapter.notifyDataSetChanged()
+            }
         }
     }
 

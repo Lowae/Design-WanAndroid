@@ -44,7 +44,7 @@ class MessageTabChildFragment :
         PagingMultiTypeAdapter(ArticleDiffCalculator.getCommonDiffItemCallback()).apply {
             register(MessageTabChildItemBinder(this@MessageTabChildFragment::onMsgItemClick))
         }
-    private val messageTabBean by lazy(LazyThreadSafetyMode.NONE) {
+    private val messageTabBean by unsafeLazy {
         BundleCompat.getParcelable(
             arguments,
             MessageChildFragmentAdapter.KEY_MESSAGE_CHILD_TAB_PARCELABLE

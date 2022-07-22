@@ -7,15 +7,26 @@
 
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.navigator.child.tutorial.list.TutorialChapterListActivity">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_arrow_back_24dp"
+            app:navigationIconTint="?colorPrimary"
+            app:titleMarginStart="0dp"
+            app:titleTextColor="?colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chapterList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>
