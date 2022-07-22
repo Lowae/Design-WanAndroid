@@ -1,6 +1,6 @@
 import java.nio.charset.Charset
 
-private const val verName = "1.0.8"
+private const val verName = "1.0.9"
 private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 
 object Version {
