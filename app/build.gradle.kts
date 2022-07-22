@@ -59,6 +59,8 @@ dependencies {
     implementation(project(mapOf("path" to ":multitype")))
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
+    implementation(Deps.activity)
+    implementation(Deps.fragment)
     implementation(Deps.material)
     implementation(Deps.constraintlayout)
     implementation(Deps.lifecycleLiveDataKtx)

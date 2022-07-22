@@ -3,6 +3,7 @@ package com.lowe.wanandroid.base.app
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.lowe.wanandroid.services.usecase.ArticleCollectUseCase
 import javax.inject.Inject
 
@@ -12,16 +13,13 @@ import javax.inject.Inject
 class AppViewModelFactory @Inject constructor(
     private val application: Application,
     private val articleCollectUseCase: ArticleCollectUseCase
-) : ViewModelProvider.AndroidViewModelFactory(application) {
+) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass != AppViewModel::class.java) {
-            throw IllegalArgumentException("Unknown ViewModel class, must be ${AppViewModel::class.java}")
-        }
-        return AppViewModel(
-            application,
-            articleCollectUseCase
-        ) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+        return when (modelClass) {
+            AppViewModel::class.java -> AppViewModel(application, articleCollectUseCase)
+            else -> throw IllegalArgumentException("Unknown class $modelClass")
+        } as T
     }
 }

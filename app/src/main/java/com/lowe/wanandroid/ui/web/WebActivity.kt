@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
@@ -133,7 +132,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
         return super.onKeyDown(keyCode, event)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.web_action_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }

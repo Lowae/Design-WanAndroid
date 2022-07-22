@@ -6,7 +6,7 @@ private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 object Version {
     object ClassPathVersion {
         const val kotlinVersion = "1.7.0"
-        const val hiltPluginVersion = "2.42"
+        const val hiltPluginVersion = "2.43"
         const val hiltCompilerVersion = "1.0.0"
     }
 
@@ -19,9 +19,11 @@ object Version {
 
     const val coreKtxVersion = "1.8.0"
     const val appCompatVersion = "1.4.2"
+    const val activity = "1.5.0"
+    const val fragment = "1.5.0"
     const val materialVersion = "1.6.1"
     const val constraintLayoutVersion = "2.1.4"
-    const val lifecycleVersion = "2.4.1"
+    const val lifecycleVersion = "2.5.0"
     const val navigationVersion = "2.4.2"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val recyclerViewVersion = "1.3.0-alpha02"
@@ -44,7 +46,6 @@ object Version {
     const val bannerVersion = "2.2.2"
     const val flexboxVersion = "3.0.0"
 
-    const val agentWebVersion = "v4.1.9-androidx"
     const val dataStoreVersion = "1.0.0"
 
     const val kotlinSerialVersion = "1.3.3"
@@ -67,6 +68,8 @@ object Deps {
 
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtxVersion}"
     const val appcompat = "androidx.appcompat:appcompat:${Version.appCompatVersion}"
+    const val activity = "androidx.fragment:fragment-ktx:${Version.activity}"
+    const val fragment = "androidx.activity:activity-ktx:${Version.fragment}"
     const val material = "com.google.android.material:material:${Version.materialVersion}"
     const val constraintlayout =
         "androidx.constraintlayout:constraintlayout:${Version.constraintLayoutVersion}"
@@ -100,7 +103,6 @@ object Deps {
     const val flexbox = "com.google.android.flexbox:flexbox:${Version.flexboxVersion}"
     const val paging = "androidx.paging:paging-runtime:${Version.pagingVersion}"
     const val pagingKtx = "androidx.paging:paging-runtime-ktx:${Version.pagingVersion}"
-    const val agentWeb = "com.github.Justson.AgentWeb:agentweb-core:${Version.agentWebVersion}"
     const val dataStore = "androidx.datastore:datastore-preferences:${Version.dataStoreVersion}"
     const val hiltAndroid =
         "com.google.dagger:hilt-android:${Version.ClassPathVersion.hiltPluginVersion}"
