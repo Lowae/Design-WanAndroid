@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lowe.resource"
+    namespace = "com.lowe.common"
     compileSdk = Version.compileSdk
 
     defaultConfig {
@@ -25,8 +25,6 @@ android {
 }
 
 dependencies {
-    implementation(Deps.material)
-
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)
     androidTestImplementation(Deps.androidTestEspresso)
