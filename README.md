@@ -1,4 +1,7 @@
 # 🦄Design WanAndroid
+
+## TODO: Compose化部分页面
+
 ## 界面：
 **原WanAndroid开放的Api功能均已实现**<p>
 App内通篇全采用[Material Design 3](https://m3.material.io/)风格，拒绝半完成式Material带来的UI的割裂感。<p>
