@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.base.http.interceptor
 
-import com.lowe.wanandroid.BuildConfig
+import com.lowe.resource.BuildConfig
 import com.lowe.wanandroid.base.AppLog
 import okhttp3.logging.HttpLoggingInterceptor
 

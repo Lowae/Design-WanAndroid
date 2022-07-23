@@ -36,6 +36,13 @@ class SettingFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+        findPreference<Preference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_THEME)?.apply {
+            setOnPreferenceClickListener {
+//                startActivity(Intent(requireActivity(), ThemeActivity::class.java))
+                true
+            }
+        }
+
         findPreference<Preference>(SettingConstants.PREFERENCE_KEY_OTHER_CATEGORY_ABOUT)?.apply {
             summary = getString(
                 R.string.app_version,

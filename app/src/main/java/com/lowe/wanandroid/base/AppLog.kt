@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.base
 
 import android.util.Log
-import com.lowe.wanandroid.BuildConfig
+import com.lowe.resource.BuildConfig
 
 /**
  * App 日志类

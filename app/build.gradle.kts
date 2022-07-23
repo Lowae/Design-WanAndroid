@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar", "*.aar")))
+    implementation(project(mapOf("path" to ":compose", "path" to ":common")))
     implementation(project(mapOf("path" to ":multitype")))
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)

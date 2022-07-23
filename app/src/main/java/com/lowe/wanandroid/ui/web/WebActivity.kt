@@ -20,11 +20,11 @@ import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivityWebLayoutBinding
+import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.getPrimaryColor
 import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

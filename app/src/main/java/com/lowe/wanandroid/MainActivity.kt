@@ -3,6 +3,7 @@ package com.lowe.wanandroid
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
+import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
 import com.lowe.wanandroid.ui.BaseActivity
@@ -13,10 +14,8 @@ import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.profile.ProfileFragment
 import com.lowe.wanandroid.ui.project.ProjectFragment
-import com.lowe.wanandroid.utils.getPrimaryColor
 import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

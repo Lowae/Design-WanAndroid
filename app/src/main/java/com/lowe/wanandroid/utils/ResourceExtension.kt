@@ -1,9 +1,7 @@
 package com.lowe.wanandroid.utils
 
-import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
-import com.lowe.wanandroid.R
 
 inline val Float.spF: Float
     get() {
@@ -47,13 +45,3 @@ inline val Float.dp: Int
     get() {
         return dpF.toInt()
     }
-
-/**
- * 获取Primary Color
- */
-fun Context.getPrimaryColor() = runCatching {
-    TypedValue().let {
-        this.theme.resolveAttribute(android.R.attr.colorPrimary, it, true)
-        this.getColor(it.resourceId)
-    }
-}.getOrNull() ?: this.getColor(R.color.md_theme_primary)

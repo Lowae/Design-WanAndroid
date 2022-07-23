@@ -10,10 +10,10 @@ import com.google.android.material.color.MaterialColors
 import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemProfileOptionsLayoutBinding
+import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.ui.profile.Badge
 import com.lowe.wanandroid.ui.profile.ProfileItemBean
-import com.lowe.wanandroid.utils.getPrimaryColor
 
 class ProfileItemBinder(private val onClick: (Int, ProfileItemBean) -> Unit) :
     ItemViewBinder<ProfileItemBean, ProfileItemBinder.ProfileItemViewHolder>() {

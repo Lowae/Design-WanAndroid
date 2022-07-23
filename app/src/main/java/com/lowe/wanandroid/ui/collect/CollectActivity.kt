@@ -8,6 +8,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
+import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
@@ -18,7 +19,6 @@ import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
 import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -66,7 +66,7 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
             }
             with(collectSwipeRefresh) {
                 setColorSchemeColors(context.getPrimaryColor())
-                setProgressBackgroundColorSchemeResource(R.color.md_theme_background)
+                setProgressBackgroundColorSchemeResource(com.lowe.resource.R.color.md_theme_primary)
                 setOnRefreshListener {
                     collectPagingAdapter.refresh()
                     isRefreshing = false
@@ -84,7 +84,7 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
             }
 
             launch {
-                collectPagingAdapter.loadStateFlow.collect(this@CollectActivity::updateLoadStates)
+                collectPagingAdapter.loadStateFlow.collectLatest(this@CollectActivity::updateLoadStates)
             }
 
             launch {

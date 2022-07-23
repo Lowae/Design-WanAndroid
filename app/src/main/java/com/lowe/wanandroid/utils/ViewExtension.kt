@@ -9,6 +9,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import androidx.core.view.isVisible
+import com.lowe.resource.extension.getPrimaryColor
 
 inline fun <T : View> T?.showIf(needShow: Boolean, afterShown: (T) -> Unit) {
     this?.isVisible = needShow

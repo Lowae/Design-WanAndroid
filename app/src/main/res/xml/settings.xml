@@ -13,6 +13,12 @@
             app:summary="@string/preference_summary_dynamic_color"
             app:title="@string/preference_title_dynamic_color" />
 
+        <Preference
+            app:icon="@drawable/ic_palette_32dp"
+            app:key="normal_theme"
+            app:summary="动态取色"
+            app:title="@string/preference_title_theme" />
+
         <DropDownPreference
             app:defaultValue="system"
             app:entries="@array/preference_list_dark_mode"

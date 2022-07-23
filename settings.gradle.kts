@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "DesignWanAndroid"
 include(":app")
 include(":multitype")
+include(":compose")
+include(":common")

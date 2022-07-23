@@ -48,7 +48,7 @@
     <string name="preference_list_dark_mode_system">跟随系统</string>
     <string name="preference_category_others">其他</string>
     <string name="preference_title_about">关于</string>
-    <string name="preference_title_clean_cache">清理缓存</string>
+    <string name="preference_title_theme">主题切换</string>
     <string name="preference_title_home_website">源代码</string>
     <string name="setting">设置</string>
     <string name="collect">收藏</string>

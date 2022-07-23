@@ -27,7 +27,7 @@ object CommonTagChipWidget {
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
         this.textSize = 13F
-        this.setTextColor(context.getColor(R.color.md_theme_on_surface_variant))
+        this.setTextColor(context.getColor(com.lowe.resource.R.color.md_theme_on_surface_variant))
         setRippleBackground(
             GradientDrawable().also {
                 it.cornerRadius = 8.dpF
@@ -52,7 +52,7 @@ object CommonTagChipWidget {
         this.layoutParams = layoutParams
         this.gravity = Gravity.CENTER
         this.setPadding(6.dp)
-        this.setTextColor(context.getColor(R.color.md_theme_on_surface))
+        this.setTextColor(context.getColor(com.lowe.resource.R.color.md_theme_on_surface))
         background = GradientDrawable().also {
             it.cornerRadius = 8.dpF
             it.setColor(context.getColor(R.color.secondary_background_container))

@@ -9,6 +9,7 @@ import com.lowe.wanandroid.base.app.BaseApp
  */
 object SettingConstants {
     const val PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS = "normal_dynamic_colors"
+    const val PREFERENCE_KEY_NORMAL_CATEGORY_THEME = "normal_theme"
     const val PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE = "normal_darkMode"
     private const val DARK_MODE_ON = "on"
     private const val DARK_MODE_OFF = "off"
