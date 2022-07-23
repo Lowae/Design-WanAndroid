@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="launcher_background_color">@android:color/white</color>
+    <color name="launcher_foreground_android_color">#1f5a89</color>
+
+    <color name="md_theme_primary">#795554</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_primary_container">#FFDAD9</color>
+    <color name="md_theme_on_primary_container">#2E1414</color>
+    <color name="md_theme_secondary">#685B5B</color>
+    <color name="md_theme_on_secondary">#FFFFFF</color>
+    <color name="md_theme_secondary_container">#F0DEDD</color>
+    <color name="md_theme_on_secondary_container">#221919</color>
+    <color name="md_theme_tertiary">#685D4E</color>
+    <color name="md_theme_on_tertiary">#FFFFFF</color>
+    <color name="md_theme_tertiary_container">#F0E0CD</color>
+    <color name="md_theme_on_tertiary_container">#221A0F</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_on_error">#FFFFFF</color>
+    <color name="md_theme_error_container">#FFDAD6</color>
+    <color name="md_theme_on_error_container">#410002</color>
+    <color name="md_theme_background">#FFFBFF</color>
+    <color name="md_theme_on_background">#1E1B1B</color>
+    <color name="md_theme_surface">#FFFBFF</color>
+    <color name="md_theme_on_surface">#1E1B1B</color>
+    <color name="md_theme_surface_variant">#EBE0DF</color>
+    <color name="md_theme_on_surface_variant">#4C4545</color>
+    <color name="md_theme_outline">#7D7575</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_inverse_surface">#33302F</color>
+    <color name="md_theme_inverse_on_surface">#F6EFEE</color>
+    <color name="md_theme_inverse_primary">#EABBBA</color>
+    <color name="seed">#B38988</color>
+
+    <color name="placeholer_gray_300">@color/material_grey_300</color>
+    <color name="secondary_background_container">#eff0f3</color>
+</resources>
