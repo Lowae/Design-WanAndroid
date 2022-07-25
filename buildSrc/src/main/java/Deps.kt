@@ -1,6 +1,6 @@
 import java.nio.charset.Charset
 
-private const val verName = "1.0.9"
+private const val verName = "2.0.0"
 private val verCode: Int by lazy { "git rev-list --count HEAD".exec().toInt() }
 
 object Version {
@@ -8,6 +8,12 @@ object Version {
         const val kotlinVersion = "1.7.0"
         const val hiltPluginVersion = "2.43"
         const val hiltCompilerVersion = "1.0.0"
+    }
+
+    object ComposeVersion {
+
+        const val composeVersion = "1.1.1"
+        const val composeMaterial3Version = "1.0.0-alpha14"
     }
 
     const val compileSdk = 33
@@ -64,6 +70,15 @@ object Deps {
 
         const val hiltPlugin =
             "com.google.dagger:hilt-android-gradle-plugin:${Version.ClassPathVersion.hiltPluginVersion}"
+    }
+
+    object ComposeDependency {
+        const val composeActivity = "androidx.activity:activity-compose:${Version.activity}"
+        const val composeUI = "androidx.compose.ui:ui:${Version.ComposeVersion.composeVersion}"
+        const val composeTool = "androidx.compose.ui:ui-tooling:${Version.ComposeVersion.composeVersion}"
+        const val composeFoundation = "androidx.compose.foundation:foundation:${Version.ComposeVersion.composeVersion}"
+        const val composeMaterial3 = "androidx.compose.material3:material3:${Version.ComposeVersion.composeMaterial3Version}"
+        const val composeMaterial3Window = "androidx.compose.material3:material3-window-size-class:${Version.ComposeVersion.composeMaterial3Version}"
     }
 
     const val coreKtx = "androidx.core:core-ktx:${Version.coreKtxVersion}"

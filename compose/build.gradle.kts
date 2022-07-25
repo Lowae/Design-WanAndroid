@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -33,16 +35,25 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":resource")))
+    implementation(project(mapOf("path" to ":common")))
 
-    implementation("androidx.activity:activity-compose:1.5.0")
-    implementation("androidx.compose.ui:ui:1.1.1")
+    implementation(Deps.material)
+
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.kaptHiltAndroidCompiler)
+    kapt(Deps.kaptHiltCompiler)
+
+    // Compose
+    implementation(Deps.ComposeDependency.composeActivity)
+    implementation(Deps.ComposeDependency.composeUI)
     // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.1.1")
+    implementation(Deps.ComposeDependency.composeTool)
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.1.1")
+    implementation(Deps.ComposeDependency.composeFoundation)
     // Material Design
-    implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha14")
+    implementation(Deps.ComposeDependency.composeMaterial3)
+    implementation(Deps.ComposeDependency.composeMaterial3Window)
 
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)

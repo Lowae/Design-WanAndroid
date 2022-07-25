@@ -56,8 +56,10 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar", "*.aar")))
-    implementation(project(mapOf("path" to ":compose", "path" to ":common")))
     implementation(project(mapOf("path" to ":multitype")))
+    implementation(project(mapOf("path" to ":resource")))
+    implementation(project(mapOf("path" to ":common")))
+    implementation(project(mapOf("path" to ":compose")))
     implementation(Deps.coreKtx)
     implementation(Deps.appcompat)
     implementation(Deps.activity)
@@ -74,22 +76,20 @@ dependencies {
     implementation(Deps.paging)
     implementation(Deps.pagingKtx)
     implementation(Deps.dataStore)
-    implementation(Deps.hiltAndroid)
     implementation(Deps.preferences)
+    implementation(Deps.hiltAndroid)
     kapt(Deps.kaptHiltAndroidCompiler)
     kapt(Deps.kaptHiltCompiler)
 
-    implementation(Deps.okhttp)
-    implementation(Deps.okhttpLoggingInterceptor)
-    implementation(Deps.retrofit)
-    implementation(Deps.retrofitGsonConverter)
+//    implementation(Deps.okhttp)
+//    implementation(Deps.okhttpLoggingInterceptor)
     implementation(Deps.gson)
     implementation(Deps.fresco)
 
     implementation(Deps.banner)
     implementation(Deps.flexbox)
 
-    implementation(Deps.kotlinSerial)
+//    implementation(Deps.kotlinSerial)
     debugImplementation(Deps.DebugDependency.debugLeakCanary)
 
     testImplementation(Deps.testJunit)
