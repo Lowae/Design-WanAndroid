@@ -17,4 +17,5 @@ rootProject.name = "DesignWanAndroid"
 include(":app")
 include(":multitype")
 include(":compose")
+include(":resource")
 include(":common")

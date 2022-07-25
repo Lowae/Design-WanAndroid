@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.utils
+package com.lowe.resource.extension
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -8,13 +8,6 @@ import android.graphics.drawable.shapes.RoundRectShape
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
-import androidx.core.view.isVisible
-import com.lowe.resource.extension.getPrimaryColor
-
-inline fun <T : View> T?.showIf(needShow: Boolean, afterShown: (T) -> Unit) {
-    this?.isVisible = needShow
-    if (needShow && this != null) afterShown(this)
-}
 
 /**
  * 设置Ripple背景

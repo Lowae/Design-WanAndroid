@@ -1,5 +1,12 @@
 <resources>
 
+    <style name="DynamicColorTheme" parent="Theme.Material3.DynamicColors.Dark">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">?colorSurface</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_on_primary</item>
@@ -28,8 +35,8 @@
         <item name="colorPrimaryInverse">@color/md_theme_inverse_primary</item>
         <item name="colorBackgroundFloating">@color/md_theme_background</item>
 
-        <item name="android:colorBackground">?colorBackgroundFloating</item>
-        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:colorBackground">?colorSurface</item>
+        <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
@@ -91,33 +98,33 @@
         <item name="colorPrimaryInverse">@color/iris_blue_dark_inversePrimary</item>
     </style>
 
-    <style name="AppTheme_Lotus_Leaf_Green" parent="AppTheme">
-        <item name="colorPrimary">@color/lotus_leaf_green_dark_primary</item>
-        <item name="colorOnPrimary">@color/lotus_leaf_green_dark_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/lotus_leaf_green_dark_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/lotus_leaf_green_dark_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/lotus_leaf_green_dark_secondary</item>
-        <item name="colorOnSecondary">@color/lotus_leaf_green_dark_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/lotus_leaf_green_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/lotus_leaf_green_dark_onSecondaryContainer</item>
-        <item name="colorTertiary">@color/lotus_leaf_green_dark_tertiary</item>
-        <item name="colorOnTertiary">@color/lotus_leaf_green_dark_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/lotus_leaf_green_dark_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/lotus_leaf_green_dark_onTertiaryContainer</item>
-        <item name="colorError">@color/lotus_leaf_green_dark_error</item>
-        <item name="colorOnError">@color/lotus_leaf_green_dark_onError</item>
-        <item name="colorErrorContainer">@color/lotus_leaf_green_dark_errorContainer</item>
-        <item name="colorOnErrorContainer">@color/lotus_leaf_green_dark_onErrorContainer</item>
-        <item name="android:colorBackground">@color/lotus_leaf_green_dark_background</item>
-        <item name="colorOnBackground">@color/lotus_leaf_green_dark_onBackground</item>
-        <item name="colorSurface">@color/lotus_leaf_green_dark_surface</item>
-        <item name="colorOnSurface">@color/lotus_leaf_green_dark_onSurface</item>
-        <item name="colorSurfaceVariant">@color/lotus_leaf_green_dark_surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/lotus_leaf_green_dark_onSurfaceVariant</item>
-        <item name="colorOutline">@color/lotus_leaf_green_dark_outline</item>
-        <item name="colorSurfaceInverse">@color/lotus_leaf_green_dark_inverseSurface</item>
-        <item name="colorOnSurfaceInverse">@color/lotus_leaf_green_dark_inverseOnSurface</item>
-        <item name="colorPrimaryInverse">@color/lotus_leaf_green_dark_inversePrimary</item>
+    <style name="AppTheme_Cardamom_Tip_Green" parent="AppTheme">
+        <item name="colorPrimary">@color/cardamom_tip_green_dark_primary</item>
+        <item name="colorOnPrimary">@color/cardamom_tip_green_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/cardamom_tip_green_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/cardamom_tip_green_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/cardamom_tip_green_dark_secondary</item>
+        <item name="colorOnSecondary">@color/cardamom_tip_green_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/cardamom_tip_green_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/cardamom_tip_green_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/cardamom_tip_green_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/cardamom_tip_green_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/cardamom_tip_green_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/cardamom_tip_green_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/cardamom_tip_green_dark_error</item>
+        <item name="colorOnError">@color/cardamom_tip_green_dark_onError</item>
+        <item name="colorErrorContainer">@color/cardamom_tip_green_dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/cardamom_tip_green_dark_onErrorContainer</item>
+        <item name="android:colorBackground">@color/cardamom_tip_green_dark_background</item>
+        <item name="colorOnBackground">@color/cardamom_tip_green_dark_onBackground</item>
+        <item name="colorSurface">@color/cardamom_tip_green_dark_surface</item>
+        <item name="colorOnSurface">@color/cardamom_tip_green_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/cardamom_tip_green_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/cardamom_tip_green_dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/cardamom_tip_green_dark_outline</item>
+        <item name="colorSurfaceInverse">@color/cardamom_tip_green_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/cardamom_tip_green_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/cardamom_tip_green_dark_inversePrimary</item>
     </style>
 
 </resources>
