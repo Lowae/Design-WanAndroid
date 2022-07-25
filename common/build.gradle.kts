@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("kotlin-parcelize")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -25,6 +28,25 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":resource")))
+    implementation(Deps.lifecucleRuntimeKtx)
+
+    implementation(Deps.paging)
+    implementation(Deps.pagingKtx)
+
+    implementation(Deps.retrofit)
+    implementation(Deps.retrofitGsonConverter)
+    implementation(Deps.okhttp)
+    implementation(Deps.okhttpLoggingInterceptor)
+
+    implementation(Deps.preferences)
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.kaptHiltAndroidCompiler)
+    kapt(Deps.kaptHiltCompiler)
+
+    implementation(Deps.dataStore)
+    implementation(Deps.kotlinSerial)
+
     testImplementation(Deps.testJunit)
     androidTestImplementation(Deps.androidTestJunit)
     androidTestImplementation(Deps.androidTestEspresso)
