@@ -1,6 +1,8 @@
 # 🦄Design WanAndroid
 
-## TODO: Compose化部分页面
+
+## Compose化部分页面
+目前暂有：主题选择界面
 
 ## 界面：
 **原WanAndroid开放的Api功能均已实现**<p>
