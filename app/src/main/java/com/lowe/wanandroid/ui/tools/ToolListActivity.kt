@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityToolsBinding
-import com.lowe.wanandroid.services.model.ToolBean
+import com.lowe.common.services.model.ToolBean
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 

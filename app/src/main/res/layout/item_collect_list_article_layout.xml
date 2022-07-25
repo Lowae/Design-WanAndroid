@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.lowe.wanandroid.services.model.CollectBean" />
+        <import type="com.lowe.common.services.model.CollectBean" />
 
         <variable
             name="collect"

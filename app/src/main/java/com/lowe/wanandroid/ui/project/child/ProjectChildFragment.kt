@@ -7,26 +7,25 @@ import androidx.fragment.app.viewModels
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.common.base.app.AppViewModel
+import com.lowe.common.services.model.Article
+import com.lowe.common.services.model.CollectEvent
+import com.lowe.common.utils.Activities
+import com.lowe.common.utils.isEmpty
+import com.lowe.common.utils.isRefreshing
+import com.lowe.common.utils.launchRepeatOnStarted
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
+import com.lowe.wanandroid.BaseFragment
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentChildProjectBinding
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.project.ProjectViewModel
 import com.lowe.wanandroid.ui.project.child.item.ProjectChildItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -88,7 +87,7 @@ class ProjectChildFragment :
                 viewModel.getProjectListFlow.collectLatest(projectAdapter::submitData)
             }
             launch {
-                projectAdapter.loadStateFlow.collect(this@ProjectChildFragment::updateLoadStates)
+                projectAdapter.loadStateFlow.collectLatest(this@ProjectChildFragment::updateLoadStates)
             }
         }
         projectViewModel.parentRefreshLiveData.observe(viewLifecycleOwner, this::onParentRefresh)

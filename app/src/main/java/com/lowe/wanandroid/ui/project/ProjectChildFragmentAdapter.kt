@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.lowe.wanandroid.services.model.ProjectTitle
+import com.lowe.common.services.model.ProjectTitle
 import com.lowe.wanandroid.ui.project.child.ProjectChildFragment
 
 class ProjectChildFragmentAdapter(

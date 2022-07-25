@@ -3,9 +3,9 @@ package com.lowe.wanandroid.ui.search
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.ui.BaseViewModel
-import com.lowe.wanandroid.utils.tryOffer
+import com.lowe.common.services.model.Article
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.utils.tryOffer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

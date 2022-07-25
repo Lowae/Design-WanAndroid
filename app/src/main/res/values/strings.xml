@@ -31,7 +31,6 @@
     <string name="search_hint">搜索关键词</string>
     <string name="search_hotkey_title">搜索热词</string>
     <string name="search_history_title">搜索历史</string>
-    <string name="account_need_login">请先登录！</string>
     <string name="login_username">用户名</string>
     <string name="login_password">密码</string>
     <string name="login_confirm_password">确认密码</string>
@@ -56,7 +55,6 @@
     <string name="web_action_menu_refresh">刷新</string>
     <string name="web_action_menu_open_outside">浏览器打开</string>
     <string name="preference_title_dynamic_color">动态主题色</string>
-    <string name="preference_summary_dynamic_color">应用动态跟随系统主题色(操作后重启应用生效，仅Android 12及以上版本可开启)</string>
     <string name="item_footer_not_more">没有更多数据了</string>
     <string name="content_description_coin_rules">积分规则</string>
     <string name="content_description_coin_ranking">积分排行榜</string>

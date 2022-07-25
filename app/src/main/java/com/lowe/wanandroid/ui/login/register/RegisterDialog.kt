@@ -7,14 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lowe.common.account.RegisterInfo
+import com.lowe.common.base.http.adapter.isSuccess
+import com.lowe.common.utils.showShortToast
+import com.lowe.common.utils.unsafeLazy
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.account.RegisterInfo
-import com.lowe.wanandroid.base.http.adapter.isSuccess
 import com.lowe.wanandroid.databinding.DialogRegisterAccountLayoutBinding
 import com.lowe.wanandroid.ui.login.LoginActivity
 import com.lowe.wanandroid.ui.login.LoginViewModel
-import com.lowe.wanandroid.utils.showShortToast
-import com.lowe.wanandroid.utils.unsafeLazy
 
 class RegisterDialog(activity: LoginActivity, viewModel: LoginViewModel) {
 

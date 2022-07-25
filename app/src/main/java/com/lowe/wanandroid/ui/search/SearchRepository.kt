@@ -5,11 +5,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.base.IntKeyPagingSource
-import com.lowe.wanandroid.base.http.SearchHistoryPreference
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.services.SearchService
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.IntKeyPagingSource
+import com.lowe.common.base.http.SearchHistoryPreference
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.services.SearchService
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

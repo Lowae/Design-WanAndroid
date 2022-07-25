@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.message.child
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 import com.lowe.wanandroid.ui.message.MessageRepository
 import com.lowe.wanandroid.ui.message.UnreadMessageManager
 import dagger.hilt.android.lifecycle.HiltViewModel

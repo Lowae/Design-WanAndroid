@@ -9,7 +9,7 @@
 
         <variable
             name="article"
-            type="com.lowe.wanandroid.services.model.Article" />
+            type="com.lowe.common.services.model.Article" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import androidx.activity.viewModels
+import com.lowe.wanandroid.BaseActivity
+import com.lowe.common.utils.fromHtml
 import com.lowe.wanandroid.BuildConfig
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityAboutBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.utils.fromHtml
 
 /**
  * 关于页面

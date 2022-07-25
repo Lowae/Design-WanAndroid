@@ -3,10 +3,10 @@ package com.lowe.wanandroid.ui.project.child.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.common.services.model.Article
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemProjectArticleLayoutBinding
-import com.lowe.wanandroid.services.model.Article
 import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 

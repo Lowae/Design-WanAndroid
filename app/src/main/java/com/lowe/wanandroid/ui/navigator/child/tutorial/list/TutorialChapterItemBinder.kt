@@ -8,7 +8,7 @@ import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.lowe.wanandroid.databinding.ItemHomeArticleLayoutV2Binding
-import com.lowe.wanandroid.services.model.Article
+import com.lowe.common.services.model.Article
 
 class TutorialChapterItemBinder(private val onClick: (Int, Article) -> Unit) :
     ItemViewBinder<Article, ViewBindingHolder<ItemHomeArticleLayoutV2Binding>>() {

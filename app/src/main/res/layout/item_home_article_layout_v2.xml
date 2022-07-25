@@ -9,7 +9,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.lowe.wanandroid.services.model.Article" />
+        <import type="com.lowe.common.services.model.Article" />
 
         <variable
             name="article"

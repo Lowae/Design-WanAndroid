@@ -1,9 +1,9 @@
 package com.lowe.wanandroid.ui.navigator.child.tutorial.list
 
 import androidx.lifecycle.viewModelScope
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.services.model.Article
+import com.lowe.common.base.BaseViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

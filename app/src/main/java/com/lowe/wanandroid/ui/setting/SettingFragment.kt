@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.preference.*
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lowe.common.base.ActivityConfigHelper
+import com.lowe.common.base.Config
+import com.lowe.common.constant.SettingConstants
+import com.lowe.compose.ui.theme.ThemeActivity
 import com.lowe.wanandroid.BuildConfig
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.constant.SettingConstants
 import com.lowe.wanandroid.ui.about.AboutActivity
 import com.lowe.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,12 +26,6 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, null)
-        findPreference<SwitchPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DYNAMIC_COLORS)?.apply {
-            if (DynamicColors.isDynamicColorAvailable().not()) {
-                setDefaultValue(false)
-                isEnabled = false
-            }
-        }
         findPreference<ListPreference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_DARK_MODE)?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 AppCompatDelegate.setDefaultNightMode(SettingConstants.getNightMode(newValue.toString()))
@@ -37,8 +33,10 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
         findPreference<Preference>(SettingConstants.PREFERENCE_KEY_NORMAL_CATEGORY_THEME)?.apply {
+            summary = (ActivityConfigHelper.getConfigs()
+                .find { it is Config.ThemeConfig } as Config.ThemeConfig).key.storageKey
             setOnPreferenceClickListener {
-//                startActivity(Intent(requireActivity(), ThemeActivity::class.java))
+                startActivity(Intent(requireActivity(), ThemeActivity::class.java))
                 true
             }
         }
@@ -90,8 +88,8 @@ class SettingFragment : PreferenceFragmentCompat() {
                         .setTitle("确认退出登录？")
                         .setPositiveButton("确认") { dialogInterface, _ ->
                             dialogInterface.dismiss()
-                            this.activity?.finish()
                             settingViewModel.userLogout()
+                            this.activity?.finish()
                         }
                         .setNegativeButton("取消") { dialogInterface, _ ->
                             dialogInterface.dismiss()

@@ -1,11 +1,11 @@
 package com.lowe.wanandroid.ui.setting
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.lowe.common.base.BaseThemeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingActivity : AppCompatActivity() {
+class SettingActivity : BaseThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

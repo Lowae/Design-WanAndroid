@@ -3,10 +3,10 @@ package com.lowe.wanandroid.ui.collect.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.common.services.model.CollectBean
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemCollectListArticleLayoutBinding
-import com.lowe.wanandroid.services.model.CollectBean
 import com.lowe.wanandroid.ui.ItemClickType
 import com.lowe.wanandroid.ui.ViewBindingHolder
 

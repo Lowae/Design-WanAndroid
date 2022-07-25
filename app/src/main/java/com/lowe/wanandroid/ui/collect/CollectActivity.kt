@@ -6,18 +6,22 @@ import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.common.base.app.AppViewModel
+import com.lowe.common.services.model.CollectBean
+import com.lowe.common.services.model.CollectEvent
+import com.lowe.common.utils.*
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.resource.extension.getPrimaryColor
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.ActivityCollectBinding
-import com.lowe.wanandroid.services.model.CollectBean
-import com.lowe.wanandroid.services.model.CollectEvent
-import com.lowe.wanandroid.ui.*
+import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
+import com.lowe.wanandroid.ui.ArticleDiffCalculator
+import com.lowe.wanandroid.ui.ItemClickType
+import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.collect.item.CollectItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -66,7 +70,6 @@ class CollectActivity : BaseActivity<CollectViewModel, ActivityCollectBinding>()
             }
             with(collectSwipeRefresh) {
                 setColorSchemeColors(context.getPrimaryColor())
-                setProgressBackgroundColorSchemeResource(com.lowe.resource.R.color.md_theme_primary)
                 setOnRefreshListener {
                     collectPagingAdapter.refresh()
                     isRefreshing = false

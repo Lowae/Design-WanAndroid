@@ -3,13 +3,13 @@ package com.lowe.wanandroid.ui.navigator.child.series.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.common.services.model.Classify
+import com.lowe.common.services.model.Series
+import com.lowe.common.utils.fromHtml
 import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTagChildrenLayoutBinding
-import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.services.model.Series
 import com.lowe.wanandroid.ui.ViewBindingHolder
-import com.lowe.wanandroid.utils.fromHtml
 import com.lowe.wanandroid.widgets.CommonTagChipWidget
 
 class SeriesChildTagChildrenItemBinder(private val onTagChildrenClick: (Classify) -> Unit) :

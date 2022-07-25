@@ -7,7 +7,7 @@
 
         <variable
             name="coinHistory"
-            type="com.lowe.wanandroid.services.model.CoinHistory" />
+            type="com.lowe.common.services.model.CoinHistory" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

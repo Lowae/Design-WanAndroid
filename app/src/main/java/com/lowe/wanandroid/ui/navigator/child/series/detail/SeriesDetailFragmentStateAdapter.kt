@@ -3,7 +3,7 @@ package com.lowe.wanandroid.ui.navigator.child.series.detail
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.lowe.wanandroid.services.model.Classify
+import com.lowe.common.services.model.Classify
 import com.lowe.wanandroid.ui.navigator.child.series.detail.child.SeriesDetailChildFragment
 
 class SeriesDetailFragmentStateAdapter(

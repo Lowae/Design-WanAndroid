@@ -7,17 +7,18 @@ import androidx.fragment.app.viewModels
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.wanandroid.BaseFragment
+import com.lowe.common.base.app.AppViewModel
+import com.lowe.common.compat.BundleCompat
+import com.lowe.common.services.model.Article
+import com.lowe.common.services.model.Banner
+import com.lowe.common.services.model.CollectEvent
+import com.lowe.common.utils.*
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.app.AppViewModel
-import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentHomeChildExploreBinding
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.Banner
-import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.home.HomeChildFragmentAdapter
 import com.lowe.wanandroid.ui.home.HomeFragment
@@ -27,9 +28,7 @@ import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.home.item.HomeBannerItemBinder
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -110,7 +109,7 @@ class ExploreFragment :
                 viewModel.getArticlesFlow.collectLatest(homeAdapter::submitData)
             }
             launch {
-                homeAdapter.loadStateFlow.collect(this@ExploreFragment::updateLoadStates)
+                homeAdapter.loadStateFlow.collectLatest(this@ExploreFragment::updateLoadStates)
             }
         }
         homeViewModel.apply {

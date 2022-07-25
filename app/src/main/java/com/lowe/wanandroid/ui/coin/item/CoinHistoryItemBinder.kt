@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemCoinHistoryLayoutBinding
-import com.lowe.wanandroid.services.model.CoinHistory
+import com.lowe.common.services.model.CoinHistory
 import com.lowe.wanandroid.ui.ViewBindingHolder
 
 class CoinHistoryItemBinder :

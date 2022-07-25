@@ -2,9 +2,9 @@ package com.lowe.wanandroid.ui.navigator.child.series.detail.child
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.utils.tryOffer
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
-import com.lowe.wanandroid.utils.tryOffer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest

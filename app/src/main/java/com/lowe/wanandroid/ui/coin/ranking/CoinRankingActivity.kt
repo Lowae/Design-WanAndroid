@@ -5,21 +5,20 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import com.lowe.common.base.SimpleDiffItemCallback
+import com.lowe.common.services.model.CoinInfo
+import com.lowe.common.utils.isEmpty
+import com.lowe.common.utils.isRefreshing
+import com.lowe.common.utils.launchRepeatOnStarted
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.SimpleDiffItemCallback
 import com.lowe.wanandroid.databinding.ActivityCoinRankingBinding
-import com.lowe.wanandroid.services.model.CoinInfo
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.coin.ranking.item.CoinInfoItemBinder
-import com.lowe.wanandroid.utils.isEmpty
-import com.lowe.wanandroid.utils.isRefreshing
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -67,7 +66,7 @@ class CoinRankingActivity : BaseActivity<CoinRankingViewModel, ActivityCoinRanki
                 viewModel.coinRankingFlow.collectLatest(rankingAdapter::submitData)
             }
             launch {
-                rankingAdapter.loadStateFlow.collect(this@CoinRankingActivity::updateLoadStates)
+                rankingAdapter.loadStateFlow.collectLatest(this@CoinRankingActivity::updateLoadStates)
             }
         }
     }

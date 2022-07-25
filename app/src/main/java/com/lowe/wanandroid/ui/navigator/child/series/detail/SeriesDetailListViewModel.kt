@@ -2,8 +2,8 @@ package com.lowe.wanandroid.ui.navigator.child.series.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.services.model.Classify
 
 class SeriesDetailListViewModel : BaseViewModel() {
 
@@ -12,9 +12,5 @@ class SeriesDetailListViewModel : BaseViewModel() {
 
     fun onRefreshEvent(classify: Classify) {
         _onRefreshLiveData.value = classify
-    }
-
-    override fun init() {
-
     }
 }

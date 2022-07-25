@@ -13,7 +13,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.IntDef
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.lowe.wanandroid.utils.dpF
+import com.lowe.common.utils.dpF
 
 /**
  * 使Chip的ViewGroup能够竖向滚动

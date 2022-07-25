@@ -3,9 +3,9 @@ package com.lowe.wanandroid.ui.navigator.child.series
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
-import com.lowe.wanandroid.base.http.adapter.getOrElse
+import com.lowe.common.base.http.adapter.getOrElse
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 import com.lowe.wanandroid.ui.navigator.NavigatorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

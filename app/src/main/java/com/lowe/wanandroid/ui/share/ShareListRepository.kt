@@ -2,13 +2,13 @@ package com.lowe.wanandroid.ui.share
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.base.IntKeyPagingSource
-import com.lowe.wanandroid.base.http.adapter.NetworkResponse
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.base.http.adapter.whenSuccess
-import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.services.model.ShareBean
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.IntKeyPagingSource
+import com.lowe.common.base.http.adapter.NetworkResponse
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.base.http.adapter.whenSuccess
+import com.lowe.common.services.ProfileService
+import com.lowe.common.services.model.ShareBean
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject

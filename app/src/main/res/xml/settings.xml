@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         app:key="normalCategory"
         app:title="@string/preference_category_normal">
-
-        <SwitchPreference
-            app:defaultValue="true"
-            app:icon="@drawable/ic_color_palette_32dp"
-            app:key="normal_dynamic_colors"
-            app:summary="@string/preference_summary_dynamic_color"
-            app:title="@string/preference_title_dynamic_color" />
 
         <Preference
             app:icon="@drawable/ic_palette_32dp"

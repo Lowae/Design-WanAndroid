@@ -2,12 +2,13 @@ package com.lowe.wanandroid.ui.collect
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.services.repository.CollectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CollectViewModel @Inject constructor(private val repository: CollectRepository) :
+class CollectViewModel @Inject constructor(repository: CollectRepository) :
     BaseViewModel() {
 
     /**

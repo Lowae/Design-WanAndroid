@@ -3,14 +3,14 @@ package com.lowe.wanandroid.ui.login
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import com.lowe.common.account.LocalUserInfo
+import com.lowe.common.base.http.adapter.isSuccess
+import com.lowe.common.utils.unsafeLazy
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.account.LocalUserInfo
-import com.lowe.wanandroid.base.http.adapter.NetworkResponse
 import com.lowe.wanandroid.databinding.ActivityLoginBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.login.register.RegisterDialog
-import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -55,7 +55,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewModel.apply {
             loginLiveData.observe(this@LoginActivity) {
                 updateLoginLoadingStatus(false)
-                if (it is NetworkResponse.Success) finish()
+                if (it.isSuccess) finish()
             }
         }
     }

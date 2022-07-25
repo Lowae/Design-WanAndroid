@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.coin.ranking
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

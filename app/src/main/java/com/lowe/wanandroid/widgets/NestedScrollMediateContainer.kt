@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.children
-import com.lowe.wanandroid.utils.unsafeLazy
+import com.lowe.common.utils.unsafeLazy
 import kotlin.math.abs
 
 /**

@@ -2,10 +2,10 @@ package com.lowe.wanandroid.ui.project
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.base.IntKeyPagingSource
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.services.BaseService
-import com.lowe.wanandroid.services.ProjectService
+import com.lowe.common.base.IntKeyPagingSource
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.services.BaseService
+import com.lowe.common.services.ProjectService
 import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(private val service: ProjectService) {

@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.navigator
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 
 class NavigatorViewModel : BaseViewModel() {
 
@@ -11,9 +11,5 @@ class NavigatorViewModel : BaseViewModel() {
 
     fun scrollToTopEvent(tabBean: NavigatorTabBean) {
         _scrollToTopLiveData.value = tabBean
-    }
-
-    override fun init() {
-
     }
 }

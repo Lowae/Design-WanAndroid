@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import com.lowe.common.services.model.Banner
+import com.lowe.common.services.model.Banners
 import com.lowe.multitype.PagingItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemHomeBannerLayoutBinding
-import com.lowe.wanandroid.services.model.Banner
-import com.lowe.wanandroid.services.model.Banners
 import com.lowe.wanandroid.ui.ViewBindingHolder
 import com.youth.banner.indicator.CircleIndicator
 

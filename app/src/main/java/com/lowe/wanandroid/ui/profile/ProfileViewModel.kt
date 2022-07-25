@@ -1,7 +1,7 @@
 package com.lowe.wanandroid.ui.profile
 
-import com.lowe.wanandroid.account.IAccountViewModelDelegate
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.account.IAccountViewModelDelegate
 import com.lowe.wanandroid.ui.message.UnreadMessageManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

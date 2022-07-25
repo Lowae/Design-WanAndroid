@@ -6,7 +6,8 @@
     <data>
 
         <import type="android.view.View" />
-        <import type="com.lowe.wanandroid.utils.Activities.Web.WebIntent"/>
+        <import type="com.lowe.common.utils.Activities"/>
+        <import type="com.lowe.common.utils.Activities.Web.WebIntent"/>
 
         <variable
             name="intentObservable"

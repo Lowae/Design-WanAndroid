@@ -15,17 +15,16 @@ import androidx.core.os.bundleOf
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
+import com.lowe.wanandroid.BaseActivity
+import com.lowe.common.base.app.AppViewModel
+import com.lowe.common.services.model.CollectEvent
+import com.lowe.common.utils.Activities
+import com.lowe.common.utils.intentTo
+import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.app.AppViewModel
-import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivityWebLayoutBinding
-import com.lowe.resource.extension.getPrimaryColor
-import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.intentTo
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -95,7 +94,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
     }
 
     private val intentData by lazy {
-        IntentCompat.getParcelableExtra(intent, Activities.Web.KEY_WEB_VIEW_Intent_bundle)
+        com.lowe.common.compat.IntentCompat.getParcelableExtra(intent, Activities.Web.KEY_WEB_VIEW_Intent_bundle)
             ?: Activities.Web.WebIntent("")
     }
 

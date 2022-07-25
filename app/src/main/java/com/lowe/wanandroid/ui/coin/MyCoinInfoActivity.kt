@@ -6,24 +6,23 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import com.lowe.wanandroid.BaseActivity
+import com.lowe.common.base.SimpleDiffItemCallback
+import com.lowe.common.base.http.exception.ApiException
+import com.lowe.common.services.model.CoinHistory
+import com.lowe.common.services.model.UserBaseInfo
+import com.lowe.common.utils.*
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.SimpleDiffItemCallback
-import com.lowe.wanandroid.base.http.exception.ApiException
 import com.lowe.wanandroid.databinding.ActivityMyCoinInfoBinding
-import com.lowe.wanandroid.services.model.CoinHistory
-import com.lowe.wanandroid.services.model.UserBaseInfo
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
 import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.coin.item.CoinHistoryItemBinder
 import com.lowe.wanandroid.ui.coin.ranking.CoinRankingActivity
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -80,7 +79,7 @@ class MyCoinInfoActivity : BaseActivity<MyCoinInfoViewModel, ActivityMyCoinInfoB
     private fun initEvent() {
         launchRepeatOnStarted {
             launch {
-                coinHistoryAdapter.loadStateFlow.collect(this@MyCoinInfoActivity::updateLoadStates)
+                coinHistoryAdapter.loadStateFlow.collectLatest(this@MyCoinInfoActivity::updateLoadStates)
             }
             launch {
                 viewModel.userBaseInfoFlow.collectLatest(this@MyCoinInfoActivity::updateUserCoinInfo)

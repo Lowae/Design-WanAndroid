@@ -7,18 +7,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.common.compat.BundleCompat
+import com.lowe.common.services.model.Classify
+import com.lowe.common.utils.unsafeLazy
 import com.lowe.multitype.MultiTypeAdapter
+import com.lowe.wanandroid.BaseFragment
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.compat.BundleCompat
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildTutorialBinding
-import com.lowe.wanandroid.services.model.Classify
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorChildFragmentAdapter
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.tutorial.item.TutorialChildItemBinder
 import com.lowe.wanandroid.ui.navigator.child.tutorial.list.TutorialChapterListActivity
-import com.lowe.wanandroid.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

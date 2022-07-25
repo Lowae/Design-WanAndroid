@@ -1,8 +1,8 @@
 package com.lowe.wanandroid.ui
 
-import com.lowe.wanandroid.base.SimpleDiffCallback
-import com.lowe.wanandroid.base.SimpleDiffItemCallback
-import com.lowe.wanandroid.services.model.*
+import com.lowe.common.base.SimpleDiffCallback
+import com.lowe.common.base.SimpleDiffItemCallback
+import com.lowe.common.services.model.*
 
 object ArticleDiffCalculator {
 

@@ -2,10 +2,10 @@ package com.lowe.wanandroid.ui.message
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.base.IntKeyPagingSource
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.IntKeyPagingSource
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.services.ProfileService
 import javax.inject.Inject
 
 class MessageRepository @Inject constructor(private val service: ProfileService) {

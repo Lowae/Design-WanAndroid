@@ -11,23 +11,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import com.lowe.wanandroid.BaseFragment
+import com.lowe.common.services.model.Article
+import com.lowe.common.services.model.Navigation
+import com.lowe.common.utils.Activities
+import com.lowe.common.utils.smoothSnapToPosition
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNavigatorChildNavigatorBinding
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.Navigation
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorTabBean
 import com.lowe.wanandroid.ui.navigator.child.navigator.item.NavigatorChildTagChildrenItemBinder
 import com.lowe.wanandroid.ui.navigator.widgets.NavigatorTagOnScrollListener
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.smoothSnapToPosition
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**

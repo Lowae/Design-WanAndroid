@@ -2,13 +2,13 @@ package com.lowe.wanandroid.ui.home
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.lowe.wanandroid.base.IntKeyPagingSource
-import com.lowe.wanandroid.base.http.adapter.getOrElse
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.services.BaseService
-import com.lowe.wanandroid.services.HomeService
-import com.lowe.wanandroid.services.model.Banners
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.IntKeyPagingSource
+import com.lowe.common.base.http.adapter.getOrElse
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.services.BaseService
+import com.lowe.common.services.HomeService
+import com.lowe.common.services.model.Banners
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject

@@ -5,12 +5,12 @@ import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivitySeriesDetailListLayoutBinding
-import com.lowe.wanandroid.services.model.Classify
+import com.lowe.common.services.model.Classify
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.utils.unsafeLazy
+import com.lowe.wanandroid.BaseActivity
+import com.lowe.common.compat.IntentCompat
+import com.lowe.common.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

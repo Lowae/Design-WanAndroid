@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.lowe.common.services.model.HotKeyBean
 import com.lowe.multitype.ItemViewBinder
-import com.lowe.wanandroid.services.model.HotKeyBean
 import com.lowe.wanandroid.widgets.CommonTagChipWidget
 
 /**

@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.core.view.setMargins
 import androidx.core.view.setPadding
 import com.google.android.material.chip.Chip
+import com.lowe.common.utils.dp
+import com.lowe.common.utils.dpF
+import com.lowe.resource.extension.setRippleBackground
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.utils.dp
-import com.lowe.wanandroid.utils.dpF
-import com.lowe.wanandroid.utils.setRippleBackground
 
 object CommonTagChipWidget {
 

@@ -1,6 +1,6 @@
 package com.lowe.wanandroid.ui.about
 
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 
 class AboutViewModel : BaseViewModel() {
 }

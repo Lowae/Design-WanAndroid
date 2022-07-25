@@ -6,15 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lowe.multitype.MultiTypeAdapter
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityTutorialChapterListLayoutBinding
-import com.lowe.wanandroid.services.model.Article
+import com.lowe.common.services.model.Article
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.Activities
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
-import com.lowe.wanandroid.utils.unsafeLazy
+import com.lowe.common.utils.Activities
+import com.lowe.common.utils.launchRepeatOnStarted
+import com.lowe.common.utils.unsafeLazy
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class TutorialChapterListActivity :

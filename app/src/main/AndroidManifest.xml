@@ -7,7 +7,7 @@
 
     <!-- 由于WanAndroid接口部分下发的链接是http，所以为了兼容只能设置usesCleartextTraffic = true 开放对http链接的支持 -->
     <application
-        android:name=".base.app.BaseApp"
+        android:name=".app.BaseApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

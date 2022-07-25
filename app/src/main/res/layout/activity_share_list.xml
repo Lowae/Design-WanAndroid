@@ -7,7 +7,7 @@
 
         <variable
             name="shareBean"
-            type="com.lowe.wanandroid.services.model.ShareBean" />
+            type="com.lowe.common.services.model.ShareBean" />
 
     </data>
 

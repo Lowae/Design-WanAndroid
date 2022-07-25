@@ -7,23 +7,22 @@ import androidx.fragment.app.viewModels
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lowe.wanandroid.BaseFragment
+import com.lowe.common.base.app.AppViewModel
+import com.lowe.common.services.model.Article
+import com.lowe.common.services.model.CollectEvent
+import com.lowe.common.utils.*
 import com.lowe.multitype.PagingLoadStateAdapter
 import com.lowe.multitype.PagingMultiTypeAdapter
 import com.lowe.wanandroid.R
-import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.databinding.FragmentChildGroupBinding
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.CollectEvent
 import com.lowe.wanandroid.ui.ArticleDiffCalculator
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.SimpleFooterItemBinder
 import com.lowe.wanandroid.ui.group.GroupViewModel
 import com.lowe.wanandroid.ui.home.item.ArticleAction
 import com.lowe.wanandroid.ui.home.item.HomeArticleItemBinderV2
 import com.lowe.wanandroid.ui.web.WebActivity
-import com.lowe.wanandroid.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -92,7 +91,7 @@ class GroupChildFragment :
                 viewModel.groupArticlesFlow.collectLatest(articlesAdapter::submitData)
             }
             launch {
-                articlesAdapter.loadStateFlow.collect(this@GroupChildFragment::updateLoadStates)
+                articlesAdapter.loadStateFlow.collectLatest(this@GroupChildFragment::updateLoadStates)
             }
         }
         groupViewModel.apply {

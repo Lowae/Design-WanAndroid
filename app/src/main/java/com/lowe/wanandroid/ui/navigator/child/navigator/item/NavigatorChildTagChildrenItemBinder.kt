@@ -3,13 +3,13 @@ package com.lowe.wanandroid.ui.navigator.child.navigator.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.lowe.common.services.model.Article
+import com.lowe.common.services.model.Navigation
+import com.lowe.common.utils.fromHtml
 import com.lowe.multitype.ItemViewBinder
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ItemNavigatorChildTagChildrenLayoutBinding
-import com.lowe.wanandroid.services.model.Article
-import com.lowe.wanandroid.services.model.Navigation
 import com.lowe.wanandroid.ui.ViewBindingHolder
-import com.lowe.wanandroid.utils.fromHtml
 import com.lowe.wanandroid.widgets.CommonTagChipWidget
 
 class NavigatorChildTagChildrenItemBinder(private val onTagChildrenClick: (Article) -> Unit) :

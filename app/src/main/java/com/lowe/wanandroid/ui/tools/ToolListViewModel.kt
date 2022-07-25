@@ -1,9 +1,9 @@
 package com.lowe.wanandroid.ui.tools
 
 import androidx.lifecycle.liveData
-import com.lowe.wanandroid.base.http.adapter.getOrElse
-import com.lowe.wanandroid.services.ProfileService
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.http.adapter.getOrElse
+import com.lowe.common.services.ProfileService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -7,7 +7,7 @@
 
         <variable
             name="userInfo"
-            type="com.lowe.wanandroid.services.model.UserBaseInfo" />
+            type="com.lowe.common.services.model.UserBaseInfo" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

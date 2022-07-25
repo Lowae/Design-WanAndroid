@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lowe.wanandroid.BaseActivity
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.ActivityMessageBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

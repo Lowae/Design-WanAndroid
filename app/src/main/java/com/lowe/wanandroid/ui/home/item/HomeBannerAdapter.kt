@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.view.SimpleDraweeView
-import com.lowe.wanandroid.services.model.Banner
+import com.lowe.common.services.model.Banner
 import com.youth.banner.adapter.BannerAdapter
 
 class HomeBannerAdapter(items: List<Banner>, private val onClick: (Banner, Int) -> Unit) :

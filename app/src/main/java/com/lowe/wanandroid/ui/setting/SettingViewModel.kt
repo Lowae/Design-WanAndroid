@@ -1,27 +1,25 @@
 package com.lowe.wanandroid.ui.setting
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.lowe.wanandroid.account.IAccountViewModelDelegate
-import com.lowe.wanandroid.base.http.adapter.whenSuccess
+import com.lowe.common.account.IAccountViewModelDelegate
+import com.lowe.common.di.ApplicationScope
+import com.lowe.common.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingViewModel @Inject constructor(private val accountViewModelDelegate: IAccountViewModelDelegate) :
-    ViewModel(), IAccountViewModelDelegate by accountViewModelDelegate {
-
-    private val _logoutLiveData = MutableLiveData<Any>()
-    val logoutLiveData: LiveData<Any> = _logoutLiveData
+class SettingViewModel @Inject constructor(
+    private val accountViewModelDelegate: IAccountViewModelDelegate,
+    @ApplicationScope private val applicationScope: CoroutineScope,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) : ViewModel(), IAccountViewModelDelegate by accountViewModelDelegate {
 
     fun userLogout() {
-        viewModelScope.launch {
-            logout().whenSuccess {
-                _logoutLiveData.value = it
-            }
+        applicationScope.launch(ioDispatcher) {
+            logout()
         }
     }
 

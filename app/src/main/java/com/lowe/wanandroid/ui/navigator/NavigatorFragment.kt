@@ -5,10 +5,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lowe.wanandroid.BaseFragment
 import com.lowe.wanandroid.MainViewModel
 import com.lowe.wanandroid.R
 import com.lowe.wanandroid.databinding.FragmentNotificationsBinding
-import com.lowe.wanandroid.ui.BaseFragment
 
 /**
  * 导航Fragment

@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.home.child.explore
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 import com.lowe.wanandroid.ui.home.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

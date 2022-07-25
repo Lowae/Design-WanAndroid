@@ -36,38 +36,8 @@
                 RuntimeVisibleTypeAnnotations,
                 Signature
 
+# Fragment
 -keep class * extends androidx.fragment.app.Fragment{}
--keep public class * extends androidx.preference.Preference
-
-# For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
--keepclasseswithmembernames class * {
-    native <methods>;
-}
-
-# Keep setters in Views so that animations can still work.
--keepclassmembers public class * extends android.view.View {
-    void set*(***);
-    *** get*();
-}
-
-# We want to keep methods in Activity that could be used in the XML attribute onClick.
--keepclassmembers class * extends android.app.Activity {
-    public void *(android.view.View);
-}
-
-# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keepclassmembers class * implements android.os.Parcelable {
-    public static final ** CREATOR;
-}
-
--keepclassmembers class **.R$* {
-    public static <fields>;
-}
 
 # Preserve annotated Javascript interface methods.
 -keepclassmembers class * {
@@ -81,24 +51,6 @@
 -dontnote androidx.**
 -dontwarn android.support.**
 -dontwarn androidx.**
-
-# Understand the @Keep support annotation.
--keep class androidx.annotation.Keep
-
--keep @androidx.annotation.Keep class * {*;}
-
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <methods>;
-}
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <fields>;
-}
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <init>(...);
-}
 
 ## Android architecture components: Lifecycle
 # LifecycleObserver's empty constructor is considered to be unused by proguard
@@ -118,11 +70,6 @@
 # ViewBinding
 -keep public class * extends androidx.viewbinding.ViewBinding {*;}
 
-# BottomSheetBehavior
--keepclassmembers public class com.google.android.material.bottomsheet.BottomSheetBehavior {
-  void setStateInternal(int);
-}
-
 # These classes are duplicated between android.jar and org.apache.http.legacy.jar.
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
@@ -135,18 +82,8 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
--keep class com.lowe.wanandroid.services.model.** {*;}
--keepclasseswithmembers class com.lowe.wanandroid.base.http.adapter.NetworkResponse {*;}
--keepclasseswithmembers class * extends com.lowe.wanandroid.base.http.adapter.NetworkResponse {*;}
-
--keepclasseswithmembers class com.lowe.wanandroid.account.AccountState {*;}
--keepclasseswithmembers class com.lowe.wanandroid.account.LocalUserInfo {*;}
--keepclasseswithmembers class com.lowe.wanandroid.account.RegisterInfo {*;}
-
 # AgentWeb
--keep class com.just.agentweb.** {
-    *;
-}
+-keep class com.just.agentweb.** {*;}
 -dontwarn com.just.agentweb.**
 
 # Databinding

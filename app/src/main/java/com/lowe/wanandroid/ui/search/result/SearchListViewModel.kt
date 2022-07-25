@@ -1,5 +1,5 @@
 package com.lowe.wanandroid.ui.search.result
 
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 
 class SearchListViewModel : BaseViewModel()

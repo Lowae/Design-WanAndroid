@@ -1,4 +1,4 @@
-package com.lowe.wanandroid.utils
+package com.lowe.common.utils
 
 import android.graphics.Bitmap
 import android.net.Uri

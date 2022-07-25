@@ -9,7 +9,7 @@
 
         <variable
             name="toolBean"
-            type="com.lowe.wanandroid.services.model.ToolBean" />
+            type="com.lowe.common.services.model.ToolBean" />
 
         <variable
             name="position"
@@ -17,7 +17,7 @@
 
         <variable
             name="onClickFunc"
-            type="Function2&lt;Integer, com.lowe.wanandroid.services.model.ToolBean, kotlin.Unit&gt;" />
+            type="Function2&lt;Integer, com.lowe.common.services.model.ToolBean, kotlin.Unit&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

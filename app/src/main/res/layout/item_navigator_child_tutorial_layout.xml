@@ -7,7 +7,7 @@
 
         <variable
             name="classify"
-            type="com.lowe.wanandroid.services.model.Classify" />
+            type="com.lowe.common.services.model.Classify" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

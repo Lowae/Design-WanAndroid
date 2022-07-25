@@ -2,7 +2,7 @@ package com.lowe.wanandroid.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
 
@@ -17,9 +17,5 @@ class HomeViewModel : BaseViewModel() {
 
     fun refreshEvent(tabBean: HomeTabBean) {
         _refreshLiveData.value = tabBean
-    }
-
-    override fun init() {
-
     }
 }

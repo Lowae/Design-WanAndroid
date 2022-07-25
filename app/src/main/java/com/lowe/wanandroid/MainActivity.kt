@@ -6,15 +6,13 @@ import androidx.activity.viewModels
 import com.lowe.resource.extension.getPrimaryColor
 import com.lowe.wanandroid.databinding.ActivityMainBinding
 import com.lowe.wanandroid.ui.ActivityDataBindingDelegate
-import com.lowe.wanandroid.ui.BaseActivity
-import com.lowe.wanandroid.ui.BaseFragment
 import com.lowe.wanandroid.ui.group.GroupFragment
 import com.lowe.wanandroid.ui.home.HomeFragment
 import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
 import com.lowe.wanandroid.ui.navigator.NavigatorFragment
 import com.lowe.wanandroid.ui.profile.ProfileFragment
 import com.lowe.wanandroid.ui.project.ProjectFragment
-import com.lowe.wanandroid.utils.launchRepeatOnStarted
+import com.lowe.common.utils.launchRepeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

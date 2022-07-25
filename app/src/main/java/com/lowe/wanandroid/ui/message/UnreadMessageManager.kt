@@ -1,15 +1,17 @@
 package com.lowe.wanandroid.ui.message
 
-import android.util.Log
-import com.lowe.wanandroid.account.IAccountViewModelDelegate
-import com.lowe.wanandroid.account.isLogin
-import com.lowe.wanandroid.base.http.adapter.getOrNull
-import com.lowe.wanandroid.di.ApplicationScope
-import com.lowe.wanandroid.di.IoDispatcher
-import com.lowe.wanandroid.services.usecase.UnreadMessageCountUseCase
+import com.lowe.common.base.http.adapter.getOrNull
+import com.lowe.common.di.ApplicationScope
+import com.lowe.common.di.IoDispatcher
+import com.lowe.common.services.usecase.UnreadMessageCountUseCase
+import com.lowe.common.account.IAccountViewModelDelegate
+import com.lowe.common.account.isLogin
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton

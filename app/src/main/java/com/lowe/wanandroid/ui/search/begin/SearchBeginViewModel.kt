@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.lowe.wanandroid.base.http.adapter.getOrElse
-import com.lowe.wanandroid.di.ApplicationScope
-import com.lowe.wanandroid.services.model.HotKeyBean
-import com.lowe.wanandroid.ui.BaseViewModel
+import com.lowe.common.base.BaseViewModel
+import com.lowe.common.base.http.adapter.getOrElse
+import com.lowe.common.di.ApplicationScope
+import com.lowe.common.services.model.HotKeyBean
 import com.lowe.wanandroid.ui.search.SearchRepository
 import com.lowe.wanandroid.ui.search.SearchState
 import com.lowe.wanandroid.widgets.LimitedLruQueue
