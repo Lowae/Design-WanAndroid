@@ -1,6 +1,7 @@
 package com.lowe.common.base.http.converter
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -12,7 +13,7 @@ class GsonConverterFactory(private val gson: Gson) : Converter.Factory() {
     companion object {
 
         fun create(): GsonConverterFactory {
-            return create(Gson())
+            return create(GsonBuilder().disableHtmlEscaping().create())
         }
 
         private fun create(gson: Gson?): GsonConverterFactory {
